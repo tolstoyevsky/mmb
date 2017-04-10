@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     php5-gd \
     php5-fpm \
     php5-mysql \
+    quilt \
     supervisor \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
@@ -29,6 +30,9 @@ RUN cd /var/www/nc/apps2 \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/gallery.git
 
 RUN cd /var/www && chown -R www-data:www-data nc
+
+COPY ./patches /var/www/nc/patches
+RUN cd /var/www/nc && quilt push -a
 
 # Security & setup warnings:
 # php does not seem to be setup properly to query system environment variables.
