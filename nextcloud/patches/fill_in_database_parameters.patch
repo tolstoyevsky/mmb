@@ -26,7 +26,7 @@ Index: server/core/templates/installation.php
  				<input type="password" name="dbpass" id="dbpass" data-typetoggle="#dbpassword-toggle"
  					placeholder="<?php p($l->t( 'Database password' )); ?>"
 -					value="<?php p($_['dbpass']); ?>"
-+					value="<?php getenv('DBPASS'); ?>"
++					value="cusdeb"
  					autocomplete="off" autocapitalize="off" autocorrect="off">
  				<label for="dbpass" class="infield"><?php p($l->t( 'Database password' )); ?></label>
  				<input type="checkbox" id="dbpassword-toggle" name="dbpassword-toggle">
