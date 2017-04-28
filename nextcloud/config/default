@@ -34,7 +34,10 @@ server {
 
 	server_name _;
 
-	client_max_body_size 1G;
+	# Should be equal or close to upload_max_filesize in .user.ini.
+	client_max_body_size 1536M;
+	# Should be equal to upload_tmp_dir in php.ini.
+	client_body_temp_path /var/www/nc/data;
 
 	location /oc {
 		rewrite ^/\.well-known/host-meta /public.php?service=host-meta break;
@@ -61,6 +64,8 @@ server {
 		include fastcgi_params;
 		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 		fastcgi_param PATH_INFO $fastcgi_path_info;
+		# Should be equal to max_execution_time in php.ini.
+		fastcgi_read_timeout 1800s;
 		fastcgi_pass unix:/var/run/php5-fpm.sock;
 
 		include snippets/fastcgi-php.conf;
