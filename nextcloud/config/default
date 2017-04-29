@@ -39,23 +39,23 @@ server {
 	# Should be equal to upload_tmp_dir in php.ini.
 	client_body_temp_path /var/www/nc/data;
 
-	location /oc {
+	location /nc {
 		rewrite ^/\.well-known/host-meta /public.php?service=host-meta break;
 		rewrite ^/\.well-known/host-meta\.json /public.php?service=host-meta-json break;
 		rewrite ^/\.well-known/carddav /remote.php/carddav/ redirect;
 		rewrite ^/\.well-known/caldav /remote.php/caldav/ redirect;
 	}
 
-	location /oc/apps {
+	location /nc/apps {
 		rewrite ^/apps/calendar/caldav\.php /remote.php/caldav/ break;
 		rewrite ^/apps/contacts/carddav\.php /remote.php/carddav/ break;
 	}
 
-	location /oc/data {
+	location /nc/data {
 		deny all;
 	}
 
-	location /oc/remote {
+	location /nc/remote {
 		rewrite ^/remote/(.*) /remote.php break;
 	}
 
