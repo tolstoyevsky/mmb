@@ -1,8 +1,10 @@
-mysql:
-  image: cusdeb-mysql-armhf
-  command: mysqld
-  net: "host"
-  environment:
-  - MYSQL_ROOT_PASSWORD=cusdeb
-  volumes:
-  - /srv/mysql:/var/lib/mysql
+version: "2"
+services:
+  mysql:
+    image: cusdeb-mysql-armhf
+    command: mysqld
+    network_mode: "host"
+    environment:
+    - MYSQL_ROOT_PASSWORD=cusdeb
+    volumes:
+    - /srv/mysql:/var/lib/mysql
