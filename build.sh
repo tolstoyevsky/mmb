@@ -26,6 +26,12 @@ if [ ! -d $1 ]; then
     exit 1
 fi
 
+if [ $1 = watchtower ]; then
+    cd $1
+    ./build_watchtower.sh
+    exit 0
+fi
+
 CURDIR=`pwd`
 cd $1
 cp $QEMU_ARM_STATIC .
