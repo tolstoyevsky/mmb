@@ -3,7 +3,7 @@ MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 COPY qemu-arm-static /usr/bin/qemu-arm-static
 
-ENV NEXTCLOUD_VERSION stable11
+ENV NEXTCLOUD_VERSION stable12
 
 RUN apt-get update && apt-get install -y \
     git \
