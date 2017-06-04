@@ -1,7 +1,7 @@
 version: "2"
 services:
   inadyn:
-    image: cusdeb-inadyn-armhf
+    image: cusdeb.com:5000/inadyn-armhf
     network_mode: "host"
     volumes:
     - ./inadyn.conf:/etc/inadyn.conf

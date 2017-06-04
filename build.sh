@@ -35,6 +35,6 @@ fi
 CURDIR=`pwd`
 cd $1
 cp $QEMU_ARM_STATIC .
-docker build --force-rm --no-cache -t cusdeb-$1-armhf .
+docker build --force-rm --no-cache -t cusdeb.com:5000/$1-armhf .
 cd $CURDIR
 

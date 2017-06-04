@@ -1,7 +1,7 @@
 version: "2"
 services:
   mysql:
-    image: cusdeb-mysql-armhf
+    image: cusdeb.com:5000/mysql-armhf
     command: mysqld
     network_mode: "host"
     environment:
