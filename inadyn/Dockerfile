@@ -38,7 +38,6 @@ RUN apk --update add \
     automake \
     autoconf \
     build-base \
-    ca-certificates \
     curl \
     flex \
     git \
