@@ -93,7 +93,7 @@ if [[ "${PORT}" != "${DEFAULT_PORT}" ]]; then
     sed -i -e "s/${DEFAULT_PORT}$/${PORT}/" "Dockerfile${suffix}"
 fi
 
-IMAGE_NAME=`grep "image: " "docker-compose${suffix}.yml" | awk -F': ' '{print $2}'`
+IMAGE_NAME=`grep "image: " "docker-compose${suffix}.yml" | awk -F': ' '{print $2}' | head -n1`
 
 docker build --no-cache --force-rm -t "${IMAGE_NAME}" -f "Dockerfile${suffix}" .
 

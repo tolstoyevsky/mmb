@@ -47,7 +47,7 @@ def main():
     # Preserve case
     config.optionxform = str
 
-    config.read(options.config_file)
+    config.read(options.config_file, encoding='utf-8')
 
     config.set(options.section, args[0], args[1])
 
