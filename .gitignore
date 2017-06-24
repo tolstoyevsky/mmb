@@ -1,1 +1,3 @@
 qemu-arm-static
+baseimages/jessie_chroot
+baseimages/alpine_chroot
