@@ -7,7 +7,7 @@ Index: server/core/js/jquery-showpassword.js
              	// Create clone
  				var $clone = cloneElement($input);
 +					$clone.val($input.val());
- 					$clone.insertAfter($input);
+ 					$clone.insertBefore($input);
  				
  				// Set callback arguments
 Index: server/core/templates/installation.php
