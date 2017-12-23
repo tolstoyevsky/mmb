@@ -1,22 +1,63 @@
 #!/bin/sh
 
-. ./functions.sh
+set -e
 
-if [ -d jessie_chroot ]; then
-    fail_msg "jessie_chroot already exists. Remove it and run the script again."
+if [ "`id -u`" -ne "0" ]; then
+    >&2 echo "This script must be run as root"
+    exit 1
 fi
 
-debootstrap --arch=armhf --foreign --variant=minbase jessie jessie_chroot || fail_msg "Something went wrong during the first stage."
+. ./functions.sh
 
-cp $QEMU_ARM_STATIC jessie_chroot/usr/bin
+set_traps
 
-chroot jessie_chroot /debootstrap/debootstrap --second-stage || fail_msg "Something went wrong during the second stage."
+if [ -d stretch_chroot ]; then
+    fatal "stretch_chroot already exists. Remove it and run the script again."
+    exit 1
+fi
 
-chroot jessie_chroot apt-get clean
+if [ -e qemu-arm-static ]; then
+    info "./qemu-arm-static already exists"
+else
+    info "Fetching qemu-arm-static"
 
-chroot jessie_chroot sh -c "rm -rf /var/lib/apt/lists/*"
+    get_qemu_arm_static
 
-IMAGE=`sh -c "tar -C jessie_chroot -c . | docker import -"`
+    success "Successfully fetched qemu-arm-static"
+fi
 
-docker tag $IMAGE cusdeb/jessie_armhf
+if [ -d debootstrap ]; then
+    info "./debootstrap already exists"
+else
+    info "Fetching debootstrap"
 
+    get_debootstrap
+
+    success "Successfully fetched debootstrap"
+fi
+
+info "Creating Debian Stretch chroot environment"
+${DEBOOTSTRAP_EXEC} --arch=armhf --foreign --variant=minbase stretch stretch_chroot
+
+cp qemu-arm-static stretch_chroot/usr/bin
+
+chroot stretch_chroot /debootstrap/debootstrap --second-stage
+
+chroot stretch_chroot apt-get clean
+
+chroot stretch_chroot sh -c "rm -rf /var/lib/apt/lists/*"
+
+success "Successfully created Debian Stretch chroot environment"
+
+info "Make some optimizations"
+
+echo "APT::Get::Purge \"true\";" > stretch_chroot/etc/apt/apt.conf
+
+echo "path-exclude=/usr/share/locale/*" > /etc/dpkg/dpkg.cfg.d/excludes
+echo "path-exclude=/usr/share/man/*"   >> /etc/dpkg/dpkg.cfg.d/excludes
+
+IMAGE=`sh -c "tar -C stretch_chroot -c . | docker import -"`
+
+docker tag $IMAGE cusdeb/stretch:armhf
+
+success "Successfully created Debian Stretch base image"
