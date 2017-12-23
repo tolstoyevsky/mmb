@@ -1,10 +1,10 @@
-Index: server/lib/private/Config.php
-===================================================================
---- server.orig/lib/private/Config.php
-+++ server/lib/private/Config.php
-@@ -40,7 +40,23 @@ namespace OC;
-  */
- class Config {
+diff --git a/lib/private/Config.php b/lib/private/Config.php
+index 2abf00a..5fa68bf 100644
+--- a/lib/private/Config.php
++++ b/lib/private/Config.php
+@@ -44,7 +44,23 @@ class Config {
+ 	const ENV_PREFIX = 'NC_';
+ 
  	/** @var array Associative array ($key => $value) */
 -	protected $cache = array();
 +	protected $cache = array(
