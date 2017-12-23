@@ -1,0 +1,12 @@
+version: "2"
+services:
+  deluge-web:
+    image: cusdeb.com:5000/deluge:1_3_15_armhf
+    command: /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+    environment:
+    - PORT=8002
+    network_mode: "host"
+    volumes:
+    - /srv/common/downloads:/root/Downloads
+    - /srv/deluge/state:/root/.config/deluge/state
+    - /srv/deluge/web.conf:/root/.config/deluge/web.conf

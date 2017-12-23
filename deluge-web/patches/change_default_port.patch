@@ -1,0 +1,13 @@
+diff --git a/deluge/ui/web/server.py b/deluge/ui/web/server.py
+index 92e63dedd..25c420d32 100644
+--- a/deluge/ui/web/server.py
++++ b/deluge/ui/web/server.py
+@@ -103,7 +103,7 @@
+     # Server Settings
+     "base": "/",
+     "interface": "0.0.0.0",
+-    "port": 8112,
++    "port": 8002,
+     "https": False,
+     "pkey": "ssl/daemon.pkey",
+     "cert": "ssl/daemon.cert"
