@@ -1,14 +1,17 @@
-Здесь находятся скрипты для сборки базовых образов Docker, которые используются в основе всех образов из проекта `docker-services`. Обратите внимание на то, что архитектура базовых образов – armhf. Скрипты сборки используют `qemu-arm-static` для того, чтобы сделать возможной сборку базовых образов на машинах c архитектурой x86.
+Here are the scripts for building base images which are used for all services from the MMB project. 
 
 ## Alpine
 
-Для того чтобы собрать базовый образ на основе [Alpine 3.6](https://alpinelinux.org/posts/Alpine-3.6.2-released.html), запустите скрипт `create_alpine_chroot.sh` с правами суперпользователя. После удачного завершения работы скрипта будет создан образ `cusdeb/alpinev3.6_armhf:latest`.
+To build [Alpine 3.7](https://alpinelinux.org/posts/Alpine-3.7.0-released.html) base image run `create_alpine_chroot.sh` with superuser privileges. Once the script is finished, the image `cusdeb/alpinev3.7:armhf` is created.
 
 ## Debian
 
-Для того чтобы собрать базовый образ на основе [Debian Jessie](https://debian.org/releases/jessie/index.en.html), запустите скрипт `create_debian_chroot.sh` с правами суперпользователя. После удачного завершения работы скрипта будет создан образ `cusdeb/jessie_armhf:latest`.
+To build [Debian Stretch](https://wiki.debian.org/DebianStretch) base image run `create_debian_chroot.sh` with superuser privileges. Once the script is finished, the image `cusdeb/stretch:armhf` is created.
 
-## Отличия от других похожих образов с Docker Hub
+## Differences from other similar Docker Hub images
 
-Базовые образы, полученные посредством `create_alpine_chroot.sh` и `create_debian_chroot.sh`, отличаются от аналогичных образов с [Docker Hub](https://hub.docker.com) в основном только наличием `qemu-user-static` в `/usr/bin`, что упрощает отладку контейнеров, т. к. они могут быть запущены на машинах c архитектурой x86.
+The images created by `create_alpine_chroot.sh` and `create_debian_chroot.sh` include `qemu-arm-static` 2.8 to simplify debugging on x86 machines. Furthermore, Debian Stretch base image:
+* is forced to get rid of configuration files when removing packages;
+* drops locales and man pages when installing packages.
 
+These two things help keep images as small as possible.
