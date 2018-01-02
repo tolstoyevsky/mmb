@@ -12,7 +12,7 @@ First, execute
 
 ```
 docker build -t cusdeb.com:5000/transmission:2_92_armhf .
-docker-compose up -p
+docker-compose up -d
 ```
 
 Then, go to `http://[Device IP Address]:8003`. You will be asked to enter a username and password. By default, in both cases it's `cusdeb`. It's highly recommended to change it in `docker-compose.yml`. See the [Configuration](#configuration) section.

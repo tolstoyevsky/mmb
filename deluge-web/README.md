@@ -13,7 +13,7 @@ First, execute
 ```
 docker build -t cusdeb.com:5000/deluge:1_3_15_armhf .
 sudo ./postinst.sh
-docker-compose up -p
+docker-compose up -d
 ```
 
 Then, go to `http://[Device IP Address]:8002`. You will be asked to enter a password. By default, it's `deluge`. It's highly recommended to change it after successful login.
