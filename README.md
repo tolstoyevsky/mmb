@@ -1,9 +1,13 @@
-Этот проект представляет собой набор Dockerfile'ов и связанных с ними ресурсов для сборки образов Docker-контейнеров с различными сервисами, предназначенными для запуска на Raspberry Pi и других аналогичных одноплатных компьютерах.
+# MMB [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Set%20of%20Dockerfiles%20and%20assets%20related%20to%20them%20for%20building%20Docker%20images%20with%20different%20services&url=https://github.com/tolstoyevsky/mmb&via=CusDeb&hashtags=RaspberryPi,Docker,Alpine,Debian)
 
-Для сборки нужного образа выполните ```./build.sh dir```, где dir – это имя директории с исходниками целевого образа. Директории с исходниками находятся в корне проекта.
-Пример:
-```
-./build.sh mysql
-```
+MMB is the set of Dockerfiles and assets for building Docker images with different services (such as [Nextcloud](https://nextcloud.com), [Transmission](https://transmissionbt.com), etc.), intended for running on Raspberry Pis and other single board computers.
 
-Вы также можете скачать уже собранные образы в [разделе Приложения на сайте cusdeb.com](https://cusdeb.com/apps/)
+MMB stands for "Mr. Meeseeks Box". The project name was inspired by the episode ["Meeseeks and Destroy"](https://en.wikipedia.org/wiki/Meeseeks_and_Destroy) of an animated sitcom [Rick and Morty](https://en.wikipedia.org/wiki/Rick_and_Morty).
+
+## Authors
+
+See [AUTHORS](AUTHORS.md).
+
+## Licensing
+
+MMB is available under the [Apache License, Version 2.0](LICENSE).

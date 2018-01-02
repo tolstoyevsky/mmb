@@ -9,7 +9,7 @@ Nextcloud is a self-hosted file storage and synchronization service.
 
 ## Prerequisites
 
-Build and run the [MySQL](https://github.com/tolstoyevsky/cusdeb-services/tree/master/mysql) container before running Nextcloud.
+Build and run the [MySQL](https://github.com/tolstoyevsky/mmb/tree/master/mysql) container before running Nextcloud.
 
 ## Installation
 
