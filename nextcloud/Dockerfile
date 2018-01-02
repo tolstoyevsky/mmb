@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     php-xml \
     php-zip \
     supervisor \
+    cron \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && cd /var/www \
@@ -38,7 +39,9 @@ COPY ./patches /var/www/nc/patches
 COPY ./rollout_fixes.sh /usr/bin/rollout_fixes.sh
 RUN /usr/bin/rollout_fixes.sh
 
+COPY ./config/cron /tmp/cron
 COPY ./config/default /etc/nginx/sites-available/default
 COPY ./config/supervisord.conf /etc/supervisor/supervisord.conf
 COPY ./run_nginx.sh /usr/bin/run_nginx.sh
 
+RUN crontab -u www-data /tmp/cron
