@@ -41,6 +41,7 @@ RUN /usr/bin/rollout_fixes.sh
 
 COPY ./config/cron /tmp/cron
 COPY ./config/default /etc/nginx/sites-available/default
+COPY ./config/www.conf /etc/php/7.0/fpm/pool.d/www.conf
 COPY ./config/supervisord.conf /etc/supervisor/supervisord.conf
 COPY ./run_nginx.sh /usr/bin/run_nginx.sh
 
