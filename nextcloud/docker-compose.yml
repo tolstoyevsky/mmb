@@ -13,3 +13,5 @@ services:
     volumes:
     - /srv/nextcloud/config.php:/var/www/nc/config/config.php
     - /srv/nextcloud/data:/var/www/nc/data/
+    - /srv/nextcloud/data/nginx:/var/log/nginx/
+    - /srv/nextcloud/data/supervisor:/var/log/supervisor/
