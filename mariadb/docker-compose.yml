@@ -1,8 +1,7 @@
 version: "2"
 services:
-  mysql:
-    image: cusdeb.com:5000/mysql-armhf
-    command: mysqld
+  mariadb:
+    image: cusdeb.com:5000/mariadb:10_1_28_armhf
     network_mode: "host"
     environment:
     - MYSQL_ROOT_PASSWORD=cusdeb
