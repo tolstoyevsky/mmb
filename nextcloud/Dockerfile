@@ -1,7 +1,7 @@
 FROM cusdeb/stretch:armhf
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
-ENV NEXTCLOUD_VERSION v13.0.0beta3
+ENV NEXTCLOUD_VERSION v13.0.0RC1
 ENV TERM linux
 
 RUN apt-get update && apt-get install -y \
