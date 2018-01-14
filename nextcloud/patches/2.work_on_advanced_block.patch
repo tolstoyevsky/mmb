@@ -7,7 +7,7 @@ index fc9de2170f..aebcfda253 100644
              	// Create clone
  				var $clone = cloneElement($input);
 +					$clone.val($input.val());
- 					$clone.insertBefore($input);
+ 					$clone.insertAfter($input);
  				
  				// Set callback arguments
 diff --git a/core/templates/installation.php b/core/templates/installation.php
