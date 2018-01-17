@@ -1,6 +1,5 @@
-FROM hypriot/rpi-alpine-scratch
-
-COPY qemu-arm-static /usr/bin/qemu-arm-static
+FROM cusdeb/alpinev3.7:armhf
+MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV INADYN_VERSION v2.1
 ENV LIBITE_VERSION v1.8.3
