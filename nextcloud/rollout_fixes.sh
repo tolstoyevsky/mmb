@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /var/www/nc && for i in patches/*; do patch -p1 < ${i}; done
+cd /var/www/nc && for i in `cat patches/series`; do patch -p1 < patches/${i}; done
 
 # Fixes
 # *** stack smashing detected ***: nginx: worker process terminated
