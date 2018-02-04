@@ -1,9 +1,11 @@
 FROM cusdeb/stretch:armhf
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
+ENV BOOKMARKS_VERSION v0.10.1
 ENV CALENDAR_VERSION v1.5.7
 ENV CONTACTS_VERSION v2.0.1
 ENV NEXTCLOUD_VERSION v13.0.0RC4
+ENV OCSMS_VERSION 1.21.2
 ENV SPREED_VERSION v3.0.1
 ENV TERM linux
 
@@ -35,9 +37,12 @@ RUN apt-get update && apt-get install -y \
  && cd /var/www/nc/apps2 \
  && git clone -b $CALENDAR_VERSION  --depth 1 https://github.com/nextcloud/calendar.git \
  && git clone -b $CONTACTS_VERSION  --depth 1 https://github.com/nextcloud/contacts.git \
+ && git clone -b $BOOKMARKS_VERSION --depth 1 https://github.com/nextcloud/bookmarks.git \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/files_pdfviewer.git \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/files_videoplayer.git \
  && rm -r /var/www/nc/apps2/files_videoviewer \
+ && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/notifications.git \
+ && git clone -b $OCSMS_VERSION     --depth 1 https://github.com/nextcloud/ocsms.git \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/gallery.git \
  && git clone -b $SPREED_VERSION    --depth 1 https://github.com/nextcloud/spreed.git \
  && cd /var/www && chown -R www-data:www-data nc \
