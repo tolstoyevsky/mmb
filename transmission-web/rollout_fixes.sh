@@ -1,4 +1,4 @@
 #!/bin/sh
 
-cd /root/transmission-${TRANSMISSION_VERSION} && for i in patches/*; do patch -p1 < ${i}; done
+cd /root/transmission-${TRANSMISSION_VERSION} && for i in `cat patches/series`; do patch -p1 < patches/${i}; done
 
