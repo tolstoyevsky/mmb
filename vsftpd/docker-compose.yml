@@ -1,7 +1,7 @@
 version: "2"
 services:
   vsftpd:
-    image: cusdeb.com:5000/vsftpd:3_0_3_armhf
+    image: cusdeb.com:5000/vsftpd:3.0.3-armhf
     command: /usr/bin/run.sh
     environment:
     - PORT=8004
