@@ -6,49 +6,59 @@
 
 Nextcloud is a self-hosted file storage and synchronization service.
 
-
-## Prerequisites
-
-Build and run the [MySQL](https://github.com/tolstoyevsky/mmb/tree/master/mysql) container before running Nextcloud.
+<table>
+  <tr>
+    <td align="center" colspan="2"><b>Nextcloud</b></td>
+  </tr>
+  <tr>
+    <td>Version</td>
+    <td><a href="https://github.com/nextcloud/server/pull/8127">13 RC4</a></td>
+  </tr>
+  <tr>
+    <td>Release date</td>
+    <td>31 Jan 2018</td>
+  </tr>
+  <tr>
+    <td>Port</td>
+    <td>8001</td>
+  </tr>
+  <tr>
+    <td>Route</td>
+    <td>/nc</td>
+  </tr>
+  <tr>
+    <td>Data volume</td>
+    <td>/srv/nextcloud/data</td>
+  </tr>
+  <tr>
+    <td valign="top">Other volumes</td>
+    <td>
+        /srv/nextcloud/config.php<br>
+        /srv/nextcloud/data/nginx<br>
+        /srv/nextcloud/data/supervisor<br>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">Base images</td>
+    <td>
+        cusdeb/stretch:armhf (for armhf port)<br>
+        debian:stretch (for amd64 port)
+    </td>
+  </tr>
+</table>
 
 ## Installation
 
-First, execute
-
-```
-docker build -t cusdeb.com:5000/nextcloud:13beta3_armhf .
-sudo ./postinst.sh
-docker-compose up -d
-```
-
-Then, go to `http://[Device IP Address]:8001`.
-
-Finally, create an administrator's user account.
-
-## Uninstallation
-
-First, stop the Nextcloud container by executing
-```
-docker stop nextcloud_nextcloud_1
-```
-
-If for some reason Docker says something like `Error response from daemon: No such container: nextcloud_nextcloud_1`, execute
-
-```
-docker ps
-```
-
-and find the container name and execute `docker stop` again.
-
-Then, remove the container by executing
-
-```
-docker rm nextcloud_nextcloud_1
-```
-
-Note that you have to remove manually the configuration file `/srv/nextcloud/config.php` and data directory `/srv/nextcloud/data`.
+Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) section to learn how to install this or other services.
 
 ## Configuration
 
-* Change the `PORT` parameter in `docker-compose.yml` to use different port for Nextcloud.
-* `/srv/nextcloud/config.php` allows changing all sort of things related to Nextcloud. Refer to the [official documentation](https://docs.nextcloud.com/server/12/admin_manual/configuration_server/config_sample_php_parameters.html) to know more about each parameter from the configuration file.
+`docker-compose.yml` supports the following parameters.
+
+| Parameter | Description | Default |
+| --- | --- | --- |
+| PORT        | Port the web server listens on | 8001      |
+| DB_HOST     | MySQL/MariDB server host       | 127.0.0.1 |
+| DB_NAME     | Database name                  | cusdeb    |
+| DB_USERNAME | User name                      | root      |
+| DB_PASSWORD | User password                  | cusdeb    |

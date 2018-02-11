@@ -1,51 +1,50 @@
 # Deluge
 
 <p align="center">
-    <img src="logo.png" width="400">
+    <img src="logo.png" width="200">
 </p>
 
 Deluge is a feature-rich BitTorrent client with Web interface.
 
+<table>
+  <tr>
+    <td align="center" colspan="2"><b>Deluge</b></td>
+  </tr>
+  <tr>
+    <td>Version</td>
+    <td><a href="http://dev.deluge-torrent.org/wiki/ReleaseNotes/1.3.15">1.3.15</a></td>
+  </tr>
+  <tr>
+    <td>Release date</td>
+    <td>12 May 2017</td>
+  </tr>
+  <tr>
+    <td>Port</td>
+    <td>8002</td>
+  </tr>
+  <tr>
+    <td>Data volume</td>
+    <td>/srv/common/downloads</td>
+  </tr>
+  <tr>
+    <td valign="top">Other volumes</td>
+    <td>
+        /srv/deluge/state<br>
+        /srv/deluge/web.conf
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">Base images</td>
+    <td>
+        cusdeb/stretch:armhf (for armhf port)<br>
+        debian:stretch (for amd64 port)
+    </td>
+  </tr>
+</table>
+
 ## Installation
 
-First, execute
-
-```
-docker build -t cusdeb.com:5000/deluge:1_3_15_armhf .
-sudo ./postinst.sh
-docker-compose up -d
-```
-
-Then, go to `http://[Device IP Address]:8002`. You will be asked to enter a password. By default, it's `deluge`. It's highly recommended to change it after successful login.
-
-## Uninstallation
-
-First, stop the Deluge container by executing
-```
-docker stop delugeweb_deluge-web_1
-```
-
-If for some reason Docker says something like `Error response from daemon: No such container: delugeweb_deluge-web_1`, execute
-
-```
-docker ps
-```
-
-and find the container name and execute `docker stop` again.
-
-Then, remove the container by executing
-
-```
-docker rm delugeweb_deluge-web_1
-```
-
-Finally, execute
-
-```
-sudo ./postrm.sh
-```
-
-to remove all the directories associated with Deluge (except the directory intended for downloads which is located in `/srv/common`).
+Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) section to learn how to install this or other services.
 
 ## Configuration
 
