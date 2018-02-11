@@ -1,0 +1,1 @@
+The image is deprecated.
