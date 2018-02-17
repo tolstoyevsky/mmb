@@ -10,8 +10,12 @@ ENV SPREED_VERSION v3.0.1
 ENV TERM linux
 
 RUN apt-get update && apt-get install -y \
+    apt-transport-https \
+    curl \
     git \
+    gnupg2 \
     less \
+    make \
     memcached \
     nano \
     nginx \
@@ -25,10 +29,20 @@ RUN apt-get update && apt-get install -y \
     php-mysql \
     php-xml \
     php-zip \
+    sudo \
     supervisor \
+    wget \
     cron \
+ # Install Node.js
+ && wget -qO- https://deb.nodesource.com/setup_8.x | sudo bash - \
+ && apt-get install nodejs \
+ # Install yarn
+ && wget -qO - https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
+ && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list \
+ && apt-get update && apt-get install -y yarn \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
+ # Install Nextcloud
  && cd /var/www \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/server.git nc \
  && cd /var/www/nc \
@@ -45,8 +59,18 @@ RUN apt-get update && apt-get install -y \
  && git clone -b $OCSMS_VERSION     --depth 1 https://github.com/nextcloud/ocsms.git \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/gallery.git \
  && git clone -b $SPREED_VERSION    --depth 1 https://github.com/nextcloud/spreed.git \
- && cd /var/www && chown -R www-data:www-data nc \
- && apt-get purge -y git \
+ && chown -R www-data:www-data /var/www \
+ && cd /var/www/nc/apps2/calendar && sudo -u www-data make \
+ && cd                ../contacts && sudo -u www-data make \
+ && apt-get purge -y \
+    apt-transport-https \
+    curl \
+    git \
+    gnupg2 \
+    make \
+    wget \
+    nodejs \
+    yarn \
  && apt-get autoremove -y
 
 COPY ./patches /var/www/nc/patches
