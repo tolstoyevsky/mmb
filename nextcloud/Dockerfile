@@ -9,8 +9,11 @@ ENV OCSMS_VERSION 1.21.2
 ENV SPREED_VERSION v3.0.1
 ENV TERM linux
 
+COPY ./fix_phantomjs_on_armv7l.sh /usr/bin/fix_phantomjs_on_armv7l.sh
+
 RUN apt-get update && apt-get install -y \
     apt-transport-https \
+    build-essential \
     curl \
     git \
     gnupg2 \
@@ -33,6 +36,7 @@ RUN apt-get update && apt-get install -y \
     supervisor \
     wget \
     cron \
+ && /usr/bin/fix_phantomjs_on_armv7l.sh \
  # Install Node.js
  && wget -qO- https://deb.nodesource.com/setup_8.x | sudo bash - \
  && apt-get install nodejs \
@@ -62,8 +66,10 @@ RUN apt-get update && apt-get install -y \
  && chown -R www-data:www-data /var/www \
  && cd /var/www/nc/apps2/calendar && sudo -u www-data make \
  && cd                ../contacts && sudo -u www-data make \
+ && /usr/bin/fix_phantomjs_on_armv7l.sh \
  && apt-get purge -y \
     apt-transport-https \
+    build-essential \
     curl \
     git \
     gnupg2 \
