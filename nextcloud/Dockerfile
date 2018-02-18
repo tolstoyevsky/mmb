@@ -66,6 +66,12 @@ RUN apt-get update && apt-get install -y \
  && chown -R www-data:www-data /var/www \
  && cd /var/www/nc/apps2/calendar && sudo -u www-data make \
  && cd                ../contacts && sudo -u www-data make \
+ # Cleanup
+ && rm -r /var/www/.cache \
+ && rm -r /var/www/.node-gyp \
+ && rm -r /var/www/.npm \
+ && rm -r /var/www/nc/apps2/calendar/js/node_modules \
+ && rm -r /var/www/nc/apps2/contacts/node_modules \
  && /usr/bin/fix_phantomjs_on_armv7l.sh \
  && apt-get purge -y \
     apt-transport-https \
