@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y \
     php-curl \
     php-gd \
     php-fpm \
+    php-ldap \
     php-mbstring \
     php-memcached \
     php-mysql \
