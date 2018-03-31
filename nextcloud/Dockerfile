@@ -60,6 +60,7 @@ RUN apt-get update && apt-get install -y \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/files_pdfviewer.git \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/files_videoplayer.git \
  && rm -r /var/www/nc/apps2/files_videoviewer \
+ && rm -r /var/www/nc/apps2/files_odfviewer \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/notifications.git \
  && git clone -b $OCSMS_VERSION     --depth 1 https://github.com/nextcloud/ocsms.git \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/gallery.git \
