@@ -1,0 +1,4 @@
+version: "2"
+services:
+  qemu:
+    image: cusdeb/qemu:2.12-amd64

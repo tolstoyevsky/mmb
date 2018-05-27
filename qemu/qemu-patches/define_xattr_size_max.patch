@@ -1,0 +1,15 @@
+Index: qemu-2.12.0/hw/9pfs/9p.c
+===================================================================
+--- qemu-2.12.0.orig/hw/9pfs/9p.c
++++ qemu-2.12.0/hw/9pfs/9p.c
+@@ -26,6 +26,10 @@
+ #include "migration/blocker.h"
+ #include "sysemu/qtest.h"
+ 
++#ifndef XATTR_SIZE_MAX
++# define XATTR_SIZE_MAX 65536
++#endif
++
+ int open_fd_hw;
+ int total_open_fd;
+ static int open_fd_rc;

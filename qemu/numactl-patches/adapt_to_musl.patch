@@ -1,0 +1,13 @@
+Index: numactl-2.0.11/syscall.c
+===================================================================
+--- numactl-2.0.11.orig/syscall.c
++++ numactl-2.0.11/syscall.c
+@@ -115,7 +115,7 @@
+ 
+ #endif
+ 
+-#if defined(__GLIBC__) && __GLIBC_PREREQ(2, 11)
++#if defined(__GLIBC__)
+ 
+ /* glibc 2.11 seems to have working 6 argument sycall. Use the
+    glibc supplied syscall in this case.
