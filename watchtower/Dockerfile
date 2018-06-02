@@ -1,16 +1,29 @@
-FROM centurylink/ca-certs
-MAINTAINER Fabrizio Steiner <stffabi@users.noreply.github.com>
+FROM cusdeb/alpine3.7:amd64
+MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
-ARG BUILD_DATE
-ARG VCS_REF
-ARG VERSION
+ENV WATCHTOWER_VERSION 0.3.0
+ENV WATCHTOWER_SRC /root/src/github.com/v2tec/watchtower
 
-LABEL com.centurylinklabs.watchtower=true \
-      org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/v2tec/docker-watchtower" \
-      org.label-schema.version="$VERSION" \
-      org.label-schema.schema-version="1.0"
+RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.7/community >> /etc/apk/repositories \
+ && apk --update add \
+    git \
+    glide \
+    go \
+    musl-dev \
+ && mkdir -p $WATCHTOWER_SRC \
+ && git clone -b v0.3.0 https://github.com/v2tec/watchtower.git $WATCHTOWER_SRC \
+ && cd $WATCHTOWER_SRC \
+ && env GOPATH=/root glide install \
+ && env GOPATH=/root go build -a -ldflags '-extldflags "-static"' \
+ && cp watchtower / \
+ # Cleanup
+ && rm -r /root/src /root/.glide \
+ && apk del \
+    git \
+    glide \
+    go \
+    musl-dev \
+ && rm -f /var/cache/apk/*
 
-COPY watchtower /
 ENTRYPOINT ["/watchtower"]
+
