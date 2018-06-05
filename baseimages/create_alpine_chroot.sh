@@ -12,7 +12,7 @@ fi
 set_traps
 
 ALPINE_VERSION=v3.7
-APK_TOOLS_VERSION=2.8.1-r2
+APK_TOOLS_VERSION=2.9.1-r2
 CHROOT_DIR=alpine_chroot
 MIRROR=http://mirror.yandex.ru/mirrors/alpine
 
