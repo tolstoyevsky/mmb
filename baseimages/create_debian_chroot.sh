@@ -9,7 +9,26 @@ fi
 
 . ./functions.sh
 
+parse_options "$@"
+
 set_traps
+
+set -x
+
+FLAVOUR=${FLAVOUR:=""}
+
+TAG_NAME=${TAG_NAME:="cusdeb/stretch:armhf"}
+
+set +x
+
+#
+# Let's get started
+#
+
+if [ ! -z "${FLAVOUR}" ] && [ ! -f ./flavours/"${FLAVOUR}.sh" ]; then
+    fatal "there is no such flavour as '${FLAVOUR}'."
+    exit 1
+fi
 
 if [ -d stretch_chroot ]; then
     fatal "stretch_chroot already exists. Remove it and run the script again."
@@ -56,8 +75,13 @@ echo "APT::Get::Purge \"true\";" > stretch_chroot/etc/apt/apt.conf
 echo "path-exclude=/usr/share/locale/*" > /etc/dpkg/dpkg.cfg.d/excludes
 echo "path-exclude=/usr/share/man/*"   >> /etc/dpkg/dpkg.cfg.d/excludes
 
+if [ ! -z "${FLAVOUR}" ]; then
+    info "importing './flavours/${FLAVOUR}.sh'"
+    . ./flavours/"${FLAVOUR}.sh"
+fi
+
 IMAGE=`sh -c "tar -C stretch_chroot -c . | docker import -"`
 
-docker tag $IMAGE cusdeb/stretch:armhf
+docker tag $IMAGE "${TAG_NAME}"
 
 success "Successfully created Debian Stretch base image"

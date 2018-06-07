@@ -9,12 +9,34 @@ fi
 
 . ./functions.sh
 
+parse_options "$@"
+
 set_traps
 
+set -x
+
 ALPINE_VERSION=v3.7
+
 APK_TOOLS_VERSION=2.9.1-r2
+
 CHROOT_DIR=alpine_chroot
+
+FLAVOUR=${FLAVOUR:=""}
+
 MIRROR=http://mirror.yandex.ru/mirrors/alpine
+
+TAG_NAME=${TAG_NAME:="cusdeb/alpine3.7:armhf"}
+
+set +x
+
+#
+# Let's get started
+#
+
+if [ ! -z "${FLAVOUR}" ] && [ ! -f ./flavours/"${FLAVOUR}.sh" ]; then
+    fatal "there is no such flavour as '${FLAVOUR}'."
+    exit 1
+fi
 
 if [ -d ${CHROOT_DIR} ]; then
     fatal "${CHROOT_DIR} already exists. Remove it and run the script again."
@@ -61,7 +83,12 @@ info "Setting up APK mirror"
 mkdir -p ${CHROOT_DIR}/etc/apk
 echo "${MIRROR}/${ALPINE_VERSION}/main" > ${CHROOT_DIR}/etc/apk/repositories
 
+if [ ! -z "${FLAVOUR}" ]; then
+    info "importing './flavours/${FLAVOUR}.sh'"
+    . ./flavours/"${FLAVOUR}.sh"
+fi
+
 IMAGE=`sh -c "tar -C alpine_chroot -c . | docker import -"`
 
-docker tag $IMAGE cusdeb/alpine${ALPINE_VERSION}:armhf
+docker tag $IMAGE "${TAG_NAME}"
 

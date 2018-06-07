@@ -75,6 +75,17 @@ check_dependencies() {
     fi
 }
 
+# Executes the specified command in the chroot environment.
+# Globals:
+#     CHROOT_DIR
+# Arguments:
+#     None
+# Returns:
+#     None
+chroot_exec() {
+    chroot "${CHROOT_DIR}" "$@" 1>&2
+}
+
 # Get qemu-user-static 2.8 from the Debian archive.
 # Globals:
 #     None
@@ -113,6 +124,32 @@ get_debootstrap() {
     # functional, but does not have a correct version number. However, the
     # version can be found in the source package changelog.
     ver=`sed 's/.*(\(.*\)).*/\1/; q' debootstrap/debian/changelog`
+}
+
+# Parses command line options.
+# Globals:
+#     FLAVOUR
+#     TAG_NAME
+# Arguments:
+#     Command line as an array
+# Returns:
+#     None
+parse_options() {
+    while true; do
+        case "$1" in
+        -f|--flavour)
+            FLAVOUR="$2"
+            shift 2
+            ;;
+        -t|--tag-name)
+            TAG_NAME="$2"
+            shift 2
+            ;;
+        *)
+            break
+            ;;
+        esac
+    done
 }
 
 # Calls the cleanup function on the following signals: EXIT, SIGHUP, SIGINT,
