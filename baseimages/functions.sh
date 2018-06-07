@@ -42,6 +42,24 @@ success() {
     >&2 echo "${text_in_green_color}Success${reset}: ${*}"
 }
 
+# Check if the specified architecture is valid.
+# Globals:
+#     ARCH
+# Arguments:
+#     None
+# Returns:
+#     Boolean
+is_architecture_valid() {
+    case "${ARCH}" in
+    armhf|amd64)
+        true
+        ;;
+    *)
+        false
+        ;;
+    esac
+}
+
 # Checks if all required dependencies are installed on the system.
 # Globals:
 #     None
@@ -128,6 +146,7 @@ get_debootstrap() {
 
 # Parses command line options.
 # Globals:
+#     ARCH
 #     FLAVOUR
 #     TAG_NAME
 # Arguments:
@@ -137,6 +156,10 @@ get_debootstrap() {
 parse_options() {
     while true; do
         case "$1" in
+        -a|--arch)
+            ARCH="$2"
+            shift 2
+            ;;
         -f|--flavour)
             FLAVOUR="$2"
             shift 2
