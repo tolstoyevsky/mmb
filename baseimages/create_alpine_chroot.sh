@@ -19,6 +19,8 @@ ALPINE_VERSION=v3.7
 
 APK_TOOLS_VERSION=2.9.1-r2
 
+ARCH=${ARCH:="armhf"}
+
 CHROOT_DIR=alpine_chroot
 
 FLAVOUR=${FLAVOUR:=""}
@@ -32,6 +34,16 @@ set +x
 #
 # Let's get started
 #
+
+if ! is_architecture_valid; then
+    fatal "the specified architecture '${ARCH}' is not supported."
+    exit 1
+fi
+
+# Alpine calls the architecture in a different way. Fixing it.
+if [ "${ARCH}" == "amd64" ]; then
+    ARCH="x86_64"
+fi
 
 if [ ! -z "${FLAVOUR}" ] && [ ! -f ./flavours/"${FLAVOUR}.sh" ]; then
     fatal "there is no such flavour as '${FLAVOUR}'."
@@ -54,7 +66,7 @@ else
 fi
 
 if [ ! -d sbin ]; then
-    wget ${MIRROR}/${ALPINE_VERSION}/main/armhf/apk-tools-static-${APK_TOOLS_VERSION}.apk
+    wget "${MIRROR}/${ALPINE_VERSION}/main/${ARCH}/apk-tools-static-${APK_TOOLS_VERSION}.apk"
 
     tar -xzf apk-tools-static-${APK_TOOLS_VERSION}.apk
 

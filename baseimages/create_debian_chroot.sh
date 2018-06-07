@@ -15,6 +15,8 @@ set_traps
 
 set -x
 
+ARCH=${ARCH:="armhf"}
+
 FLAVOUR=${FLAVOUR:=""}
 
 TAG_NAME=${TAG_NAME:="cusdeb/stretch:armhf"}
@@ -24,6 +26,11 @@ set +x
 #
 # Let's get started
 #
+
+if ! is_architecture_valid; then
+    fatal "the specified architecture '${ARCH}' is not supported."
+    exit 1
+fi
 
 if [ ! -z "${FLAVOUR}" ] && [ ! -f ./flavours/"${FLAVOUR}.sh" ]; then
     fatal "there is no such flavour as '${FLAVOUR}'."
@@ -56,7 +63,7 @@ else
 fi
 
 info "Creating Debian Stretch chroot environment"
-${DEBOOTSTRAP_EXEC} --arch=armhf --foreign --variant=minbase stretch stretch_chroot
+${DEBOOTSTRAP_EXEC} --arch="${ARCH}" --foreign --variant=minbase stretch stretch_chroot
 
 cp qemu-arm-static stretch_chroot/usr/bin
 
