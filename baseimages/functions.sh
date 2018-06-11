@@ -1,5 +1,5 @@
 DEBOOTSTRAP_VER="1.0.91"
-DEBOOTSTRAP_EXEC="env DEBOOTSTRAP_DIR=`pwd`/debootstrap ./debootstrap/debootstrap"
+DEBOOTSTRAP_EXEC="env DEBOOTSTRAP_DIR=$(pwd)/debootstrap ./debootstrap/debootstrap"
 
 text_in_red_color=$(tput setaf 1)
 
@@ -17,7 +17,7 @@ reset=$(tput sgr0)
 # Returns:
 #     None
 fatal() {
-    >&2 echo "${text_in_red_color}Fatal${reset}: ${*}"
+    >&2 echo "${text_in_red_color}Fatal${reset}: $*"
 }
 
 # Prints the specified message with the level info.
@@ -28,7 +28,7 @@ fatal() {
 # Returns:
 #     None
 info() {
-    >&2 echo "${text_in_yellow_color}Info${reset}: ${*}"
+    >&2 echo "${text_in_yellow_color}Info${reset}: $*"
 }
 
 # Prints the specified message with the level success.
@@ -39,7 +39,7 @@ info() {
 # Returns:
 #     None
 success() {
-    >&2 echo "${text_in_green_color}Success${reset}: ${*}"
+    >&2 echo "${text_in_green_color}Success${reset}: $*"
 }
 
 # Check if the specified architecture is valid.
@@ -98,25 +98,25 @@ is_debian() {
 # Returns:
 #     None
 check_dependencies() {
-    if [ -z `which docker` ]; then
+    if [ -z "$(which docker)" ]; then
         fatal "Docker is not installed." \
               "Run apt-get install docker.io on Debian/Ubuntu to fix it."
         exit 1
     fi
 
-    if [ -z `which git` ]; then
+    if [ -z "$(which git)" ]; then
         fatal "git is not installed." \
               "Run apt-get install git on Debian/Ubuntu to fix it."
         exit 1
     fi
 
-    if [ -z `which wget` ]; then
+    if [ -z "$(which wget)" ]; then
         fatal "wget is not installed." \
               "Run apt-get install wget on Debian/Ubuntu to fix it."
         exit 1
     fi
 
-    if [ -z `which xz` ]; then
+    if [ -z "$(which xz)" ]; then
         fatal "xz is not installed." \
               "Run apt-get install xz-utils on Debian/Ubuntu to fix it."
         exit 1
@@ -168,11 +168,11 @@ get_qemu_emulation_binary() {
 
     xz -d Packages.xz
 
-    package=`grep "Filename: pool/main/q/qemu/qemu-user-static" Packages | awk '{print $2}'`
+    package="$(grep "Filename: pool/main/q/qemu/qemu-user-static" Packages | awk '{print $2}')"
 
-    wget http://ftp.debian.org/debian/${package}
+    wget http://ftp.debian.org/debian/"${package}"
 
-    ar x `basename ${package}`
+    ar x "$(basename "${package}")"
 
     tar xJvf data.tar.xz
 
@@ -188,12 +188,7 @@ get_qemu_emulation_binary() {
 #     None
 get_debootstrap() {
     git clone https://anonscm.debian.org/git/d-i/debootstrap.git
-    git -C debootstrap checkout ${DEBOOTSTRAP_VER}
-
-    # After cloning the debootstrap git repo the program is a fully
-    # functional, but does not have a correct version number. However, the
-    # version can be found in the source package changelog.
-    ver=`sed 's/.*(\(.*\)).*/\1/; q' debootstrap/debian/changelog`
+    git -C debootstrap checkout "${DEBOOTSTRAP_VER}"
 }
 
 # Parses command line options.
