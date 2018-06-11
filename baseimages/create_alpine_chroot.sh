@@ -2,7 +2,7 @@
 
 set -e
 
-if [ "`id -u`" -ne "0" ]; then
+if [ "$(id -u)" -ne "0" ]; then
     >&2 echo "This script must be run as root"
     exit 1
 fi
@@ -90,41 +90,43 @@ fi
 if [ ! -d sbin ]; then
     wget "${MIRROR}/${ALPINE_VERSION}/main/${ARCH}/apk-tools-static-${APK_TOOLS_VERSION}.apk"
 
-    tar -xzf apk-tools-static-${APK_TOOLS_VERSION}.apk
+    tar -xzf apk-tools-static-"${APK_TOOLS_VERSION}.apk"
 
-    rm apk-tools-static-${APK_TOOLS_VERSION}.apk
+    rm apk-tools-static-"${APK_TOOLS_VERSION}.apk"
 fi
 
 if ${USE_EMULATION}; then
-    mkdir -p ${CHROOT_DIR}/usr/bin
-    cp qemu-arm-static ${CHROOT_DIR}/usr/bin
+    mkdir -p "${CHROOT_DIR}"/usr/bin
+    cp qemu-arm-static "${CHROOT_DIR}"/usr/bin
 fi
 
-./sbin/apk.static -X ${MIRROR}/${ALPINE_VERSION}/main -U --allow-untrusted --root ${CHROOT_DIR} --initdb add alpine-base
+./sbin/apk.static -X "${MIRROR}/${ALPINE_VERSION}/main" -U --allow-untrusted --root "${CHROOT_DIR}" --initdb add alpine-base
 
-rm -rf ${CHROOT_DIR}/var/cache/apk/*
+rm -rf "${CHROOT_DIR}"/var/cache/apk/*
 
 info "Setting up some devices"
-mknod -m 666 ${CHROOT_DIR}/dev/full c 1 7
-mknod -m 666 ${CHROOT_DIR}/dev/ptmx c 5 2
-mknod -m 644 ${CHROOT_DIR}/dev/random c 1 8
-mknod -m 644 ${CHROOT_DIR}/dev/urandom c 1 9
-mknod -m 666 ${CHROOT_DIR}/dev/zero c 1 5
-mknod -m 666 ${CHROOT_DIR}/dev/tty c 5 0
+mknod -m 666 "${CHROOT_DIR}"/dev/full c 1 7
+mknod -m 666 "${CHROOT_DIR}"/dev/ptmx c 5 2
+mknod -m 644 "${CHROOT_DIR}"/dev/random c 1 8
+mknod -m 644 "${CHROOT_DIR}"/dev/urandom c 1 9
+mknod -m 666 "${CHROOT_DIR}"/dev/zero c 1 5
+mknod -m 666 "${CHROOT_DIR}"/dev/tty c 5 0
 
 info "Configuring DNS"
-echo 'nameserver 8.8.8.8' > ${CHROOT_DIR}/etc/resolv.conf
+echo 'nameserver 8.8.8.8' > "${CHROOT_DIR}"/etc/resolv.conf
 
 info "Setting up APK mirror"
 mkdir -p ${CHROOT_DIR}/etc/apk
-echo "${MIRROR}/${ALPINE_VERSION}/main" > ${CHROOT_DIR}/etc/apk/repositories
+echo "${MIRROR}/${ALPINE_VERSION}/main" > "${CHROOT_DIR}"/etc/apk/repositories
 
 if [ ! -z "${FLAVOUR}" ]; then
     info "importing './flavours/${FLAVOUR}.sh'"
+
+    # shellcheck source=flavours/nodejs.sh
     . ./flavours/"${FLAVOUR}.sh"
 fi
 
-IMAGE=`sh -c "tar -C alpine_chroot -c . | docker import -"`
+IMAGE="$(sh -c "tar -C alpine_chroot -c . | docker import -")"
 
-docker tag $IMAGE "${TAG_NAME}"
+docker tag "${IMAGE}" "${TAG_NAME}"
 

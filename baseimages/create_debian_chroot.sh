@@ -2,7 +2,7 @@
 
 set -e
 
-if [ "`id -u`" -ne "0" ]; then
+if [ "$(id -u)" -ne "0" ]; then
     >&2 echo "This script must be run as root"
     exit 1
 fi
@@ -109,11 +109,13 @@ echo "path-exclude=/usr/share/man/*"   >> "${CHROOT_DIR}"/etc/dpkg/dpkg.cfg.d/ex
 
 if [ ! -z "${FLAVOUR}" ]; then
     info "importing './flavours/${FLAVOUR}.sh'"
+
+    # shellcheck source=flavours/nodejs.sh
     . ./flavours/"${FLAVOUR}.sh"
 fi
 
-IMAGE=`sh -c "tar -C ${CHROOT_DIR} -c . | docker import -"`
+IMAGE="$(sh -c "tar -C ${CHROOT_DIR} -c . | docker import -")"
 
-docker tag $IMAGE "${TAG_NAME}"
+docker tag "${IMAGE}" "${TAG_NAME}"
 
 success "Successfully created Debian Stretch base image"

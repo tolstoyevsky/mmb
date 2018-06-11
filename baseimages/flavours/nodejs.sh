@@ -2,8 +2,6 @@ CORES_NUMBER="$(grep -c ^processor /proc/cpuinfo)"
 
 NODE_VERSION=8.11.2
 
-NVM_VERSION=0.33.11
-
 # Install dependencies for building the latest Node.js LTS.
 
 if is_alpine; then
