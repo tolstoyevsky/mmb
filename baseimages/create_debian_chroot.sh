@@ -17,6 +17,8 @@ set -x
 
 ARCH=${ARCH:="armhf"}
 
+CHROOT_DIR=${CHROOT_DIR:="stretch_chroot"}
+
 FLAVOUR=${FLAVOUR:=""}
 
 TAG_NAME=${TAG_NAME:="cusdeb/stretch:armhf"}
@@ -37,8 +39,8 @@ if [ ! -z "${FLAVOUR}" ] && [ ! -f ./flavours/"${FLAVOUR}.sh" ]; then
     exit 1
 fi
 
-if [ -d stretch_chroot ]; then
-    fatal "stretch_chroot already exists. Remove it and run the script again."
+if [ -d "${CHROOT_DIR}" ]; then
+    fatal "${CHROOT_DIR} already exists. Remove it and run the script again."
     exit 1
 fi
 
@@ -63,31 +65,31 @@ else
 fi
 
 info "Creating Debian Stretch chroot environment"
-${DEBOOTSTRAP_EXEC} --arch="${ARCH}" --foreign --variant=minbase stretch stretch_chroot
+${DEBOOTSTRAP_EXEC} --arch="${ARCH}" --foreign --variant=minbase stretch "${CHROOT_DIR}"
 
-cp qemu-arm-static stretch_chroot/usr/bin
+cp qemu-arm-static "${CHROOT_DIR}"/usr/bin
 
-chroot stretch_chroot /debootstrap/debootstrap --second-stage
+chroot "${CHROOT_DIR}" /debootstrap/debootstrap --second-stage
 
-chroot stretch_chroot apt-get clean
+chroot "${CHROOT_DIR}" apt-get clean
 
-chroot stretch_chroot sh -c "rm -rf /var/lib/apt/lists/*"
+chroot "${CHROOT_DIR}" sh -c "rm -rf /var/lib/apt/lists/*"
 
 success "Successfully created Debian Stretch chroot environment"
 
 info "Make some optimizations"
 
-echo "APT::Get::Purge \"true\";" > stretch_chroot/etc/apt/apt.conf
+echo "APT::Get::Purge \"true\";" > "${CHROOT_DIR}"/etc/apt/apt.conf
 
-echo "path-exclude=/usr/share/locale/*" > /etc/dpkg/dpkg.cfg.d/excludes
-echo "path-exclude=/usr/share/man/*"   >> /etc/dpkg/dpkg.cfg.d/excludes
+echo "path-exclude=/usr/share/locale/*" > "${CHROOT_DIR}"/etc/dpkg/dpkg.cfg.d/excludes
+echo "path-exclude=/usr/share/man/*"   >> "${CHROOT_DIR}"/etc/dpkg/dpkg.cfg.d/excludes
 
 if [ ! -z "${FLAVOUR}" ]; then
     info "importing './flavours/${FLAVOUR}.sh'"
     . ./flavours/"${FLAVOUR}.sh"
 fi
 
-IMAGE=`sh -c "tar -C stretch_chroot -c . | docker import -"`
+IMAGE=`sh -c "tar -C ${CHROOT_DIR} -c . | docker import -"`
 
 docker tag $IMAGE "${TAG_NAME}"
 
