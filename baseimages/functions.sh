@@ -60,6 +60,36 @@ is_architecture_valid() {
     esac
 }
 
+# Checks if the target distribution is Alpine.
+# Globals:
+#     CHROOT_DIR
+# Arguments:
+#     None
+# Returns:
+#     Boolean
+is_alpine() {
+    if [ -f "${CHROOT_DIR}/etc/alpine-release" ]; then
+        true
+    else
+        false
+    fi
+}
+
+# Checks if the target distribution is Debian.
+# Globals:
+#     CHROOT_DIR
+# Arguments:
+#     None
+# Returns:
+#     Boolean
+is_debian() {
+    if [ -f "${CHROOT_DIR}/etc/debian_version" ]; then
+        true
+    else
+        false
+    fi
+}
+
 # Checks if all required dependencies are installed on the system.
 # Globals:
 #     None
