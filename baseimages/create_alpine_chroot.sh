@@ -92,11 +92,11 @@ if ${USE_EMULATION}; then
     if [ -e "${EMULATION_BINARY}" ]; then
         info "./${EMULATION_BINARY} already exists"
     else
-        info "Fetching ${EMULATION_BINARY}"
+        info "fetching ${EMULATION_BINARY}"
 
         get_qemu_emulation_binary
 
-        success "Successfully fetched ${EMULATION_BINARY}"
+        success "fetched ${EMULATION_BINARY}"
     fi
 fi
 
@@ -117,7 +117,7 @@ fi
 
 rm -rf "${CHROOT_DIR}"/var/cache/apk/*
 
-info "Setting up some devices"
+info "setting up some devices"
 mknod -m 666 "${CHROOT_DIR}"/dev/full c 1 7
 mknod -m 666 "${CHROOT_DIR}"/dev/ptmx c 5 2
 mknod -m 644 "${CHROOT_DIR}"/dev/random c 1 8
@@ -125,10 +125,10 @@ mknod -m 644 "${CHROOT_DIR}"/dev/urandom c 1 9
 mknod -m 666 "${CHROOT_DIR}"/dev/zero c 1 5
 mknod -m 666 "${CHROOT_DIR}"/dev/tty c 5 0
 
-info "Configuring DNS"
+info "configuring DNS"
 echo 'nameserver 8.8.8.8' > "${CHROOT_DIR}"/etc/resolv.conf
 
-info "Setting up APK mirror"
+info "setting up APK mirror"
 mkdir -p ${CHROOT_DIR}/etc/apk
 echo "${MIRROR}/${ALPINE_VERSION}/main" > "${CHROOT_DIR}"/etc/apk/repositories
 
@@ -143,3 +143,4 @@ IMAGE="$(sh -c "tar -C alpine_chroot -c . | docker import -")"
 
 docker tag "${IMAGE}" "${TAG_NAME}"
 
+success "created Alpine 3.7 base image"
