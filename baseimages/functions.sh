@@ -123,6 +123,28 @@ check_dependencies() {
     fi
 }
 
+# Choose the suitable user mode emulation binary depending on the ARCH value.
+# Globals:
+#     ARCH
+#     EMULATION_BINARY
+# Arguments:
+#     None
+# Returns:
+#     None
+choose_emulator() {
+    case "${ARCH}" in
+    amd64|x86_64)
+        EMULATION_BINARY="qemu-x86_64-static"
+        ;;
+    armhf)
+        EMULATION_BINARY="qemu-arm-static"
+        ;;
+    *)
+        EMULATION_BINARY=""
+        ;;
+    esac
+}
+
 # Executes the specified command in the chroot environment.
 # Globals:
 #     CHROOT_DIR
@@ -136,12 +158,12 @@ chroot_exec() {
 
 # Get qemu-user-static 2.8 from the Debian archive.
 # Globals:
-#     None
+#     EMULATION_BINARY
 # Arguments:
 #     None
 # Returns:
 #     None
-get_qemu_arm_static() {
+get_qemu_emulation_binary() {
     wget http://ftp.debian.org/debian/dists/stretch/main/binary-amd64/Packages.xz
 
     xz -d Packages.xz
@@ -154,7 +176,7 @@ get_qemu_arm_static() {
 
     tar xJvf data.tar.xz
 
-    cp usr/bin/qemu-arm-static .
+    cp usr/bin/"${EMULATION_BINARY}" .
 }
 
 # Get the latest version of debootstrap.
@@ -179,6 +201,7 @@ get_debootstrap() {
 #     ARCH
 #     FLAVOUR
 #     TAG_NAME
+#     USE_EMULATION
 # Arguments:
 #     Command line as an array
 # Returns:
@@ -189,6 +212,10 @@ parse_options() {
         -a|--arch)
             ARCH="$2"
             shift 2
+            ;;
+        -n|--do-not-use-emulation)
+            USE_EMULATION=false
+            shift 1
             ;;
         -f|--flavour)
             FLAVOUR="$2"

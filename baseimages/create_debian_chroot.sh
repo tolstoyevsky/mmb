@@ -13,6 +13,10 @@ parse_options "$@"
 
 set_traps
 
+#
+# User defined params
+#
+
 set -x
 
 ARCH=${ARCH:="armhf"}
@@ -23,7 +27,15 @@ FLAVOUR=${FLAVOUR:=""}
 
 TAG_NAME=${TAG_NAME:="cusdeb/stretch:armhf"}
 
+USE_EMULATION=${USE_EMULATION:=true}
+
 set +x
+
+#
+# Internal params
+#
+
+EMULATION_BINARY=""
 
 #
 # Let's get started
@@ -44,14 +56,23 @@ if [ -d "${CHROOT_DIR}" ]; then
     exit 1
 fi
 
-if [ -e qemu-arm-static ]; then
-    info "./qemu-arm-static already exists"
-else
-    info "Fetching qemu-arm-static"
+if ${USE_EMULATION}; then
+    choose_emulator
 
-    get_qemu_arm_static
+    if [ -z "${EMULATION_BINARY}" ]; then
+        fatal "could not choose the suitable user mode emulation binary."
+        exit 1
+    fi
 
-    success "Successfully fetched qemu-arm-static"
+    if [ -e "${EMULATION_BINARY}" ]; then
+        info "./${EMULATION_BINARY} already exists"
+    else
+        info "Fetching ${EMULATION_BINARY}"
+
+        get_qemu_emulation_binary
+
+        success "Successfully fetched ${EMULATION_BINARY}"
+    fi
 fi
 
 if [ -d debootstrap ]; then
@@ -67,7 +88,9 @@ fi
 info "Creating Debian Stretch chroot environment"
 ${DEBOOTSTRAP_EXEC} --arch="${ARCH}" --foreign --variant=minbase stretch "${CHROOT_DIR}"
 
-cp qemu-arm-static "${CHROOT_DIR}"/usr/bin
+if ${USE_EMULATION}; then
+    cp "${EMULATION_BINARY}" "${CHROOT_DIR}"/usr/bin
+fi
 
 chroot "${CHROOT_DIR}" /debootstrap/debootstrap --second-stage
 
