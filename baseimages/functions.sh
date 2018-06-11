@@ -156,7 +156,7 @@ chroot_exec() {
     chroot "${CHROOT_DIR}" "$@" 1>&2
 }
 
-# Get qemu-user-static 2.8 from the Debian archive.
+# Get qemu-user-static 2.11 from Ubuntu Bionic (LTS).
 # Globals:
 #     EMULATION_BINARY
 # Arguments:
@@ -164,13 +164,13 @@ chroot_exec() {
 # Returns:
 #     None
 get_qemu_emulation_binary() {
-    wget http://ftp.debian.org/debian/dists/stretch/main/binary-amd64/Packages.xz
+    wget http://mirrors.kernel.org/ubuntu/dists/bionic/universe/binary-amd64/Packages.xz
 
     xz -d Packages.xz
 
-    package="$(grep "Filename: pool/main/q/qemu/qemu-user-static" Packages | awk '{print $2}')"
+    package="$(grep "Filename: pool/universe/q/qemu/qemu-user-static" Packages | awk '{print $2}')"
 
-    wget http://ftp.debian.org/debian/"${package}"
+    wget http://security.ubuntu.com/ubuntu/"${package}"
 
     ar x "$(basename "${package}")"
 
