@@ -80,25 +80,25 @@ if ${USE_EMULATION}; then
     if [ -e "${EMULATION_BINARY}" ]; then
         info "./${EMULATION_BINARY} already exists"
     else
-        info "Fetching ${EMULATION_BINARY}"
+        info "fetching ${EMULATION_BINARY}"
 
         get_qemu_emulation_binary
 
-        success "Successfully fetched ${EMULATION_BINARY}"
+        success "fetched ${EMULATION_BINARY}"
     fi
 fi
 
 if [ -d debootstrap ]; then
     info "./debootstrap already exists"
 else
-    info "Fetching debootstrap"
+    info "fetching debootstrap"
 
     get_debootstrap
 
-    success "Successfully fetched debootstrap"
+    success "fetched debootstrap"
 fi
 
-info "Creating Debian Stretch chroot environment"
+info "creating Debian Stretch chroot environment"
 ${DEBOOTSTRAP_EXEC} --arch="${ARCH}" --foreign --variant=minbase stretch "${CHROOT_DIR}"
 
 if ${USE_EMULATION}; then
@@ -111,9 +111,9 @@ chroot "${CHROOT_DIR}" apt-get clean
 
 chroot "${CHROOT_DIR}" sh -c "rm -rf /var/lib/apt/lists/*"
 
-success "Successfully created Debian Stretch chroot environment"
+success "created Debian Stretch chroot environment"
 
-info "Make some optimizations"
+info "making some optimizations"
 
 echo "APT::Get::Purge \"true\";" > "${CHROOT_DIR}"/etc/apt/apt.conf
 
@@ -131,4 +131,4 @@ IMAGE="$(sh -c "tar -C ${CHROOT_DIR} -c . | docker import -")"
 
 docker tag "${IMAGE}" "${TAG_NAME}"
 
-success "Successfully created Debian Stretch base image"
+success "created Debian Stretch base image"
