@@ -13,6 +13,10 @@ parse_options "$@"
 
 set_traps
 
+#
+# User defined params
+#
+
 set -x
 
 ALPINE_VERSION=v3.7
@@ -29,7 +33,16 @@ MIRROR=http://mirror.yandex.ru/mirrors/alpine
 
 TAG_NAME=${TAG_NAME:="cusdeb/alpine3.7:armhf"}
 
+USE_EMULATION=${USE_EMULATION:=true}
+
 set +x
+
+
+#
+# Internal params
+#
+
+EMULATION_BINARY=""
 
 #
 # Let's get started
@@ -55,14 +68,23 @@ if [ -d ${CHROOT_DIR} ]; then
     exit 1
 fi
 
-if [ -e qemu-arm-static ]; then
-    info "./qemu-arm-static already exists"
-else
-    info "Fetching qemu-arm-static"
+if ${USE_EMULATION}; then
+    choose_emulator
 
-    get_qemu_arm_static
+    if [ -z "${EMULATION_BINARY}" ]; then
+        fatal "could not choose the suitable user mode emulation binary."
+        exit 1
+    fi
 
-    success "Successfully fetched qemu-arm-static"
+    if [ -e "${EMULATION_BINARY}" ]; then
+        info "./${EMULATION_BINARY} already exists"
+    else
+        info "Fetching ${EMULATION_BINARY}"
+
+        get_qemu_emulation_binary
+
+        success "Successfully fetched ${EMULATION_BINARY}"
+    fi
 fi
 
 if [ ! -d sbin ]; then
@@ -73,8 +95,10 @@ if [ ! -d sbin ]; then
     rm apk-tools-static-${APK_TOOLS_VERSION}.apk
 fi
 
-mkdir -p ${CHROOT_DIR}/usr/bin
-cp qemu-arm-static ${CHROOT_DIR}/usr/bin
+if ${USE_EMULATION}; then
+    mkdir -p ${CHROOT_DIR}/usr/bin
+    cp qemu-arm-static ${CHROOT_DIR}/usr/bin
+fi
 
 ./sbin/apk.static -X ${MIRROR}/${ALPINE_VERSION}/main -U --allow-untrusted --root ${CHROOT_DIR} --initdb add alpine-base
 
