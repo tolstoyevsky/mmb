@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+
 # execute any pre-init scripts
 for i in /scripts/pre-init.d/*sh
 do
@@ -69,6 +70,17 @@ do
     if [ -e "${i}" ]; then
         echo "[i] pre-exec.d - processing $i"
         . ${i}
+    fi
+done
+
+# Modify /etc/mysql/my.cnf
+for key_val in $(env); do
+    if [[ "${key_val}" = MYSQLD_* ]]; then
+        var=$(echo ${key_val} | cut -d"=" -f1)
+	val=${!var}
+	config_option=${var#MYSQLD_}
+	>&2 echo "Changing '${config_option}' to '${val}'"
+	change_ini_param.py ${config_option} ${val}
     fi
 done
 
