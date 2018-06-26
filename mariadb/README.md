@@ -45,7 +45,8 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
 
 | Parameter | Description | Default |
 | --- | --- | --- |
-| MYSQL_ROOT_PASSWORD | root password for MariaDB      | cusdeb |
-| MYSQL_DATABASE      | Database name                  |        |
-| MYSQL_USER          | User name for the database     |        |
-| MYSQL_PASSWORD      | User password for the database |        |
+| MYSQLD_*            | Any option in `/etc/mysql/my.cnf` from the `mysqld` section |        |
+| MYSQL_ROOT_PASSWORD | root password for MariaDB                                   | cusdeb |
+| MYSQL_DATABASE      | Database name                                               |        |
+| MYSQL_USER          | User name for the database                                  |        |
+| MYSQL_PASSWORD      | User password for the database                              |        |
