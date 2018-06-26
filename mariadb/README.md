@@ -12,11 +12,11 @@ MariaDB is a community-developed fork of MySQL that is dedicated to FOSS (free a
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://mariadb.com/kb/en/library/mariadb-10128-release-notes/">10.1.28</a></td>
+    <td><a href="https://mariadb.org/mariadb-10-1-is-stable-ga/">10.1</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>28 Sep 2017</td>
+    <td>17 Oct 2015</td>
   </tr>
   <tr>
     <td>Port</td>
