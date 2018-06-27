@@ -4,6 +4,7 @@ services:
     image: cusdeb/mariadb:10.1-armhf
     network_mode: "host"
     environment:
+    - MYSQLD_port=33061
     - MYSQL_ROOT_PASSWORD=cusdeb
     - MYSQL_DATABASE=
     - MYSQL_USER=
