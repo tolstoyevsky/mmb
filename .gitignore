@@ -1,6 +1,7 @@
 .idea
 baseimages/debootstrap
 baseimages/qemu-arm-static
+baseimages/qemu-x86_64-static
 baseimages/jessie_chroot
 baseimages/stretch_chroot
 baseimages/alpine_chroot
