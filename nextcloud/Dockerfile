@@ -66,8 +66,12 @@ RUN apt-get update && apt-get install -y \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/gallery.git \
  && git clone -b $SPREED_VERSION    --depth 1 https://github.com/nextcloud/spreed.git \
  && chown -R www-data:www-data /var/www \
- && cd /var/www/nc/apps2/calendar && sudo -u www-data make \
- && cd                ../contacts && sudo -u www-data make \
+ # Install the latest bower.
+ # Helps to solver the issue:
+ # EINVRES Request to https://bower.herokuapp.com/packages/angular failed with 502
+ && cd /var/www/nc/apps2/calendar/js && sudo -u www-data npm install bower \
+ && cd ..          && sudo -u www-data make \
+ && cd ../contacts && sudo -u www-data make \
  # Cleanup
  && rm -r /var/www/.cache \
  && rm -r /var/www/.node-gyp \
