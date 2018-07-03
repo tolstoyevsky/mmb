@@ -1,0 +1,12 @@
+version: "2"
+services:
+  redis:
+    image: cusdeb/redis:5.0-armhf
+    network_mode: "host"
+    environment:
+    - REDIS_CONF_bind=127.0.0.1
+    - REDIS_CONF_port=16379
+    - REDIS_CONF_loglevel=notice
+    volumes:
+    - /srv/redis-dump:/dump
+
