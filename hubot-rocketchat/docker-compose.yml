@@ -1,0 +1,16 @@
+version: "2"
+services:
+  hubot-rocketchat:
+    image: cusdeb/hubot-rocketchat:armhf
+    network_mode: "host"
+    environment:
+    - ROCKETCHAT_URL=http://127.0.0.1:3000
+    - ROCKETCHAT_ROOM=
+    - LISTEN_ON_ALL_PUBLIC=true
+    - ROCKETCHAT_USER=meeseeks
+    - ROCKETCHAT_PASSWORD=pass
+    - HUBOT_NAME=bot
+    - EXTERNAL_SCRIPTS=hubot-help,hubot-pugme,hubot-youtube,hubot-thesimpsons,git:tenten0213/hubot-thecat
+    volumes:
+    - ./scripts:/home/hubot/scripts
+
