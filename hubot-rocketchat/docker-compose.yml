@@ -1,0 +1,41 @@
+version: "2"
+services:
+  hubot-rocketchat:
+    image: cusdeb/hubot-rocketchat:1.0.11-amd64
+    network_mode: "host"
+    environment:
+    - ROCKETCHAT_URL=http://127.0.0.1:8006
+    - ROCKETCHAT_ROOM=
+    - ROCKETCHAT_USER=meeseeks
+    - ROCKETCHAT_PASSWORD=pass
+    - EXTERNAL_SCRIPTS=git:hubot-scripts/hubot-auth,git:tolstoyevsky/hubot-happy-birthder,hubot-help,hubot-pugme,hubot-redis-brain,git:tenten0213/hubot-thecat,hubot-thesimpsons
+    - HUBOT_NAME=bot
+    - LISTEN_ON_ALL_PUBLIC=true
+    # hubot-auth
+    - HUBOT_AUTH_ADMIN=
+    # hubot-happy-birthder
+    - TENOR_API_KEY=
+    - TENOR_IMG_LIMIT=50
+    - TENOR_SEARCH_TERM=thesimpsonsbirthday+simpsonsbirthday+futuramabirthday+rickandmortybirthday
+    - BIRTHDAY_CRON_STRING=0 0 7 * * *
+    - ANNOUNCER_CRON_STRING=0 0 7 * * *
+    - BIRTHDAY_ANNOUNCEMENT_BEFORE_CNT=7
+    - BIRTHDAY_ANNOUNCEMENT_BEFORE_MODE=days
+    # hubot-redis-brain
+    - REDIS_URL=redis://127.0.0.1:16379
+    volumes:
+    - ./scripts:/home/hubot/scripts
+  redis:
+    image: cusdeb/redis:5.0-amd64
+    network_mode: "host"
+    environment:
+    - REDIS_CONF_bind=127.0.0.1
+    - REDIS_CONF_port=16379
+    # Enable AOF
+    - REDIS_CONF_appendonly=yes
+    # Disable RDB
+    - REDIS_CONF_save=
+    - REDIS_CONF_loglevel=notice
+    volumes:
+    - /srv/redis-dump:/dump
+
