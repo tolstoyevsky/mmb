@@ -1,7 +1,7 @@
 version: "2"
 services:
   hubot-rocketchat:
-    image: cusdeb/hubot-rocketchat:armhf
+    image: cusdeb/hubot-rocketchat:amd64
     network_mode: "host"
     environment:
     - ROCKETCHAT_URL=http://127.0.0.1:3000
@@ -9,8 +9,14 @@ services:
     - LISTEN_ON_ALL_PUBLIC=true
     - ROCKETCHAT_USER=meeseeks
     - ROCKETCHAT_PASSWORD=pass
+    - TENOR_API_KEY=YZBFJ69DU989
+    - TENOR_IMG_LIMIT=16
+    - TENOR_SEARCH_TERM=simpsons+birthday
+    - BIRTHDAY_CRON_STRING=20 * * * * *
+    - ANNOUNCER_CRON_STRING=40 * * * * *
+    - BIRTHDAY_ANNOUNCEMENT_BEFORE_CNT=7
+    - BIRTHDAY_ANNOUNCEMENT_BEFORE_MODE=days
     - HUBOT_NAME=bot
-    - EXTERNAL_SCRIPTS=hubot-help,hubot-pugme,hubot-youtube,hubot-thesimpsons,git:tenten0213/hubot-thecat
+    - EXTERNAL_SCRIPTS=hubot-help,hubot-pugme,hubot-youtube,hubot-thesimpsons,git:tenten0213/hubot-thecat,hubot-redis-brain,git:6r1d/hubot-birthday
     volumes:
     - ./scripts:/home/hubot/scripts
-
