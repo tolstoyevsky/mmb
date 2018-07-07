@@ -66,8 +66,8 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
 
 | Parameter | Description | Default |
 | --- | --- | --- |
-| PORT        | Port the web server listens on | 8001      |
-| DB_HOST     | MySQL/MariDB server host       | 127.0.0.1 |
-| DB_NAME     | Database name                  | cusdeb    |
-| DB_USERNAME | User name                      | root      |
-| DB_PASSWORD | User password                  | cusdeb    |
+| PORT        | Port the web server listens on | 8001            |
+| DB_HOST     | MySQL/MariDB server host       | 127.0.0.1:33061 |
+| DB_NAME     | Database name                  | cusdeb          |
+| DB_USERNAME | User name                      | root            |
+| DB_PASSWORD | User password                  | cusdeb          |
