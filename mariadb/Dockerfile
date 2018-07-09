@@ -1,4 +1,4 @@
-FROM cusdeb/alpinev3.7:armhf
+FROM cusdeb/alpine3.7:armhf
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 RUN apk --update add \

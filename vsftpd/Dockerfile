@@ -1,4 +1,4 @@
-FROM cusdeb/alpinev3.7:armhf
+FROM cusdeb/alpine3.7:armhf
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.7/community >> /etc/apk/repositories \

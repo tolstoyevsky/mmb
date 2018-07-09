@@ -25,7 +25,7 @@ vsftpd (stands for Very Secure FTP daemon) is a secure and fast FTP server for U
   <tr>
     <td valign="top">Base images</td>
     <td>
-        cusdeb/alpinev3.7:armhf (for armhf port)<br>
+        cusdeb/alpine3.7:armhf (for armhf port)<br>
         alpine:3.7 (for amd64 port)
     </td>
   </tr>
