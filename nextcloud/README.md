@@ -12,11 +12,11 @@ Nextcloud is a self-hosted file storage and synchronization service.
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://nextcloud.com/blog/nextcloud-13.0.1-12.0.6-and-11.0.8-available-with-improved-password-protection/">13.0.1</a></td>
+    <td><a href="https://nextcloud.com/blog/nextcloud-13-brings-secure-file-sync-and-collaboration-to-the-next-level/">13</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>15 Mar 2018</td>
+    <td>06 Feb 2018</td>
   </tr>
   <tr>
     <td>Port</td>
