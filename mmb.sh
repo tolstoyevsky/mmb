@@ -82,14 +82,14 @@ case ${PORT} in
     armhf)
         NEW_IMAGE_NAME=${IMAGE_NAME/-amd64/-armhf}
 
-        sed -i "s~alpine:3.7~cusdeb/alpine3.7:armhf~" Dockerfile
-        sed -i "s~debian:stretch~cusdeb/stretch:armhf~" Dockerfile
+        sed -i "s~cusdeb/alpine3.7:amd64~cusdeb/alpine3.7:armhf~" Dockerfile
+        sed -i "s~cusdeb/stretch:amd64~cusdeb/stretch:armhf~" Dockerfile
         ;;
     amd64)
         NEW_IMAGE_NAME=${IMAGE_NAME/-armhf/-amd64}
 
-        sed -i "s~cusdeb/alpine3.7:armhf~alpine:3.7~" Dockerfile
-        sed -i "s~cusdeb/stretch:armhf~debian:stretch~" Dockerfile
+        sed -i "s~cusdeb/alpine3.7:armhf~cusdeb/alpine3.7:amd64~" Dockerfile
+        sed -i "s~cusdeb/stretch:armhf~cusdeb/stretch:amd64~" Dockerfile
         ;;
 esac
 

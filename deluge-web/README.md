@@ -37,7 +37,7 @@ Deluge is a feature-rich BitTorrent client with Web interface.
     <td valign="top">Base images</td>
     <td>
         cusdeb/stretch:armhf (for armhf port)<br>
-        debian:stretch (for amd64 port)
+        cusdeb/stretch:amd64 (for amd64 port)
     </td>
   </tr>
 </table>
