@@ -13,7 +13,7 @@ else
 fi
 
 if [ ! -d ${DOWNLOADS_DIR} ]; then
-    mkdir ${DOWNLOADS_DIR}
+    mkdir -p ${DOWNLOADS_DIR}
 else
     >&2 echo "${DOWNLOADS_DIR} already exists"
 fi
