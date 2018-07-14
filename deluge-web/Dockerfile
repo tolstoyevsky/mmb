@@ -1,4 +1,4 @@
-FROM cusdeb/stretch:armhf
+FROM cusdeb/stretch:amd64
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV DELUGE_VERSION 1.3.15

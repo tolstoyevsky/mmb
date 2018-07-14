@@ -1,4 +1,4 @@
-FROM cusdeb/stretch:armhf
+FROM cusdeb/stretch:amd64
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV BOOKMARKS_VERSION v0.11.0

@@ -41,7 +41,7 @@ fi
 # Let's get started
 #
 
-DEFAULT_PORT="armhf"
+DEFAULT_PORT="amd64"
 
 PORT="${DEFAULT_PORT}"
 
@@ -64,9 +64,9 @@ fi
 
 if [ ! -z $2 ]; then
     case $2 in
-        armhf)
-            ;;
         amd64)
+            ;;
+        armhf)
             PORT=$2
             ;;
         *)
