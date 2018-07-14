@@ -1,7 +1,7 @@
 version: "2"
 services:
   mariadb:
-    image: cusdeb/mariadb:10.1-armhf
+    image: cusdeb/mariadb:10.1-amd64
     network_mode: "host"
     environment:
     - MYSQLD_port=33061
