@@ -30,18 +30,29 @@ or
 $ sudo ./mmb.sh mariadb
 ```
 
-to build a Docker image for `armhf` port. If the target platform is based on x86_64, substitute `armhf` for `amd64`. For example,
+to build the Docker image for `armhf` port. If the target platform is based on x86_64, substitute `armhf` for `amd64`. For example,
 
 ```
 $ sudo ./mmb.sh mariadb amd64
 ```
 
-By the way, you can avoid using the `mmb.sh` script and build the image in a little more challenging way:
+By the way, you can avoid using the `mmb.sh` script and build the image in a little more challenging way. Execute
 
 ```
 $ cd mariadb
-$ IMAGE_NAME=`grep "image: " docker-compose.yml | awk -F': ' '{print $2}'`
-$ docker build -t ${IMAGE_NAME} .
+$ IMAGE_NAME="$(grep "image: " docker-compose.yml | awk -F': ' '{print $2}')"
+$ docker build -t "${IMAGE_NAME}" .
+$ if [ -f postinst.sh ]; then ./postinst.sh; fi
+```
+
+to build the Docker image for `armhf` port. If the target platform is based on x86_64, execute
+
+```
+$ cd mariadb
+$ IMAGE_NAME="$(grep "image: " docker-compose-amd64.yml | awk -F': ' '{print $2}')"
+$ cp Dockerfile Dockerfile-amd64
+$ sed -i -e "s/armhf$/amd64/" Dockerfile-amd64
+$ docker build -t "${IMAGE_NAME}" -f Dockerfile-amd64 .
 $ if [ -f postinst.sh ]; then ./postinst.sh; fi
 ```
 
@@ -53,17 +64,21 @@ To run the container, go to the directory of the target service and execute
 $ docker-compose up -d
 ```
 
+or
+
+```
+$ docker-compose -f docker-compose-amd64.yml up -d
+```
+
+to run a Docker container for `amd64` port.
+
 Make sure that the container is in the RUNNING state, executing
 
 ```
 $ docker ps
 ```
 
-If the container is not present in the list, execute `docker-compose` without the `-d` option to figure out the reason. For example,
-
-```
-$ docker-compose up
-```
+If the container is not present in the list, execute `docker-compose` without the `-d` option to figure out the reason.
 
 ## Authors
 

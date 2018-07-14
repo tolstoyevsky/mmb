@@ -1,0 +1,13 @@
+version: "2"
+services:
+  vsftpd:
+    image: cusdeb/vsftpd:3.0.3-amd64
+    command: /usr/bin/run.sh
+    environment:
+    - PORT=8004
+    - USERNAME=cusdeb
+    - PASSWORD=cusdeb
+    network_mode: "host"
+    volumes:
+    - /srv/common/downloads:/ftp
+

@@ -1,0 +1,17 @@
+version: "2"
+services:
+  nextcloud:
+    image: cusdeb/nextcloud:13-amd64
+    command: /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+    environment:
+    - PORT=8001
+    - DB_HOST=127.0.0.1:33061
+    - DB_NAME=cusdeb
+    - DB_USERNAME=root
+    - DB_PASSWORD=cusdeb
+    network_mode: "host"
+    volumes:
+    - /srv/nextcloud/config.php:/var/www/nc/config/config.php
+    - /srv/nextcloud/data:/var/www/nc/data/
+    - /srv/nextcloud/data/nginx:/var/log/nginx/
+    - /srv/nextcloud/data/supervisor:/var/log/supervisor/
