@@ -41,7 +41,9 @@ fi
 # Let's get started
 #
 
-PORT=armhf
+DEFAULT_PORT="armhf"
+
+PORT="${DEFAULT_PORT}"
 
 SERVICE_NAME=$1
 
@@ -76,24 +78,24 @@ fi
 
 cd ${SERVICE_NAME}
 
-IMAGE_NAME=`grep "image: " docker-compose.yml | awk -F': ' '{print $2}'`
+suffix=""
 
-case ${PORT} in
-    armhf)
-        NEW_IMAGE_NAME=${IMAGE_NAME/-amd64/-armhf}
+if [[ "${PORT}" != "${DEFAULT_PORT}" ]]; then
+    suffix="-${PORT}"
 
-        sed -i "s~cusdeb/alpine3.7:amd64~cusdeb/alpine3.7:armhf~" Dockerfile
-        sed -i "s~cusdeb/stretch:amd64~cusdeb/stretch:armhf~" Dockerfile
-        ;;
-    amd64)
-        NEW_IMAGE_NAME=${IMAGE_NAME/-armhf/-amd64}
+    if [ ! -f "docker-compose${suffix}.yml" ]; then
+        fatal "${SERVICE_NAME} does not support the port ${PORT}"
+        exit 1
+    fi
 
-        sed -i "s~cusdeb/alpine3.7:armhf~cusdeb/alpine3.7:amd64~" Dockerfile
-        sed -i "s~cusdeb/stretch:armhf~cusdeb/stretch:amd64~" Dockerfile
-        ;;
-esac
+    cp --preserve Dockerfile "Dockerfile${suffix}"
 
-docker build --no-cache --force-rm -t ${NEW_IMAGE_NAME} .
+    sed -i -e "s/${DEFAULT_PORT}$/${PORT}/" "Dockerfile${suffix}"
+fi
+
+IMAGE_NAME=`grep "image: " "docker-compose${suffix}.yml" | awk -F': ' '{print $2}'`
+
+docker build --no-cache --force-rm -t "${IMAGE_NAME}" -f "Dockerfile${suffix}" .
 
 if [ -f postinst.sh ]; then
     info "executing postinst.sh"
@@ -102,7 +104,5 @@ if [ -f postinst.sh ]; then
 else
     info "there is no postinst.sh, so nothing to execute"
 fi
-
-sed -i "s~${IMAGE_NAME}~${NEW_IMAGE_NAME}~" docker-compose.yml
 
 success "${SERVICE_NAME} was built"
