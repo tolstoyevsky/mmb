@@ -4,7 +4,7 @@ services:
     image: cusdeb/vsftpd:3.0.3-armhf
     command: /usr/bin/run.sh
     environment:
-    - PORT=8004
+    - PORT=2121
     - USERNAME=cusdeb
     - PASSWORD=cusdeb
     network_mode: "host"
