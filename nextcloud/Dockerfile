@@ -19,7 +19,6 @@ RUN apt-get update && apt-get install -y \
     gnupg2 \
     less \
     make \
-    memcached \
     nano \
     nginx \
     patch \

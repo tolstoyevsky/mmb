@@ -15,3 +15,12 @@ services:
     - /srv/nextcloud/data:/var/www/nc/data/
     - /srv/nextcloud/data/nginx:/var/log/nginx/
     - /srv/nextcloud/data/supervisor:/var/log/supervisor/
+  memcached:
+    image: cusdeb/memcached:1.5.9-amd64
+    network_mode: "host"
+    environment:
+    - PORT=11212
+    - BIND=127.0.0.1
+    - MEM_LIMIT=64
+    - CON_LIMIT=1024
+
