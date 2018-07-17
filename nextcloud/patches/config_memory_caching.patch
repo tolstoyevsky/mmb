@@ -11,7 +11,7 @@ index 5fa68bf..405b3ee 100644
 +		'memcache.local' => '\OC\Memcache\APCu',
 +		'memcache.distributed' => '\OC\Memcache\Memcached',
 +		'memcached_servers' => array(
-+			array('127.0.0.1', 11211),
++			array('127.0.0.1', 11212),
 +		),
  	);
  	/** @var string */
