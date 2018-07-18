@@ -17,7 +17,11 @@ RUN apk add --update \
  && echo $REDIS_DOWNLOAD_SHA $REDIS_VERSION.tar.gz | sha256sum -c \
  && tar xzvf $REDIS_VERSION.tar.gz \
  && cd redis-$REDIS_VERSION \
- && make && make install \
+ # Install only the server. Such client-side tools as redis-benchmark,
+ # redis-check-aof, redis-check-rdb and redis-cli are not needed in the
+ # container. They can be obtained by installing the redis-tools package
+ # on Debian/Ubuntu.
+ && make && install -o root -g root -m 744 src/redis-server /usr/bin \
  && cd .. \
  # Cleanup
  && rm    $REDIS_VERSION.tar.gz \
