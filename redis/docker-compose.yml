@@ -6,6 +6,10 @@ services:
     environment:
     - REDIS_CONF_bind=127.0.0.1
     - REDIS_CONF_port=16379
+    # Enable AOF
+    - REDIS_CONF_appendonly=yes
+    # Disable RDB
+    - REDIS_CONF_save=
     - REDIS_CONF_loglevel=notice
     volumes:
     - /srv/redis-dump:/dump
