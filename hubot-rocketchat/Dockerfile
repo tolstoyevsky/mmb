@@ -9,13 +9,17 @@ ENV BOT_DESC "Hubot with rocketbot adapter"
 
 ENV EXTERNAL_SCRIPTS=hubot-help
 
+ENV TZ="Europe/Moscow"
+
 ENV RC_HUBOT_VERSION 1.0.11
 
 RUN apk --update add \
     bash \
     curl \
     git \
+    openntpd \
     sudo \
+    tzdata \
  && npm install -g \
     coffeescript \
     generator-hubot \

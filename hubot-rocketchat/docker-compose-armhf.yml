@@ -11,6 +11,7 @@ services:
     - EXTERNAL_SCRIPTS=git:hubot-scripts/hubot-auth,git:tolstoyevsky/hubot-happy-birthder,hubot-help,hubot-pugme,hubot-redis-brain,git:tenten0213/hubot-thecat,hubot-thesimpsons
     - HUBOT_NAME=bot
     - LISTEN_ON_ALL_PUBLIC=true
+    - TZ=Europe/Moscow
     # hubot-auth
     - HUBOT_AUTH_ADMIN=
     # hubot-happy-birthder
