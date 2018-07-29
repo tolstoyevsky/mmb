@@ -51,7 +51,7 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
   </tr>
   <tr>
     <td>MYSQLD_*</td>
-    <td colspan="2">Any option in <code>/etc/mysql/my.cnf</code> from the <code>mysqld</code> section.</td>
+    <td colspan="2">Any option in <code>/etc/mysql/my.cnf</code> from the <code>mysqld</code> section. For example, to change the port which is used by default, use the <code>MYSQLD_port</code> environment variable.</td>
   </tr>
   <tr>
     <td>MYSQL_ROOT_PASSWORD</td>
