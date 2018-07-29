@@ -26,10 +26,7 @@ The Dockerfile and assets related to it are intended primarily, but **not** excl
   </tr>
   <tr>
     <td valign="top">Base images</td>
-    <td>
-        <code>cusdeb/alpine3.7:armhf</code> (for <code>armhf</code> port)<br>
-        <code>cusdeb/alpine3.7:amd64</code> (for <code>amd64</code> port)
-    </td>
+    <td><code>cusdeb/alpine3.7:amd64</code></td>
   </tr>
 </table>
 
