@@ -43,10 +43,35 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
 
 `docker-compose.yml` supports the following parameters.
 
-| Parameter | Description | Default |
-| --- | --- | --- |
-| MYSQLD_*            | Any option in `/etc/mysql/my.cnf` from the `mysqld` section |        |
-| MYSQL_ROOT_PASSWORD | root password for MariaDB                                   | cusdeb |
-| MYSQL_DATABASE      | Database name                                               |        |
-| MYSQL_USER          | User name for the database                                  |        |
-| MYSQL_PASSWORD      | User password for the database                              |        |
+<table>
+  <tr>
+    <td align="center"><b>Parameter</b></td>
+    <td align="center"><b>Description</b></td>
+    <td align="center"><b>Default</b></td>
+  </tr>
+  <tr>
+    <td>MYSQLD_*</td>
+    <td colspan="2">Any option in <code>/etc/mysql/my.cnf</code> from the <code>mysqld</code> section.</td>
+  </tr>
+  <tr>
+    <td>MYSQL_ROOT_PASSWORD</td>
+    <td>root password for MariaDB.</td>
+    <td>cusdeb</td>
+  </tr>
+  <tr>
+    <td>MYSQL_DATABASE</td>
+    <td>Database name.</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>MYSQL_USER</td>
+    <td>User name for the database.</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>MYSQL_PASSWORD</td>
+    <td>User name for the database.</td>
+    <td></td>
+  </tr>
+</table>
+
