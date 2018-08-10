@@ -32,7 +32,6 @@ RUN apk --update add \
  && sed -i /heroku/d ./external-scripts.json \
  && sed -i /redis-brain/d ./external-scripts.json \
  && sudo -u hubot npm install hubot@$HUBOT_VERSION \
- && sudo -u hubot npm install hubot-scripts \
  && sudo -u hubot npm install hubot-rocketchat@$RC_HUBOT_VERSION \
  # Cleanup
  && apk del \
