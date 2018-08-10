@@ -41,6 +41,7 @@ The following set of scripts makes bot capable of doing all sort of things:
 * [hubot-redis-brain](https://github.com/hubotio/hubot-redis-brain) – allows using Redis as an alternative storage backend for the Hubot in-memory key-value storage exposed as `robot.brain`.
 * [hubot-thecat](https://github.com/tenten0213/hubot-thecat) – interacts with [The Cat API](http://thecatapi.com).
 * [hubot-thesimpsons](https://github.com/hubot-scripts/hubot-thesimpsons) – generates the quotes and images related to The Simpsons.
+* [hubot-vote-or-die](https://github.com/tolstoyevsky/hubot-vote-or-die) – allows building polls.
 
 ## Installation
 
