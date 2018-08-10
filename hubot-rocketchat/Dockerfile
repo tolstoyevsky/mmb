@@ -11,6 +11,8 @@ ENV EXTERNAL_SCRIPTS=hubot-help
 
 ENV TZ="Europe/Moscow"
 
+ENV HUBOT_VERSION 2.19.0
+
 ENV RC_HUBOT_VERSION 1.0.11
 
 RUN apk --update add \
@@ -29,6 +31,7 @@ RUN apk --update add \
  && sudo -u hubot yo hubot --owner="$BOT_OWNER" --name="$BOT_NAME" --description="$BOT_DESC" --defaults \
  && sed -i /heroku/d ./external-scripts.json \
  && sed -i /redis-brain/d ./external-scripts.json \
+ && sudo -u hubot npm install hubot@$HUBOT_VERSION \
  && sudo -u hubot npm install hubot-scripts \
  && sudo -u hubot npm install hubot-rocketchat@$RC_HUBOT_VERSION \
  # Cleanup
