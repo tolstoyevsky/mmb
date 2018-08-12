@@ -32,7 +32,7 @@ Rocket.Chat Hubot adapter is the way to integrate [Hubot](https://hubot.github.c
 
 ## Features
 
-The following set of scripts makes bot capable of doing all sort of things:
+The following set of scripts makes the bot capable of doing all sort of things:
 
 * [hubot-auth](https://github.com/hubot-scripts/hubot-auth) – allows assigning roles to users and restricting command access in other scripts.
 * [hubot-happy-birthder](https://github.com/tolstoyevsky/hubot-happy-birthder) – writes birthday messages to users.
