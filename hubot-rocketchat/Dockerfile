@@ -7,10 +7,6 @@ ENV BOT_OWNER "No owner specified"
 
 ENV BOT_DESC "Hubot with rocketbot adapter"
 
-ENV EXTERNAL_SCRIPTS=hubot-help
-
-ENV TZ="Europe/Moscow"
-
 ENV HUBOT_VERSION 2.19.0
 
 ENV RC_HUBOT_VERSION 1.0.11

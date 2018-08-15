@@ -84,7 +84,7 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
   <tr>
     <td>EXTERNAL_SCRIPTS</td>
     <td colspan="2">Comma-separated list of the scripts which must be installed. Using the parameter it's possible to install scripts either from the NPM registry or from the specified Git repository (<a href="#installing-external-scripts">read more</a>).<br>
-By default, only <code>hubot-help</code> is installed via the parameter. However, if the container runs through <code>docker-compse</code> using <code>docker-compose.yml</code> (or its variations), the scripts from the list <a href="#features">above</a> will be installed.</td>
+By default, the scripts from the list <a href="#features">above</a> will be installed.</td>
   </tr>
   <tr>
     <td>HUBOT_NAME</td>

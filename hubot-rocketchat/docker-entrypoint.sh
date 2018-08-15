@@ -1,5 +1,28 @@
 #!/bin/bash
 
+set -x
+
+ROCKETCHAT_URL=${ROCKETCHAT_URL:="http://127.0.0.1:8006"}
+
+ROCKETCHAT_ROOM=${ROCKETCHAT_ROOM:=""}
+
+ROCKETCHAT_USER=${ROCKETCHAT_USER:="meeseeks"}
+
+ROCKETCHAT_PASSWORD=${ROCKETCHAT_PASSWORD:="pass"}
+
+EXTERNAL_SCRIPTS=${EXTERNAL_SCRIPTS:="git:hubot-scripts/hubot-auth,git:tolstoyevsky/hubot-happy-birthder,hubot-help,hubot-pugme,hubot-reaction,hubot-redis-brain,git:tenten0213/hubot-thecat,hubot-thesimpsons,git:tolstoyevsky/hubot-vote-or-die"}
+
+HUBOT_NAME=${HUBOT_NAME:="bot"}
+
+LISTEN_ON_ALL_PUBLIC=${LISTEN_ON_ALL_PUBLIC:=true}
+
+TZ=${TZ:="Europe/Moscow"}
+
+# hubot-redis-brain script
+REDIS_URL=${REDIS_URL:="redis://127.0.0.1:16379"}
+
+set +x
+
 to_be_added_to_external_scripts=""
 
 for script in ${EXTERNAL_SCRIPTS//,/ }; do
