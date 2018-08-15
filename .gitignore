@@ -8,3 +8,4 @@ baseimages/alpine_chroot
 Dockerfile-armhf
 *.img
 *.dtb
+.env
