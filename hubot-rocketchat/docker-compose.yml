@@ -4,26 +4,26 @@ services:
     image: cusdeb/hubot-rocketchat:1.0.11-amd64
     network_mode: "host"
     environment:
-    - ROCKETCHAT_URL=http://127.0.0.1:8006
-    - ROCKETCHAT_ROOM=
-    - ROCKETCHAT_USER=meeseeks
-    - ROCKETCHAT_PASSWORD=pass
-    - EXTERNAL_SCRIPTS=git:hubot-scripts/hubot-auth,git:tolstoyevsky/hubot-happy-birthder,hubot-help,hubot-pugme,hubot-reaction,hubot-redis-brain,git:tenten0213/hubot-thecat,hubot-thesimpsons,git:tolstoyevsky/hubot-vote-or-die
-    - HUBOT_NAME=bot
-    - LISTEN_ON_ALL_PUBLIC=true
-    - TZ=Europe/Moscow
+    - ROCKETCHAT_URL=${ROCKETCHAT_URL}
+    - ROCKETCHAT_ROOM=${ROCKETCHAT_ROOM}
+    - ROCKETCHAT_USER=${ROCKETCHAT_USER}
+    - ROCKETCHAT_PASSWORD=${ROCKETCHAT_PASSWORD}
+    - EXTERNAL_SCRIPTS=${EXTERNAL_SCRIPTS}
+    - HUBOT_NAME=${HUBOT_NAME}
+    - LISTEN_ON_ALL_PUBLIC=${LISTEN_ON_ALL_PUBLIC}
+    - TZ=${TZ}
     # hubot-auth
-    - HUBOT_AUTH_ADMIN=
+    - HUBOT_AUTH_ADMIN=${HUBOT_AUTH_ADMIN}
     # hubot-happy-birthder
-    - TENOR_API_KEY=
-    - TENOR_IMG_LIMIT=50
-    - TENOR_SEARCH_TERM=thesimpsonsbirthday+simpsonsbirthday+futuramabirthday+rickandmortybirthday
-    - BIRTHDAY_CRON_STRING=0 0 7 * * *
-    - ANNOUNCER_CRON_STRING=0 0 7 * * *
-    - BIRTHDAY_ANNOUNCEMENT_BEFORE_CNT=7
-    - BIRTHDAY_ANNOUNCEMENT_BEFORE_MODE=days
+    - TENOR_API_KEY=${TENOR_API_KEY}
+    - TENOR_IMG_LIMIT=${TENOR_IMG_LIMIT}
+    - TENOR_SEARCH_TERM=${TENOR_SEARCH_TERM}
+    - BIRTHDAY_CRON_STRING=${BIRTHDAY_CRON_STRING}
+    - ANNOUNCER_CRON_STRING=${ANNOUNCER_CRON_STRING}
+    - BIRTHDAY_ANNOUNCEMENT_BEFORE_CNT=${BIRTHDAY_ANNOUNCEMENT_BEFORE_CNT}
+    - BIRTHDAY_ANNOUNCEMENT_BEFORE_MODE=${BIRTHDAY_ANNOUNCEMENT_BEFORE_MODE}
     # hubot-redis-brain
-    - REDIS_URL=redis://127.0.0.1:16379
+    - REDIS_URL=${REDIS_URL}
     volumes:
     - ./scripts:/home/hubot/scripts
   redis:
