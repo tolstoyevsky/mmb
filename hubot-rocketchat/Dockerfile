@@ -9,7 +9,7 @@ ENV BOT_DESC "Hubot with rocketbot adapter"
 
 ENV HUBOT_VERSION 2.19.0
 
-ENV RC_HUBOT_VERSION 1.0.11
+ENV RC_HUBOT_BRANCH 930d085472bb9afa122721fa1b0bec59a783b86b
 
 RUN apk --update add \
     bash \
@@ -28,7 +28,7 @@ RUN apk --update add \
  && sed -i /heroku/d ./external-scripts.json \
  && sed -i /redis-brain/d ./external-scripts.json \
  && sudo -u hubot npm install hubot@$HUBOT_VERSION \
- && sudo -u hubot npm install hubot-rocketchat@$RC_HUBOT_VERSION \
+ && sudo -u hubot npm install git+https://git@github.com/RocketChat/hubot-rocketchat.git#$RC_HUBOT_BRANCH \
  # Cleanup
  && apk del \
     curl \
