@@ -12,11 +12,11 @@ Memcached is an open source high-performance, distributed memory object caching 
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://github.com/memcached/memcached/wiki/ReleaseNotes159">1.5.9</a></td>
+    <td><a href="https://github.com/memcached/memcached/wiki/ReleaseNotes1510">1.5.10</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>07 Jul 2018</td>
+    <td>10 Aug 2018</td>
   </tr>
   <tr>
     <td>Port</td>

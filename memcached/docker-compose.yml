@@ -1,7 +1,7 @@
 version: "2"
 services:
   memcached:
-    image: cusdeb/memcached:1.5.9-amd64
+    image: cusdeb/memcached:1.5.10-amd64
     network_mode: "host"
     environment:
     - PORT=11212
