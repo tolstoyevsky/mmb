@@ -1,7 +1,7 @@
 version: "2"
 services:
   hubot-rocketchat:
-    image: cusdeb/hubot-rocketchat:1.0.11-armhf
+    image: cusdeb/hubot-rocketchat:2.0-armhf
     network_mode: "host"
     environment:
     - ROCKETCHAT_URL=${ROCKETCHAT_URL}

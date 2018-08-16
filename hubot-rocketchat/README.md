@@ -8,11 +8,11 @@ Rocket.Chat Hubot adapter is the way to integrate [Hubot](https://hubot.github.c
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://github.com/RocketChat/hubot-rocketchat/releases/tag/v1.0.11">1.0.11</a></td>
+    <td>2.0 (<a href="https://github.com/RocketChat/hubot-rocketchat/commit/930d085472bb9afa122721fa1b0bec59a783b86b">930d085472bb9afa122721fa1b0bec59a783b86b</a>)</td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>07 Aug 2017</td>
+    <td>04 Jun 2018</td>
   </tr>
   <tr>
     <td valign="top">Base images</td>
