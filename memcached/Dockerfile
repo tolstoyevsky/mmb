@@ -1,11 +1,11 @@
 FROM cusdeb/alpine3.7:amd64
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
-ENV MEMCACHED_VERSION 1.5.9
+ENV MEMCACHED_VERSION 1.5.10
 
 ENV MEMCACHED_DOWNLOAD_URL https://github.com/memcached/memcached/archive/$MEMCACHED_VERSION.tar.gz
 
-ENV MEMCACHED_DOWNLOAD_SHA 4bd9fe003021b2b638d4be54562caae1eaa8deb45131aa839830221f6c850e39
+ENV MEMCACHED_DOWNLOAD_SHA 58408d0abc29e2da27cd3e1b9506991f0bd9c80e9362c68e564eee166631b18a
 
 # If the version doesn't look bad for Debian Stretch,
 # it's not bad for the image.

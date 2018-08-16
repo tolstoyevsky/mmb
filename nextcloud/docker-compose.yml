@@ -16,7 +16,7 @@ services:
     - /srv/nextcloud/data/nginx:/var/log/nginx/
     - /srv/nextcloud/data/supervisor:/var/log/supervisor/
   memcached:
-    image: cusdeb/memcached:1.5.9-amd64
+    image: cusdeb/memcached:1.5.10-amd64
     network_mode: "host"
     environment:
     - PORT=11212
