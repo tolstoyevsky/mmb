@@ -6,6 +6,7 @@ ENV CALENDAR_VERSION v1.6.1
 ENV CONTACTS_VERSION v2.1.6
 ENV NEXTCLOUD_VERSION v14.0.0RC1
 ENV OCSMS_VERSION 1.13.1
+ENV NOTES_VERSION v2.4.0
 ENV SPREED_VERSION v3.99.11
 ENV TERM linux
 
@@ -62,6 +63,7 @@ RUN apt-get update && apt-get install -y \
  && rm -r /var/www/nc/apps2/files_odfviewer \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/notifications.git \
  && git clone -b $OCSMS_VERSION     --depth 1 https://github.com/nextcloud/ocsms.git \
+ && git clone -b $NOTES_VERSION     --depth 1 https://github.com/nextcloud/notes.git \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/gallery.git \
  && git clone -b $SPREED_VERSION    --depth 1 https://github.com/nextcloud/spreed.git \
  && chown -R www-data:www-data /var/www \
