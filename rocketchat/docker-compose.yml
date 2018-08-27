@@ -1,7 +1,7 @@
 version: "2"
 services:
   rocketchat:
-    image: cusdeb/rocketchat:0.66-amd64
+    image: cusdeb/rocketchat:0.69-amd64
     network_mode: "host"
     environment:
     - PORT=8006
