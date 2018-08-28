@@ -30,7 +30,7 @@ for script in ${EXTERNAL_SCRIPTS//,/ }; do
         # without 'git:'
         script="${script:4}"
 
-        >&2 echo "Installing ${script} from Git"
+        >&2 echo "Installing ${script} from the GitHub repo"
 
 	username_repo=(${script/\// })
 
@@ -57,7 +57,19 @@ for script in ${EXTERNAL_SCRIPTS//,/ }; do
             # will be added to external-scripts.json
             script="${repo_branch[0]}"
         fi
+    elif [[ "${script}" == dir:* ]]; then
+        # without 'dir:'
+        script="${script:4}"
+        package="/home/hubot/packages/${script}"
 
+        >&2 echo "Installing ${script} from the ~/packages directory"
+
+        if [ ! -d "${package}" ]; then
+            >&2 echo "The specified package ${script} does not exist in the ~/packages directory"
+            exit 1
+        fi
+
+        npm install "${package}"
     else
         >&2 echo "Installing ${script} from NPM registry"
 

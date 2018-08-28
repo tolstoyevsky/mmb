@@ -83,8 +83,8 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
   </tr>
   <tr>
     <td>EXTERNAL_SCRIPTS</td>
-    <td colspan="2">Comma-separated list of the scripts which must be installed. Using the parameter it's possible to install scripts either from the NPM registry or from the specified Git repository (<a href="#installing-external-scripts">read more</a>).<br>
-By default, the scripts from the list <a href="#features">above</a> will be installed.</td>
+    <td colspan="2">Comma-separated list of the packages, containing the scripts which are intended to empower Hubot. Using the parameter it's possible to install packages either from an NPM registry or from a Git repository, or a local directory (<a href="#installing-external-scripts">read more</a>).<br>
+By default, the packages from the list <a href="#features">above</a> will be installed.</td>
   </tr>
   <tr>
     <td>HUBOT_NAME</td>
@@ -127,4 +127,7 @@ By default, the scripts from the list <a href="#features">above</a> will be inst
 
 ## Installing external scripts
 
-`EXTERNAL_SCRIPTS` is a comma-separated list of the scripts which must be installed. To install a script from the official NPM registry, simply specify its name in the list. To install a script from its GitHub repository, use the following format: `git:github-username/repo-name`. In this case the script will be installed from the `master` branch. To specify a different branch follow the format: `git:github-username/repo-name@target-branch`.
+`EXTERNAL_SCRIPTS` is a comma-separated list of the packages, containing the scripts which are intended to empower Hubot.
+* To install a package from the official NPM registry, simply specify its name in the list.
+* To install a package from its GitHub repository, use the following format: `git:github-username/repo-name`. In this case the script will be installed from the `master` branch. To specify a different branch follow the format: `git:github-username/repo-name@target-branch`.
+* To install a package from a local directory, move the directory to `packages` and use the following format: `dir:package-name`.
