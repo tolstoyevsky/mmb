@@ -12,8 +12,6 @@ services:
     - HUBOT_NAME=${HUBOT_NAME}
     - LISTEN_ON_ALL_PUBLIC=${LISTEN_ON_ALL_PUBLIC}
     - TZ=${TZ}
-    # hubot-auth
-    - HUBOT_AUTH_ADMIN=${HUBOT_AUTH_ADMIN}
     # hubot-happy-birthder
     - TENOR_API_KEY=${TENOR_API_KEY}
     - TENOR_IMG_LIMIT=${TENOR_IMG_LIMIT}

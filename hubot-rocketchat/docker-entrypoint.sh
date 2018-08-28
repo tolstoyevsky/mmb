@@ -10,7 +10,7 @@ ROCKETCHAT_USER=${ROCKETCHAT_USER:="meeseeks"}
 
 ROCKETCHAT_PASSWORD=${ROCKETCHAT_PASSWORD:="pass"}
 
-EXTERNAL_SCRIPTS=${EXTERNAL_SCRIPTS:="git:hubot-scripts/hubot-auth,git:tolstoyevsky/hubot-happy-birthder,hubot-help,git:tolstoyevsky/hubot-pugme,hubot-reaction,hubot-redis-brain,hubot-thesimpsons,git:tolstoyevsky/hubot-vote-or-die"}
+EXTERNAL_SCRIPTS=${EXTERNAL_SCRIPTS:="git:tolstoyevsky/hubot-happy-birthder,hubot-help,git:tolstoyevsky/hubot-pugme,hubot-reaction,hubot-redis-brain,hubot-thesimpsons,git:tolstoyevsky/hubot-vote-or-die"}
 
 HUBOT_NAME=${HUBOT_NAME:="bot"}
 
