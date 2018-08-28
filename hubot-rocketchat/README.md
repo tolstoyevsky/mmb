@@ -34,7 +34,6 @@ Rocket.Chat Hubot adapter is the way to integrate [Hubot](https://hubot.github.c
 
 The following set of scripts makes the bot capable of doing all sort of things:
 
-* [hubot-auth](https://github.com/hubot-scripts/hubot-auth) – allows assigning roles to users and restricting command access in other scripts.
 * [hubot-happy-birthder](https://github.com/tolstoyevsky/hubot-happy-birthder) – writes birthday messages to users.
 * [hubot-help](https://github.com/hubotio/hubot-help) – shows available commands.
 * [hubot-pugme](https://github.com/tolstoyevsky/hubot-pugme) – shows random pictures with pugs.
@@ -102,11 +101,6 @@ By default, the packages from the list <a href="#features">above</a> will be ins
   </tr>
   <tr>
     <td align="center" colspan="3"><b>hubot-auth</b></td>
-  </tr>
-  <tr>
-    <td>HUBOT_AUTH_ADMIN</td>
-    <td>Comma-separated list containing the ids of the users who must have the admin rore. To get to know your user id, use the bot command <code>what is my id</code>.</td>
-    <td></td>
   </tr>
   <tr>
     <td align="center" colspan="3"><b>hubot-happy-birthder</b></td>
