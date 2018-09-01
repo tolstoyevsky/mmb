@@ -50,6 +50,7 @@ RUN apt-get update && apt-get install -y \
  && cd /var/www \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/server.git nc \
  && cd /var/www/nc \
+ && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/updater.git \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/3rdparty.git \
  && git clone -b $NEXTCLOUD_VERSION --depth 1 https://github.com/nextcloud/apps.git apps2 \
  && cd /var/www/nc/apps2 \
