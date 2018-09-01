@@ -1,7 +1,7 @@
 version: "2"
 services:
   nextcloud:
-    image: cusdeb/nextcloud:14RC1-armhf
+    image: cusdeb/nextcloud:14RC2-armhf
     command: /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
     environment:
     - PORT=8001
