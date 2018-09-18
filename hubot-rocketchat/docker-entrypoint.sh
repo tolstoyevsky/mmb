@@ -16,6 +16,8 @@ HUBOT_NAME=${HUBOT_NAME:="bot"}
 
 LISTEN_ON_ALL_PUBLIC=${LISTEN_ON_ALL_PUBLIC:=true}
 
+RESPOND_TO_DM=${RESPOND_TO_DM:=true}
+
 TZ=${TZ:="Europe/Moscow"}
 
 # hubot-redis-brain script

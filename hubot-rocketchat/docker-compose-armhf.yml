@@ -11,6 +11,7 @@ services:
     - EXTERNAL_SCRIPTS=${EXTERNAL_SCRIPTS}
     - HUBOT_NAME=${HUBOT_NAME}
     - LISTEN_ON_ALL_PUBLIC=${LISTEN_ON_ALL_PUBLIC}
+    - RESPOND_TO_DM=${RESPOND_TO_DM}
     - TZ=${TZ}
     # hubot-happy-birthder
     - TENOR_API_KEY=${TENOR_API_KEY}
