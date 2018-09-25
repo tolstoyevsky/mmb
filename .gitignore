@@ -10,3 +10,5 @@ Dockerfile-armhf
 *.img
 *.dtb
 .env
+venv/
+__pycache__/
