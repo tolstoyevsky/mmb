@@ -25,7 +25,7 @@ def create_user(browser, log):
 
     log.info('Click users button')
     users_btn = browser.driver.find_elements_by_css_selector(
-        'a.sidebar-item__link[title="Users"]'
+        'a.sidebar-item__link[aria-label="Users"]'
     )[0]
     browser.driver.execute_script("arguments[0].click();", users_btn)
     log.info('success!')
@@ -103,7 +103,7 @@ def remove_user(browser, log):
 
     log.info('Click users button')
     users_btn = browser.driver.find_elements_by_css_selector(
-        'a.sidebar-item__link[title="Users"]'
+        'a.sidebar-item__link[aria-label="Users"]'
     )[0]
     browser.driver.execute_script("arguments[0].click();", users_btn)
     log.info('success!')
@@ -116,10 +116,18 @@ def remove_user(browser, log):
     selected_user.click()
     log.info('success!')
 
+    log.info('Click to "more" button')
+    more_btn = browser.find_by_css(
+        'button.rc-tooltip.rc-room-actions__button.js-more'
+        '[aria-label="More"]'
+    ).first
+    more_btn.click()
+    log.info('success!')
+
     log.info('Click to delete button')
     delete_btn = browser.find_by_xpath(
-        '//button[@class="js-action rc-user-info-action__item"]'
-        '[text()="Delete"]'
+        '//li[@class="rc-popover__item js-action"]'
+        '/span[text()="Delete"]'
     ).first
     delete_btn.click()
     confirm_btn = browser.find_by_css('input[value="Yes, delete it!"]').first
