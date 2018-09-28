@@ -140,3 +140,15 @@ def remove_user(browser, log):
     )[0]
     browser.driver.execute_script("arguments[0].click();", close_btn)
     log.info('success!')
+
+
+def click_send_btn_and_get_last_msg(browser):
+    send_msg_btn = browser.find_by_css(
+        'svg.rc-icon.rc-input__icon-svg.rc-input__icon-svg--send'
+    ).first
+    send_msg_btn.click()
+
+    last_msg = browser.driver.find_elements_by_css_selector(
+        'div.body.color-primary-font-color '
+    )[-1]
+    return last_msg
