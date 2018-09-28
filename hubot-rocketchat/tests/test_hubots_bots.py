@@ -47,11 +47,11 @@ def main():
     if browser.find_by_text('Welcome to Rocket.Chat!'):
         log.info('success!')
     else:
-        log.error('error!')
+        log.error('------------ERROR!!!!!------------')
         return
 
     # ToDo (if ...) look optparse!
-    log.info('------------RUN TEST HAPPY BIRTHDER------------')
+    log.info('------------run test happy birthder------------')
     test_happy_birthder.run_script(browser, log)
 
     # ToDo ... optparse and run other scripts!
