@@ -3,6 +3,7 @@ import os
 import sys
 
 from logbook import Logger, StreamHandler
+from splinter.exceptions import ElementDoesNotExist
 
 
 def logging():
@@ -125,10 +126,16 @@ def remove_user(browser, log):
     log.info('success!')
 
     log.info('Click to delete button')
-    delete_btn = browser.find_by_xpath(
-        '//li[@class="rc-popover__item js-action"]'
-        '/span[text()="Delete"]'
-    ).first
+    try:
+        delete_btn = browser.find_by_xpath(
+            '//li[@class="rc-popover__item js-action"]'
+            '/span[text()="Delete"]'
+        ).first
+    except ElementDoesNotExist:
+        delete_btn = browser.find_by_xpath(
+            '//button[@class="js-action rc-user-info-action__item"]'
+            '[text()="Delete"]'
+        ).first
     delete_btn.click()
     confirm_btn = browser.find_by_css('input[value="Yes, delete it!"]').first
     confirm_btn.click()
