@@ -24,7 +24,9 @@ def check_result(browser, log, last_msg, expected_msg):
 
 def run_script(browser, log):
     log.info('creating user...')
-    create_user(browser, log)
+    result = create_user(browser, log)
+    if not result:
+        return False
 
     log.info('Click general chat')
     general_chat = browser.driver.find_elements_by_css_selector(
@@ -54,7 +56,7 @@ def run_script(browser, log):
     log.info(last_msg.text)  # ToDo remove
     expected_msg = "Saving {0}'s birthday.".format(USERNAME)
     if not check_result(browser, log, last_msg, expected_msg):
-        return
+        return False
     log.info('success!')
 
     log.info('Send birthdays on request')
@@ -62,7 +64,7 @@ def run_script(browser, log):
     last_msg = click_send_btn_and_get_last_msg(browser)
     expected_msg = "@{0}".format(USERNAME)
     if not check_result(browser, log, last_msg, expected_msg):
-        return
+        return False
     log.info('success!')
 
     log.info('Send birthdays list request')
@@ -71,7 +73,7 @@ def run_script(browser, log):
     log.info(last_msg.text)  # ToDo remove
     expected_msg = "@{0} was born on {1}".format(USERNAME, FULL_USER_BIRTHDAY)
     if not check_result(browser, log, last_msg, expected_msg):
-        return
+        return False
     log.info('success!')
 
     log.info('Send birthday delete request')
@@ -80,7 +82,7 @@ def run_script(browser, log):
     log.info(last_msg.text)  # ToDo remove
     expected_msg = "Removing {0}'s birthday.".format(USERNAME)
     if not check_result(browser, log, last_msg, expected_msg):
-        return
+        return False
     log.info('success!')
 
     log.info('Send birthdays list request again')
@@ -88,4 +90,8 @@ def run_script(browser, log):
     log.info('success!')
 
     log.info('removing user...')
-    remove_user(browser, log)
+    result = remove_user(browser, log)
+    if not result:
+        return False
+
+    return True

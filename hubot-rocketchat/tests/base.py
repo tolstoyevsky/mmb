@@ -88,6 +88,8 @@ def create_user(browser, log):
     close_btn.click()
     log.info('success!')
 
+    return True
+
 
 def remove_user(browser, log):
     log.info('Click options button')
@@ -147,6 +149,8 @@ def remove_user(browser, log):
     )[0]
     browser.driver.execute_script("arguments[0].click();", close_btn)
     log.info('success!')
+
+    return True
 
 
 def click_send_btn_and_get_last_msg(browser):
