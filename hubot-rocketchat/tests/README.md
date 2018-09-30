@@ -14,5 +14,12 @@ Setup:
   - USER_PASSWORD=
 - ./setup.sh
 
+Help:
+- ./test_hubots_bots.py -h (--help)
+
 Launch:
-- ./test_hubots_bots.py
+- run test all bots:
+  - ./test_hubots_bots.py
+  - ./test_hubots_bots.py -a (--all)
+- run test happy birthder:
+  - ./test_hubots_bots.py -b (--happy_birthder)
