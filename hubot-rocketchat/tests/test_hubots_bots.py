@@ -1,23 +1,22 @@
 #!/usr/bin/env python3
+import argparse
 import os
 
 from dotenv import load_dotenv
 from splinter import Browser
 
 from base import logging
-import test_happy_birthder
-
-load_dotenv()
-
+import happy_birthder
 
 BROWSER_WINDOW_SIZE = (1920, 1080)
-
-log = logging()
-browser = Browser('chrome', headless=False, wait_time=30,
-                  executable_path='./drivers/chromedriver')
+BOTS_FOR_TESTING = [happy_birthder]
 
 
 def main():
+    log = logging()
+    browser = Browser('chrome', headless=False, wait_time=30,
+                      executable_path='./drivers/chromedriver')
+
     log.info('Initialize Browser')
     browser.driver.set_page_load_timeout(30)
     log.info('success!')
@@ -50,13 +49,33 @@ def main():
         log.error('------------ERROR!!!!!------------')
         return
 
-    # ToDo (if ...) look optparse!
-    log.info('------------run test happy birthder------------')
-    test_happy_birthder.run_script(browser, log)
+    if args_dict['all'] or not any(args_dict.values()):
+        log.info('TESTING ALL BOTS...')
+        bots = BOTS_FOR_TESTING
+    else:
+        bots = list(
+            filter(lambda bot: args_dict[bot.__name__], BOTS_FOR_TESTING)
+        )
 
-    # ToDo ... optparse and run other scripts!
+    for bot in bots:
+        log.info('TESTING {0} ...'.format(bot.__name__))
+        result = bot.run_script(browser, log)
+        if not result:
+            log.error('------------SOMETHING WENT WRONG!!!------------')
+            break
+        log.info('TESTING {0} IS SUCCESSFULLY FINISHED'.format(bot.__name__))
 
     browser.quit()
 
 
+parser = argparse.ArgumentParser(
+    description='Choose what bots you want to test.')
+parser.add_argument('-a', '--all', action='store_true',
+                    help='run all tests.')
+parser.add_argument('-b', '--happy_birthder', action='store_true',
+                    help='run happy birthder test.')
+args = parser.parse_args()
+args_dict = vars(args)
+
+load_dotenv()
 main()
