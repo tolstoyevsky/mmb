@@ -36,6 +36,9 @@ RUN apt-get update \
  && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/VisualEditor.git VisualEditor \
  && cd VisualEditor \
  && git submodule update --init \
+ # Do the same thing for SyntaxHighlight_GeSHi
+ && cd /var/www/w/extensions \
+ && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/SyntaxHighlight_GeSHi.git SyntaxHighlight_GeSHi \ 
  && cd /var/www && chown -R www-data:www-data w \
  && curl -O https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
  && chmod +x wait-for-it.sh \
