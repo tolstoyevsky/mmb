@@ -40,6 +40,7 @@ The following set of scripts makes the bot capable of doing all sort of things:
 * [hubot-reaction](https://github.com/hubot-scripts/hubot-reaction) – interacts with [replygif.net](http://replygif.net).
 * [hubot-redis-brain](https://github.com/hubotio/hubot-redis-brain) – allows using Redis as an alternative storage backend for the Hubot in-memory key-value storage exposed as `robot.brain`.
 * [hubot-thesimpsons](https://github.com/hubot-scripts/hubot-thesimpsons) – generates the quotes and images related to The Simpsons.
+* [hubot-viva-las-vegas](https://github.com/tolstoyevsky/hubot-viva-las-vegas) – allows handling leave requests.
 * [hubot-vote-or-die](https://github.com/tolstoyevsky/hubot-vote-or-die) – allows building polls.
 
 ## Installation
@@ -117,6 +118,12 @@ By default, the packages from the list <a href="#features">above</a> will be ins
     <td>REDIS_URL</td>
     <td>Domain or IP of the Redis host.</td>
     <td>redis://127.0.0.1:16379</td>
+  </tr>
+  <tr>
+    <td align="center" colspan="3"><b>hubot-viva-las-vegas</b></td>
+  </tr>
+  <tr>
+    <td colspan="3">See the description for all the parameters related to the script in its original <a href="https://github.com/tolstoyevsky/hubot-viva-las-vegas">README</a>.</td>
   </tr>
 </table>
 
