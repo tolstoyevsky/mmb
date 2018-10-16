@@ -95,6 +95,11 @@ By default, the packages from the list <a href="#features">above</a> will be ins
     <td><code>true</code></td>
   </tr>
   <tr>
+    <td>RESPOND_TO_DM</td>
+    <td>Allows specifying whether the bot can respond privately. If the environment variable is set to <code>true</code>, users may send direct messages to the bot (without mentioning its name) and expect a response from it.</td>
+    <td><code>true</code></td>
+  </tr>
+  <tr>
     <td>TZ</td>
     <td>Time zone. See all the possible values for the parameter <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">here</a>.</td>
     <td>Europe/Moscow</td>
