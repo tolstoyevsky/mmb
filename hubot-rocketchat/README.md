@@ -100,9 +100,6 @@ By default, the packages from the list <a href="#features">above</a> will be ins
     <td>Europe/Moscow</td>
   </tr>
   <tr>
-    <td align="center" colspan="3"><b>hubot-auth</b></td>
-  </tr>
-  <tr>
     <td align="center" colspan="3"><b>hubot-happy-birthder</b></td>
   </tr>
   <tr>
