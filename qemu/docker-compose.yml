@@ -1,4 +1,4 @@
 version: "2"
 services:
   qemu:
-    image: cusdeb/qemu:2.12-amd64
+    image: cusdeb/qemu:3.0-amd64

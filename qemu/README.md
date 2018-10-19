@@ -14,11 +14,11 @@ The Dockerfile and assets related to it are intended primarily, but **not** excl
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="http://lists.nongnu.org/archive/html/qemu-devel/2018-04/msg04089.html">2.12.0</a></td>
+    <td><a href="http://lists.nongnu.org/archive/html/qemu-devel/2018-08/msg02608.html">3.0.0</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>24 Apr 2018</td>
+    <td>14 Aug 2018</td>
   </tr>
   <tr>
     <td>Data volume</td>
@@ -154,8 +154,8 @@ The filename of the target image. The parameter is translated into the `-sd` opt
 
 ## Known issues
 
-* QEMU 2.12.0 doesn't support networking when emulating Raspberry Pi 3.
-* If you see the following error message trying to run one of the existing images, it probably means that the root partition is not properly aligned relatively the boot partition. In spite of the fact, the image may run on a real hardware without any problem, it may fail in the emulator. I don't know whether it's a bug or feature, but the fact is QEMU (at least, `2.12.0`) is very sensitive to the way how the partitions of the target image are aligned.
+* QEMU 3.0 doesn't support networking when emulating Raspberry Pi 3.
+* If you see the following error message trying to run one of the existing images, it probably means that the root partition is not properly aligned relatively the boot partition. In spite of the fact, the image may run on a real hardware without any problem, it may fail in the emulator. I don't know whether it's a bug or feature, but the fact is QEMU (at least, `3.0`) is very sensitive to the way how the partitions of the target image are aligned.
   ```
   [    5.008032] ---[ end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
   ```

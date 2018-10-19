@@ -1,13 +1,11 @@
 FROM cusdeb/alpine3.7:amd64
 
 ENV LIBISCSI_VERSION 1.18.0
-ENV NUMACTL_VERSION 2.0.11
-ENV QEMU_VERSION 2.12.0
+ENV NUMACTL_VERSION 2.0.12
+ENV QEMU_VERSION 3.0.0
 ENV QUILT_VERSION 0.65
 
 ENV TERM linux
-
-COPY ./numactl-patches /root/numactl-patches
 
 COPY ./qemu-patches /root/qemu-patches
 
@@ -67,8 +65,6 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.7/community >> /etc/apk/repos
  && tar xzvf v$NUMACTL_VERSION.tar.gz \
  && rm v$NUMACTL_VERSION.tar.gz \
  && cd numactl-$NUMACTL_VERSION \
- && mv /root/numactl-patches patches \
- && env QUILT_PATCHES=patches quilt push -a \
  && libtoolize \
  && ./autogen.sh \
  && ./configure && make -j "$(nproc)" && make install \
