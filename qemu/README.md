@@ -61,7 +61,7 @@ or execute all the commands below from the `qemu` directory. Finally run the ima
 That's it. However, there will be a lot of things which will happen under the hood. Here are the most important parts:
 * When the container starts, the working directory is mounted as `/tmp` inside the container.
 * The boot partition in the image, specified via the `IMAGE` parameter, is mounted into `/mnt`.
-* `kernel8.img` and the corresponding DTB file (`bcm2710-rpi-3-b.dtb` or `bcm2837-rpi-3-b.dtb`) are copied to `/tmp`.
+* `kernel8.img` and the corresponding DTB file (`bcm2837-rpi-3-b.dtb`) are copied to `/tmp`.
 * The boot partitions is unmounted.
 * The image, DTB and kernel filenames are passed to QEMU and it starts.
 
