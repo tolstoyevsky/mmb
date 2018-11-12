@@ -17,7 +17,7 @@ RUN apt-get update \
  && useradd -m rocketchat \
  # Install Rocket.Chat
  && cd /home/rocketchat \
- && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys $PUBLIC_KEY \
+ && gpg --no-tty --keyserver ha.pool.sks-keyservers.net --recv-keys $PUBLIC_KEY \
  && curl -fSL https://releases.rocket.chat/$RC_VERSION/download -o rocket.chat.tgz \
  && curl -fSL https://releases.rocket.chat/$RC_VERSION/asc -o rocket.chat.tgz.asc \
  && gpg --batch --verify rocket.chat.tgz.asc rocket.chat.tgz \
