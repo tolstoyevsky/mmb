@@ -2,6 +2,8 @@
 
 set -x
 
+DEBUG=${DEBUG:=false}
+
 ROCKETCHAT_URL=${ROCKETCHAT_URL:="http://127.0.0.1:8006"}
 
 ROCKETCHAT_ROOM=${ROCKETCHAT_ROOM:=""}
@@ -86,5 +88,11 @@ to_be_added_to_external_scripts="${to_be_added_to_external_scripts:1}"
 
 node -e "console.log(JSON.stringify('${to_be_added_to_external_scripts}'.split(',')))" > external-scripts.json
 
-bin/hubot -n "${BOT_NAME}" -a rocketchat
+npm install
+export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
 
+if ${DEBUG}; then
+    coffee --nodejs --inspect node_modules/.bin/hubot -n "${BOT_NAME}" -a rocketchat "$@"
+else
+    exec node_modules/.bin/hubot -n "${BOT_NAME}" -a rocketchat "$@"
+fi
