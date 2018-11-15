@@ -61,6 +61,11 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
     <td align="center" colspan="3"><b>Rocket.Chat Hubot adapter</b></td>
   </tr>
   <tr>
+    <td>DEBUG</td>
+    <td>Specifies whether to run Hubot in debug mode (See <a href="#debugging">Debugging</a> for more details).</td>
+    <td><code>false</code></td>
+  </tr>
+  <tr>
     <td>ROCKETCHAT_URL</td>
     <td>Domain or IP of the Rocket.Chat host.</td>
     <td>http://127.0.0.1:8006</td>
@@ -133,3 +138,28 @@ By default, the packages from the list <a href="#features">above</a> will be ins
 * To install a package from the official NPM registry, simply specify its name in the list.
 * To install a package from its GitHub repository, use the following format: `git:github-username/repo-name`. In this case the script will be installed from the `master` branch. To specify a different branch follow the format: `git:github-username/repo-name@target-branch`.
 * To install a package from a local directory, move the directory to `packages` and use the following format: `dir:package-name`.
+
+## Debugging
+
+To enable debugging the Hubot scripts set `DEBUG` to `true` via the `.env` file, run the container in interactive mode and make sure you can find a line which looks like the following: `Debugger listening on ws://127.0.0.1:9229/xxxxxxxx-xxxx-4xxx-xxxx-xxxxxxxxxxxx`.
+To start debugging via [Chrome DevTools](https://nodejs.org/en/docs/guides/debugging-getting-started/):
+* send an HTTP request to http://127.0.0.1:9229/json/list and copy the address stored in the `devtoolsFrontendUrl` field;
+* open the address in a Chromium-based browser.
+
+To start debugging via [Visual Studio Code](https://github.com/microsoft/vscode):
+* find Open Configurations in the Debug menu;
+* edit the configurations field to make it look like the following;
+```json
+[
+  {
+    "type": "node",
+    "request": "attach",
+    "name": "Attach to remote",
+    "address": "127.0.0.1",
+    "port": "9229"
+  }
+]
+```
+* (optionally) read [Remote debugging](https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_remote-debugging) for details.
+
+The section described two possible ways of debugging the scripts. Read [Debugging Guide](https://nodejs.org/en/docs/guides/debugging-getting-started/) to get to know about other ones.
