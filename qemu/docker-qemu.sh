@@ -15,7 +15,7 @@
 
 set -e
 
-version="2.12"
+version="3.0"
 
 if [[ ${BASH_VERSION} != 4.* ]]; then
     >&2 echo "$0 requires bash 4 or higher"
