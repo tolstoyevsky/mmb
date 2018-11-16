@@ -29,6 +29,7 @@ Rocket.Chat Hubot adapter is the way to integrate [Hubot](https://hubot.github.c
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [Installing external scripts](#installing-external-scripts)
+* [Debugging](#debugging)
 
 ## Features
 
