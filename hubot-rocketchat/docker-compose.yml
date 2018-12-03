@@ -41,6 +41,7 @@ services:
     - MAXIMUM_LENGTH_OF_WAIT=${MAXIMUM_LENGTH_OF_WAIT}
     - MINIMUM_DAYS_BEFORE_REQUEST=${MINIMUM_DAYS_BEFORE_REQUEST}
     - VIVA_REMINDER_SCHEDULER=${VIVA_REMINDER_SCHEDULER}
+    - VIVA_REPORT_SCHEDULER=${VIVA_REPORT_SCHEDULER}
     volumes:
     - ./packages:/home/hubot/packages
     - ./scripts:/home/hubot/scripts
