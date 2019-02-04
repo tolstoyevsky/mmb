@@ -222,10 +222,6 @@ parse_options() {
             ARCH="$2"
             shift 2
             ;;
-        -n|--do-not-use-emulation)
-            USE_EMULATION=false
-            shift 1
-            ;;
         -f|--flavour)
             FLAVOUR="$2"
             shift 2
@@ -278,4 +274,26 @@ cleanup() {
     rm -rf usr
 
     set +x
+}
+
+# Transforms user the defined arch into the target arch.
+# Globals:
+#     TARGET_ARCH
+# Arguments:
+#     User defined arch
+# Returns:
+#     None
+user_defined_arch_to_target_arch() {
+    case "${ARCH}" in
+    amd64|x86_64)
+        TARGET_ARCH="x86_64"
+        ;;
+    armhf)
+        TARGET_ARCH="armv7l"
+        ;;
+    *)
+        fatal "the specified architecture '${ARCH}' is not supported."
+        exit 1
+        ;;
+    esac
 }

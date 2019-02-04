@@ -46,8 +46,6 @@ MIRROR=http://mirror.yandex.ru/mirrors/alpine
 
 TAG_NAME=${TAG_NAME:="cusdeb/alpine3.7:armhf"}
 
-USE_EMULATION=${USE_EMULATION:=true}
-
 set +x
 
 
@@ -57,6 +55,8 @@ set +x
 
 EMULATION_BINARY=""
 
+USE_EMULATION=true
+
 #
 # Let's get started
 #
@@ -64,6 +64,12 @@ EMULATION_BINARY=""
 if ! is_architecture_valid; then
     fatal "the specified architecture '${ARCH}' is not supported."
     exit 1
+fi
+
+user_defined_arch_to_target_arch "${ARCH}"
+
+if uname -a | grep -q "${TARGET_ARCH}"; then
+    USE_EMULATION=false
 fi
 
 # Alpine calls the architecture in a different way. Fixing it.
