@@ -40,8 +40,6 @@ FLAVOUR=${FLAVOUR:=""}
 
 TAG_NAME=${TAG_NAME:="cusdeb/stretch:armhf"}
 
-USE_EMULATION=${USE_EMULATION:=true}
-
 set +x
 
 #
@@ -50,9 +48,17 @@ set +x
 
 EMULATION_BINARY=""
 
+USE_EMULATION=true
+
 #
 # Let's get started
 #
+
+user_defined_arch_to_target_arch "${ARCH}"
+
+if uname -a | grep -q "${TARGET_ARCH}"; then
+    USE_EMULATION=false
+fi
 
 if ! is_architecture_valid; then
     fatal "the specified architecture '${ARCH}' is not supported."

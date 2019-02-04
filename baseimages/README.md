@@ -20,10 +20,6 @@ Both `create_alpine_chroot.sh` and `create_debian_chroot.sh` support the followi
 
 Allows specifying the architecture of the base image. If not specified, the default `armhf` architecture will be used.
 
-##### `-n`, `--do-not-use-emulation`
-
-Allows specifying whether the emulator is needed during the build process. By default, the emulator is used.
-
 ##### `-f`, `--flavour`
 
 Allows specifying the flavour of the base images. If not specified, none of the flavours will be used.
