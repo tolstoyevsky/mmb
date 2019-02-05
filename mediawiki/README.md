@@ -32,8 +32,8 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
   <tr>
     <td valign="top">Base images</td>
     <td>
-        <code>cusdeb/stretch:armhf</code> (for <code>armhf</code> port)<br>
-        <code>cusdeb/stretch:amd64</code> (for <code>amd64</code> port)
+        <code>cusdeb/alpine3.9:armhf</code> (for <code>armhf</code> port)<br>
+        <code>cusdeb/alpine3.9:amd64</code> (for <code>amd64</code> port)
     </td>
   </tr>
 </table>

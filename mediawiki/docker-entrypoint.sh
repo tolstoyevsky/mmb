@@ -1,8 +1,18 @@
 #!/bin/bash
 
-change_ini_param.py --config-file /etc/php/7.0/fpm/pool.d/www.conf --section www "env[PARSOID_DOMAIN]" "${PARSOID_DOMAIN}"
+change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "env[PARSOID_DOMAIN]" "${PARSOID_DOMAIN}"
 
-change_ini_param.py --config-file /etc/php/7.0/fpm/pool.d/www.conf --section www "env[PARSOID_HOST]" "${PARSOID_HOST}"
+change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "env[PARSOID_HOST]" "${PARSOID_HOST}"
+
+change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "listen" "/var/run/php/php7.0-fpm.sock"
+
+change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "listen.owner" "nginx"
+
+change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "listen.group" "nginx"
+
+change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "user" "nginx"
+
+change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "group" "nginx"
 
 >&2 echo "Preparing LocalSettings.php"
 
@@ -41,9 +51,9 @@ fi
 
 >&2 echo "Executing maintenance/update.php"
 cd /var/www/w || exit 1
-php maintenance/update.php
+php7 maintenance/update.php
 
-sed -i -e "s/PORT/${PORT}/" /etc/nginx/sites-available/default
+sed -i -e "s/PORT/${PORT}/" /etc/nginx/conf.d/default.conf
 
 supervisord -c /etc/supervisor/supervisord.conf
 

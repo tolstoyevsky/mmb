@@ -1,22 +1,30 @@
-FROM cusdeb/stretch:amd64
+FROM cusdeb/alpine3.9:amd64
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV MEDIAWIKI_VERSION REL1_31
 
-RUN apt-get update \
- && apt-get install -y \
+RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.9/community >> /etc/apk/repositories \
+ && apk --update add \
+    bash \
     curl \
     git \
     mysql-client \
     nginx \
-    php-apcu \
-    php-curl \
-    php-fpm \
-    php-gd \
-    php-intl \
-    php-mbstring \
-    php-mysql \
-    php-xml \
+    php7 \
+    php7-ctype \
+    php7-curl \
+    php7-dom \
+    php7-fileinfo \
+    php7-fpm \
+    php7-gd \
+    php7-iconv \
+    php7-intl \
+    php7-json \
+    php7-mbstring \
+    php7-mysqli \
+    php7-pecl-apcu \
+    php7-session \
+    php7-xml \
     python3 \
     supervisor \
  && cd /usr/bin \
@@ -39,20 +47,21 @@ RUN apt-get update \
  # Do the same thing for SyntaxHighlight_GeSHi
  && cd /var/www/w/extensions \
  && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/SyntaxHighlight_GeSHi.git SyntaxHighlight_GeSHi \ 
- && cd /var/www && chown -R www-data:www-data w \
+ && cd /var/www && chown -R nginx:nginx w \
  && curl -O https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
  && chmod +x wait-for-it.sh \
  && mv wait-for-it.sh /usr/local/bin \
  # Cleanup
- && apt-get clean \
- && apt-get purge -y \
+ && apk del \
     curl \
     git \
- && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/cache/apk/*
 
 COPY ./config/LocalSettings.php /var/www/w
 
-COPY ./config/default /etc/nginx/sites-available/default
+COPY ./config/default /etc/nginx/conf.d/default.conf
+
+COPY ./config/fastcgi-php.conf /etc/nginx/fastcgi-php.conf
 
 COPY ./config/supervisord.conf /etc/supervisor/supervisord.conf
 
