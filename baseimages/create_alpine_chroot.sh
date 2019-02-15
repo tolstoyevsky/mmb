@@ -44,7 +44,7 @@ FLAVOUR=${FLAVOUR:=""}
 
 MIRROR=http://mirror.yandex.ru/mirrors/alpine
 
-TAG_NAME=${TAG_NAME:="cusdeb/alpine3.7:armhf"}
+TAG_NAME=${TAG_NAME:="cusdeb/alpine${ALPINE_VERSION}:${ARCH}"}
 
 set +x
 
@@ -149,4 +149,4 @@ IMAGE="$(sh -c "tar -C alpine_chroot -c . | docker import -")"
 
 docker tag "${IMAGE}" "${TAG_NAME}"
 
-success "created Alpine 3.7 base image"
+success "created ${TAG_NAME} base image"
