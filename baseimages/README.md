@@ -6,7 +6,7 @@ Here are the scripts for building base images which are used for all services fr
     <img src="alpine-logo.png" width="300">
 </p>
 
-To build [Alpine 3.7](https://alpinelinux.org/posts/Alpine-3.7.0-released.html) base image run `create_alpine_chroot.sh` with superuser privileges. Once the script is finished, the image `cusdeb/alpine3.7:armhf` is created.
+To build [Alpine 3.9](https://alpinelinux.org/posts/Alpine-3.9.0-released.html) base image run `create_alpine_chroot.sh` with superuser privileges. Once the script is finished, the image `cusdeb/alpine3.9:armhf` or `cusdeb/alpine3.9:amd64` is created.
 
 <p align="center">
     <img src="debian-logo.png" width="150">
