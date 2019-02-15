@@ -32,9 +32,9 @@ set_traps
 
 set -x
 
-ALPINE_VERSION=v3.7
+ALPINE_VERSION=v3.9
 
-APK_TOOLS_VERSION=2.9.1-r2
+APK_TOOLS_VERSION=2.10.3-r1
 
 ARCH=${ARCH:="armhf"}
 
