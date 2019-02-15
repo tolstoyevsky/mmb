@@ -55,5 +55,9 @@ php7 maintenance/update.php
 
 sed -i -e "s/PORT/${PORT}/" /etc/nginx/conf.d/default.conf
 
+>&2 echo "Fixing ownership"
+chown -R nginx:nginx /var/www/w/deleted
+chown -R nginx:nginx /var/www/w/images
+
 supervisord -c /etc/supervisor/supervisord.conf
 
