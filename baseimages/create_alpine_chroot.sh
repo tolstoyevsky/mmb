@@ -32,7 +32,7 @@ set_traps
 
 set -x
 
-ALPINE_VERSION=v3.9
+ALPINE_VERSION=3.9
 
 APK_TOOLS_VERSION=2.10.3-r1
 
@@ -107,7 +107,7 @@ if ${USE_EMULATION}; then
 fi
 
 if [ ! -d sbin ]; then
-    wget "${MIRROR}/${ALPINE_VERSION}/main/${ARCH}/apk-tools-static-${APK_TOOLS_VERSION}.apk"
+    wget "${MIRROR}/v${ALPINE_VERSION}/main/${ARCH}/apk-tools-static-${APK_TOOLS_VERSION}.apk"
 
     tar -xzf apk-tools-static-"${APK_TOOLS_VERSION}.apk"
 
@@ -119,7 +119,7 @@ if ${USE_EMULATION}; then
     cp qemu-arm-static "${CHROOT_DIR}"/usr/bin
 fi
 
-./sbin/apk.static -X "${MIRROR}/${ALPINE_VERSION}/main" -U --allow-untrusted --root "${CHROOT_DIR}" --initdb add alpine-base
+./sbin/apk.static -X "${MIRROR}/v${ALPINE_VERSION}/main" -U --allow-untrusted --root "${CHROOT_DIR}" --initdb add alpine-base
 
 rm -rf "${CHROOT_DIR}"/var/cache/apk/*
 
@@ -136,7 +136,7 @@ echo 'nameserver 8.8.8.8' > "${CHROOT_DIR}"/etc/resolv.conf
 
 info "setting up APK mirror"
 mkdir -p ${CHROOT_DIR}/etc/apk
-echo "${MIRROR}/${ALPINE_VERSION}/main" > "${CHROOT_DIR}"/etc/apk/repositories
+echo "${MIRROR}/v${ALPINE_VERSION}/main" > "${CHROOT_DIR}"/etc/apk/repositories
 
 if [ ! -z "${FLAVOUR}" ]; then
     info "importing './flavours/${FLAVOUR}.sh'"
