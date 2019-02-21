@@ -6,6 +6,7 @@ baseimages/jessie_chroot
 baseimages/stretch_chroot
 baseimages/alpine_chroot
 hubot-rocketchat/packages/*
+mediawiki/kblogo.png
 Dockerfile-armhf
 *.img
 *.dtb

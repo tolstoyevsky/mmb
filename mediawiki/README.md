@@ -68,3 +68,7 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
 | PARSOID_HOST            | Domain or IP of the Parsoid host | http://127.0.0.1:8005 |
 
 Note, that commenting the `PARSOID_HOST`, `PARSOID_PORT` and `PARSOID_PROTOCOL` parameters deactivates the [VisualEditor](https://mediawiki.org/wiki/Extension:VisualEditor) extension. By default, the parameters are uncommented.
+
+## How to change logo
+
+Provide a square logo named `kblogo.png` which is 135x135px or 150x150px. Note that running the container without providing any logo causes creating the `kblogo.png` directory. Don't be confused. Simply remove the directory before copying a real logo to `mediawiki`.
