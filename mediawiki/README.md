@@ -40,7 +40,7 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
 
 ## Features
 
-* Nginx [1.10](http://nginx.org/en/CHANGES-1.10) and PHP [7.0](http://php.net/archive/2015.php#id2015-12-03-1).
+* Nginx [1.14.2](http://nginx.org/en/CHANGES-1.14) and PHP [7.2.14](http://php.net/ChangeLog-7.php#7.2.14).
 * [VisualEditor](https://mediawiki.org/wiki/Extension:VisualEditor) extension which allows editing pages as rich content.
 
 ## Configuration
