@@ -25,6 +25,7 @@ services:
     volumes:
     - /srv/mediawiki/deleted:/var/www/w/deleted
     - /srv/mediawiki/images:/var/www/w/images
+    - ./kblogo.png:/tmp/kblogo.png
   mariadb:
     image: cusdeb/mariadb:10.1-amd64
     network_mode: "host"
