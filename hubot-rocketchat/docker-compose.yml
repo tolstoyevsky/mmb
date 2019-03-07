@@ -4,6 +4,7 @@ services:
     image: cusdeb/hubot-rocketchat:2.0-amd64
     network_mode: "host"
     environment:
+    - AUTH_ATTEMPTS=${AUTH_ATTEMPTS}
     - DEBUG=${DEBUG}
     - EXTERNAL_SCRIPTS=${EXTERNAL_SCRIPTS}
     - HUBOT_NAME=${HUBOT_NAME}

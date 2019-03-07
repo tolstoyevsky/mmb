@@ -2,6 +2,8 @@
 
 set -x
 
+AUTH_ATTEMPTS=${AUTH_ATTEMPTS:=60}
+
 DEBUG=${DEBUG:=false}
 
 ROCKETCHAT_URL=${ROCKETCHAT_URL:="http://127.0.0.1:8006"}
@@ -82,6 +84,27 @@ for script in ${EXTERNAL_SCRIPTS//,/ }; do
 
     to_be_added_to_external_scripts="${to_be_added_to_external_scripts},${script}"
 done
+
+>&2 echo "Checking if ${ROCKETCHAT_USER} account is available"
+result=false
+for i in $(seq ${AUTH_ATTEMPTS} ${END}); do
+    json=$(curl ${ROCKETCHAT_URL}/api/v1/login --silent -d "user=${ROCKETCHAT_USER}&password=${ROCKETCHAT_PASSWORD}")
+    if [ ! -z "${json}" ]; then
+        status=$(node -e "console.log(JSON.parse('${json}').status)")
+        if [ "${status}" == "success" ]; then
+            result=true
+            break
+        fi
+    fi
+    sleep 1
+done
+
+if ! ${result}; then
+    >&2 echo "${ROCKETCHAT_USER} account is not available"
+    exit 1
+fi
+
+>&2 echo "${ROCKETCHAT_USER} account is available"
 
 # strip ','
 to_be_added_to_external_scripts="${to_be_added_to_external_scripts:1}"
