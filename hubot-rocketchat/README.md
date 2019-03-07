@@ -62,6 +62,11 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
     <td align="center" colspan="3"><b>Rocket.Chat Hubot adapter</b></td>
   </tr>
   <tr>
+    <td>AUTH_ATTEMPTS</td>
+    <td>Specifies the number of authentication attempts before running the bot. The parameters helps the container to be put on pause when, for example, the bot account is being prepared.</td>
+    <td>60</td>
+  </tr>
+  <tr>
     <td>DEBUG</td>
     <td>Specifies whether to run Hubot in debug mode (See <a href="#debugging">Debugging</a> for more details).</td>
     <td><code>false</code></td>

@@ -31,7 +31,6 @@ RUN apk --update add \
  && sudo -u hubot npm install git+https://git@github.com/RocketChat/hubot-rocketchat.git#$RC_HUBOT_BRANCH \
  # Cleanup
  && apk del \
-    curl \
     sudo \
 && rm -rf /var/cache/apk/*
 
