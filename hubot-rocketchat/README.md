@@ -72,6 +72,11 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
     <td><code>false</code></td>
   </tr>
   <tr>
+    <td>REQUIRED_PRIVATE_CHANNELS</td>
+    <td>Comma-separated list containing the private channels the bot must be in. The check repeats at intervals of 1 second. The number of attempts is specified via <code>AUTH_ATTEMPTS</code>.</td>
+    <td></td>
+  </tr>
+  <tr>
     <td>ROCKETCHAT_URL</td>
     <td>Domain or IP of the Rocket.Chat host.</td>
     <td>http://127.0.0.1:8006</td>

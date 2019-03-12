@@ -6,6 +6,8 @@ AUTH_ATTEMPTS=${AUTH_ATTEMPTS:=60}
 
 DEBUG=${DEBUG:=false}
 
+REQUIRED_PRIVATE_CHANNELS=${REQUIRED_PRIVATE_CHANNELS=""}
+
 ROCKETCHAT_URL=${ROCKETCHAT_URL:="http://127.0.0.1:8006"}
 
 ROCKETCHAT_ROOM=${ROCKETCHAT_ROOM:=""}
@@ -105,6 +107,32 @@ if ! ${result}; then
 fi
 
 >&2 echo "${ROCKETCHAT_USER} account is available"
+
+if [ ! -z "${REQUIRED_PRIVATE_CHANNELS}" ]; then
+    token=$(node -e "console.log(JSON.parse('${json}').data.authToken)")
+    user_id=$(node -e "console.log(JSON.parse('${json}').data.userId)")
+
+    >&2 echo "Checking if ${ROCKETCHAT_USER} is in required channels"
+
+    for i in $(seq ${AUTH_ATTEMPTS} ${END}); do
+        groups=$(curl --silent -H "X-Auth-Token: ${token}" -H "X-User-Id: ${user_id}" ${ROCKETCHAT_URL}/api/v1/groups.list)
+
+        includes=$(node -e "console.log('${REQUIRED_PRIVATE_CHANNELS}'.split(',').every(g => JSON.parse('${groups}').groups.map(g => g.name).includes(g)))")
+
+        if ${includes}; then
+            break
+        fi
+
+        sleep 1
+    done
+
+    if ! ${includes}; then
+        >&2 echo "${ROCKETCHAT_USER} is not in required channels"
+        exit 1
+    fi
+
+    >&2 echo "${ROCKETCHAT_USER} is in required channels"
+fi
 
 # strip ','
 to_be_added_to_external_scripts="${to_be_added_to_external_scripts:1}"
