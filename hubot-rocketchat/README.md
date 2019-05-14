@@ -30,6 +30,7 @@ Rocket.Chat Hubot adapter is the way to integrate [Hubot](https://hubot.github.c
 * [Configuration](#configuration)
 * [Installing external scripts](#installing-external-scripts)
 * [Debugging](#debugging)
+* [Known issues](#known-issues)
 
 ## Features
 
@@ -181,3 +182,10 @@ To start debugging via [Visual Studio Code](https://github.com/microsoft/vscode)
 * (optionally) read [Remote debugging](https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_remote-debugging) for details.
 
 The section described two possible ways of debugging the scripts. Read [Debugging Guide](https://nodejs.org/en/docs/guides/debugging-getting-started/) to get to know about other ones.
+
+## Known issues
+
+If you use macOS you need to modify the configuration specified in `docker-compose.yml`.
+
+Replace `network_mode: "host"` settings with `network_mode: "container:rocketchat_rocketchat_1"` in both `hubot-rocketchat` and `redis` services, 
+where `rocketchat_rocketchat_1` is the name of the running container with the Rocket.Chat server (see Rocket.Chat [README](https://github.com/tolstoyevsky/mmb/tree/master/rocketchat) for details).
