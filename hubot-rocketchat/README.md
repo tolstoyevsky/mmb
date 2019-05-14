@@ -37,6 +37,7 @@ The following set of scripts makes the bot capable of doing all sort of things:
 
 * [hubot-happy-birthder](https://github.com/tolstoyevsky/hubot-happy-birthder) – writes birthday messages to users.
 * [hubot-help](https://github.com/hubotio/hubot-help) – shows available commands.
+* [hubot-huntflow-reloaded](https://github.com/tolstoyevsky/hubot-huntflow-reloaded) – helps handling incoming interviews.
 * [hubot-pugme](https://github.com/tolstoyevsky/hubot-pugme) – shows random pictures with pugs.
 * [hubot-reaction](https://github.com/hubot-scripts/hubot-reaction) – interacts with [replygif.net](http://replygif.net).
 * [hubot-redis-brain](https://github.com/hubotio/hubot-redis-brain) – allows using Redis as an alternative storage backend for the Hubot in-memory key-value storage exposed as `robot.brain`.
@@ -126,6 +127,12 @@ By default, the packages from the list <a href="#features">above</a> will be ins
   </tr>
   <tr>
     <td colspan="3"><code>TENOR_API_KEY</code> is the only <b>mandatory</b> parameter both in this script and in the Docker image. The script will fail if the parameter is equal to an empty string (which it is by default).<br>See the description for all the parameters related to the script in its original <a href="https://github.com/tolstoyevsky/hubot-happy-birthder">README</a>.</td>
+  </tr>
+  <tr>
+    <td align="center" colspan="3"><b>hubot-huntflow-reloaded</b></td>
+  </tr>
+  <tr>
+    <td colspan="3">See the description for all the parameters related to the script in its original <a href="https://github.com/tolstoyevsky/hubot-huntflow-reloaded">README</a>.</td>
   </tr>
   <tr>
     <td align="center" colspan="3"><b>hubot-redis-brain</b></td>
