@@ -29,6 +29,11 @@ services:
     - TENOR_BLACKLIST=${TENOR_BLACKLIST}
     - TENOR_IMG_LIMIT=${TENOR_IMG_LIMIT}
     - TENOR_SEARCH_TERM=${TENOR_SEARCH_TERM}
+    # hubot-huntflow-reloaded
+    - CHANNEL_NAME=${CHANNEL_NAME}
+    - REDIS_HOST=${REDIS_HOST}
+    - REDIS_PASSWORD=${REDIS_PASSWORD}
+    - REDIS_PORT=${REDIS_PORT}
     # hubot-pugme
     - PUGS_LIMIT=${PUGS_LIMIT}
     # hubot-redis-brain
