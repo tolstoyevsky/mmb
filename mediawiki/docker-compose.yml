@@ -16,7 +16,7 @@ services:
     - WG_DB_PASSWORD=cusdeb
     - ALLOW_ACCOUNT_CREATION=true
     - ALLOW_ACCOUNT_EDITING=true
-    - ALLOW_ANONYMOUS_READING=true
+    - ALLOW_ANONYMOUS_READING=false
     - ALLOW_ANONYMOUS_EDITING=true
     # Parsoid server
     - PARSOID_DOMAIN=parsoid
