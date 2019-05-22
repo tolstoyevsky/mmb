@@ -116,7 +116,7 @@ set +x
 
 LOOP_DEV=""
 
-default_cmdline="rw earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2"
+default_cmdline="rw earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2 ExecStart=-/sbin/agetty -o '-p -- \\u' --keep-baud 115200,38400,9600 %I xterm"
 
 cmdline=""
 
