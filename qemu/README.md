@@ -126,7 +126,7 @@ Everything that goes after `--` will be passed to QEMU as is.
 
 ##### ARCH=""
 
-The target system architecture. The parameter takes the following values: `i386`, `x86_64`, `alpha`, `aarch64`, `arm`, `cris`, `lm32`, `m68k`, `microblaze`, `microblazeel`, `mips`, `mipsel`, `mips64`, `mips64el`, `moxie`, `ppc`, `ppcemb`, `ppc64`, `sh4`, `sh4eb`, `sparc`, `sparc64`, `s390x`, `tricore`, `xtensa`, `xtensaeb`, `unicore32`.
+The target system architecture. The parameter takes the following values: `i386`, `x86_64`, `alpha`, `aarch64`, `arm`, `cris`, `lm32`, `m68k`, `microblaze`, `microblazeel`, `mips`, `mipsel`, `mips64`, `mips64el`, `moxie`, `ppc`, `ppc64`, `sh4`, `sh4eb`, `sparc`, `sparc64`, `s390x`, `tricore`, `xtensa`, `xtensaeb`, `unicore32`.
 
 ##### DTB=""
 
