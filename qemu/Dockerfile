@@ -2,7 +2,7 @@ FROM cusdeb/alpine3.7:amd64
 
 ENV LIBISCSI_VERSION 1.18.0
 ENV NUMACTL_VERSION 2.0.12
-ENV QEMU_VERSION 3.0.0
+ENV QEMU_VERSION 4.1.0
 ENV QUILT_VERSION 0.65
 
 ENV TERM linux
@@ -33,7 +33,8 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.7/community >> /etc/apk/repos
         libnfs-dev \
         libpng-dev \
         libseccomp-dev \
-        libssh2-dev \
+        # https://wiki.qemu.org/ChangeLog/4.1#Build_Dependencies
+        libssh-dev \
         libusb-dev \
         ovmf \
         pixman-dev \
@@ -104,7 +105,6 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.7/community >> /etc/apk/repos
             mips64el-softmmu \
             moxie-softmmu \
             ppc-softmmu \
-            ppcemb-softmmu \
             ppc64-softmmu \
             sh4-softmmu \
             sh4eb-softmmu \
@@ -129,7 +129,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.7/community >> /etc/apk/repos
         --enable-kvm \
         --enable-libiscsi \
         --enable-libnfs \
-        --enable-libssh2 \
+        --enable-libssh \
         --enable-libusb \
         --enable-linux-aio \
         --enable-linux-user \
