@@ -12,11 +12,11 @@ Rocket.Chat is a self-hosted alternative to Slack.
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://github.com/RocketChat/Rocket.Chat/releases/tag/0.70.0">0.70</a></td>
+    <td><a href="https://github.com/RocketChat/Rocket.Chat/releases/tag/1.1.0">1.1</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>27 Sep 2018</td>
+    <td>28 May 2019</td>
   </tr>
   <tr>
     <td>Port</td>

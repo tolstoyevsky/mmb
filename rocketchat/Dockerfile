@@ -6,7 +6,7 @@ ENV BUNDLE_DIR /home/rocketchat/bundle
 # Rocket.Chat Buildmaster <buildmaster@rocket.chat>
 ENV PUBLIC_KEY 0E163286C20D07B9787EBE9FD7F9D0414FD08104
 
-ENV RC_VERSION 0.70.4
+ENV RC_VERSION 1.1.3
 
 RUN apt-get update \
  && apt-get install -y \
