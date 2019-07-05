@@ -32,6 +32,20 @@ Rocket.Chat is a self-hosted alternative to Slack.
 
 Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) section to learn how to install this or other services.
 
+## Custom permissions
+
+Note that the Rocket.Chat will have the custom permissions for the [hubot-viva-las-vegas](https://github.com/tolstoyevsky/hubot-viva-las-vegas) Hubot script. If you are not going to use the script, it’s better to remove the patch from the `patches` directory before building the image.
+Here is the list of all custom permissions:
+* `hubot-viva-send-leave-request` allows users to send leave request.
+* `hubot-viva-approve-leave-request` allows users to approve leave requests.
+* `hubot-viva-reject-leave-request` allows users to reject leave requests.
+* `hubot-viva-cancel-leave-request` allows users to cancel approved leave requests.
+* `hubot-viva-get-leave-requests-list` allows users to get the leave request statuses of other users.
+* `hubot-viva-initiate-new-leave-request-on-behalf-of-user` allows users to initiate a new leave request on behalf of the specified user.
+* `hubot-viva-initiate-new-time-off-request-on-behalf-of-user` allows users to initiate a new time off request for the specified user.
+* `hubot-viva-work-from-home` allows users to use the `работаю из дома` command.
+* `hubot-viva-set-unset-status-of-being-ill` allows users to use the `болею` command.
+
 ## How to migrate from Rocket.Chat 0.70+ to 1.0+
 
 * Stop and remove the current Rocket.Chat and MongoDB containers.
