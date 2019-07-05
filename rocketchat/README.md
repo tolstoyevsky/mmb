@@ -42,7 +42,7 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
   mongo mongo/rocketchat --eval "rs.initiate({ _id: 'rs0', members: [ { _id: 0, host: 'localhost:27017' } ]})"
   ```
 
-  You should get the following message (the Rocket.Chat version may be different):
+  You should get the following message (the MongoDB version may be different):
 
   ```
   MongoDB shell version: 3.2.21
