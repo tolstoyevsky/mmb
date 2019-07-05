@@ -24,7 +24,7 @@ RUN apt-get update \
  && curl -fSL https://releases.rocket.chat/$RC_VERSION/download -o rocket.chat.tgz \
  && curl -fSL https://releases.rocket.chat/$RC_VERSION/asc -o rocket.chat.tgz.asc \
  && gpg --batch --verify rocket.chat.tgz.asc rocket.chat.tgz \
- && tar zxvf rocket.chat.tgz \
+ && tar zxf rocket.chat.tgz \
  && rm rocket.chat.tgz rocket.chat.tgz.asc \
  && cd $BUNDLE_DIR \
  # Patches apply
