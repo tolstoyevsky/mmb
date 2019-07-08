@@ -1,0 +1,4 @@
+aiohttp==3.5.4
+motor==2.0.0
+pytest-aiohttp==0.3.0
+pytest-mongodb==2.1.2
