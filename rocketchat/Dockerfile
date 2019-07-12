@@ -19,8 +19,11 @@ RUN apt-get update \
     python \
  && useradd -m rocketchat \
  # Install Rocket.Chat
+ && for i in $(seq 1 10); do \
+      gpg --no-tty --keyserver ha.pool.sks-keyservers.net --recv-keys $PUBLIC_KEY && break; \
+      rm -r /root/.gnupg; \
+    done \
  && cd /home/rocketchat \
- && gpg --no-tty --keyserver ha.pool.sks-keyservers.net --recv-keys $PUBLIC_KEY \
  && curl -fSL https://releases.rocket.chat/$RC_VERSION/download -o rocket.chat.tgz \
  && curl -fSL https://releases.rocket.chat/$RC_VERSION/asc -o rocket.chat.tgz.asc \
  && gpg --batch --verify rocket.chat.tgz.asc rocket.chat.tgz \
