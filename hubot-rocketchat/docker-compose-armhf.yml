@@ -2,7 +2,7 @@ version: "2"
 services:
   hubot-rocketchat:
     image: cusdeb/hubot-rocketchat:2.0-armhf
-    network_mode: "host"
+    network_mode: "container:rocketchat_rocketchat_1"
     environment:
     - AUTH_ATTEMPTS=${AUTH_ATTEMPTS}
     - DEBUG=${DEBUG}
@@ -57,11 +57,8 @@ services:
     - ./packages:/home/hubot/packages
     - ./scripts:/home/hubot/scripts
   redis:
-    image: cusdeb/redis:5.0-armhf
-    network_mode: "host"
+    image: cusdeb/redis:5.0-amd64
     environment:
-    - REDIS_CONF_bind=127.0.0.1
-    - REDIS_CONF_port=16379
     # Enable AOF
     - REDIS_CONF_appendonly=yes
     # Disable RDB
