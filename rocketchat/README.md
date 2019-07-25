@@ -32,6 +32,23 @@ Rocket.Chat is a self-hosted alternative to Slack.
 
 Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) section to learn how to install this or other services.
 
+## First run of Rocket.Chat
+
+If you're running Rocket.Chat from here for the very first time, you have to
+* first, run `docker-compose up mongo`;
+* next, run `docker run -it --rm --net=container:rocketchat_mongo_1 mongo:3.2-jessie bash` where `rocketchat_mongo_1` is the name of the MongoDB container;
+* then, execute the following code in the shell
+  ```
+  mongo mongo/rocketchat --eval "rs.initiate({ _id: 'rs0', members: [ { _id: 0, host: 'localhost:27017' } ]})"
+  ```
+* finally, stop the current container and run `docker-compose up -d`.
+
+Next time you want to run Rocket.Chat, simply run `docker-compose up -d`.
+
+## Note to macOS users
+
+macOS doesn't have the `/srv` directory which the MongoDB service relies on. Moreover, it's not possible to create that directory because of [System Integrity Protection](https://arstechnica.com/gadgets/2015/09/os-x-10-11-el-capitan-the-ars-technica-review/8/#h1) (or simply SIP), so edit `docker-compose.yml` to replace `/srv/mongo:/data/db` to `./mongo:/data/db`.
+
 ## Custom permissions
 
 Note that the Rocket.Chat will have the custom permissions for the [hubot-viva-las-vegas](https://github.com/tolstoyevsky/hubot-viva-las-vegas) Hubot script. If you are not going to use the script, it’s better to remove the patch from the `patches` directory before building the image.
