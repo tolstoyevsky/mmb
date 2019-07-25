@@ -2,18 +2,17 @@ version: "2"
 services:
   rocketchat:
     image: cusdeb/rocketchat:1.1-amd64
-    network_mode: "host"
     environment:
     - PORT=8006
     - MONGO_DATABASE=rocketchat
-    - MONGO_HOST=127.0.0.1:27018
-    - MONGO_OPLOG_HOST=127.0.0.1:27018
+    - MONGO_HOST=mongo:27017
+    - MONGO_OPLOG_HOST=mongo:27017
     - ROOT_URL=http://127.0.0.1:8006
+    ports:
+    - "8006:8006"
   mongo:
     image: mongo:3.2-jessie
     volumes:
     - /srv/mongo:/data/db
-    ports:
-    - "27018:27017"
     command: mongod --oplogSize 128 --replSet rs0
 
