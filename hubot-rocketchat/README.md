@@ -27,6 +27,7 @@ Rocket.Chat Hubot adapter is the way to integrate [Hubot](https://hubot.github.c
 
 * [Features](#features)
 * [Installation](#installation)
+* [Note to macOS users](#note-to-macos-users)
 * [Configuration](#configuration)
 * [Installing external scripts](#installing-external-scripts)
 * [Debugging](#debugging)
@@ -49,6 +50,10 @@ The following set of scripts makes the bot capable of doing all sort of things:
 ## Installation
 
 Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) section to learn how to install this or other services.
+
+## Note to macOS users
+
+macOS doesn't have the `/srv` directory which the Redis service relies on. Moreover, it's not possible to create that directory because of [System Integrity Protection](https://arstechnica.com/gadgets/2015/09/os-x-10-11-el-capitan-the-ars-technica-review/8/#h1) (or simply SIP), so edit `docker-compose.yml` to replace `/srv/redis-dump:/dump` to `./redis-dump:/dump`.
 
 ## Configuration
 
@@ -141,7 +146,7 @@ By default, the packages from the list <a href="#features">above</a> will be ins
   <tr>
     <td>REDIS_URL</td>
     <td>Domain or IP of the Redis host.</td>
-    <td>redis://127.0.0.1:16379</td>
+    <td>redis://redis:6379</td>
   </tr>
   <tr>
     <td align="center" colspan="3"><b>hubot-viva-las-vegas</b></td>

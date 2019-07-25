@@ -27,7 +27,7 @@ RESPOND_TO_DM=${RESPOND_TO_DM:=true}
 TZ=${TZ:="Europe/Moscow"}
 
 # hubot-redis-brain script
-REDIS_URL=${REDIS_URL:="redis://127.0.0.1:16379"}
+REDIS_URL=${REDIS_URL:="redis://redis:6379"}
 
 set +x
 
