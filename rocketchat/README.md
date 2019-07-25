@@ -90,5 +90,5 @@ Here is the list of all custom permissions:
 | -------------- | -------------------------------- | --------------------- |
 | PORT           | Port Rocket.Chat is available on | 8006                  |
 | MONGO_DATABASE | Database name                    | rocketchat            |
-| MONGO_HOST     | MongoDB host                     | 127.0.0.1:27018       |
+| MONGO_HOST     | MongoDB host                     | mongo:27017           |
 | ROOT_URL       | Rocket.Chat host                 | http://127.0.0.1:8006 |
