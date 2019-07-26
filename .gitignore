@@ -1,15 +1,15 @@
-.idea
 baseimages/debootstrap
 baseimages/qemu-arm-static
 baseimages/qemu-x86_64-static
 baseimages/jessie_chroot
 baseimages/stretch_chroot
 baseimages/alpine_chroot
+Dockerfile-armhf
 hubot-rocketchat/packages/*
 hubot-rocketchat/redis-dump
 mediawiki/kblogo.png
 rocketchat/mongo
-Dockerfile-armhf
 *.img
 *.dtb
 .env
+.idea
