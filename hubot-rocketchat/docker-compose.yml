@@ -2,7 +2,8 @@ version: "2"
 services:
   hubot-rocketchat:
     image: cusdeb/hubot-rocketchat:2.0-amd64
-    network_mode: "container:rocketchat_rocketchat_1"
+    networks:
+    - rocketchat_rocketchat-network
     environment:
     - AUTH_ATTEMPTS=${AUTH_ATTEMPTS}
     - DEBUG=${DEBUG}
@@ -58,6 +59,8 @@ services:
     - ./scripts:/home/hubot/scripts
   redis:
     image: cusdeb/redis:5.0-amd64
+    networks:
+    - rocketchat_rocketchat-network
     environment:
     # Enable AOF
     - REDIS_CONF_appendonly=yes
@@ -66,4 +69,6 @@ services:
     - REDIS_CONF_loglevel=notice
     volumes:
     - /srv/redis-dump:/dump
-
+networks:
+  rocketchat_rocketchat-network:
+    external: true
