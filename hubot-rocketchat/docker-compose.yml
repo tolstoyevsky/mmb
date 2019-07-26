@@ -66,6 +66,8 @@ services:
       - socket
   redis:
     image: cusdeb/redis:5.0-amd64
+    networks:
+    - rocketchat_rocketchat-network
     environment:
     # Enable AOF
     - REDIS_CONF_appendonly=yes
