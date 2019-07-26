@@ -38,7 +38,7 @@ Rocket.Chat Hubot adapter is the way to integrate [Hubot](https://hubot.github.c
 The following set of scripts makes the bot capable of doing all sort of things:
 
 * [hubot-happy-birthder](https://github.com/tolstoyevsky/hubot-happy-birthder) – writes birthday messages to users.
-* [hubot-help](https://github.com/hubotio/hubot-help) – shows available commands.
+* [hubot-help](https://github.com/tolstoyevsky/hubot-help) – shows available commands.
 * [hubot-huntflow-reloaded](https://github.com/tolstoyevsky/hubot-huntflow-reloaded) – helps handling incoming interviews.
 * [hubot-pugme](https://github.com/tolstoyevsky/hubot-pugme) – shows random pictures with pugs.
 * [hubot-reaction](https://github.com/hubot-scripts/hubot-reaction) – interacts with [replygif.net](http://replygif.net).
