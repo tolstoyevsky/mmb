@@ -28,6 +28,15 @@ Rocket.Chat is a self-hosted alternative to Slack.
   </tr>
 </table>
 
+## Table of Contents
+
+* [Installation](#installation)
+* [First run of Rocket.Chat](#first-run-of-rocketchat)
+* [Note to macOS users](#note-to-macos-users)
+* [Custom permissions](#custom-permissions)
+* [How to migrate from Rocket.Chat 0.70+ to 1.0+](#how-to-migrate-from-rocketchat-070-to-10)
+* [Configuration](#configuration)
+
 ## Installation
 
 Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) section to learn how to install this or other services.
