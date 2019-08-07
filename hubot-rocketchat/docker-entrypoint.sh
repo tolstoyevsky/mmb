@@ -16,7 +16,7 @@ ROCKETCHAT_USER=${ROCKETCHAT_USER:="meeseeks"}
 
 ROCKETCHAT_PASSWORD=${ROCKETCHAT_PASSWORD:="pass"}
 
-EXTERNAL_SCRIPTS=${EXTERNAL_SCRIPTS:="git:tolstoyevsky/hubot-happy-birthder,git:tolstoyevsky/hubot-help,git:tolstoyevsky/hubot-pugme,hubot-reaction,hubot-redis-brain,hubot-thesimpsons,git:tolstoyevsky/hubot-vote-or-die"}
+EXTERNAL_SCRIPTS=${EXTERNAL_SCRIPTS:="git:tolstoyevsky/hubot-happy-birthder,git:tolstoyevsky/hubot-help,git:tolstoyevsky/hubot-pugme,hubot-reaction,git:hubotio/hubot-redis-brain,hubot-thesimpsons,git:tolstoyevsky/hubot-vote-or-die"}
 
 HUBOT_NAME=${HUBOT_NAME:="bot"}
 
@@ -27,7 +27,7 @@ RESPOND_TO_DM=${RESPOND_TO_DM:=true}
 TZ=${TZ:="Europe/Moscow"}
 
 # hubot-redis-brain script
-REDIS_URL=${REDIS_URL:="redis://redis:6379"}
+REDIS_URL=${REDIS_URL:="redis:///var/run/hubot-redis.sock"}
 
 set +x
 
@@ -68,12 +68,12 @@ for script in ${EXTERNAL_SCRIPTS//,/ }; do
     elif [[ "${script}" == dir:* ]]; then
         # without 'dir:'
         script="${script:4}"
-        package="/home/hubot/packages/${script}"
+        package="/root/hubot/packages/${script}"
 
-        >&2 echo "Installing ${script} from the ~/packages directory"
+        >&2 echo "Installing ${script} from the /root/hubot/packages directory"
 
         if [ ! -d "${package}" ]; then
-            >&2 echo "The specified package ${script} does not exist in the ~/packages directory"
+            >&2 echo "The specified package ${script} does not exist in the /root/hubot/packages directory"
             exit 1
         fi
 
@@ -140,10 +140,10 @@ to_be_added_to_external_scripts="${to_be_added_to_external_scripts:1}"
 node -e "console.log(JSON.stringify('${to_be_added_to_external_scripts}'.split(',')))" > external-scripts.json
 
 npm install
-export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
+export PATH="/usr/lib/node_modules/hubot/bin:/usr/local/share/npm/bin:/root/hubot/node_modules/hubot/bin:$PATH"
 
 if ${DEBUG}; then
-    coffee --nodejs --inspect node_modules/.bin/hubot -n "${BOT_NAME}" -a rocketchat "$@"
+    coffee --nodejs --inspect hubot -n "${BOT_NAME}" -a rocketchat "$@"
 else
-    exec node_modules/.bin/hubot -n "${BOT_NAME}" -a rocketchat "$@"
+    exec hubot -n "${BOT_NAME}" -a rocketchat "$@"
 fi

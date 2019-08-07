@@ -1,5 +1,10 @@
 version: "2"
 services:
+  socket:
+    image: busybox
+    command: chmod -R 777 /var/run
+    volumes:
+      - /var/run
   hubot-rocketchat:
     image: cusdeb/hubot-rocketchat:2.0-amd64
     networks:
@@ -55,20 +60,24 @@ services:
     - VIVA_REMINDER_SCHEDULER=${VIVA_REMINDER_SCHEDULER}
     - VIVA_REPORT_SCHEDULER=${VIVA_REPORT_SCHEDULER}
     volumes:
-    - ./packages:/home/hubot/packages
-    - ./scripts:/home/hubot/scripts
+    - ./packages:/root/hubot/packages
+    - ./scripts:/root/hubot/scripts
+    volumes_from:
+      - socket
   redis:
     image: cusdeb/redis:5.0-amd64
-    networks:
-    - rocketchat_rocketchat-network
     environment:
     # Enable AOF
     - REDIS_CONF_appendonly=yes
     # Disable RDB
     - REDIS_CONF_save=
     - REDIS_CONF_loglevel=notice
+    - REDIS_CONF_unixsocket=/var/run/hubot-redis.sock
+    - REDIS_CONF_unixsocketperm=777
     volumes:
     - /srv/redis-dump:/dump
+    volumes_from:
+      - socket
 networks:
   rocketchat_rocketchat-network:
     external: true
