@@ -45,7 +45,7 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
 
 If you're running Rocket.Chat from here for the very first time, you have to
 * first, run `docker-compose up mongo`;
-* next, run `docker run -it --rm --net=container:rocketchat_mongo_1 mongo:3.4-jessie bash` where `rocketchat_mongo_1` is the name of the MongoDB container;
+* next, run `docker run -it --rm --net=container:rocketchat_mongo_1 mongo:3.2-jessie bash` where `rocketchat_mongo_1` is the name of the MongoDB container;
 * then, execute the following code in the shell
   ```
   mongo mongo/rocketchat --eval "rs.initiate({ _id: 'rs0', members: [ { _id: 0, host: 'localhost:27017' } ]})"
@@ -76,7 +76,7 @@ Here is the list of all custom permissions:
 
 * Stop and remove the current Rocket.Chat and MongoDB containers.
 * Run the up-to-dated containers. Note that the Rocket.Chat container will crash but don't worry, because it will be fixed soon.
-* run `docker run -it --rm --net=container:rocketchat_mongo_1 mongo:3.4-jessie bash` where `rocketchat_mongo_1` is the name of the MongoDB container.
+* run `docker run -it --rm --net=container:rocketchat_mongo_1 mongo:3.2-jessie bash` where `rocketchat_mongo_1` is the name of the MongoDB container.
 * execute the following code in the shell
   ```
   mongo mongo/rocketchat --eval "rs.initiate({ _id: 'rs0', members: [ { _id: 0, host: 'localhost:27017' } ]})"
@@ -85,7 +85,7 @@ Here is the list of all custom permissions:
   You should get the following message (the MongoDB version may be different):
 
   ```
-  MongoDB shell version: 3.4.20
+  MongoDB shell version: 3.2.21
   connecting to: mongo/rocketchat
   { "ok" : 1 }
   ```
