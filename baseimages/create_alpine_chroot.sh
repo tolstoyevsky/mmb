@@ -77,7 +77,7 @@ if [ "${ARCH}" == "amd64" ]; then
     ARCH="x86_64"
 fi
 
-if [ ! -z "${FLAVOUR}" ] && [ ! -f ./flavours/"${FLAVOUR}.sh" ]; then
+if [ -n "${FLAVOUR}" ] && [ ! -f ./flavours/"${FLAVOUR}.sh" ]; then
     fatal "there is no such flavour as '${FLAVOUR}'."
     exit 1
 fi
@@ -138,7 +138,7 @@ info "setting up APK mirror"
 mkdir -p ${CHROOT_DIR}/etc/apk
 echo "${MIRROR}/v${ALPINE_VERSION}/main" > "${CHROOT_DIR}"/etc/apk/repositories
 
-if [ ! -z "${FLAVOUR}" ]; then
+if [ -n "${FLAVOUR}" ]; then
     info "importing './flavours/${FLAVOUR}.sh'"
 
     # shellcheck source=flavours/nodejs.sh

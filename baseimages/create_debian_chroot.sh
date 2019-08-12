@@ -65,7 +65,7 @@ if ! is_architecture_valid; then
     exit 1
 fi
 
-if [ ! -z "${FLAVOUR}" ] && [ ! -f ./flavours/"${FLAVOUR}.sh" ]; then
+if [ -n "${FLAVOUR}" ] && [ ! -f ./flavours/"${FLAVOUR}.sh" ]; then
     fatal "there is no such flavour as '${FLAVOUR}'."
     exit 1
 fi
@@ -126,7 +126,7 @@ echo "APT::Get::Purge \"true\";" > "${CHROOT_DIR}"/etc/apt/apt.conf
 echo "path-exclude=/usr/share/locale/*" > "${CHROOT_DIR}"/etc/dpkg/dpkg.cfg.d/excludes
 echo "path-exclude=/usr/share/man/*"   >> "${CHROOT_DIR}"/etc/dpkg/dpkg.cfg.d/excludes
 
-if [ ! -z "${FLAVOUR}" ]; then
+if [ -n "${FLAVOUR}" ]; then
     info "importing './flavours/${FLAVOUR}.sh'"
 
     # shellcheck source=flavours/nodejs.sh
