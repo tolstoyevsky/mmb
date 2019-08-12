@@ -112,25 +112,25 @@ is_debian() {
 # Returns:
 #     None
 check_dependencies() {
-    if [ -z "$(which docker)" ]; then
+    if [ -z "$(command -v docker)" ]; then
         fatal "Docker is not installed." \
               "Run apt-get install docker.io on Debian/Ubuntu to fix it."
         exit 1
     fi
 
-    if [ -z "$(which git)" ]; then
+    if [ -z "$(command -v git)" ]; then
         fatal "git is not installed." \
               "Run apt-get install git on Debian/Ubuntu to fix it."
         exit 1
     fi
 
-    if [ -z "$(which wget)" ]; then
+    if [ -z "$(command -v wget)" ]; then
         fatal "wget is not installed." \
               "Run apt-get install wget on Debian/Ubuntu to fix it."
         exit 1
     fi
 
-    if [ -z "$(which xz)" ]; then
+    if [ -z "$(command -v xz)" ]; then
         fatal "xz is not installed." \
               "Run apt-get install xz-utils on Debian/Ubuntu to fix it."
         exit 1
