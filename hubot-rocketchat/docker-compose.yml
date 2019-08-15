@@ -64,6 +64,8 @@ services:
     - ./scripts:/root/hubot/scripts
     volumes_from:
       - socket
+    ports:
+    - "9229:9229"
   redis:
     image: cusdeb/redis:5.0-amd64
     environment:

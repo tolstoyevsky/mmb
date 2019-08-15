@@ -143,7 +143,7 @@ npm install
 export PATH="/usr/lib/node_modules/hubot/bin:/usr/local/share/npm/bin:/root/hubot/node_modules/hubot/bin:$PATH"
 
 if ${DEBUG}; then
-    coffee --nodejs --inspect hubot -n "${BOT_NAME}" -a rocketchat "$@"
+    coffee --nodejs --inspect=0.0.0.0:9229 node_modules/.bin/hubot -n "${BOT_NAME}" -a rocketchat "$@"
 else
     exec hubot -n "${BOT_NAME}" -a rocketchat "$@"
 fi
