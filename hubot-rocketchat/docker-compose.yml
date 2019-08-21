@@ -59,6 +59,8 @@ services:
     - MINIMUM_DAYS_BEFORE_REQUEST=${MINIMUM_DAYS_BEFORE_REQUEST}
     - VIVA_REMINDER_SCHEDULER=${VIVA_REMINDER_SCHEDULER}
     - VIVA_REPORT_SCHEDULER=${VIVA_REPORT_SCHEDULER}
+    # brain-updater
+    - BRAIN_UPDATER_SCHEDULER=${BRAIN_UPDATER_SCHEDULER}
     volumes:
     - ./packages:/root/hubot/packages
     - ./scripts:/root/hubot/scripts

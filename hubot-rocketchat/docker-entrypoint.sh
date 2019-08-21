@@ -140,6 +140,7 @@ to_be_added_to_external_scripts="${to_be_added_to_external_scripts:1}"
 node -e "console.log(JSON.stringify('${to_be_added_to_external_scripts}'.split(',')))" > external-scripts.json
 
 npm install
+npm install node-schedule@0.6.0 # "brain-updater" dependency
 export PATH="/usr/lib/node_modules/hubot/bin:/usr/local/share/npm/bin:/root/hubot/node_modules/hubot/bin:$PATH"
 
 if ${DEBUG}; then
