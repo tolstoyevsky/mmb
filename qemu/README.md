@@ -18,7 +18,7 @@ The Dockerfile and assets related to it are intended primarily, but **not** excl
   </tr>
   <tr>
     <td>Release date</td>
-    <td>14 Aug 2018</td>
+    <td>15 Aug 2019</td>
   </tr>
   <tr>
     <td>Data volume</td>
