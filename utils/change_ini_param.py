@@ -13,9 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Change INI parameter CLI."""
+
 import configparser
 import sys
-from optparse import OptionParser
+from argparse import ArgumentParser
 from pathlib import Path
 
 
@@ -25,21 +27,22 @@ SECTION = 'mysqld'
 
 
 def main():
-    parser = OptionParser(usage='usage: %prog [options] option value')
-    parser.add_option('--config-file', default=MY_CNF,
+    """Main module function."""
+    parser = ArgumentParser(usage='%(prog)s [options] option value')
+    parser.add_argument('--config-file', default=MY_CNF,
                       help='Path to configuration file', metavar='CONFIG_FILE')
-    parser.add_option('--section', default=SECTION,
+    parser.add_argument('--section', default=SECTION,
                       help='Section name which the specified option '
                            'belongs to',
                       metavar='SECTION')
-    options, args = parser.parse_args()
+    args = parser.parse_args()
 
-    if len(args) != 2:
+    if len(vars(args)) != 2:
         sys.stderr.write('Usage: {} option value\n'.format(sys.argv[0]))
         sys.exit(1)
 
-    if not Path(options.config_file).is_file():
-        sys.stderr.write('{} does not exist\n'.format(options.config_file))
+    if not Path(args.config_file).is_file():
+        sys.stderr.write('{} does not exist\n'.format(args.config_file))
         sys.exit(1)
 
     config = configparser.ConfigParser(allow_no_value=True)
@@ -47,11 +50,11 @@ def main():
     # Preserve case
     config.optionxform = str
 
-    config.read(options.config_file, encoding='utf-8')
+    config.read(args.config_file, encoding='utf-8')
 
-    config.set(options.section, args[0], args[1])
+    config.set(args.section, args[0], args[1])
 
-    with open(options.config_file, 'w') as configfile:
+    with open(args.config_file, 'w') as configfile:
         config.write(configfile)
 
 
