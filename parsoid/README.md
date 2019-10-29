@@ -8,11 +8,11 @@ Parsoid is a bidirectional runtime wikitext parser. It works in tandem with the 
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://www.mediawiki.org/wiki/Parsoid/Releases#0.9.0_(released_Mar_23,_2018)">0.9.0</a></td>
+    <td><a href="https://mediawiki.org/wiki/Parsoid/Releases#0.10.0_(released_Dec_5,_2018)">0.10.0</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>23 Mar 2018</td>
+    <td>05 Dec 2018</td>
   </tr>
   <tr>
     <td>Port</td>

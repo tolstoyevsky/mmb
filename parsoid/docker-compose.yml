@@ -1,7 +1,7 @@
 version: "2"
 services:
   parsoid:
-    image: cusdeb/parsoid:0.9.0-amd64
+    image: cusdeb/parsoid:0.10.0-amd64
     environment:
     - PORT=8005
     - PARSOID_DOMAIN=parsoid
