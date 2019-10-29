@@ -37,7 +37,7 @@ services:
     volumes:
     - /srv/mysql:/var/lib/mysql
   parsoid:
-    image: cusdeb/parsoid:0.9.0-armhf
+    image: cusdeb/parsoid:0.10.0-armhf
     environment:
     - PORT=8005
     - PARSOID_DOMAIN=parsoid

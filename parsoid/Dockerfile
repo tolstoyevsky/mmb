@@ -1,7 +1,7 @@
 FROM cusdeb/alpine3.7-node:amd64
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
-ENV PARSOID_VERSION 0.9.0
+ENV PARSOID_VERSION 0.10.0
 
 RUN apk --update add \
     curl \
