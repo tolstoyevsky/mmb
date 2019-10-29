@@ -27,7 +27,7 @@ server {
 	#
 	# include snippets/snakeoil.conf;
 
-	root /var/www;
+	root /var/www/w;
 
 	# Add index.php to the list if you are using PHP
 	index index.html index.htm index.php;
@@ -56,11 +56,11 @@ server {
 	# The solution was borrowed from
 	# https://mediawiki.org/wiki/Manual:Short_URL/Nginx
 	#
-	location ~ ^\/w/.+$ {
-		if ($request_uri ~ ^/w/images) { break; }
-		if ($request_uri ~ ^/w/resources) { break; }
-		if ($request_uri ~ ^/w/index\.php) { break; }
-		rewrite ^/w/(.+)$ /w/index.php?title=$1 last;
+	location ~ ^\/.+$ {
+		if ($request_uri ~ ^/images) { break; }
+		if ($request_uri ~ ^/resources) { break; }
+		if ($request_uri ~ ^/index\.php) { break; }
+		rewrite ^/(.+)$ /index.php?title=$1 last;
 	}
 
 	# deny access to .htaccess files, if Apache's document root

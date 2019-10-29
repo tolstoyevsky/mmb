@@ -39,6 +39,6 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
 | --- | --- | --- |
 | PORT            | Port the Parsoid server listens on | 8005 |
 | PARSOID_DOMAIN  | Domain of the Parsoid host (the value must be equal to the `PARSOID_DOMAIN` parameter from the [MediaWiki](https://github.com/tolstoyevsky/mmb/tree/master/mediawiki) Docker image) | parsoid |
-| MW_API_ENDPOINT | URL of the MediaWiki API endpoint | http://127.0.0.1:8004/w/api.php |
+| MW_API_ENDPOINT | URL of the MediaWiki API endpoint | http://127.0.0.1:8004/api.php |
 | LOGGING_LEVEL   | Logging level (`fatal`, `error`, `warn`, `info`, `debug` and `trace`) | `info` |
 | DEBUG_MODE      | Debug mode (`true` and `false`) | `false` |

@@ -5,7 +5,7 @@ services:
     environment:
     - PORT=8005
     - PARSOID_DOMAIN=parsoid
-    - MW_API_ENDPOINT=http://127.0.0.1:8004/w/api.php
+    - MW_API_ENDPOINT=http://127.0.0.1:8004/api.php
     - LOGGING_LEVEL=info
     - DEBUG_MODE=false
     network_mode: "host"
