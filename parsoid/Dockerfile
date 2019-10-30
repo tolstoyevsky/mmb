@@ -11,7 +11,7 @@ RUN apk --update add \
  # Install Parsoid
  && cd \
  && curl -LO https://github.com/wikimedia/parsoid/archive/v$PARSOID_VERSION.tar.gz \
- && tar xzvf v$PARSOID_VERSION.tar.gz \
+ && tar xzf v$PARSOID_VERSION.tar.gz \
  && rm v$PARSOID_VERSION.tar.gz \
  && mv parsoid-$PARSOID_VERSION parsoid \
  && cd parsoid \
