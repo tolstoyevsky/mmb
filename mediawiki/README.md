@@ -62,7 +62,7 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
 | WG_DB_PASSWORD          | [Database password](https://mediawiki.org/wiki/Manual:$wgDBpassword) | cusdeb |
 | ALLOW_ACCOUNT_CREATION  | Allows users to create accounts (`true` and `false`) | `true` |
 | ALLOW_ACCOUNT_EDITING   | Allows users to edit their accounts (`true` and `false`) | `true` |
-| ALLOW_ANONYMOUS_READING | Allows users to read wiki anonymously (`true` and `false`). If the parameter is `false`, wiki is **private** | `true` |
+| ALLOW_ANONYMOUS_READING | Allows users to read wiki anonymously (`true` and `false`). If the parameter is `false`, wiki is **private** | `false` |
 | ALLOW_ANONYMOUS_EDITING | Allows users to edit wiki anonymously (`true` and `false`) | `true` |
 | PARSOID_DOMAIN          | Domain of the Parsoid host (the value must be equal to the `PARSOID_DOMAIN` parameter from the [Parsoid](https://github.com/tolstoyevsky/mmb/tree/master/parsoid) Docker image) | parsoid |
 | PARSOID_HOST            | Domain or IP of the Parsoid host | http://127.0.0.1:8005 |
