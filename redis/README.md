@@ -27,11 +27,8 @@ Redis is an open source high-performance in-memory key-value data store.
     <td><code>/srv/redis-dump:/dump</code></td>
   </tr> 
   <tr>
-    <td valign="top">Base images</td>
-    <td>
-        <code>cusdeb/alpine3.7:armhf</code> (for <code>armhf</code> port)<br>
-        <code>cusdeb/alpine3.7:amd64</code> (for <code>amd64</code> port)
-    </td>
+    <td valign="top">Base image</td>
+    <td><code>cusdeb/alpine3.7:amd64</code></td>
   </tr>
 </table>
 

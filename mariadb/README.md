@@ -27,11 +27,8 @@ MariaDB is a community-developed fork of MySQL that is dedicated to FOSS (free a
     <td>/srv/mysql</td>
   </tr> 
   <tr>
-    <td valign="top">Base images</td>
-    <td>
-        cusdeb/alpine3.7:armhf (for armhf port)<br>
-        cusdeb/alpine3.7:amd64 (for amd64 port)
-    </td>
+    <td valign="top">Base image</td>
+    <td>cusdeb/alpine3.7:amd64</td>
   </tr>
 </table>
 
