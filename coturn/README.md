@@ -23,11 +23,8 @@ coturn is a free open source implementation of TURN and STUN Server.
     <td>5349</td>
   </tr> 
   <tr>
-    <td valign="top">Base images</td>
-    <td>
-        cusdeb/alpine3.7:armhf (for armhf port)<br>
-        cusdeb/alpine3.7:amd64 (for amd64 port)
-    </td>
+    <td valign="top">Base image</td>
+    <td>cusdeb/alpine3.7:amd64</td>
   </tr>
 </table>
 

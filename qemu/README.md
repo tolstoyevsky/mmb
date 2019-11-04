@@ -25,7 +25,7 @@ The Dockerfile and assets related to it are intended primarily, but **not** excl
     <td><code>current directory:/tmp</code></td>
   </tr>
   <tr>
-    <td valign="top">Base images</td>
+    <td valign="top">Base image</td>
     <td><code>cusdeb/alpine3.7:amd64</code></td>
   </tr>
 </table>

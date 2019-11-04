@@ -1,8 +1,0 @@
-coturn:
-  image: cusdeb/coturn:4.5.0.7-armhf
-  command: /usr/bin/run.sh
-  environment:
-  - PORT=3478
-  - TLS_PORT=5349
-  - AUTH_SECRET=secret
-  net: "host"

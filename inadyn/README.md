@@ -19,11 +19,8 @@ inadyn (stands for Internet Automated Dynamic DNS Client) is a dynamic DNS clien
     <td>inadyn.conf</td>
   </tr>
   <tr>
-    <td valign="top">Base images</td>
-    <td>
-        cusdeb/alpine3.7:armhf (for armhf port)<br>
-        cusdeb/alpine3.7:amd64 (for amd64 port)
-    </td>
+    <td valign="top">Base image</td>
+    <td>cusdeb/alpine3.7:amd64</td>
   </tr>
 </table>
 
