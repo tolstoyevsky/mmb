@@ -13,7 +13,7 @@ if [ ! -z ${USERNAME} ] && [ ! -z ${PASSWORD} ]; then
     usermod -p "${encrypted_password}" ${USERNAME}
     chown ${USERNAME}:${USERNAME} /ftp
 else
-    >&2 echo "either USERNAME or PASWORD hasn't been specified"
+    >&2 echo "either USERNAME or PASSWORD hasn't been specified"
 fi
 
 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
