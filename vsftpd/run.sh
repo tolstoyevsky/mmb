@@ -8,7 +8,7 @@ sed -i -e "s/{IP}/${IP}/" /etc/vsftpd/vsftpd.conf
 sed -i -e "s/{PORT}/${PORT}/" /etc/vsftpd/vsftpd.conf
 
 if [ ! -z ${USERNAME} ] && [ ! -z ${PASSWORD} ]; then
-    useradd -d /ftp -K MAIL_DIR=/dev/null -s /bin/false ${USERNAME} || true
+    useradd -d /ftp -K MAIL_DIR=/dev/null -m -s /bin/false ${USERNAME} || true
     encrypted_password=`mkpasswd -m sha-512 "${PASSWORD}"`
     usermod -p "${encrypted_password}" ${USERNAME}
     chown ${USERNAME}:${USERNAME} /ftp
