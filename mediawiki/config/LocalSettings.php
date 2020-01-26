@@ -169,4 +169,5 @@ $wgSessionsInObjectCache = true;
 $wgVirtualRestConfig['modules']['parsoid']['forwardCookies'] = true;
 
 // Extensions
+wfLoadExtension('Cite');
 wfLoadExtension('SyntaxHighlight_GeSHi');

@@ -38,6 +38,7 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
 ## Features
 
 * Nginx [1.14.2](http://nginx.org/en/CHANGES-1.14) and PHP [7.2.14](http://php.net/ChangeLog-7.php#7.2.14).
+* The [Cite](https://www.mediawiki.org/wiki/Extension:Cite) extension which allows creating references as footnotes on a page, using `<ref>` and `<references />` tags.
 * The [SyntaxHighlight](https://mediawiki.org/wiki/Extension:SyntaxHighlight) extension which provides rich formatting of source code using the `<syntaxhighlight>` tag.
 * [VisualEditor](https://mediawiki.org/wiki/Extension:VisualEditor) extension which allows editing pages as rich content.
 
