@@ -123,6 +123,11 @@ $wgGroupPermissions['*']['edit'] = ALLOW_ACCOUNT_EDITING;
 $wgGroupPermissions['*']['read'] = ALLOW_ANONYMOUS_READING;
 $wgGroupPermissions['*']['edit'] = ALLOW_ANONYMOUS_EDITING;
 
+# Permissions for the Translate extension
+$wgGroupPermissions['user']['translate'] = true;
+$wgGroupPermissions['user']['translate-messagereview'] = true;
+$wgGroupPermissions['user']['pagetranslation'] = true;
+
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'vector', 'monobook':
 $wgDefaultSkin = "vector";
@@ -171,6 +176,9 @@ $wgVirtualRestConfig['modules']['parsoid']['forwardCookies'] = true;
 $wgMFDefaultSkinClass = 'SkinVector';
 
 // Extensions
+// Cannot use wfLoadExtension here since extension.json does not exist.
+require "$IP/extensions/Translate/Translate.php";
 wfLoadExtension('Cite');
 wfLoadExtension('MobileFrontend');
 wfLoadExtension('SyntaxHighlight_GeSHi');
+wfLoadExtension('UniversalLanguageSelector');
