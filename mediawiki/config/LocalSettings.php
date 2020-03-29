@@ -168,6 +168,9 @@ $wgSessionsInObjectCache = true;
 // that $wgVirtualRestConfig['modules']['parsoid']['url'] be pointed to localhost if this setting is enabled.
 $wgVirtualRestConfig['modules']['parsoid']['forwardCookies'] = true;
 
+$wgMFDefaultSkinClass = 'SkinVector';
+
 // Extensions
 wfLoadExtension('Cite');
+wfLoadExtension('MobileFrontend');
 wfLoadExtension('SyntaxHighlight_GeSHi');
