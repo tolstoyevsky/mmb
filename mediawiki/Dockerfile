@@ -46,8 +46,9 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.9/community >> /etc/apk/repos
  && git submodule update --init \
  # Do the same thing for Cite and SyntaxHighlight_GeSHi
  && cd /var/www/w/extensions \
- && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Cite.git Cite \
- && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/SyntaxHighlight_GeSHi.git SyntaxHighlight_GeSHi \ 
+ && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Cite.git Cite \ 
+ && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/MobileFrontend.git MobileFrontend \
+ && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/SyntaxHighlight_GeSHi.git SyntaxHighlight_GeSHi \
  && cd /var/www && chown -R nginx:nginx w \
  && curl -O https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
  && chmod +x wait-for-it.sh \
