@@ -41,7 +41,7 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
 * The [Cite](https://www.mediawiki.org/wiki/Extension:Cite) extension which allows creating references as footnotes on a page, using `<ref>` and `<references />` tags.
 * The [MobileFrontend](https://www.mediawiki.org/wiki/Extension:MobileFrontend) extension which provides a mobile view.
 * The [SyntaxHighlight](https://mediawiki.org/wiki/Extension:SyntaxHighlight) extension which provides rich formatting of source code using the `<syntaxhighlight>` tag.
-* [VisualEditor](https://mediawiki.org/wiki/Extension:VisualEditor) extension which allows editing pages as rich content.
+* The [VisualEditor](https://mediawiki.org/wiki/Extension:VisualEditor) extension which allows editing pages as rich content.
 
 ## Configuration
 
