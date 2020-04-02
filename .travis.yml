@@ -6,7 +6,7 @@ addons:
     - debian-sid
 
 install:
-  - sudo apt-get install -y shellcheck
+  - sudo apt-get install -y --allow-unauthenticated shellcheck
 
 script:
   - bash -c 'cd baseimages && find . -type f -name "*.sh" | xargs shellcheck -x -e SC2034,SC2148'
