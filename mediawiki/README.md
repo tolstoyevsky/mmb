@@ -31,13 +31,13 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
   </tr>
   <tr>
     <td valign="top">Base image</td>
-    <td><code>cusdeb/alpine3.9:amd64</code></td>
+    <td><a href="https://alpinelinux.org/posts/Alpine-3.11.0-released.html">Alpine 3.11</a></td>
   </tr>
 </table>
 
 ## Features
 
-* Nginx [1.14.2](http://nginx.org/en/CHANGES-1.14) and PHP [7.2.14](http://php.net/ChangeLog-7.php#7.2.14).
+* Nginx [1.16.1](http://nginx.org/en/CHANGES-1.16) and PHP [7.3.16](http://php.net/ChangeLog-7.php#7.3.16).
 * The [Cite](https://www.mediawiki.org/wiki/Extension:Cite) extension which allows creating references as footnotes on a page, using `<ref>` and `<references />` tags.
 * The [MobileFrontend](https://www.mediawiki.org/wiki/Extension:MobileFrontend) extension which provides a mobile view.
 * The [SyntaxHighlight](https://mediawiki.org/wiki/Extension:SyntaxHighlight) extension which provides rich formatting of source code using the `<syntaxhighlight>` tag.

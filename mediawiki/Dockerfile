@@ -1,4 +1,4 @@
-FROM cusdeb/alpine3.9:amd64
+FROM alpine:3.11
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV MEDIAWIKI_VERSION REL1_31
