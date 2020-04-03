@@ -13,7 +13,7 @@ services:
     ports:
     - "8006:8006"
   mongo:
-    image: mongo:3.2-jessie
+    image: mongo:3.6-xenial
     networks:
     - rocketchat-network
     volumes:
