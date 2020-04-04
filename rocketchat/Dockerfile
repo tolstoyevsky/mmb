@@ -31,7 +31,7 @@ RUN apt-get update \
  && rm rocket.chat.tgz rocket.chat.tgz.asc \
  && cd $BUNDLE_DIR \
  # Patches apply
- && for path in $(ls ../patches/) \
+ && for path in $(ls ../patches/*.patch 2> /dev/null) \
  ; do patch -p1 < "../patches/${path}" \
  ; done \
  && cd programs/server \
