@@ -12,11 +12,11 @@ Rocket.Chat is a self-hosted alternative to Slack.
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://github.com/RocketChat/Rocket.Chat/releases/tag/1.3.0">1.3</a></td>
+    <td><a href="https://github.com/RocketChat/Rocket.Chat/releases/tag/2.4.0">2.4</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>28 May 2019</td>
+    <td>28 Dec 2019</td>
   </tr>
   <tr>
     <td>Port</td>
@@ -34,7 +34,6 @@ Rocket.Chat is a self-hosted alternative to Slack.
 * [First run of Rocket.Chat](#first-run-of-rocketchat)
 * [Note to macOS users](#note-to-macos-users)
 * [Custom permissions](#custom-permissions)
-* [How to migrate from Rocket.Chat 0.70+ to 1.0+](#how-to-migrate-from-rocketchat-070-to-10)
 * [How to upgrade MongoDB 3.2 to 3.6](#how-to-upgrade-mongodb-32-to-36)
 * [Configuration](#configuration)
 
@@ -72,25 +71,6 @@ Here is the list of all custom permissions:
 * `hubot-viva-initiate-new-time-off-request-on-behalf-of-user` allows users to initiate a new time off request for the specified user.
 * `hubot-viva-work-from-home` allows users to use the `работаю из дома` command.
 * `hubot-viva-set-unset-status-of-being-ill` allows users to use the `болею` command.
-
-## How to migrate from Rocket.Chat 0.70+ to 1.0+
-
-* Stop and remove the current Rocket.Chat and MongoDB containers.
-* Run the up-to-dated containers. Note that the Rocket.Chat container will crash but don't worry, because it will be fixed soon.
-* run `docker run -it --rm --net=container:rocketchat_mongo_1 mongo:3.2-jessie bash` where `rocketchat_mongo_1` is the name of the MongoDB container.
-* execute the following code in the shell
-  ```
-  mongo mongo/rocketchat --eval "rs.initiate({ _id: 'rs0', members: [ { _id: 0, host: 'localhost:27017' } ]})"
-  ```
-
-  You should get the following message (the MongoDB version may be different):
-
-  ```
-  MongoDB shell version: 3.2.21
-  connecting to: mongo/rocketchat
-  { "ok" : 1 }
-  ```
-* Restart the Rocket.Chat and MongoDB containers. Now everything should be fine.
 
 ## How to upgrade MongoDB 3.2 to 3.6
 
