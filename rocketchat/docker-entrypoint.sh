@@ -1,8 +1,8 @@
 #!/bin/sh
 
-host="$(echo ${MONGO_HOST} | cut -d':' -f1)"
+host="$(echo "${MONGO_HOST}" | cut -d':' -f1)"
 
-port="$(echo ${MONGO_HOST} | cut -d':' -f2)"
+port="$(echo "${MONGO_HOST}" | cut -d':' -f2)"
 
 export MONGO_URL="mongodb://${MONGO_HOST}/${MONGO_DATABASE}"
 export MONGO_OPLOG_URL="mongodb://${MONGO_OPLOG_HOST}/local?replSet=rs01"
