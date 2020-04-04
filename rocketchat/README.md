@@ -33,7 +33,6 @@ Rocket.Chat is a self-hosted alternative to Slack.
 * [Installation](#installation)
 * [First run of Rocket.Chat](#first-run-of-rocketchat)
 * [Note to macOS users](#note-to-macos-users)
-* [Custom permissions](#custom-permissions)
 * [How to upgrade MongoDB 3.2 to 3.6](#how-to-upgrade-mongodb-32-to-36)
 * [Configuration](#configuration)
 
@@ -57,20 +56,6 @@ Next time you want to run Rocket.Chat, simply run `docker-compose up -d`.
 ## Note to macOS users
 
 macOS doesn't have the `/srv` directory which the MongoDB service relies on. Moreover, it's not possible to create that directory because of [System Integrity Protection](https://arstechnica.com/gadgets/2015/09/os-x-10-11-el-capitan-the-ars-technica-review/8/#h1) (or simply SIP), so edit `docker-compose.yml` to replace `/srv/mongo:/data/db` to `./mongo:/data/db`.
-
-## Custom permissions
-
-Note that the Rocket.Chat will have the custom permissions for the [hubot-viva-las-vegas](https://github.com/tolstoyevsky/hubot-viva-las-vegas) Hubot script. If you are not going to use the script, it’s better to remove the patch from the `patches` directory before building the image.
-Here is the list of all custom permissions:
-* `hubot-viva-send-leave-request` allows users to send leave request.
-* `hubot-viva-approve-leave-request` allows users to approve leave requests.
-* `hubot-viva-reject-leave-request` allows users to reject leave requests.
-* `hubot-viva-cancel-leave-request` allows users to cancel approved leave requests.
-* `hubot-viva-get-leave-requests-list` allows users to get the leave request statuses of other users.
-* `hubot-viva-initiate-new-leave-request-on-behalf-of-user` allows users to initiate a new leave request on behalf of the specified user.
-* `hubot-viva-initiate-new-time-off-request-on-behalf-of-user` allows users to initiate a new time off request for the specified user.
-* `hubot-viva-work-from-home` allows users to use the `работаю из дома` command.
-* `hubot-viva-set-unset-status-of-being-ill` allows users to use the `болею` command.
 
 ## How to upgrade MongoDB 3.2 to 3.6
 
