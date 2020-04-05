@@ -41,6 +41,8 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
 * The [Cite](https://www.mediawiki.org/wiki/Extension:Cite) extension which allows creating references as footnotes on a page, using `<ref>` and `<references />` tags.
 * The [MobileFrontend](https://www.mediawiki.org/wiki/Extension:MobileFrontend) extension which provides a mobile view.
 * The [SyntaxHighlight](https://mediawiki.org/wiki/Extension:SyntaxHighlight) extension which provides rich formatting of source code using the `<syntaxhighlight>` tag.
+* The [Translate](https://mediawiki.org/wiki/Extension:Translate) extension which allows managing multilingual wikis in a sensible way.
+* The [Universal Language Selector](https://mediawiki.org/wiki/Extension:UniversalLanguageSelector) extension which allows selecting a language and configuring its support in an easy way. Note that the extension is a dependency for Translate (see above), so be careful when removing it.
 * The [VisualEditor](https://mediawiki.org/wiki/Extension:VisualEditor) extension which allows editing pages as rich content.
 
 ## Configuration
