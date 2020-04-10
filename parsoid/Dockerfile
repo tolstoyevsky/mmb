@@ -26,9 +26,9 @@ RUN apk --update add \
     python \
  && rm -rf /var/cache/apk/*
 
-COPY ./docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
+COPY ./docker-entrypoint.sh /entrypoint.sh
 
 COPY ./config/config.yaml /root/parsoid/config.yaml
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
