@@ -10,4 +10,5 @@ install:
 
 script:
   - bash -c 'shellcheck mediawiki/*.sh'
+  - bash -c 'shellcheck parsoid/docker-entrypoint.sh'
   - bash -c 'shellcheck rocketchat/docker-entrypoint.sh'
