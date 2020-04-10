@@ -24,5 +24,7 @@ sed -i -e "s/LOGGING_LEVEL/${LOGGING_LEVEL}/" /root/parsoid/config.yaml
 
 sed -i -e "s/DEBUG_MODE/${DEBUG_MODE}/" /root/parsoid/config.yaml
 
+export NODE_PATH=/root/parsoid
+
 cd /root/parsoid && npm start
 

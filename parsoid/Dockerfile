@@ -1,10 +1,11 @@
-FROM cusdeb/alpine3.7-node:amd64
+FROM node:12-alpine3.11
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV PARSOID_VERSION 0.10.0
 
 RUN apk --update add \
     curl \
+    g++ \
     git \
     make \
     python \
@@ -19,6 +20,7 @@ RUN apk --update add \
  # Cleanup
  && apk del \
     curl \
+    g++ \
     git \
     make \
     python \
