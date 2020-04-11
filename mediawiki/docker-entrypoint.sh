@@ -2,6 +2,9 @@
 
 export PORT=${PORT:=8004}
 
+SECRET_KEY="$(python3 -c "import secrets, string; print(''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(64)))")"
+export SECRET_KEY
+
 change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "env[PARSOID_DOMAIN]" "${PARSOID_DOMAIN}"
 
 change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "env[PARSOID_HOST]" "${PARSOID_HOST}"
@@ -18,6 +21,7 @@ change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "gr
 
 >&2 echo "Preparing LocalSettings.php"
 
+sed -i -e "s/SECRET_KEY/${SECRET_KEY}/" /var/www/w/LocalSettings.php
 sed -i -e "s/WG_SITENAME/${WG_SITENAME}/" /var/www/w/LocalSettings.php
 sed -i -e "s/WG_META_NAMESPACE/${WG_META_NAMESPACE}/" /var/www/w/LocalSettings.php
 sed -i -e "s/WG_PROTOCOL/${WG_PROTOCOL}/" /var/www/w/LocalSettings.php
