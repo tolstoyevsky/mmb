@@ -96,7 +96,7 @@ $wgShellLocale = "C.UTF-8";
 # Site language code, should be one of the list in ./languages/data/Names.php
 $wgLanguageCode = "en";
 
-$wgSecretKey = "248d6d363940c132c2f5c13298abb1a19ebc1ceb5fa5c7a2fe2498032e75496f";
+$wgSecretKey = "SECRET_KEY";
 
 # Changing this will log out all existing sessions.
 $wgAuthenticationTokenVersion = "1";
