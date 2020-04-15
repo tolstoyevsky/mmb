@@ -21,6 +21,9 @@ services:
     # Parsoid server
     - PARSOID_DOMAIN=parsoid
     - PARSOID_HOST=http://127.0.0.1:8005
+    # Render server
+    - CREDENTIALS=${CREDENTIALS}
+    - RENDER_SERVER_HOST=${RENDER_SERVER_HOST}
     network_mode: "host"
     volumes:
     - /srv/mediawiki/deleted:/var/www/w/deleted
@@ -46,4 +49,26 @@ services:
     - LOGGING_LEVEL=info
     - DEBUG_MODE=false
     network_mode: "host"
+  mw_qserve:
+    image: cusdeb/mwlib:0.16.2
+    network_mode: "host"
+    environment:
+    - MW_QSERVE_PORT=${MW_QSERVE_PORT}
+    - TYPE=mw-qserve
+  postman:
+    image: cusdeb/mwlib:0.16.2
+    network_mode: "host"
+    environment:
+    - TYPE=postman
+  nserve:
+    image: cusdeb/mwlib:0.16.2
+    network_mode: "host"
+    environment:
+    - PORT=${PORT}
+    - TYPE=nserve
+  nslave:
+    image: cusdeb/mwlib:0.16.2
+    network_mode: "host"
+    environment:
+    - TYPE=nslave
 

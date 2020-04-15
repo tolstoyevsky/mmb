@@ -178,6 +178,16 @@ $wgMFDefaultSkinClass = 'SkinVector';
 // Extensions
 // Cannot use wfLoadExtension here since extension.json does not exist.
 require "$IP/extensions/Translate/Translate.php";
+require "$IP/extensions/Collection/Collection.php";
+
+$wgCollectionFormats = array(
+   'rl' => 'PDF',
+);
+
+$wgCollectionMWServeURL = "RENDER_SERVER";
+
+$wgCollectionMWServeCredentials = "CREDENTIALS";
+
 wfLoadExtension('Cite');
 wfLoadExtension('MobileFrontend');
 wfLoadExtension('SyntaxHighlight_GeSHi');
