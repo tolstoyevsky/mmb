@@ -5,6 +5,8 @@ export PORT=${PORT:=8004}
 SECRET_KEY="$(python3 -c "import secrets, string; print(''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(64)))")"
 export SECRET_KEY
 
+export RENDER_SERVER=${RENDER_SERVER:=http://127.0.0.1:8007}
+
 change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "env[PARSOID_DOMAIN]" "${PARSOID_DOMAIN}"
 
 change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "env[PARSOID_HOST]" "${PARSOID_HOST}"
@@ -36,6 +38,8 @@ sed -i -e "s/ALLOW_ACCOUNT_CREATION/${ALLOW_ACCOUNT_CREATION}/" /var/www/w/Local
 sed -i -e "s/ALLOW_ACCOUNT_EDITING/${ALLOW_ACCOUNT_EDITING}/" /var/www/w/LocalSettings.php
 sed -i -e "s/ALLOW_ANONYMOUS_READING/${ALLOW_ANONYMOUS_READING}/" /var/www/w/LocalSettings.php
 sed -i -e "s/ALLOW_ANONYMOUS_EDITING/${ALLOW_ANONYMOUS_EDITING}/" /var/www/w/LocalSettings.php
+sed -i -e "s#RENDER_SERVER#${RENDER_SERVER}#" /var/www/w/LocalSettings.php
+sed -i -e "s/CREDENTIALS/${CREDENTIALS}/" /var/www/w/LocalSettings.php
 
 >&2 echo "Waiting for MariaDB server"
 
