@@ -1,0 +1,24 @@
+version: "3.3"
+services:
+  mw_qserve:
+    image: cusdeb/mwlib:0.16.2
+    network_mode: "host"
+    environment:
+    - MW_QSERVE_PORT=${MW_QSERVE_PORT}
+    - TYPE=mw-qserve
+  postman:
+    image: cusdeb/mwlib:0.16.2
+    network_mode: "host"
+    environment:
+    - TYPE=postman
+  nserve:
+    image: cusdeb/mwlib:0.16.2
+    network_mode: "host"
+    environment:
+    - PORT=${PORT}
+    - TYPE=nserve
+  nslave:
+    image: cusdeb/mwlib:0.16.2
+    network_mode: "host"
+    environment:
+    - TYPE=nslave
