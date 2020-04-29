@@ -2,7 +2,6 @@ version: "2"
 services:
   transmission-web:
     image: cusdeb/transmission:2.94-amd64
-    command: /entrypoint.sh
     environment:
     - ALLOWED=192.168.*.*
     - AUTH=true

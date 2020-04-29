@@ -42,3 +42,5 @@ RUN apk --update add \
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
+ENTRYPOINT ["/entrypoint.sh"]
+
