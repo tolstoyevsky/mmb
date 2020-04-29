@@ -2,7 +2,7 @@ FROM cusdeb/stretch:amd64
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV TERM linux
-ENV TRANSMISSION_VERSION 2.92
+ENV TRANSMISSION_VERSION 2.94
 
 COPY ./patches /root/patches
 COPY ./rollout_fixes.sh /root/rollout_fixes.sh

@@ -12,11 +12,11 @@ Transmission is a lightweight BitTorrent client with Web interface.
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://github.com/transmission/transmission/wiki/Release-Notes#transmission-292-20160306">2.92</a></td>
+    <td><a href="https://github.com/transmission/transmission/releases/tag/2.94">2.94</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>06 Mar 2016</td>
+    <td>01 May 2018</td>
   </tr>
   <tr>
     <td>Port</td>
