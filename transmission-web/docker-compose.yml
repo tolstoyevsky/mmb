@@ -3,11 +3,11 @@ services:
   transmission-web:
     image: cusdeb/transmission:2.94-amd64
     environment:
-    - ALLOWED=192.168.*.*
-    - AUTH=true
-    - LOGIN=cusdeb
-    - PASSWORD=cusdeb
-    - PORT=8003
+    - ALLOWED=${ALLOWED}
+    - AUTH=${AUTH}
+    - LOGIN=${LOGIN}
+    - PASSWORD=${PASSWORD}
+    - PORT=${PORT}
     network_mode: "host"
     volumes:
     - /srv/common/downloads:/root/Downloads
