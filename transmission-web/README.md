@@ -28,7 +28,7 @@ Transmission is a lightweight BitTorrent client with Web interface.
   </tr>
   <tr>
     <td valign="top">Base image</td>
-    <td>cusdeb/stretch:amd64</td>
+    <td><a href="https://hub.docker.com/_/alpine">Official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.11.0-released.html">Alpine 3.11</a></td>
   </tr>
 </table>
 
