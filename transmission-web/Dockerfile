@@ -39,5 +39,6 @@ RUN apk --update add \
     pkgconfig \
  && rm -rf /var/cache/apk/*
 
-COPY ./run_transmission.sh /usr/bin/run_transmission.sh
+
+COPY docker-entrypoint.sh /entrypoint.sh
 
