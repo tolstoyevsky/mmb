@@ -34,6 +34,7 @@ Rocket.Chat is a self-hosted alternative to Slack.
 * [First run of Rocket.Chat](#first-run-of-rocketchat)
 * [Note to macOS users](#note-to-macos-users)
 * [How to upgrade MongoDB 3.2 to 3.6](#how-to-upgrade-mongodb-32-to-36)
+* [Troubleshooting](#troubleshooting)
 * [Configuration](#configuration)
 
 ## Installation
@@ -86,6 +87,24 @@ Initially, MMB Rocket.Chat was using MongoDB 3.2. To upgrade its data files to v
   ```
   db.adminCommand( { setFeatureCompatibilityVersion: "3.6" } )
   ```
+
+## Troubleshooting
+
+### control is locked
+
+The Rocket.Chat server complains "control is locked" after migration failure:
+
+```
+Not migrating, control is locked. Attempt 1/30. Trying again in 10 seconds.
+```
+
+To solve the problem, stick to the following instructions (inspired by [Rocket.Chat#5542](https://github.com/RocketChat/Rocket.Chat/issues/5542)):
+
+```
+$ docker exec -it rocketchat_mongo_1 mongo
+rs0:PRIMARY> use rocketchat
+rs0:PRIMARY> db.migrations.update({_id: 'control'}, {$set: {locked: false}})
+```
 
 ## Configuration
 
