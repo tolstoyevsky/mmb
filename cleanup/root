@@ -1,0 +1,1 @@
+CRON_SCHEDULE	/bin/cleaning-script.sh >> /var/log/cron.log
