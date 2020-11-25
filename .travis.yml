@@ -1,10 +1,5 @@
 language: bash
 
-addons:
-  apt:
-    sources:
-    - debian-sid
-
 install:
   - sudo apt-get install -y --allow-unauthenticated shellcheck
 
