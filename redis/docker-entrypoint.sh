@@ -12,7 +12,7 @@ mkdir -p "${REDIS_CONF_dir}"
 
 for key_val in $(env); do
     if [[ "${key_val}" = REDIS_CONF_* ]]; then
-        var=$(echo ${key_val} | cut -d"=" -f1)
+        var=$(echo "${key_val}" | cut -d"=" -f1)
 	val=${!var}
 	config_option=${var#REDIS_CONF_}
 	config_option=${config_option//_/-}
