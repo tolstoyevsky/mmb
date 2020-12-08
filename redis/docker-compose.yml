@@ -1,7 +1,7 @@
 version: "2"
 services:
   redis:
-    image: cusdeb/redis:5.0-amd64
+    image: cusdeb/redis:6.0-amd64
     network_mode: "host"
     environment:
     - REDIS_CONF_bind=127.0.0.1

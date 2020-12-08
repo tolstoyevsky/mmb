@@ -1,11 +1,11 @@
 FROM alpine:3.12
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
-ENV REDIS_VERSION 5.0-rc3
+ENV REDIS_VERSION 6.0.9
 
 ENV REDIS_DOWNLOAD_URL https://github.com/antirez/redis/archive/$REDIS_VERSION.tar.gz
 
-ENV REDIS_DOWNLOAD_SHA 4bb2eeef3695d66d8b64767825acfeeb157d64536233eac7eae71b236fd6554f
+ENV REDIS_DOWNLOAD_SHA 2819b6d9c56be1f25cd157b9cb6b7c2733edcb46f4f6bcb1b79cefe639a2853b
 
 RUN apk add --update \
     bash \
