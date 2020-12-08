@@ -4,13 +4,13 @@ services:
     image: cusdeb/redis:6.0-amd64
     network_mode: "host"
     environment:
-    - REDIS_CONF_bind=127.0.0.1
-    - REDIS_CONF_port=16379
+    - BIND=${BIND}
+    - LOGLEVEL=${LOGLEVEL}
+    - PORT=${PORT}
     # Enable AOF
     - REDIS_CONF_appendonly=yes
     # Disable RDB
     - REDIS_CONF_save=
-    - REDIS_CONF_loglevel=notice
     volumes:
     - /srv/redis-dump:/dump
 
