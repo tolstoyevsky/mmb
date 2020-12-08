@@ -1,12 +1,12 @@
 #!/bin/bash
 
-export REDIS_CONF_bind="${REDIS_CONF_bind:=127.0.0.1}"
+export REDIS_CONF_bind="${BIND:=127.0.0.1}"
 
 export REDIS_CONF_dir="${REDIS_CONF_dbfilename:=/dump}"
 
-export REDIS_CONF_port="${REDIS_CONF_port:=6379}"
+export REDIS_CONF_port="${PORT:=16379}"
 
-export REDIS_CONF_loglevel="${REDIS_CONF_loglevel:=notice}"
+export REDIS_CONF_loglevel="${LOGLEVEL:=notice}"
 
 mkdir -p "${REDIS_CONF_dir}"
 
