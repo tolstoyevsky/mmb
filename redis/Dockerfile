@@ -1,4 +1,4 @@
-FROM cusdeb/alpine3.7:amd64
+FROM alpine:3.12
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV REDIS_VERSION 5.0-rc3
