@@ -13,6 +13,7 @@ RUN apk add --update \
     coreutils \
     curl \
     linux-headers \
+    pkgconf \
  && curl -OL $REDIS_DOWNLOAD_URL \
  && echo $REDIS_DOWNLOAD_SHA $REDIS_VERSION.tar.gz | sha256sum -c \
  && tar xzvf $REDIS_VERSION.tar.gz \
