@@ -3,9 +3,9 @@ services:
   vsftpd:
     image: cusdeb/vsftpd:3.0.3-amd64
     environment:
-    - PORT=2121
-    - USERNAME=cusdeb
-    - PASSWORD=cusdeb
+    - PORT=${PORT}
+    - USERNAME=${USERNAME}
+    - PASSWORD=${PASSWORD}
     network_mode: "host"
     volumes:
     - /srv/ftp:/ftp
