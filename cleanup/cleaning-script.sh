@@ -5,7 +5,7 @@ echo y | docker container prune
 >&2 echo "Done!"
 
 >&2 echo "Start cleaning images..."
-for i in $(docker images --format="{{.ID}}"); do docker rmi "${i}"; done
+docker rmi $(docker images -f "dangling=true" -q)
 >&2 echo "Done!"
 
 >&2 echo "Start cleaning volumes..."
