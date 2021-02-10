@@ -14,8 +14,8 @@ RUN echo https://mirror.yandex.ru/mirrors/alpine/v3.13/main/       > /etc/apk/re
 
 COPY cleaning-script.sh /bin/cleaning-script.sh
 
-COPY root /var/spool/cron/crontabs/root
-
 COPY docker-entrypoint.sh /entrypoint.sh
+
+COPY config/root /var/spool/cron/crontabs/root
 
 ENTRYPOINT ["/entrypoint.sh"]
