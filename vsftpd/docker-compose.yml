@@ -8,5 +8,5 @@ services:
     - PASSWORD=cusdeb
     network_mode: "host"
     volumes:
-    - /srv/common/downloads:/ftp
+    - /srv/ftp:/ftp
 
