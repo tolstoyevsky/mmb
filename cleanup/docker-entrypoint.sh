@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CRON_SCHEDULE=${CRON_SCHEDULE:=0\ 12\ *\ *\ 6}
+CRON_SCHEDULE=${CRON_SCHEDULE:='0 12 * * 6'}
 
 sed -i -e "s/CRON_SCHEDULE/${CRON_SCHEDULE}/" /var/spool/cron/crontabs/root
 
