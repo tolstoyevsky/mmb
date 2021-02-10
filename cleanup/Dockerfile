@@ -12,10 +12,10 @@ RUN echo https://mirror.yandex.ru/mirrors/alpine/v3.13/main/       > /etc/apk/re
  && cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime \
  && echo "Europe/Moscow" > /etc/timezone
 
-COPY cleanup/cleaning-script.sh /bin/cleaning-script.sh
+COPY cleaning-script.sh /bin/cleaning-script.sh
 
-COPY cleanup/root /var/spool/cron/crontabs/root
+COPY root /var/spool/cron/crontabs/root
 
-COPY cleanup/docker-entrypoint.sh /entrypoint.sh
+COPY docker-entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
