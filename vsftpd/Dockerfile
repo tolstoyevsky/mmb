@@ -25,7 +25,8 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.7/community >> /etc/apk/repos
  && rm -rf /var/cache/apk/*
 
 COPY ./config/vsftpd.conf /etc/vsftpd/vsftpd.conf
-COPY ./run.sh /usr/bin/run.sh
 
-ENTRYPOINT ["/usr/bin/run.sh"]
+COPY ./docker-entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 
