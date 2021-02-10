@@ -3,6 +3,7 @@ MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.7/community >> /etc/apk/repositories \
  && apk --update add \
+    bash \
     build-base \
     curl \
     linux-pam-dev \
