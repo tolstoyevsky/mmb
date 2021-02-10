@@ -1,7 +1,7 @@
-FROM cusdeb/alpine3.7:amd64
+FROM alpine:3.13
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
-RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.7/community >> /etc/apk/repositories \
+RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repositories \
  && apk --update add \
     bash \
     build-base \
