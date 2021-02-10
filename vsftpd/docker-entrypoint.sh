@@ -2,6 +2,12 @@
 
 set -e
 
+PORT=${PORT:=2121}
+
+USERNAME=${USERNAME:=cusdeb}
+
+PASSWORD=${PASSWORD:=cusdeb}
+
 IP=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')
 
 sed -i -e "s/{IP}/${IP}/" /etc/vsftpd/vsftpd.conf

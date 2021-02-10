@@ -38,6 +38,6 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
 
 | Parameter | Description | Default |
 | --- | --- | --- |
-| PORT     | Port the FTP server listens on                        | 2121   |
-| USERNAME | User which will be created when the FTP server starts | cusdeb |
-| PASSWORD | User password                                         | cusdeb |
+| PORT     | Port the FTP server listens on                        | 2121      |
+| USERNAME | User which will be created when the FTP server starts | $USERNAME |
+| PASSWORD | User password                                         | cusdeb    |
