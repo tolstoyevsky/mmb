@@ -1,8 +1,8 @@
-FROM alpine:3.12
+FROM alpine:3.13
 MAINTAINER Valeriya Dmitrieva <dmit.valerya@yandex.ru>
 
-RUN echo https://mirror.yandex.ru/mirrors/alpine/v3.12/main/       > /etc/apk/repositories \
- && echo https://mirror.yandex.ru/mirrors/alpine/v3.12/community/ >> /etc/apk/repositories \
+RUN echo https://mirror.yandex.ru/mirrors/alpine/v3.13/main/       > /etc/apk/repositories \
+ && echo https://mirror.yandex.ru/mirrors/alpine/v3.13/community/ >> /etc/apk/repositories \
  && apk --update add \
     dcron \
     docker \

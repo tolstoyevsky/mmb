@@ -17,7 +17,7 @@ Cleanup is a simple service for cleaning server from old docker containers, imag
   </tr>
   <tr>
     <td valign="top">Base image</td>
-    <td><code>alpine:3.12</code></td>
+    <td><code>alpine:3.13</code></td>
   </tr>
 </table>
 
