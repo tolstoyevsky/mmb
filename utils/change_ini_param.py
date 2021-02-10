@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Utility intended for editing configuration files in INI format. """
+
 import configparser
 import sys
 from optparse import OptionParser
@@ -25,6 +27,8 @@ SECTION = 'mysqld'
 
 
 def main():
+    """The main entry point. """
+
     parser = OptionParser(usage='usage: %prog [options] option value')
     parser.add_option('--config-file', default=MY_CNF,
                       help='Path to configuration file', metavar='CONFIG_FILE')
