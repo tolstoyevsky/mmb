@@ -27,3 +27,5 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.7/community >> /etc/apk/repos
 COPY ./config/vsftpd.conf /etc/vsftpd/vsftpd.conf
 COPY ./run.sh /usr/bin/run.sh
 
+ENTRYPOINT ["/usr/bin/run.sh"]
+
