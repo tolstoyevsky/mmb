@@ -8,6 +8,7 @@ install:
   - pip install pylint
 
 script:
+  - bash -c 'shellcheck cleanup/cleaning-script.sh cleanup/docker-entrypoint.sh'
   - bash -c 'shellcheck mediawiki/*.sh'
   - bash -c 'shellcheck mwlib/docker-entrypoint.sh'
   - bash -c 'shellcheck parsoid/docker-entrypoint.sh'
