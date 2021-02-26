@@ -1,0 +1,40 @@
+name: Linter Runners
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Run shellcheck
+        run: |
+          bash -c 'shellcheck cleanup/*.sh'
+          bash -c 'shellcheck mediawiki/*.sh'
+          bash -c 'shellcheck mwlib/docker-entrypoint.sh'
+          bash -c 'shellcheck parsoid/docker-entrypoint.sh'
+          bash -c 'shellcheck redis/docker-entrypoint.sh'
+          bash -c 'shellcheck rocketchat/docker-entrypoint.sh'
+          bash -c 'shellcheck transmission-web/docker-entrypoint.sh'
+          bash -c 'shellcheck vsftpd/docker-entrypoint.sh'
+
+      - name: Install pylint
+        run: pip install pylint
+
+      - name: Run pylint
+        run: |
+          find -name "*.py" -not -path "./.git/*" | xargs pylint
+
