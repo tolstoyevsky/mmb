@@ -5,6 +5,7 @@ echo y | docker container prune
 >&2 echo "Done!"
 
 >&2 echo "Start cleaning images..."
+# shellcheck disable=SC2046
 docker rmi $(docker images -f "dangling=true" -q)
 >&2 echo "Done!"
 
