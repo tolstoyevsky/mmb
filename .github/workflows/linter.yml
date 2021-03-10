@@ -1,4 +1,4 @@
-name: Linter Runners
+name: Linter Runner
 
 on:
   push:
