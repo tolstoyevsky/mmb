@@ -12,11 +12,11 @@ Redis is an open source high-performance in-memory key-value data store.
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://raw.githubusercontent.com/antirez/redis/5.0/00-RELEASENOTES">5.0 RC3</a></td>
+    <td><a href="https://raw.githubusercontent.com/antirez/redis/6.0/00-RELEASENOTES">6.0.9</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>14 Jun 2018</td>
+    <td>26 Oct 2020</td>
   </tr>
   <tr>
     <td>Port</td>
@@ -28,7 +28,7 @@ Redis is an open source high-performance in-memory key-value data store.
   </tr> 
   <tr>
     <td valign="top">Base image</td>
-    <td><code>cusdeb/alpine3.7:amd64</code></td>
+    <td><a href="https://hub.docker.com/_/alpine">Official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.12.0-released.html">Alpine 3.12</a></td>
   </tr>
 </table>
 
