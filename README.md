@@ -1,4 +1,4 @@
-# MMB [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Set%20of%20Dockerfiles%20and%20assets%20related%20to%20them%20for%20building%20Docker%20images%20with%20different%20services&url=https://github.com/tolstoyevsky/mmb&via=CusDeb&hashtags=RaspberryPi,Docker,Alpine,Debian)
+# MMB [![Linter](https://github.com/tolstoyevsky/mmb/actions/workflows/linter.yml/badge.svg)](https://github.com/tolstoyevsky/mmb/actions/workflows/linter.yml)
 
 <p align="center">
     <img src="/logo/382x400.png" alt="MMB">
