@@ -25,6 +25,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
     php7-pecl-apcu \
     php7-session \
     php7-xml \
+    php7-xmlreader \
     python3 \
     supervisor \
  && cd /usr/bin \
