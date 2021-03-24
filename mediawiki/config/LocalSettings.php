@@ -175,9 +175,7 @@ $wgVirtualRestConfig['modules']['parsoid']['forwardCookies'] = true;
 
 $wgMFDefaultSkinClass = 'SkinVector';
 
-// Extensions
 // Cannot use wfLoadExtension here since extension.json does not exist.
-require "$IP/extensions/Translate/Translate.php";
 require "$IP/extensions/Collection/Collection.php";
 
 $wgCollectionFormats = array(
@@ -191,4 +189,6 @@ $wgCollectionMWServeCredentials = "CREDENTIALS";
 wfLoadExtension('Cite');
 wfLoadExtension('MobileFrontend');
 wfLoadExtension('SyntaxHighlight_GeSHi');
+wfLoadExtension('Translate');
 wfLoadExtension('UniversalLanguageSelector');
+

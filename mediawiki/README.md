@@ -12,11 +12,11 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://mediawiki.org/wiki/MediaWiki_1.31">1.31</a></td>
+    <td><a href="https://mediawiki.org/wiki/MediaWiki_1.35">1.35</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>13 Jun 2018</td>
+    <td>20 Sep 2020</td>
   </tr>
   <tr>
     <td>Port</td>

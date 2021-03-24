@@ -1,7 +1,7 @@
 FROM alpine:3.13
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
-ENV MEDIAWIKI_VERSION REL1_31
+ENV MEDIAWIKI_VERSION REL1_35
 
 RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repositories \
  && apk --update add \
