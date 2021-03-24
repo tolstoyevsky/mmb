@@ -1,7 +1,7 @@
 version: "2"
 services:
   mediawiki:
-    image: cusdeb/mediawiki:1.31-amd64
+    image: cusdeb/mediawiki:1.35-amd64
     environment:
     - PORT=8004
     - WG_SITENAME=My KB
