@@ -31,13 +31,13 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
   </tr>
   <tr>
     <td valign="top">Base image</td>
-    <td><a href="https://hub.docker.com/_/alpine">Official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.11.0-released.html">Alpine 3.11</a></td>
+    <td><a href="https://hub.docker.com/_/alpine">Official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.13.0-released.html">Alpine 3.13</a></td>
   </tr>
 </table>
 
 ## Features
 
-* Nginx [1.16.1](http://nginx.org/en/CHANGES-1.16) and PHP [7.3.16](http://php.net/ChangeLog-7.php#7.3.16).
+* Nginx [1.18.0](http://nginx.org/en/CHANGES-1.18) and PHP [7.4.15](http://php.net/ChangeLog-7.php#7.4.15).
 * The [Cite](https://www.mediawiki.org/wiki/Extension:Cite) extension which allows creating references as footnotes on a page, using `<ref>` and `<references />` tags.
 * The [MobileFrontend](https://www.mediawiki.org/wiki/Extension:MobileFrontend) extension which provides a mobile view.
 * The [SyntaxHighlight](https://mediawiki.org/wiki/Extension:SyntaxHighlight) extension which provides rich formatting of source code using the `<syntaxhighlight>` tag.

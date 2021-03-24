@@ -1,9 +1,9 @@
-FROM alpine:3.11
+FROM alpine:3.13
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV MEDIAWIKI_VERSION REL1_31
 
-RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.9/community >> /etc/apk/repositories \
+RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repositories \
  && apk --update add \
     bash \
     curl \
