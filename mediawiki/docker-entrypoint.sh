@@ -1,11 +1,41 @@
 #!/bin/bash
 
-export PORT=${PORT:=8004}
+PORT=${PORT:=8004}
 
 SECRET_KEY="$(python3 -c "import secrets, string; print(''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(64)))")"
-export SECRET_KEY
 
-export RENDER_SERVER=${RENDER_SERVER:=http://127.0.0.1:8007}
+WG_SITENAME=${WG_SITENAME:="My KB"}
+
+WG_META_NAMESPACE=${WG_META_NAMESPACE:=My_KB}
+
+WG_PROTOCOL=${WG_PROTOCOL:=http}
+
+WG_SERVER=${WG_SERVER:=127.0.0.1:8004}
+
+WG_EMERGENCY_CONTACT=${WG_EMERGENCY_CONTACT:=username@domain.com}
+
+WG_PASSWORD_SENDER=${WG_PASSWORD_SENDER:=username@domain.com}
+
+WG_DB_SERVER=${WG_DB_SERVER:=127.0.0.1:33061}
+
+WG_DB_NAME=${WG_DB_NAME:=knowledge_base}
+
+WG_DB_USER=${WG_DB_USER:=root}
+
+WG_DB_PASSWORD=${WG_DB_PASSWORD:=cusdeb}
+
+ALLOW_ACCOUNT_CREATION=${ALLOW_ACCOUNT_CREATION:=true}
+
+ALLOW_ACCOUNT_EDITING=${ALLOW_ACCOUNT_EDITING:=true}
+
+ALLOW_ANONYMOUS_READING=${ALLOW_ANONYMOUS_READING:=false}
+
+ALLOW_ANONYMOUS_EDITING=${ALLOW_ANONYMOUS_EDITING:=true}
+
+CREDENTIALS=${CREDENTIALS:=""}
+
+RENDER_SERVER=${RENDER_SERVER:=http://127.0.0.1:8007}
+
 
 change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "listen" "/var/run/php/php7.0-fpm.sock"
 
