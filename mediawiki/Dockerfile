@@ -67,8 +67,6 @@ COPY ./config/LocalSettings.php /var/www/w
 
 COPY ./config/default /etc/nginx/conf.d/default.conf
 
-COPY ./config/fastcgi-php.conf /etc/nginx/fastcgi-php.conf
-
 COPY ./config/supervisord.conf /etc/supervisor/supervisord.conf
 
 COPY ./rollout_fixes.sh /usr/bin/rollout_fixes.sh
