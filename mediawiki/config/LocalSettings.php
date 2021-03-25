@@ -136,30 +136,6 @@ wfLoadSkin( 'vector' );
 # End of automatically generated settings.
 # Add more configuration options below.
 
-if (getenv('PARSOID_HOST') && getenv('PARSOID_DOMAIN')) {
-    wfLoadExtension( 'VisualEditor' );
-
-    // Enable by default for everybody
-    $wgDefaultUserOptions['visualeditor-enable'] = 1;
-
-    // Optional: Set VisualEditor as the default for anonymous users
-    // otherwise they will have to switch to VE
-    // $wgDefaultUserOptions['visualeditor-editor'] = "visualeditor";
-
-    // Don't allow users to disable it
-    $wgHiddenPrefs[] = 'visualeditor-enable';
-
-    // OPTIONAL: Enable VisualEditor's experimental code features
-    #$wgDefaultUserOptions['visualeditor-enable-experimental'] = 1;
-
-    $wgVirtualRestConfig['modules']['parsoid'] = array(
-        // URL to the Parsoid instance
-        'url' => getenv('PARSOID_HOST'),
-        'domain' => getenv('PARSOID_DOMAIN'),
-        #'prefix' => 'localhost'
-    );
-}
-
 // This feature requires a non-locking session store. The default session store will not work and
 // will cause deadlocks (connection timeouts from Parsoid) when trying to use this feature.
 $wgSessionsInObjectCache = true;
@@ -188,7 +164,9 @@ $wgCollectionMWServeCredentials = "CREDENTIALS";
 
 wfLoadExtension('Cite');
 wfLoadExtension('MobileFrontend');
+wfLoadExtension('Parsoid', 'vendor/wikimedia/parsoid/extension.json');
 wfLoadExtension('SyntaxHighlight_GeSHi');
 wfLoadExtension('Translate');
 wfLoadExtension('UniversalLanguageSelector');
+wfLoadExtension('VisualEditor');
 
