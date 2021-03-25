@@ -46,7 +46,7 @@ port="$(echo "${WG_DB_SERVER}" | cut -d':' -f2)"
 wait-for-it.sh -h "${host}" -p "${port}" -t 90 -- >&2 echo "MariaDB server is ready"
 
 output="$(mysqlshow --user="${WG_DB_USER}" --host="${host}" --port="${port}" --password="${WG_DB_PASSWORD}" "${WG_DB_NAME}" | grep -v Wildcard | grep -o "${WG_DB_NAME}")"
-if [ "${output}" == "${WG_DB_NAME}" ]; then
+if [[ "${output}" == "${WG_DB_NAME}" ]]; then
     >&2 echo "Database ${WG_DB_NAME} exists"
 else
     >&2 echo "Creating the ${WG_DB_NAME} database"
