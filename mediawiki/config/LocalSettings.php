@@ -26,8 +26,9 @@ $wgMetaNamespace = "WG_META_NAMESPACE";
 ## For more information on customizing the URLs
 ## (like /w/index.php/Page_title to /wiki/Page_title) please see:
 ## https://www.mediawiki.org/wiki/Manual:Short_URL
-$wgScriptPath = "";
-$wgArticlePath = "$wgScriptPath/$1";
+$wgScriptPath = "/w";
+$wgArticlePath = "/$1";
+$wgUsePathInfo = true;
 
 ## The protocol and server name to use in fully-qualified URLs
 $wgServer = "WG_PROTOCOL://WG_SERVER";
