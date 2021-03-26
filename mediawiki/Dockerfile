@@ -73,5 +73,7 @@ COPY ./docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
 
 RUN /usr/bin/rollout_fixes.sh
 
+WORKDIR /var/www/w
+
 CMD ["docker-entrypoint.sh"]
 
