@@ -40,19 +40,17 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
  # The default skin must be installed explicitly
  && cd /var/www/w/skins \
  && git clone -b $MEDIAWIKI_VERSION --depth 1 https://github.com/wikimedia/mediawiki-skins-Vector.git vector \
+ # Install the extensions
  && cd /var/www/w/extensions \
- # Install VisualEditor from the original git repo because the GitHub mirror doesn't work.
- && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/VisualEditor.git VisualEditor \
+ && git clone -b $MEDIAWIKI_VERSION --depth 1 https://github.com/wikimedia/mediawiki-extensions-VisualEditor.git VisualEditor \
+ && git clone -b $MEDIAWIKI_VERSION --depth 1 https://github.com/wikimedia/mediawiki-extensions-Cite.git Cite \
+ && git clone -b $MEDIAWIKI_VERSION --depth 1 https://github.com/wikimedia/mediawiki-extensions-Collection.git Collection \
+ && git clone -b $MEDIAWIKI_VERSION --depth 1 https://github.com/wikimedia/mediawiki-extensions-MobileFrontend.git MobileFrontend \
+ && git clone -b $MEDIAWIKI_VERSION --depth 1 https://github.com/wikimedia/mediawiki-extensions-SyntaxHighlight_GeSHi.git SyntaxHighlight_GeSHi \
+ && git clone -b $MEDIAWIKI_VERSION --depth 1 https://github.com/wikimedia/mediawiki-extensions-Translate.git Translate \
+ && git clone -b $MEDIAWIKI_VERSION --depth 1 https://github.com/wikimedia/mediawiki-extensions-UniversalLanguageSelector.git UniversalLanguageSelector \
  && cd VisualEditor \
  && git submodule update --init \
- # Do the same thing for Cite and SyntaxHighlight_GeSHi
- && cd /var/www/w/extensions \
- && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Cite.git Cite \ 
- && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Collection.git Collection \
- && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/MobileFrontend.git MobileFrontend \
- && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/SyntaxHighlight_GeSHi.git SyntaxHighlight_GeSHi \
- && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Translate.git Translate \
- && git clone -b $MEDIAWIKI_VERSION --depth 1 https://gerrit.wikimedia.org/r/p/mediawiki/extensions/UniversalLanguageSelector.git UniversalLanguageSelector \
  && cd /var/www && chown -R nginx:nginx w \
  && curl -O https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
  && chmod +x wait-for-it.sh \
