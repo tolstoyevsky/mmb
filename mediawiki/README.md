@@ -67,6 +67,13 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
 | ALLOW_ANONYMOUS_READING | Allows users to read wiki anonymously (`true` and `false`). If the parameter is `false`, wiki is **private** | `false` |
 | ALLOW_ANONYMOUS_EDITING | Allows users to edit wiki anonymously (`true` and `false`) | `true` |
 
+## How to create an administrator
+
+Administrators are wiki users who are members of the "sysop" user group (see details [here](https://mediawiki.org/wiki/Manual:Administrators)). An administrator can be created, using the [createAndPromote.php](https://mediawiki.org/wiki/Manual:CreateAndPromote.php) script:
+
+1. Run `docker exec` on a running MediaWiki container.
+2. Run `php7 maintenance/createAndPromote.php --sysop <username> <password>` inside the container.
+
 ## How to change logo
 
 Provide a square logo named `kblogo.png` which is 135x135px or 150x150px.
