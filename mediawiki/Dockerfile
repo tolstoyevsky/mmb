@@ -71,6 +71,8 @@ COPY ./rollout_fixes.sh /usr/bin/rollout_fixes.sh
 
 COPY ./docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
 
+COPY ./logo.svg ./kblogo.pn[g] /var/www/w/resources/assets/
+
 RUN /usr/bin/rollout_fixes.sh
 
 WORKDIR /var/www/w
