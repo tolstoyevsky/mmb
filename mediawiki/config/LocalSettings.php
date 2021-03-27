@@ -129,6 +129,10 @@ $wgGroupPermissions['user']['translate'] = true;
 $wgGroupPermissions['user']['translate-messagereview'] = true;
 $wgGroupPermissions['user']['pagetranslation'] = true;
 
+# Allow administrators to change a specific page's language setting, using the "Special:PageLanguage" page.
+$wgPageLanguageUseDB = true;
+$wgGroupPermissions['sysop']['pagelang'] = true;
+
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'vector', 'monobook':
 $wgDefaultSkin = "vector";
