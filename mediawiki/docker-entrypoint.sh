@@ -83,6 +83,7 @@ else
     mysql --user="${WG_DB_USER}" --host="${host}" --port="${port}" --password="${WG_DB_PASSWORD}" -e "CREATE DATABASE ${WG_DB_NAME};"
 
     mysql --user="${WG_DB_USER}" --host="${host}" --port="${port}" --password="${WG_DB_PASSWORD}" "${WG_DB_NAME}" < /var/www/w/maintenance/tables.sql
+    mysql --user="${WG_DB_USER}" --host="${host}" --port="${port}" --password="${WG_DB_PASSWORD}" "${WG_DB_NAME}" < /var/www/w/maintenance/tables-generated.sql
 fi
 
 >&2 echo "Executing maintenance/update.php"
