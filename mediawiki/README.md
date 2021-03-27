@@ -69,4 +69,4 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
 
 ## How to change logo
 
-Provide a square logo named `kblogo.png` which is 135x135px or 150x150px. Note that running the container without providing any logo causes creating the `kblogo.png` directory. Don't be confused. Simply remove the directory before copying a real logo to `mediawiki`.
+Provide a square logo named `kblogo.png` which is 135x135px or 150x150px.

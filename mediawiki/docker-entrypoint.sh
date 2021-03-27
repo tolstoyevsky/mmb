@@ -95,9 +95,9 @@ sed -i -e "s/PORT/${PORT}/" /etc/nginx/conf.d/default.conf
 chown -R nginx:nginx /var/www/w/deleted
 chown -R nginx:nginx /var/www/w/images
 
-if [[ -f /tmp/kblogo.png ]]; then
+if [[ -f /var/www/w/resources/assets/kblogo.png ]]; then
     >&2 echo "Using provided kblogo.png"
-    cp /tmp/kblogo.png /var/www/w/resources/assets/wiki.png
+    mv /var/www/w/resources/assets/kblogo.png /var/www/w/resources/assets/wiki.png
 else
     >&2 echo "Using default logo since kblogo.png has not been provided"
 fi
