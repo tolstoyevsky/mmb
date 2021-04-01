@@ -1,4 +1,4 @@
-FROM cusdeb/alpine3.7:amd64
+FROM alpine:3.13
 
 ENV LIBISCSI_VERSION 1.18.0
 ENV NUMACTL_VERSION 2.0.12
@@ -9,7 +9,8 @@ ENV TERM linux
 
 COPY ./qemu-patches /root/qemu-patches
 
-RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.7/community >> /etc/apk/repositories \
+RUN echo https://mirror.yandex.ru/mirrors/alpine/v3.13/main/       > /etc/apk/repositories \
+ && echo https://mirror.yandex.ru/mirrors/alpine/v3.13/community/ >> /etc/apk/repositories \
  && apk --update add \
         # Build essentials
         automake \

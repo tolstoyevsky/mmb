@@ -26,7 +26,7 @@ The Dockerfile and assets related to it are intended primarily, but **not** excl
   </tr>
   <tr>
     <td valign="top">Base image</td>
-    <td><code>cusdeb/alpine3.7:amd64</code></td>
+    <td><a href="https://hub.docker.com/_/alpine">Official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.13.0-released.html">Alpine 3.13</a></td>
   </tr>
 </table>
 
