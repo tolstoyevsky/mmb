@@ -39,7 +39,6 @@ RUN echo https://mirror.yandex.ru/mirrors/alpine/v3.13/main/       > /etc/apk/re
         libusb-dev \
         ovmf \
         pixman-dev \
-        python \
         usbredir-dev \
         xen-dev \
         xfsprogs-dev \
