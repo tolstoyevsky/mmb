@@ -1,7 +1,6 @@
 FROM alpine:3.13
 
 ENV LIBISCSI_VERSION 1.18.0
-ENV NUMACTL_VERSION 2.0.12
 ENV QEMU_VERSION 4.1.0
 ENV QUILT_VERSION 0.65
 
@@ -34,6 +33,7 @@ RUN echo https://mirror.yandex.ru/mirrors/alpine/v3.13/main/       > /etc/apk/re
         libnfs-dev \
         libpng-dev \
         libseccomp-dev \
+        numactl-dev \
         # https://wiki.qemu.org/ChangeLog/4.1#Build_Dependencies
         libssh-dev \
         libusb-dev \
@@ -61,15 +61,6 @@ RUN echo https://mirror.yandex.ru/mirrors/alpine/v3.13/main/       > /etc/apk/re
  && cd quilt-$QUILT_VERSION \
  && ./configure && make -j "$(nproc)" && make install \
  && cd && rm -r quilt-$QUILT_VERSION \
- # Build numactl since Alpine 3.7 doesn't have it anymore.
- && curl -OL https://github.com/numactl/numactl/archive/v$NUMACTL_VERSION.tar.gz \
- && tar xzvf v$NUMACTL_VERSION.tar.gz \
- && rm v$NUMACTL_VERSION.tar.gz \
- && cd numactl-$NUMACTL_VERSION \
- && libtoolize \
- && ./autogen.sh \
- && ./configure && make -j "$(nproc)" && make install \
- && cd && rm -r numactl-$NUMACTL_VERSION \
  # Build libiscsi
  && curl -OL https://github.com/sahlberg/libiscsi/archive/$LIBISCSI_VERSION.tar.gz \
  && tar xzvf $LIBISCSI_VERSION.tar.gz \
