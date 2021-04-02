@@ -114,6 +114,8 @@ set +x
 # Internal params
 #
 
+IMAGE_RESIZE_VALUE=""
+
 LOOP_DEV=""
 
 default_cmdline="rw earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2"
@@ -148,6 +150,10 @@ if [ ! -z ${IMAGE} ]; then
 
     info "the SD value was changed to ${IMAGE}."
     SD="${IMAGE}"
+
+    image_size=$(wc -c < "/tmp/${IMAGE}")
+    IMAGE_RESIZE_VALUE=$(( "${image_size}" / 1024 ** 3 + 1 ))
+    IMAGE_RESIZE_VALUE="${IMAGE_RESIZE_VALUE}G"
 
     info "using the following command line \"${default_cmdline}\"."
     cmdline="${default_cmdline}"
@@ -282,6 +288,8 @@ fi
 qemu_args+=( -serial stdio )
 
 info "passing \"${qemu_args[@]}\" to ${qemu_bin}"
+
+qemu-img resize "${SD}" "${IMAGE_RESIZE_VALUE}"
 
 # Ugly solution, otherwise bash puts redundant quotes polluting command line.
 eval ${qemu_bin} "${qemu_args[@]}" $*
