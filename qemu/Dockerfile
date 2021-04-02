@@ -20,6 +20,7 @@ RUN echo https://mirror.yandex.ru/mirrors/alpine/v3.13/main/       > /etc/apk/re
         gcc \
         libtool \
         make \
+        ninja \
         patch \
         # Deps
         bzip2-dev \
