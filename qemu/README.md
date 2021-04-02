@@ -14,11 +14,11 @@ The Dockerfile and assets related to it are intended primarily, but **not** excl
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://lists.nongnu.org/archive/html/qemu-devel/2019-08/msg02895.html">4.1.0</a></td>
+    <td><a href="https://wiki.qemu.org/ChangeLog/6.0">6.0.0-rc1</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>15 Aug 2019</td>
+    <td>30 Mar 2021</td>
   </tr>
   <tr>
     <td>Data volume</td>
