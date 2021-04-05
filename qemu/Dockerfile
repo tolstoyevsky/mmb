@@ -146,7 +146,6 @@ RUN echo https://mirror.yandex.ru/mirrors/alpine/v3.13/main/       > /etc/apk/re
     automake \
     autoconf \
     bison \
-    curl \
     diffutils \
     flex \
     gcc \
