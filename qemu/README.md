@@ -22,7 +22,7 @@ The Dockerfile and assets related to it are intended primarily, but **not** excl
   </tr>
   <tr>
     <td>Data volume</td>
-    <td><code>current directory:/tmp</code></td>
+    <td><code>/dev:/dev</code></td>
   </tr>
   <tr>
     <td valign="top">Base image</td>

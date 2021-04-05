@@ -98,7 +98,7 @@ ARCH=${ARCH:=""}
 
 DTB=${DTB:=""}
 
-IMAGE=${IMAGE:=""}
+IMAGE_URL=${IMAGE_URL:=""}
 
 KERNEL=${KERNEL:=""}
 
@@ -113,6 +113,8 @@ set +x
 #
 # Internal params
 #
+
+IMAGE="emulating-image.img"
 
 IMAGE_RESIZE_VALUE=""
 
@@ -135,6 +137,8 @@ reset=$(tput sgr0)
 #
 # Let's get started
 #
+
+curl -L -f -o "/tmp/${IMAGE}" "${IMAGE_URL}"
 
 if [ ! -z ${IMAGE} ]; then
     info "trying to emulate Raspberry Pi 3 since IMAGE was specified."

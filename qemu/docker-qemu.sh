@@ -55,5 +55,5 @@ docker run ${ARGS[@]} \
     --net=host \
     --privileged \
     --rm \
-    -it -v $(pwd):/tmp -v /dev:/dev \
+    -it -v /dev:/dev \
     "cusdeb/qemu:${version}-amd64" "${additional_args}"
