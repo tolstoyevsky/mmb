@@ -108,6 +108,8 @@ MEMORY=${MEMORY:=""}
 
 SD=${SD=""}
 
+VNC_DISPLAY=${VNC_DISPLAY:=0}
+
 set +x
 
 #
@@ -158,6 +160,8 @@ if [ ! -z ${IMAGE} ]; then
     image_size=$(wc -c < "/tmp/${IMAGE}")
     IMAGE_RESIZE_VALUE=$(( "${image_size}" / 1024 ** 3 + 1 ))
     IMAGE_RESIZE_VALUE="${IMAGE_RESIZE_VALUE}G"
+
+    VNC=":${VNC_DISPLAY}"
 
     info "using the following command line \"${default_cmdline}\"."
     cmdline="${default_cmdline}"
@@ -275,6 +279,7 @@ params=(
     "MACHINE_TYPE -M"
     "MEMORY -m"
     "SD -sd"
+    "VNC -vnc"
 )
 
 for i in "${params[@]}"; do
