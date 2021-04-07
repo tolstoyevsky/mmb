@@ -154,6 +154,8 @@ if [ ! -z ${IMAGE} ]; then
     info "the ARCH value was changed to aarch64."
     ARCH="aarch64"
 
+    DEVICE="usb-kbd"
+
     info "the MACHINE_TYPE value was changed to raspi3."
     MACHINE_TYPE="raspi3"
 
@@ -288,6 +290,7 @@ alpha|cris|lm32|m68k|microblaze|microblazeel|moxie|s390x|sh4|sh4eb|tricore|unico
 esac
 
 params=(
+    "DEVICE -device"
     "DTB -dtb"
     "KERNEL -kernel"
     "MACHINE_TYPE -M"
