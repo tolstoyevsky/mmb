@@ -7,6 +7,9 @@ baseimages/alpine_chroot
 hubot-rocketchat/packages/*
 hubot-rocketchat/redis-dump
 mediawiki/kblogo.png
+mediawiki/_db
+mediawiki/_deleted
+mediawiki/_images
 rocketchat/mongo
 *.img
 *.dtb
