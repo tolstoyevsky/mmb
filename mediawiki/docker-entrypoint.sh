@@ -2,6 +2,7 @@
 
 PORT=${PORT:=8004}
 
+# shellcheck disable=SC2034
 SECRET_KEY="$(python3 -c "import secrets, string; print(''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(64)))")"
 
 WG_SITENAME=${WG_SITENAME:="My KB"}
@@ -36,6 +37,18 @@ CREDENTIALS=${CREDENTIALS:=""}
 
 RENDER_SERVER=${RENDER_SERVER:=http://127.0.0.1:8007}
 
+# Does variable substitution for LocalSettings.php.
+# Globals:
+#     None
+# Arguments:
+#     Variable name
+# Returns:
+#     None
+substitute() {
+    local var_name=$1
+
+    sed -i -e "s#${var_name}#${!var_name}#" /var/www/w/LocalSettings.php
+}
 
 change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "listen" "/var/run/php/php7.0-fpm.sock"
 
@@ -49,23 +62,23 @@ change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "gr
 
 >&2 echo "Preparing LocalSettings.php"
 
-sed -i -e "s/SECRET_KEY/${SECRET_KEY}/" /var/www/w/LocalSettings.php
-sed -i -e "s/WG_SITENAME/${WG_SITENAME}/" /var/www/w/LocalSettings.php
-sed -i -e "s/WG_META_NAMESPACE/${WG_META_NAMESPACE}/" /var/www/w/LocalSettings.php
-sed -i -e "s/WG_PROTOCOL/${WG_PROTOCOL}/" /var/www/w/LocalSettings.php
-sed -i -e "s/WG_SERVER/${WG_SERVER}/" /var/www/w/LocalSettings.php
-sed -i -e "s/WG_EMERGENCY_CONTACT/${WG_EMERGENCY_CONTACT}/" /var/www/w/LocalSettings.php
-sed -i -e "s/WG_PASSWORD_SENDER/${WG_PASSWORD_SENDER}/" /var/www/w/LocalSettings.php
-sed -i -e "s/WG_DB_SERVER/${WG_DB_SERVER}/" /var/www/w/LocalSettings.php
-sed -i -e "s/WG_DB_NAME/${WG_DB_NAME}/" /var/www/w/LocalSettings.php
-sed -i -e "s/WG_DB_USER/${WG_DB_USER}/" /var/www/w/LocalSettings.php
-sed -i -e "s/WG_DB_PASSWORD/${WG_DB_PASSWORD}/" /var/www/w/LocalSettings.php
-sed -i -e "s/ALLOW_ACCOUNT_CREATION/${ALLOW_ACCOUNT_CREATION}/" /var/www/w/LocalSettings.php
-sed -i -e "s/ALLOW_ACCOUNT_EDITING/${ALLOW_ACCOUNT_EDITING}/" /var/www/w/LocalSettings.php
-sed -i -e "s/ALLOW_ANONYMOUS_READING/${ALLOW_ANONYMOUS_READING}/" /var/www/w/LocalSettings.php
-sed -i -e "s/ALLOW_ANONYMOUS_EDITING/${ALLOW_ANONYMOUS_EDITING}/" /var/www/w/LocalSettings.php
-sed -i -e "s#RENDER_SERVER#${RENDER_SERVER}#" /var/www/w/LocalSettings.php
-sed -i -e "s/CREDENTIALS/${CREDENTIALS}/" /var/www/w/LocalSettings.php
+substitute SECRET_KEY
+substitute WG_SITENAME
+substitute WG_META_NAMESPACE
+substitute WG_PROTOCOL
+substitute WG_SERVER
+substitute WG_EMERGENCY_CONTACT
+substitute WG_PASSWORD_SENDER
+substitute WG_DB_SERVER
+substitute WG_DB_NAME
+substitute WG_DB_USER
+substitute WG_DB_PASSWORD
+substitute ALLOW_ACCOUNT_CREATION
+substitute ALLOW_ACCOUNT_EDITING
+substitute ALLOW_ANONYMOUS_READING
+substitute ALLOW_ANONYMOUS_EDITING
+substitute RENDER_SERVER
+substitute CREDENTIALS
 
 >&2 echo "Waiting for MariaDB server"
 
