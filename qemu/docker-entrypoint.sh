@@ -110,6 +110,8 @@ MONITOR_PORT="${MONITOR_PORT:=55555}"
 
 SD=${SD=""}
 
+SERIAL_PORT=${SERIAL_PORT:=4321}
+
 VNC_DISPLAY=${VNC_DISPLAY:=0}
 
 ENABLE_VNC_PASSWORD=${ENABLE_VNC_PASSWORD:=false}
@@ -166,6 +168,8 @@ if [ ! -z ${IMAGE} ]; then
     image_size=$(wc -c < "/tmp/${IMAGE}")
     IMAGE_RESIZE_VALUE=$(( "${image_size}" / 1024 ** 3 + 1 ))
     IMAGE_RESIZE_VALUE="${IMAGE_RESIZE_VALUE}G"
+
+    SERIAL="tcp:localhost:${SERIAL_PORT},server,nowait"
 
     VNC=":${VNC_DISPLAY}"
 
@@ -290,6 +294,7 @@ params=(
     "MEMORY -m"
     "MONITOR -monitor"
     "SD -sd"
+    "SERIAL -serial"
     "VNC -vnc"
 )
 
@@ -304,8 +309,6 @@ done
 if [ ! -z "${cmdline}" ]; then
     qemu_args+=( -append "\"${cmdline}\"" )
 fi
-
-qemu_args+=( -serial stdio )
 
 info "passing \"${qemu_args[@]}\" to ${qemu_bin}"
 
