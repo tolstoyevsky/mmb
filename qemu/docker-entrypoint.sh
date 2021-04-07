@@ -106,6 +106,8 @@ MACHINE_TYPE=${MACHINE_TYPE:=""}
 
 MEMORY=${MEMORY:=""}
 
+MONITOR_PORT="${MONITOR_PORT:=55555}"
+
 SD=${SD=""}
 
 VNC_DISPLAY=${VNC_DISPLAY:=0}
@@ -155,6 +157,8 @@ if [ ! -z ${IMAGE} ]; then
 
     info "the MEMORY value was changed to 1G."
     MEMORY="1G"
+
+    MONITOR="tcp:127.0.0.1:${MONITOR_PORT},server,nowait"
 
     info "the SD value was changed to ${IMAGE}."
     SD="${IMAGE}"
@@ -284,6 +288,7 @@ params=(
     "KERNEL -kernel"
     "MACHINE_TYPE -M"
     "MEMORY -m"
+    "MONITOR -monitor"
     "SD -sd"
     "VNC -vnc"
 )
