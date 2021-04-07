@@ -23,8 +23,8 @@ services:
     - RENDER_SERVER_HOST=${RENDER_SERVER_HOST}
     network_mode: "host"
     volumes:
-    - /srv/mediawiki/deleted:/var/www/w/deleted
-    - /srv/mediawiki/images:/var/www/w/images
+    - ./_deleted:/var/www/w/deleted
+    - ./_images:/var/www/w/images
   mariadb:
     image: cusdeb/mariadb:10.1-amd64
     network_mode: "host"
@@ -35,7 +35,7 @@ services:
     - MYSQL_USER=
     - MYSQL_PASSWORD=
     volumes:
-    - /srv/mysql:/var/lib/mysql
+    - ./_db:/var/lib/mysql
   mw_qserve:
     image: cusdeb/mwlib:0.16.2
     network_mode: "host"
