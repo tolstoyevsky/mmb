@@ -148,6 +148,12 @@ reset=$(tput sgr0)
 
 curl -L -f -o "/tmp/${IMAGE}" "${IMAGE_URL}"
 
+if gunzip -t "/tmp/${IMAGE}"; then
+    mv "/tmp/${IMAGE}" "/tmp/${IMAGE}.gz"
+
+    gunzip "/tmp/${IMAGE}.gz"
+fi
+
 if [ ! -z ${IMAGE} ]; then
     info "trying to emulate Raspberry Pi 3 since IMAGE was specified."
 
