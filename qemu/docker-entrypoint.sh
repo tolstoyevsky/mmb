@@ -110,6 +110,8 @@ SD=${SD=""}
 
 VNC_DISPLAY=${VNC_DISPLAY:=0}
 
+ENABLE_VNC_PASSWORD=${ENABLE_VNC_PASSWORD:=false}
+
 set +x
 
 #
@@ -162,6 +164,10 @@ if [ ! -z ${IMAGE} ]; then
     IMAGE_RESIZE_VALUE="${IMAGE_RESIZE_VALUE}G"
 
     VNC=":${VNC_DISPLAY}"
+
+    if ${ENABLE_VNC_PASSWORD}; then
+        VNC="${VNC},password=on"
+    fi
 
     info "using the following command line \"${default_cmdline}\"."
     cmdline="${default_cmdline}"
