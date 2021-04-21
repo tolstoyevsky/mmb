@@ -55,6 +55,8 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
  && curl -O https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
  && chmod +x wait-for-it.sh \
  && mv wait-for-it.sh /usr/local/bin \
+ # The client requests Vector when we've got only vector, so fix it
+ && ln -s w/skins/vector w/skins/Vector \
  # Cleanup
  && apk del \
     curl \
