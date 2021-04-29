@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PORT=${PORT:=8007}
+export RENDER_SERVER_PORT=${RENDER_SERVER_PORT:=8007}
 
 export MW_QSERVE_PORT=${MW_QSERVE_PORT:=14311}
 
@@ -20,7 +20,7 @@ postman)
 nserve)
     wait-for-it.sh -h 127.0.0.1 -p "${MW_QSERVE_PORT}" -t 90 -- >&2 echo "mw-qserve is ready"
 
-    nserve --port="${PORT}"
+    nserve --port="${RENDER_SERVER_PORT}"
 
     ;;
 nslave)

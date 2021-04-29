@@ -51,7 +51,7 @@ services:
     image: cusdeb/mwlib:0.16.2
     network_mode: "host"
     environment:
-    - PORT=${PORT}
+    - RENDER_SERVER_PORT=${RENDER_SERVER_PORT}
     - TYPE=nserve
   nslave:
     image: cusdeb/mwlib:0.16.2
