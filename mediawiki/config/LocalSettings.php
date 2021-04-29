@@ -167,6 +167,13 @@ $wgCollectionMWServeURL = "RENDER_SERVER";
 
 $wgCollectionMWServeCredentials = "CREDENTIALS";
 
+// Adds a metric counter to the page.
+$wgExtensionFunctions[] = 'wfMetricCounter';
+function wfMetricCounter() {
+	global $wgOut;
+	$wgOut->addScript('METRIC_COUNTER');
+}
+
 wfLoadExtension('Cite');
 wfLoadExtension('MobileFrontend');
 wfLoadExtension('Parsoid', 'vendor/wikimedia/parsoid/extension.json');
