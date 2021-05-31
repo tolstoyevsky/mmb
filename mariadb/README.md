@@ -12,11 +12,11 @@ MariaDB is a community-developed fork of MySQL that is dedicated to FOSS (free a
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://mariadb.org/mariadb-10-1-is-stable-ga/">10.1</a></td>
+    <td><a href="https://mariadb.com/kb/en/mariadb-1050-release-notes/">10.5</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>17 Oct 2015</td>
+    <td>03 Dec 2019</td>
   </tr>
   <tr>
     <td>Port</td>
@@ -28,7 +28,7 @@ MariaDB is a community-developed fork of MySQL that is dedicated to FOSS (free a
   </tr> 
   <tr>
     <td valign="top">Base image</td>
-    <td>cusdeb/alpine3.7:amd64</td>
+    <td><a href="https://hub.docker.com/_/alpine">Official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.13.0-released.html">Alpine 3.13</a></td>
   </tr>
 </table>
 
@@ -48,7 +48,7 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
   </tr>
   <tr>
     <td>MYSQLD_*</td>
-    <td colspan="2">Any option in <code>/etc/mysql/my.cnf</code> from the <code>mysqld</code> section. For example, to change the port which is used by default, use the <code>MYSQLD_port</code> environment variable.</td>
+    <td colspan="2">Any option in <code>/etc/my.cnf</code> from the <code>mysqld</code> section. For example, to change the port which is used by default, use the <code>MYSQLD_port</code> environment variable.</td>
   </tr>
   <tr>
     <td>MYSQL_ROOT_PASSWORD</td>
