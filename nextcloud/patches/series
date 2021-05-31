@@ -1,4 +1,0 @@
-add_apps_to_config.patch
-config_memory_caching.patch
-work_on_advanced_block.patch
-increase_max_upload_filesize.patch
