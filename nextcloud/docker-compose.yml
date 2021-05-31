@@ -1,0 +1,48 @@
+version: "3.7"
+services:
+  frontend:
+    image: cusdeb/nextcloud:21-amd64
+    environment:
+    - TYPE=frontend
+    ports:
+    - 8001:8001
+  backend:
+    image: cusdeb/nextcloud:21-amd64
+    environment:
+    - TYPE=backend
+    - PM_MAX_CHILDREN=${PM_MAX_CHILDREN}
+    - PM_START_SERVERS=${PM_START_SERVERS}
+    - PM_MIN_SPARE_SERVERS=${PM_MIN_SPARE_SERVERS}
+    - PM_MAX_SPARE_SERVERS=${PM_MAX_SPARE_SERVERS}
+    volumes:
+    - ./_config:/var/www/nc/config
+    - ./_nc/data:/var/www/nc/data
+  news_updater:
+    image: cusdeb/nextcloud:21-amd64
+    environment:
+    - TYPE=news_updater
+    volumes:
+    - ./_config:/var/www/nc/config
+    - ./_nc/data:/var/www/nc/data
+  mariadb:
+    image: cusdeb/mariadb:10.5-amd64
+    environment:
+    - MYSQLD_bind_address=mariadb
+    - MYSQLD_innodb_file_per_table=1
+    - MYSQL_DATABASE=nc
+    - MYSQL_ROOT_PASSWORD=secret
+    volumes:
+    - ./_db:/var/lib/mysql
+  redis:
+    image: cusdeb/redis:6.0-amd64
+    environment:
+    - BIND=redis
+    - PORT=6379
+    - REDIS_CONF_maxmemory=512mb
+    - REDIS_CONF_maxmemory_policy=allkeys-lru
+    - REDIS_CONF_tcp_keepalive=0
+    # Disable AOF
+    - REDIS_CONF_appendonly=no
+    # Disable RDB
+    - REDIS_CONF_save=
+
