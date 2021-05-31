@@ -1,0 +1,35 @@
+diff --git a/lib/private/Config.php b/lib/private/Config.php
+index a6c4acb..98e4661 100644
+--- a/lib/private/Config.php
++++ b/lib/private/Config.php
+@@ -47,7 +47,29 @@ class Config {
+ 	public const ENV_PREFIX = 'NC_';
+ 
+ 	/** @var array Associative array ($key => $value) */
+-	protected $cache = [];
++	protected $cache = [
++		'apps_paths' => [
++			[
++				'path' => '/var/www/nc/apps',
++				'url' => '/apps',
++				'writable' => false,
++			],
++			[
++				'path' => '/var/www/nc/apps2',
++				'url' => '/apps2',
++				'writable' => true,
++			]
++		],
++		'appstoreenabled' => false,
++		'default_phone_region' => 'RU',
++		'memcache.local' => '\OC\Memcache\APCu',
++		'memcache.distributed' => '\OC\Memcache\Redis',
++		'memcache.locking' => '\OC\Memcache\Redis',
++		'redis' => [
++			'host' => 'redis',
++			'port' => 6379,
++		],
++	];
+ 	/** @var array */
+ 	protected $envCache = [];
+ 	/** @var string */

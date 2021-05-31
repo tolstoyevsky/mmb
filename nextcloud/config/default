@@ -1,0 +1,79 @@
+upstream php-handler {
+    server backend:9000;
+}
+
+server {
+    listen PORT;
+    listen [::]:PORT;
+
+    root /var/www/nc;
+
+    index index.php index.html /index.php$request_uri;
+
+    client_max_body_size 1000M;
+
+    include /etc/nginx/avoid-security-or-privacy-risks.conf;
+    include /etc/nginx/add-misc-headers.conf;
+
+    location ^~ /.well-known {
+        location = /.well-known/carddav {
+            return 301 /remote.php/dav/;
+        }
+
+        location = /.well-known/caldav {
+            return 301 /remote.php/dav/;
+        }
+
+        # Anything else is dynamically handled by Nextcloud
+        location ^~ /.well-known {
+            return 301 /index.php$uri;
+        }
+
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)(?:$|/) {
+        return 404;
+    }
+
+    location ~ ^/(?:\.|autotest|occ|issue|indie|db_|console) {
+        return 404;
+    }
+
+    location ~ \.php(?:$|/) {
+        fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+        set $path_info $fastcgi_path_info;
+
+        try_files $fastcgi_script_name =404;
+
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $path_info;
+
+        fastcgi_param modHeadersAvailable true;         # Avoid sending the security headers twice
+        fastcgi_param front_controller_active true;     # Enable pretty urls
+        fastcgi_pass php-handler;
+
+        fastcgi_intercept_errors on;
+        fastcgi_request_buffering off;
+
+        fastcgi_read_timeout 300;
+    }
+
+    location ~ \.(?:css|js|svg|gif)$ {
+        try_files $uri /index.php$request_uri;
+        expires 6M;
+        access_log off;
+    }
+
+    location ~ \.woff2?$ {
+        try_files $uri /index.php$request_uri;
+        expires 7d;
+        access_log off;     # Optional: Don't log access to assets
+    }
+
+    location / {
+        try_files $uri $uri/ /index.php$request_uri;
+    }
+}
+
