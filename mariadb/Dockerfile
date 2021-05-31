@@ -1,4 +1,4 @@
-FROM cusdeb/alpine3.7:amd64
+FROM alpine:3.13
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 RUN apk --update add \

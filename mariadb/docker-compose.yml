@@ -1,10 +1,10 @@
 version: "2"
 services:
   mariadb:
-    image: cusdeb/mariadb:10.1-amd64
+    image: cusdeb/mariadb:10.5-amd64
     network_mode: "host"
     environment:
-    - MYSQLD_port=33061
+    - MYSQLD_port=${MYSQLD_port}
     - MYSQL_ROOT_PASSWORD=cusdeb
     - MYSQL_DATABASE=
     - MYSQL_USER=

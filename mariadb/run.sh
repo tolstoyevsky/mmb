@@ -1,5 +1,10 @@
 #!/bin/bash
 
+export MYSQLD_port="${MYSQLD_port:=33061}"
+
+# Configure MariaDB only using /etc/my.cnf
+rm /etc/my.cnf.d/mariadb-server.cnf
+
 # execute any pre-init scripts
 for i in /scripts/pre-init.d/*sh
 do
@@ -47,7 +52,7 @@ USE mysql;
 FLUSH PRIVILEGES;
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION;
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION;
-UPDATE user SET password=PASSWORD("$MYSQL_ROOT_PASSWORD") WHERE user='root' AND host='localhost';
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${MYSQL_ROOT_PASSWORD}');
 EOF
 
     if [ "$MYSQL_DATABASE" != "" ]; then
@@ -73,14 +78,14 @@ do
     fi
 done
 
-# Modify /etc/mysql/my.cnf
+# Modify /etc/my.cnf
 for key_val in $(env); do
     if [[ "${key_val}" = MYSQLD_* ]]; then
         var=$(echo ${key_val} | cut -d"=" -f1)
 	val=${!var}
 	config_option=${var#MYSQLD_}
 	>&2 echo "Changing '${config_option}' to '${val}'"
-	change_ini_param.py ${config_option} ${val}
+	change_ini_param.py --config-file /etc/my.cnf "${config_option}" "${val}"
     fi
 done
 
