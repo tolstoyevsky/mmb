@@ -27,7 +27,7 @@ services:
     - ./_deleted:/var/www/w/deleted
     - ./_images:/var/www/w/images
   mariadb:
-    image: cusdeb/mariadb:10.1-amd64
+    image: cusdeb/mariadb:10.5-amd64
     network_mode: "host"
     environment:
     - MYSQLD_port=33061
