@@ -20,7 +20,7 @@ Memcached is an open source high-performance, distributed memory object caching 
   </tr>
   <tr>
     <td>Port</td>
-    <td>11212</td>
+    <td>11211</td>
   </tr>
   <tr>
     <td valign="top">Base image</td>
@@ -34,7 +34,7 @@ Memcached is an open source high-performance, distributed memory object caching 
 
 | Parameter | Description | Default |
 | --- | --- | --- |
-| PORT      | Port the Memcached server listens on | 11212 |
+| PORT      | Port the Memcached server listens on | 11211 |
 | BIND      | Allows specifying from which interface Memcached must listen for connections | 127.0.0.1  |
 | MEM_LIMIT | Allows specifying (in megabytes) how much RAM Memcached must use for item storage | 64 |
 | CON_LIMIT | Allows specifying the max number of concurrent connections Memcached can accept | 1024 |

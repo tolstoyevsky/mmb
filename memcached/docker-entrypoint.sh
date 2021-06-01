@@ -4,7 +4,7 @@ set -e
 
 set -x
 
-PORT="${PORT:=11212}"
+PORT="${PORT:=11211}"
 
 BIND="${BIND:="127.0.0.1"}"
 
