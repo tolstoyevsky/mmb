@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export MYSQLD_port="${MYSQLD_port:=33061}"
+export MYSQLD_port="${MYSQLD_port:=3306}"
 
 # Configure MariaDB only using /etc/my.cnf
 rm /etc/my.cnf.d/mariadb-server.cnf

@@ -20,7 +20,7 @@ MariaDB is a community-developed fork of MySQL that is dedicated to FOSS (free a
   </tr>
   <tr>
     <td>Port</td>
-    <td>33061</td>
+    <td>3306</td>
   </tr> 
   <tr>
     <td>Data volume</td>
