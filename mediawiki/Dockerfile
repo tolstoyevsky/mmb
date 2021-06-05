@@ -65,7 +65,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
     git \
  && rm -rf /var/cache/apk/*
 
-COPY ./config/LocalSettings.php /var/www/w
+COPY ./config/LocalSettings.php ./config/namespaces.ph[p] /var/www/w/
 
 COPY ./config/default /etc/nginx/conf.d/default.conf
 

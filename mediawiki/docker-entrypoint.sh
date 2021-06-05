@@ -52,6 +52,10 @@ substitute() {
     sed -i -e "s#${var_name}#${!var_name}#" /var/www/w/LocalSettings.php
 }
 
+if [[ -f /var/www/w/namespaces.php ]]; then
+    cat /var/www/w/namespaces.php >> /var/www/w/LocalSettings.php
+fi
+
 change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "listen" "/var/run/php/php7.0-fpm.sock"
 
 change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "listen.owner" "nginx"
