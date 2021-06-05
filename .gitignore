@@ -6,6 +6,7 @@ baseimages/stretch_chroot
 baseimages/alpine_chroot
 hubot-rocketchat/packages/*
 hubot-rocketchat/redis-dump
+mediawiki/config/namespaces.php
 mediawiki/kblogo.png
 mediawiki/_db
 mediawiki/_deleted

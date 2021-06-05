@@ -74,6 +74,23 @@ Administrators are wiki users who are members of the "sysop" user group (see det
 1. Run `docker exec` on a running MediaWiki container.
 2. Run `php7 maintenance/createAndPromote.php --sysop <username> <password>` inside the container.
 
+## How to register custom namespaces
+
+First, create the file `config/namespaces.php` and add the following contents to it:
+
+```php
+define("NS_ESSAYS", 3000); // This MUST be even.
+define("NS_ESSAYS_TALK", 3001); // This MUST be the following odd integer.
+
+// Add namespaces.
+$wgExtraNamespaces[NS_ESSAYS] = "Essays";
+$wgExtraNamespaces[NS_ESSAYS_TALK] = "Essays_talk";
+
+$wgRestrictDisplayTitle = false;
+```
+
+Then, rebuild the Docker image and re-run the container. After this you will get two custom namespaces: `Essays` and `Essays_talk`. Read the official documentation devoted to [registering custom namespaces](https://mediawiki.org/wiki/Manual:Using_custom_namespaces) to know more about the topic.
+
 ## How to change logo
 
 Provide a square logo named `kblogo.png` which is 135x135px or 150x150px.
