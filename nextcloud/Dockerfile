@@ -17,6 +17,8 @@ ENV NEXTCLOUD_VER v21.0.2
 
 ENV NOTES_VER v4.0.4
 
+ENV NOTIFY_PUSH_VER v0.2.0
+
 ENV PASSMAN_VER 2.3.8
 
 ENV PHOTO_SPHERE_VIEWER_VER v1.21.1
@@ -104,6 +106,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
  && git clone -b "${NEWS_VER}"                --depth 1 https://github.com/nextcloud/news.git \
  && git clone -b "${NOTES_VER}"               --depth 1 https://github.com/nextcloud/notes.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/notifications.git \
+ && git clone -b "${NOTIFY_PUSH_VER}"         --depth 1 https://github.com/nextcloud/notify_push.git \
  && git clone -b "${PASSMAN_VER}"             --depth 1 https://github.com/nextcloud/passman.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/photos.git \
  && git clone -b "${SPREED_VER}"              --depth 1 https://github.com/nextcloud/spreed.git \
