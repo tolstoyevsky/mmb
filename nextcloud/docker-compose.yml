@@ -24,6 +24,12 @@ services:
     volumes:
     - ./_config:/var/www/nc/config
     - ./_nc/data:/var/www/nc/data
+  notify_push:
+    image: cusdeb/notify_push:0.2.0-amd64
+    environment:
+    - NEXTCLOUD_URL=http://frontend:8001
+    volumes:
+    - ./_config:/config
   mariadb:
     image: cusdeb/mariadb:10.5-amd64
     environment:
