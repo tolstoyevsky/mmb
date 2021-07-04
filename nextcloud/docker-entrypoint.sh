@@ -32,6 +32,8 @@ change_ini_params() {
     change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "pm.max_spare_servers" "${PM_MAX_SPARE_SERVERS}"
 
     change_ini_param.py --config-file /etc/php7/php.ini --section PHP "memory_limit" "512M"
+
+    change_ini_param.py --config-file /etc/php7/php.ini --section PHP "apc.enable_cli" "1"
 }
 
 case "${TYPE}" in
