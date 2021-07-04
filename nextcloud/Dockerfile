@@ -25,9 +25,11 @@ ENV PHOTO_SPHERE_VIEWER_VER v1.21.1
 
 ENV SPREED_VER v11.3.0
 
+ENV TASKS_VER v0.13.6
+
 ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/news"
 
-ENV BUILD_JS_FOR "/var/www/nc /var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres/js /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/passman /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/viewer"
+ENV BUILD_JS_FOR "/var/www/nc /var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres/js /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/passman /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks /var/www/nc/apps2/viewer"
 
 # For building the Spreed app
 ENV NODE_OPTIONS "--max-old-space-size=6144"
@@ -110,6 +112,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
  && git clone -b "${PASSMAN_VER}"             --depth 1 https://github.com/nextcloud/passman.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/photos.git \
  && git clone -b "${SPREED_VER}"              --depth 1 https://github.com/nextcloud/spreed.git \
+ && git clone -b "${TASKS_VER}"               --depth 1 https://github.com/nextcloud/tasks.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/viewer.git \
  \
  && for dir in ${INSTALL_DEPS_FOR}; do cd "${dir}"; composer install --no-dev; done \
@@ -118,7 +121,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
  # hide-unnecessary-blocks-on-installation-page.patch 
  && rm -r /var/www/nc/core/js/dist \
  \
- && for dir in ${BUILD_JS_FOR}; do cd "${dir}"; npm ci; npm run build; rm -rf node_modules; done \
+ && for dir in ${BUILD_JS_FOR}; do cd "${dir}"; npm ci; npm run svg_sprite 2> /dev/null || true; npm run build; rm -rf node_modules; done \
  \
  && chown -R nginx:nginx /var/www \
  \
