@@ -12,11 +12,11 @@ Nextcloud is a self-hosted collaboration platform which can act as an alternativ
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://nextcloud.com/blog/nextcloud-hub-21-out-with-up-to-10x-better-performance-whiteboard-and-more-collaboration-features/">21</a></td>
+    <td><a href="https://nextcloud.com/blog/nextcloud-hub-22-introduces-approval-workflows-integrated-knowledge-management-and-decentralized-group-administration/">22</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>19 Feb 2021</td>
+    <td>6 Jul 2021</td>
   </tr>
   <tr>
     <td>Port</td>
