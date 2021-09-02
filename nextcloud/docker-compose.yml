@@ -1,13 +1,13 @@
 version: "3.7"
 services:
   frontend:
-    image: cusdeb/nextcloud:21-amd64
+    image: cusdeb/nextcloud:22-amd64
     environment:
     - TYPE=frontend
     ports:
     - 8001:8001
   backend:
-    image: cusdeb/nextcloud:21-amd64
+    image: cusdeb/nextcloud:22-amd64
     environment:
     - TYPE=backend
     - PM_MAX_CHILDREN=${PM_MAX_CHILDREN}
@@ -18,7 +18,7 @@ services:
     - ./_config:/var/www/nc/config
     - ./_nc/data:/var/www/nc/data
   news_updater:
-    image: cusdeb/nextcloud:21-amd64
+    image: cusdeb/nextcloud:22-amd64
     environment:
     - TYPE=news_updater
     volumes:
