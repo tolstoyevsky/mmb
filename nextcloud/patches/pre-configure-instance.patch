@@ -1,8 +1,8 @@
 diff --git a/lib/private/Config.php b/lib/private/Config.php
-index a6c4acb..98e4661 100644
+index e3ace96..5bad50a 100644
 --- a/lib/private/Config.php
 +++ b/lib/private/Config.php
-@@ -47,7 +47,29 @@ class Config {
+@@ -46,7 +46,29 @@ class Config {
  	public const ENV_PREFIX = 'NC_';
  
  	/** @var array Associative array ($key => $value) */
