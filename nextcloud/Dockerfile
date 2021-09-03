@@ -19,6 +19,8 @@ ENV NOTES_VER v4.1.1
 
 ENV NOTIFY_PUSH_VER v0.2.2
 
+ENV NPM_VER 7.22
+
 ENV PASSMAN_VER 2.3.10
 
 ENV PHOTO_SPHERE_VIEWER_VER v1.22.0
@@ -85,6 +87,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
     py3-pip \
     # For nextcloud-news-updater to run it as nginx user
     sudo \
+ && npm i -g npm@"${NPM_VER}" \
  && mkdir /run/nginx \
  && cd /usr/bin \
  && curl -O https://raw.githubusercontent.com/tolstoyevsky/mmb/master/utils/change_ini_param.py \
