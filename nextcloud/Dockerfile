@@ -1,4 +1,4 @@
-FROM alpine:3.13
+FROM alpine:3.14
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV BOOKMARKS_VER v10.0.0
@@ -36,7 +36,7 @@ ENV NODE_OPTIONS "--max-old-space-size=6144"
 
 COPY ./patches /patches
 
-RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repositories \
+RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.14/community >> /etc/apk/repositories \
  && apk --update add \
     bash \
     composer \
@@ -84,7 +84,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
     py3-pip \
     # For nextcloud-news-updater to run it as nginx user
     sudo \
- && mkdir /run/nginx \
+ && mkdir -p /run/nginx \
  && cd /usr/bin \
  && curl -O https://raw.githubusercontent.com/tolstoyevsky/mmb/master/utils/change_ini_param.py \
  && chmod +x /usr/bin/change_ini_param.py \
@@ -134,8 +134,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
     make \
     npm \
     py3-pip \
- && rm -r /root/.cache/Cypress \
- && rm -r /usr/lib/node_modules \
+ && rm -r /usr/local/lib/node_modules \
  && rm -r /var/cache/apk/* \
  && rm -r /var/www/nc/node_modules
 
@@ -143,7 +142,7 @@ COPY ./config/avoid-security-or-privacy-risks.conf /etc/nginx/avoid-security-or-
 
 COPY ./config/add-misc-headers.conf /etc/nginx/add-misc-headers.conf
 
-COPY ./config/default /etc/nginx/conf.d/default.conf
+COPY ./config/default /etc/nginx/http.d/default.conf
 
 COPY ./docker-entrypoint.sh /entrypoint.sh
 
