@@ -122,7 +122,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
  # hide-unnecessary-blocks-on-installation-page.patch 
  && rm -r /var/www/nc/core/js/dist \
  \
- && for dir in ${BUILD_JS_FOR}; do cd "${dir}"; npm ci; npm run svg_sprite 2> /dev/null || true; npm run build; rm -rf node_modules; done \
+ && for dir in ${BUILD_JS_FOR}; do cd "${dir}"; rm -f package-lock.json; npm i --save-dev; npm run svg_sprite 2> /dev/null || true; npm run build; rm -rf node_modules; done \
  \
  && chown -R nginx:nginx /var/www \
  \
