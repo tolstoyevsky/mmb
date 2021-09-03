@@ -38,7 +38,7 @@ change_ini_params() {
 
 case "${TYPE}" in
 frontend)
-    sed -i -e "s/PORT/${PORT}/" /etc/nginx/conf.d/default.conf
+    sed -i -e "s/PORT/${PORT}/" /etc/nginx/http.d/default.conf
 
     /usr/sbin/nginx -g 'daemon off;'
 

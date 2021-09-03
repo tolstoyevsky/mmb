@@ -24,13 +24,13 @@ Nextcloud is a self-hosted collaboration platform which can act as an alternativ
   </tr>
   <tr>
     <td valign="top">Base image</td>
-    <td><a href="https://hub.docker.com/_/alpine">The official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.13.0-released.html">Alpine 3.13</a></td>
+    <td><a href="https://hub.docker.com/_/alpine">The official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.14.0-released.html">Alpine 3.14</a></td>
   </tr>
 </table>
 
 ## Features
 
-* Nginx [1.18.0](https://nginx.com/blog/nginx-1-18-1-19-released/) and PHP [7.4.19](https://php.net/ChangeLog-7.php#PHP_7_4).
+* Nginx [1.20.1](https://nginx.org/en/CHANGES-1.20) and PHP [7.4.23](https://php.net/ChangeLog-7.php#PHP_7_4).
 * The [Bookmarks](https://github.com/nextcloud/bookmarks) application ... .
 * The [Calendar](https://github.com/nextcloud/calendar) and [Contacts](https://github.com/nextcloud/contacts) applications allow users to synchronize calendars and contacts with the server respectively.
 * The [Deck](https://github.com/nextcloud/deck) application ... .
