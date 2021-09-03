@@ -5,8 +5,6 @@ ENV BOOKMARKS_VER v4.4.1
 
 ENV CALENDAR_VER v2.3.3
 
-ENV CONTACTS_VER v4.0.1
-
 ENV DECK_VER v1.4.2
 
 ENV NEWS_VER 16.0.1
@@ -31,7 +29,7 @@ ENV TASKS_VER v0.14.2
 
 ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/news"
 
-ENV BUILD_JS_FOR "/var/www/nc /var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres/js /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/passman /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks /var/www/nc/apps2/viewer"
+ENV BUILD_JS_FOR "/var/www/nc /var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres/js /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/passman /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks /var/www/nc/apps2/viewer"
 
 # For building the Spreed app
 ENV NODE_OPTIONS "--max-old-space-size=6144"
@@ -104,7 +102,6 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
  && mkdir apps2 && cd apps2 \
  && git clone -b "${BOOKMARKS_VER}"           --depth 1 https://github.com/nextcloud/bookmarks.git \
  && git clone -b "${CALENDAR_VER}"            --depth 1 https://github.com/nextcloud/calendar.git \
- && git clone -b "${CONTACTS_VER}"            --depth 1 https://github.com/nextcloud/contacts.git \
  && git clone -b "${DECK_VER}"                --depth 1 https://github.com/nextcloud/deck.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/files_pdfviewer.git \
  && git clone -b "${PHOTO_SPHERE_VIEWER_VER}" --depth 1 https://github.com/nextcloud/files_photospheres.git \

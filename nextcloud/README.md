@@ -32,7 +32,7 @@ Nextcloud is a self-hosted collaboration platform which can act as an alternativ
 
 * Nginx [1.18.0](https://nginx.com/blog/nginx-1-18-1-19-released/) and PHP [7.4.19](https://php.net/ChangeLog-7.php#PHP_7_4).
 * The [Bookmarks](https://github.com/nextcloud/bookmarks) application ... .
-* The [Calendar](https://github.com/nextcloud/calendar) and [Contacts](https://github.com/nextcloud/contacts) applications allow users to synchronize calendars and contacts with the server respectively.
+* The [Calendar](https://github.com/nextcloud/calendar) application allows users to synchronize calendars with the server.
 * The [Deck](https://github.com/nextcloud/deck) application ... .
 * The [Files viewer](https://github.com/nextcloud/viewer) application ... .
 * The [News](https://github.com/nextcloud/news) application ... .
