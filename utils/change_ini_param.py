@@ -54,7 +54,7 @@ def main():
 
     config.set(args.section, args.param, args.value)
 
-    with open(args.config_file, 'w') as configfile:
+    with open(args.config_file, 'w', encoding='utf8') as configfile:
         config.write(configfile)
 
 
