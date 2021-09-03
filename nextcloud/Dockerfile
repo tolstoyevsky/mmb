@@ -80,6 +80,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
     php7-pecl-imagick \
     php7-pecl-redis \
     \
+    python2 \
     python3 \
     py3-pip \
     # For nextcloud-news-updater to run it as nginx user
@@ -133,6 +134,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
     g++ \
     make \
     npm \
+    python2 \
     py3-pip \
  && rm -r /root/.cache/Cypress \
  && rm -r /usr/lib/node_modules \
