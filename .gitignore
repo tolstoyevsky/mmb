@@ -13,6 +13,7 @@ mediawiki/_images
 nextcloud/_config
 nextcloud/_db
 nextcloud/_nc
+nextcloud-devenv/_db
 rocketchat/mongo
 *.img
 *.dtb

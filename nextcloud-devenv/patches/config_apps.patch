@@ -1,0 +1,26 @@
+diff --git a/lib/private/Config.php b/lib/private/Config.php
+index e3ace96..9f561d0 100644
+--- a/lib/private/Config.php
++++ b/lib/private/Config.php
+@@ -46,7 +46,20 @@ class Config {
+ 	public const ENV_PREFIX = 'NC_';
+ 
+ 	/** @var array Associative array ($key => $value) */
+-	protected $cache = [];
++	protected $cache = [
++		'apps_paths' => [
++			[
++				'path' => '/var/www/nc/apps',
++				'url' => '/apps',
++				'writable' => false,
++			],
++			[
++				'path' => '/var/www/nc/apps2',
++				'url' => '/apps2',
++				'writable' => true,
++			]
++		],
++	];
+ 	/** @var array */
+ 	protected $envCache = [];
+ 	/** @var string */

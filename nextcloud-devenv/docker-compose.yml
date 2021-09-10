@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  nextcloud:
+    image: cusdeb/nextcloud-devenv
+    ports:
+    - 8001:80
+    environment:
+    - PM_MAX_CHILDREN=${PM_MAX_CHILDREN}
+    - PM_START_SERVERS=${PM_START_SERVERS}
+    - PM_MIN_SPARE_SERVERS=${PM_MIN_SPARE_SERVERS}
+    - PM_MAX_SPARE_SERVERS=${PM_MAX_SPARE_SERVERS}
+    - UID=${UID}
+    - XDEBUG_CLIENT_PORT=${XDEBUG_CLIENT_PORT}
+    extra_hosts:
+    - "host.docker.internal:host-gateway"
+    volumes:
+    - ./sources:/var/www/nc
+  mariadb:
+    image: cusdeb/mariadb:10.5-amd64
+    environment:
+    - MYSQLD_bind_address=mariadb
+    - MYSQLD_innodb_file_per_table=1
+    - MYSQL_DATABASE=nc
+    - MYSQL_ROOT_PASSWORD=secret
+    volumes:
+    - ./_db:/var/lib/mysql
+
