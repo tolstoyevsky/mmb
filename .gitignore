@@ -19,3 +19,4 @@ rocketchat/mongo
 *.dtb
 .env
 .idea
+.vscode
