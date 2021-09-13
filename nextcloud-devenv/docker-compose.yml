@@ -15,10 +15,10 @@ services:
     - "host.docker.internal:host-gateway"
     volumes:
     - ./sources:/var/www/nc
-  mariadb:
+  db:
     image: cusdeb/mariadb:10.5-amd64
     environment:
-    - MYSQLD_bind_address=mariadb
+    - MYSQLD_bind_address=db
     - MYSQLD_innodb_file_per_table=1
     - MYSQL_DATABASE=nc
     - MYSQL_ROOT_PASSWORD=secret
