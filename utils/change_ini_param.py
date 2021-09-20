@@ -52,7 +52,11 @@ def main():
 
     config.read(args.config_file, encoding='utf-8')
 
-    config.set(args.section, args.param, args.value)
+    try:
+        config.set(args.section, args.param, args.value)
+    except configparser.NoSectionError:
+        config.add_section(args.section)
+        config.set(args.section, args.param, args.value)
 
     with open(args.config_file, 'w', encoding='utf8') as configfile:
         config.write(configfile)

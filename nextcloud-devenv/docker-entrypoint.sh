@@ -39,7 +39,6 @@ change_ini_params() {
 
     change_ini_param.py --config-file /etc/php7/php.ini --section PHP "memory_limit" "512M"
 
-    echo "[XDebug]" >> /etc/php7/php.ini
     change_ini_param.py --config-file /etc/php7/php.ini --section XDebug "xdebug.mode" "debug"
 
     change_ini_param.py --config-file /etc/php7/php.ini --section XDebug "xdebug.start_with_request" "yes"
