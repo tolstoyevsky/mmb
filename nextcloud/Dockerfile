@@ -29,7 +29,7 @@ ENV TASKS_VER v0.14.2
 
 ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/news"
 
-ENV BUILD_JS_FOR "/var/www/nc /var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres/js /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks /var/www/nc/apps2/viewer"
+ENV BUILD_JS_FOR "/var/www/nc /var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks /var/www/nc/apps2/viewer"
 
 # For building the Spreed app
 ENV NODE_OPTIONS "--max-old-space-size=6144"
