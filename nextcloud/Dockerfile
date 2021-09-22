@@ -29,7 +29,7 @@ ENV TASKS_VER v0.14.2
 
 ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/news"
 
-ENV BUILD_JS_FOR "/var/www/nc /var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
+ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
 
 # For building the Spreed app
 ENV NODE_OPTIONS "--max-old-space-size=6144"
@@ -80,6 +80,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.14/community >> /etc/apk/repo
     php7-pecl-imagick \
     php7-pecl-redis \
     \
+    python2 \
     python3 \
     py3-pip \
     # For nextcloud-news-updater to run it as nginx user
@@ -117,26 +118,45 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.14/community >> /etc/apk/repo
  \
  && for dir in ${INSTALL_DEPS_FOR}; do cd "${dir}"; composer install --no-dev; done \
  \
- # Remove /var/www/nc/core/js/dist to rebuild it later to reflect the changes in
- # hide-unnecessary-blocks-on-installation-page.patch 
- && rm -r /var/www/nc/core/js/dist \
+ #
+ # Build patched Nextcloud.
+ # Currently it requires NPM 6 and Python 2.
+ #
+ && >&2 echo "----- Entering to /var/www/nc" \
+ && npm i -g npm@6 \
+ && npm config set python /usr/bin/python \
+ && cd /var/www/nc \
+ # Remove /var/www/nc/core/js/dist to rebuild it to reflect the changes in
+ # hide-unnecessary-blocks-on-installation-page.patch
+ && rm -r core/js/dist \
+ # Remove package-lock.json because of 'Error: Integrity checksum failed when using sha512'
+ && rm package-lock.json \
+ && /usr/local/bin/npm i --save-dev \
+ && npm run build \
+ && rm -r node_modules \
  \
- && for dir in ${BUILD_JS_FOR}; do cd "${dir}"; rm -f package-lock.json; npm i --save-dev; npm run svg_sprite 2> /dev/null || true; npm run build; rm -rf node_modules; done \
+ #
+ # Build Nextcloud apps.
+ # It requires NPM 7.
+ #
+ && for dir in ${BUILD_JS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; npm i; npm run svg_sprite 2> /dev/null || true; npm run build; rm -rf node_modules; done \
  \
  && chown -R nginx:nginx /var/www \
  \
  && pip3 install nextcloud-news-updater=="${NEWS_UPDATER_VER}" \
  # Cleanup
+ && npm r -g npm \
  && apk del \
     curl \
     git \
     g++ \
     make \
     npm \
+    python2 \
     py3-pip \
+ && rm -r /root/.npm \
  && rm -r /usr/local/lib/node_modules \
- && rm -r /var/cache/apk/* \
- && rm -r /var/www/nc/node_modules
+ && rm -r /var/cache/apk/*
 
 COPY ./config/avoid-security-or-privacy-risks.conf /etc/nginx/avoid-security-or-privacy-risks.conf
 
