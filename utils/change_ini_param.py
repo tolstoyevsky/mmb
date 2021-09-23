@@ -42,7 +42,7 @@ def main():
     args = parser.parse_args()
 
     if not Path(args.config_file).is_file():
-        sys.stderr.write('{} does not exist\n'.format(args.config_file))
+        sys.stderr.write(f'{args.config_file} does not exist\n')
         sys.exit(1)
 
     config = configparser.ConfigParser(allow_no_value=True)
