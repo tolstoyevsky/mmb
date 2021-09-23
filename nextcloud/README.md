@@ -31,12 +31,12 @@ Nextcloud is a self-hosted collaboration platform which can act as an alternativ
 ## Features
 
 * Nginx [1.20.1](https://nginx.org/en/CHANGES-1.20) and PHP [7.4.23](https://php.net/ChangeLog-7.php#PHP_7_4).
-* The [Bookmarks](https://github.com/nextcloud/bookmarks) application ... .
+* The [Bookmarks](https://github.com/nextcloud/bookmarks) application allows users to collect and organize bookmarks.
 * The [Calendar](https://github.com/nextcloud/calendar) and [Contacts](https://github.com/nextcloud/contacts) applications allow users to synchronize calendars and contacts with the server respectively.
-* The [Deck](https://github.com/nextcloud/deck) application ... .
-* The [Files viewer](https://github.com/nextcloud/viewer) application ... .
-* The [News](https://github.com/nextcloud/news) application ... .
-* The [News Updater](https://github.com/nextcloud/news-updater) microservice allows users to speed up fetching of RSS feed updates.
+* The [Deck](https://github.com/nextcloud/deck) application allows users to organize their work using [Kanban](https://en.wikipedia.org/wiki/Kanban_(development)) style dashboard.
+* The [Files viewer](https://github.com/nextcloud/viewer) application allows users to view their photos and videos.
+* The [News](https://github.com/nextcloud/news) application allows users to collect RSS/Atom feeds for later viewing.
+* The [News Updater](https://github.com/nextcloud/news-updater) microservice allows users to speed up fetching of RSS/Atom feed updates.
 * The [Notes](https://github.com/nextcloud/notes) application allows users to make notes. It also provides categories for better organization and supports formatting using the [Markdown](https://en.wikipedia.org/wiki/Markdown) syntax.
 * The [Notifications](https://github.com/nextcloud/notifications) application provides a backend and frontend for the notification API available in Nextcloud. The API is used by other applications to notify users in the web UI and sync clients about various things.
 * The [Passman](https://github.com/nextcloud/passman) application allows users to manage their passwords and share them with other users.
