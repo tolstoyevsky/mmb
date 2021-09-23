@@ -33,11 +33,13 @@ Nextcloud is a self-hosted collaboration platform which can act as an alternativ
 * Nginx [1.20.1](https://nginx.org/en/CHANGES-1.20) and PHP [7.4.23](https://php.net/ChangeLog-7.php#PHP_7_4).
 * The [Bookmarks](https://github.com/nextcloud/bookmarks) application allows users to collect and organize bookmarks.
 * The [Calendar](https://github.com/nextcloud/calendar) and [Contacts](https://github.com/nextcloud/contacts) applications allow users to synchronize calendars and contacts with the server respectively.
+* The [Circles](https://github.com/nextcloud/circles) allows users to create their own groups of users/colleagues/friends. Those groups of users (or circles) can then be used by any other app (for example, [Collectives](https://gitlab.com/collectivecloud/collectives)) for sharing purpose through the Circles API.
+* The [Collectives](https://gitlab.com/collectivecloud/collectives) allows users to to build shared knowledge.
 * The [Deck](https://github.com/nextcloud/deck) application allows users to organize their work using [Kanban](https://en.wikipedia.org/wiki/Kanban_(development)) style dashboard.
 * The [Files viewer](https://github.com/nextcloud/viewer) application allows users to view their photos and videos.
 * The [News](https://github.com/nextcloud/news) application allows users to collect RSS/Atom feeds for later viewing.
 * The [News Updater](https://github.com/nextcloud/news-updater) microservice allows users to speed up fetching of RSS/Atom feed updates.
-* The [Notes](https://github.com/nextcloud/notes) application allows users to make notes. It also provides categories for better organization and supports formatting using the [Markdown](https://en.wikipedia.org/wiki/Markdown) syntax.
+* The [Notes](https://github.com/nextcloud/notes) application allows users to make notes. It also provides categories for better organization and supports [Markdown](https://en.wikipedia.org/wiki/Markdown).
 * The [Notifications](https://github.com/nextcloud/notifications) application provides a backend and frontend for the notification API available in Nextcloud. The API is used by other applications to notify users in the web UI and sync clients about various things.
 * The [Passman](https://github.com/nextcloud/passman) application allows users to manage their passwords and share them with other users.
 * The [PDF viewer](https://github.com/nextcloud/files_pdfviewer) application allows users to view PDF files. It uses the [PDF.js](https://mozilla.github.io/pdf.js/) library under the hood.
@@ -45,6 +47,7 @@ Nextcloud is a self-hosted collaboration platform which can act as an alternativ
 * The [Photo Sphere Viewer](https://github.com/nextcloud/files_photospheres) application allows users to view Google PhotoSphere 360° images.
 * The [Right click](https://github.com/nextcloud/files_rightclick) application allows users to have a right click menu.
 * The [Talk](https://github.com/nextcloud/spreed) application allows users to have private, group, public and password protected calls. It uses the [simpleWebRTC](https://simplewebrtc.com) library under the hood.
+* The [Text](https://github.com/nextcloud/text) allows users to collaborate on documents using [Markdown](https://en.wikipedia.org/wiki/Markdown).
 
 ## Installation
 
