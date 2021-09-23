@@ -5,6 +5,8 @@ ENV BOOKMARKS_VER v10.0.0
 
 ENV CALENDAR_VER v2.3.3
 
+ENV COLLECTIVES_VER v0.14.22
+
 ENV CONTACTS_VER v4.0.3
 
 ENV DECK_VER v1.5.3
@@ -27,9 +29,9 @@ ENV SPREED_VER v12.2.0
 
 ENV TASKS_VER v0.14.2
 
-ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/news"
+ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/news /var/www/nc/apps2/text"
 
-ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
+ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/collectives /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
 
 # For building the Spreed app
 ENV NODE_OPTIONS "--max-old-space-size=6144"
@@ -101,6 +103,8 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.14/community >> /etc/apk/repo
  && mkdir apps2 && cd apps2 \
  && git clone -b "${BOOKMARKS_VER}"           --depth 1 https://github.com/nextcloud/bookmarks.git \
  && git clone -b "${CALENDAR_VER}"            --depth 1 https://github.com/nextcloud/calendar.git \
+ && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/circles.git \
+ && git clone -b "${COLLECTIVES_VER}"         --depth 1 https://gitlab.com/collectivecloud/collectives.git \
  && git clone -b "${CONTACTS_VER}"            --depth 1 https://github.com/nextcloud/contacts.git \
  && git clone -b "${DECK_VER}"                --depth 1 https://github.com/nextcloud/deck.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/files_pdfviewer.git \
@@ -114,6 +118,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.14/community >> /etc/apk/repo
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/photos.git \
  && git clone -b "${SPREED_VER}"              --depth 1 https://github.com/nextcloud/spreed.git \
  && git clone -b "${TASKS_VER}"               --depth 1 https://github.com/nextcloud/tasks.git \
+ && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/text.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/viewer.git \
  \
  && for dir in ${INSTALL_DEPS_FOR}; do cd "${dir}"; composer install --no-dev; done \
