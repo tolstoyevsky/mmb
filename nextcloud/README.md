@@ -37,6 +37,7 @@ Nextcloud is a self-hosted collaboration platform which can act as an alternativ
 * The [Collectives](https://gitlab.com/collectivecloud/collectives) allows users to to build shared knowledge.
 * The [Deck](https://github.com/nextcloud/deck) application allows users to organize their work using [Kanban](https://en.wikipedia.org/wiki/Kanban_(development)) style dashboard.
 * The [Files viewer](https://github.com/nextcloud/viewer) application allows users to view their photos and videos.
+* The [Mail](https://github.com/nextcloud/mail) application allows users to use their IMAP email accounts using a web interface within Nextcloud.
 * The [News](https://github.com/nextcloud/news) application allows users to collect RSS/Atom feeds for later viewing.
 * The [News Updater](https://github.com/nextcloud/news-updater) microservice allows users to speed up fetching of RSS/Atom feed updates.
 * The [Notes](https://github.com/nextcloud/notes) application allows users to make notes. It also provides categories for better organization and supports [Markdown](https://en.wikipedia.org/wiki/Markdown).
