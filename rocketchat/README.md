@@ -32,7 +32,6 @@ Rocket.Chat is a self-hosted alternative to Slack.
 
 * [Installation](#installation)
 * [First run of Rocket.Chat](#first-run-of-rocketchat)
-* [Note to macOS users](#note-to-macos-users)
 * [How to upgrade MongoDB 3.2 to 3.6](#how-to-upgrade-mongodb-32-to-36)
 * [Troubleshooting](#troubleshooting)
 * [Configuration](#configuration)
@@ -53,10 +52,6 @@ If you're running Rocket.Chat from here for the very first time, you have to
 * finally, stop the current container and run `docker-compose up -d`.
 
 Next time you want to run Rocket.Chat, simply run `docker-compose up -d`.
-
-## Note to macOS users
-
-macOS doesn't have the `/srv` directory which the MongoDB service relies on. Moreover, it's not possible to create that directory because of [System Integrity Protection](https://arstechnica.com/gadgets/2015/09/os-x-10-11-el-capitan-the-ars-technica-review/8/#h1) (or simply SIP), so edit `docker-compose.yml` to replace `/srv/mongo:/data/db` to `./mongo:/data/db`.
 
 ## How to upgrade MongoDB 3.2 to 3.6
 

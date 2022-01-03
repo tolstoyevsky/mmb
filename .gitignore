@@ -14,7 +14,7 @@ mediawiki/_images
 nextcloud/_config
 nextcloud/_db
 nextcloud/_nc
-rocketchat/mongo
+rocketchat/_db
 *.img
 *.dtb
 .env

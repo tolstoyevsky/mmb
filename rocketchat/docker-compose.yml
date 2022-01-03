@@ -17,7 +17,7 @@ services:
     networks:
     - rocketchat-network
     volumes:
-    - /srv/mongo:/data/db
+    - ./_db:/data/db
     command: mongod --oplogSize 128 --replSet rs0
 networks:
   rocketchat-network:
