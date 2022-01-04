@@ -18,16 +18,16 @@ RUN apt-get update \
  && useradd -m rocketchat \
  # Install Rocket.Chat
  && for i in $(seq 1 10); do \
-      gpg --no-tty --keyserver keyserver.ubuntu.com --recv-keys $PUBLIC_KEY && break; \
+      gpg --no-tty --keyserver keyserver.ubuntu.com --recv-keys "${PUBLIC_KEY}" && break; \
       rm -r /root/.gnupg; \
     done \
  && cd /home/rocketchat \
- && curl -fSL https://releases.rocket.chat/$RC_VERSION/download -o rocket.chat.tgz \
- && curl -fSL https://releases.rocket.chat/$RC_VERSION/asc -o rocket.chat.tgz.asc \
+ && curl -fSL https://releases.rocket.chat/"${RC_VERSION}"/download -o rocket.chat.tgz \
+ && curl -fSL https://releases.rocket.chat/"${RC_VERSION}"/asc -o rocket.chat.tgz.asc \
  && gpg --batch --verify rocket.chat.tgz.asc rocket.chat.tgz \
  && tar zxf rocket.chat.tgz \
  && rm rocket.chat.tgz rocket.chat.tgz.asc \
- && cd $BUNDLE_DIR \
+ && cd "${BUNDLE_DIR}" \
  # Patches apply
  && for path in $(ls ../patches/*.patch 2> /dev/null) \
  ; do patch -p1 < "../patches/${path}" \
@@ -46,7 +46,7 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-WORKDIR $BUNDLE_DIR
+WORKDIR "${BUNDLE_DIR}"
 
 USER rocketchat
 
