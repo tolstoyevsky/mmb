@@ -1,4 +1,4 @@
-FROM cusdeb/stretch-node:amd64
+FROM node:12-bullseye
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV BUNDLE_DIR /home/rocketchat/bundle

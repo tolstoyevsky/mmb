@@ -24,7 +24,7 @@ Rocket.Chat is a self-hosted alternative to Slack.
   </tr> 
   <tr>
     <td valign="top">Base image</td>
-    <td><code>cusdeb/stretch-node:amd64</code></td>
+    <td><a href="https://hub.docker.com/_/node">Official Docker image</a> based on <a href="https://debian.org/releases/bullseye/">Debian 11 "Bullseye"</a></td>
   </tr>
 </table>
 
