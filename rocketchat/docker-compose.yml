@@ -13,14 +13,14 @@ services:
     ports:
     - "8006:8006"
   mongo:
-    image: mongo:3.6-xenial
+    image: mongo:4.2
     networks:
     - rocketchat-network
     volumes:
     - ./_db:/data/db
     command: mongod --oplogSize 128 --replSet rs0
   mongo-init-replica:
-    image: mongo:3.6-xenial
+    image: mongo:4.2
     networks:
     - rocketchat-network
     command: >
