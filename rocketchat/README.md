@@ -31,7 +31,6 @@ Rocket.Chat is a self-hosted alternative to Slack.
 ## Table of Contents
 
 * [Installation](#installation)
-* [First run of Rocket.Chat](#first-run-of-rocketchat)
 * [How to upgrade MongoDB 3.2 to 3.6](#how-to-upgrade-mongodb-32-to-36)
 * [Troubleshooting](#troubleshooting)
 * [Configuration](#configuration)
@@ -39,19 +38,6 @@ Rocket.Chat is a self-hosted alternative to Slack.
 ## Installation
 
 Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) section to learn how to install this or other services.
-
-## First run of Rocket.Chat
-
-If you're running Rocket.Chat from here for the very first time, you have to
-* first, run `docker-compose up mongo`;
-* next, run `docker run -it --rm --net=container:rocketchat_mongo_1 mongo:3.2-jessie bash` where `rocketchat_mongo_1` is the name of the MongoDB container;
-* then, execute the following code in the shell
-  ```
-  mongo mongo/rocketchat --eval "rs.initiate({ _id: 'rs0', members: [ { _id: 0, host: 'localhost:27017' } ]})"
-  ```
-* finally, stop the current container and run `docker-compose up -d`.
-
-Next time you want to run Rocket.Chat, simply run `docker-compose up -d`.
 
 ## How to upgrade MongoDB 3.2 to 3.6
 
