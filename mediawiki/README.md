@@ -91,6 +91,10 @@ $wgRestrictDisplayTitle = false;
 
 Then, rebuild the Docker image and re-run the container. After this you will get two custom namespaces: `Essays` and `Essays_talk`. Read the official documentation devoted to [registering custom namespaces](https://mediawiki.org/wiki/Manual:Using_custom_namespaces) to know more about the topic.
 
+## How to modify php.ini
+
+In order to modify a [php.ini](https://php.net/manual/en/configuration.file.php) parameter, use the environment variable the name of which consists of `PHP_INI_` and the name of the parameter. For example, to change the [post_max_size](https://php.net/manual/en/ini.core.php#ini.post-max-size) parameter, pass the `PHP_INI_post_max_size` environment variable to the container.
+
 ## How to change logo
 
 Provide a square logo named `kblogo.png` which is 135x135px or 150x150px.

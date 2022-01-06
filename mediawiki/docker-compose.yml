@@ -4,6 +4,8 @@ services:
     image: cusdeb/mediawiki:1.35-amd64
     environment:
     - PORT=${PORT}
+    - PHP_INI_post_max_size=${PHP_INI_post_max_size}
+    - PHP_INI_upload_max_filesize=${PHP_INI_upload_max_filesize}
     - WG_SITENAME=${WG_SITENAME}
     - WG_META_NAMESPACE=${WG_META_NAMESPACE}
     - WG_PROTOCOL=${WG_PROTOCOL}

@@ -39,6 +39,10 @@ CREDENTIALS=${CREDENTIALS:=""}
 
 RENDER_SERVER=${RENDER_SERVER:=http://127.0.0.1:8007}
 
+export PHP_INI_post_max_size="${PHP_INI_post_max_size:=25M}"
+
+export PHP_INI_upload_max_filesize="${PHP_INI_upload_max_filesize:=25M}"
+
 # Does variable substitution for LocalSettings.php.
 # Globals:
 #     None
@@ -122,6 +126,16 @@ if [[ -f /var/www/w/resources/assets/kblogo.png ]]; then
 else
     >&2 echo "Using default logo since kblogo.png has not been provided"
 fi
+
+for key_val in $(env); do
+    if [[ "${key_val}" = PHP_INI_* ]]; then
+        var=$(echo "${key_val}" | cut -d"=" -f1)
+        val=${!var}
+        config_option=${var#PHP_INI_}
+        >&2 echo "Changing '${config_option}' to '${val}'"
+        change_ini_param.py --config-file /etc/php7/php.ini --section PHP "${config_option}" "${val}"
+    fi
+done
 
 supervisord -c /etc/supervisor/supervisord.conf
 
