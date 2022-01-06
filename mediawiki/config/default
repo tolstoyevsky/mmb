@@ -3,6 +3,8 @@ server {
     listen PORT default_server;
     listen [::]:PORT default_server;
 
+    client_max_body_size 25M;
+
     root /var/www;
 
     index index.html index.htm index.php;
