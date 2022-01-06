@@ -35,6 +35,15 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
   </tr>
 </table>
 
+## Table of Contents
+
+* [Features](#features)
+* [Configuration](#configuration)
+* [How to create an administrator](#how-to-create-an-administrator)
+* [How to register custom namespaces](#how-to-register-custom-namespaces)
+* [How to modify php.ini](#how-to-modify-phpini)
+* [How to change logo](#how-to-change-logo)
+
 ## Features
 
 * Nginx [1.18.0](http://nginx.org/en/CHANGES-1.18) and PHP [7.4.15](http://php.net/ChangeLog-7.php#7.4.15).
