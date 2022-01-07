@@ -9,8 +9,7 @@ ENV COLLECTIVES_VER v0.17.22
 
 ENV CONTACTS_VER v4.0.7
 
-ENV DECK_VER v1.5.5
-# TODO: bump its version to 1.6.0 when bumping the server version to 23
+ENV DECK_VER v1.6.0
 
 ENV MAIL_VER v1.11.5
 
@@ -18,7 +17,7 @@ ENV NEWS_VER 17.0.1
 
 ENV NEWS_UPDATER_VER 11.0.0
 
-ENV NEXTCLOUD_VER v22.2.0
+ENV NEXTCLOUD_VER v23.0.0
 
 ENV NOTES_VER v4.2.0
 
@@ -26,11 +25,9 @@ ENV NOTIFY_PUSH_VER v0.3.0
 
 ENV PASSMAN_VER 2.4.0
 
-ENV PHOTO_SPHERE_VIEWER_VER v1.22.0
-# TODO: bump its version to v1.23.0 when bumping the server version to 23
+ENV PHOTO_SPHERE_VIEWER_VER v1.23.0
 
-ENV SPREED_VER v12.2.0
-# TODO: bump its version to v13.0.1.1 when bumping the server version to 23
+ENV SPREED_VER v13.0.1.1
 
 ENV TASKS_VER v0.14.2
 
@@ -87,7 +84,6 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.14/community >> /etc/apk/repo
     php7-pecl-imagick \
     php7-pecl-redis \
     \
-    python2 \
     python3 \
     py3-pip \
     # For nextcloud-news-updater to run it as nginx user
@@ -138,18 +134,15 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.14/community >> /etc/apk/repo
  \
  #
  # Build patched Nextcloud.
- # Currently it requires NPM 6 and Python 2.
  #
  && >&2 echo "----- Entering to /var/www/nc" \
- && npm i -g npm@6 \
- && npm config set python /usr/bin/python \
  && cd /var/www/nc \
  # Remove /var/www/nc/core/js/dist to rebuild it to reflect the changes in
  # hide-unnecessary-blocks-on-installation-page.patch
  && rm -r core/js/dist \
  # Remove package-lock.json because of 'Error: Integrity checksum failed when using sha512'
  && rm package-lock.json \
- && /usr/local/bin/npm i --save-dev \
+ && npm i --save-dev \
  && npm run build \
  && rm -r node_modules \
  \
@@ -170,10 +163,8 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.14/community >> /etc/apk/repo
     g++ \
     make \
     npm \
-    python2 \
     py3-pip \
  && rm -r /root/.npm \
- && rm -r /usr/local/lib/node_modules \
  && rm -r /var/cache/apk/*
 
 COPY ./config/avoid-security-or-privacy-risks.conf /etc/nginx/avoid-security-or-privacy-risks.conf
