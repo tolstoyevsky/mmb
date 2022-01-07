@@ -1,33 +1,36 @@
 FROM alpine:3.14
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
-ENV BOOKMARKS_VER v10.0.0
+ENV BOOKMARKS_VER v10.0.3
 
-ENV CALENDAR_VER v2.3.3
+ENV CALENDAR_VER v3.0.4
 
-ENV COLLECTIVES_VER v0.14.22
+ENV COLLECTIVES_VER v0.17.22
 
-ENV CONTACTS_VER v4.0.3
+ENV CONTACTS_VER v4.0.7
 
-ENV DECK_VER v1.5.3
+ENV DECK_VER v1.5.5
+# TODO: bump its version to 1.6.0 when bumping the server version to 23
 
-ENV MAIL_VER v1.10.5
+ENV MAIL_VER v1.11.5
 
-ENV NEWS_VER 16.0.1
+ENV NEWS_VER 17.0.1
 
 ENV NEWS_UPDATER_VER 11.0.0
 
 ENV NEXTCLOUD_VER v22.2.0
 
-ENV NOTES_VER v4.1.1
+ENV NOTES_VER v4.2.0
 
-ENV NOTIFY_PUSH_VER v0.2.2
+ENV NOTIFY_PUSH_VER v0.3.0
 
-ENV PASSMAN_VER 2.3.1335
+ENV PASSMAN_VER 2.4.0
 
 ENV PHOTO_SPHERE_VIEWER_VER v1.22.0
+# TODO: bump its version to v1.23.0 when bumping the server version to 23
 
 ENV SPREED_VER v12.2.0
+# TODO: bump its version to v13.0.1.1 when bumping the server version to 23
 
 ENV TASKS_VER v0.14.2
 
