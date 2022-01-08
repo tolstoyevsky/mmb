@@ -1,7 +1,7 @@
 FROM alpine:3.14
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
-ENV NOTIFY_PUSH_VER v0.2.0
+ENV NOTIFY_PUSH_VER v0.3.0
 
 RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.14/community >> /etc/apk/repositories \
  && apk --update add \
