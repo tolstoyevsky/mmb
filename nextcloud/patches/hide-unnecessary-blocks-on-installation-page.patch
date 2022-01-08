@@ -86,12 +86,12 @@ index 5bdf8b0..4a57ab9 100644
  				<?php p($l->t('Install recommended apps')); ?>
  				<span><?php p($l->t('Calendar, Contacts, Talk, Mail & Collaborative editing')); ?></span>
 diff --git a/webpack.common.js b/webpack.common.js
-index 5c067b3..a03e21e 100644
+index 97ece51..c9dff94 100644
 --- a/webpack.common.js
 +++ b/webpack.common.js
-@@ -4,42 +4,10 @@ const { VueLoaderPlugin } = require('vue-loader')
+@@ -6,42 +6,10 @@ const path = require('path')
  const BabelLoaderExcludeNodeModulesExcept = require('babel-loader-exclude-node-modules-except')
- const path = require('path')
+ const ESLintPlugin = require('eslint-webpack-plugin')
  
 -const accessibility = require('./apps/accessibility/webpack')
 -const comments = require('./apps/comments/webpack')
