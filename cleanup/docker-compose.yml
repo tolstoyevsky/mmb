@@ -2,6 +2,7 @@ version: "2"
 services:
   cleanup:
     image: cusdeb/cleanup
+    restart: always
     environment:
       - CRON_SCHEDULE=${CRON_SCHEDULE}
     volumes:
