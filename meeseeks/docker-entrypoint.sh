@@ -67,6 +67,12 @@ export TENOR_BLACKLISTED_GIF_IDS="${TENOR_BLACKLISTED_GIF_IDS:=""}"
 
 export RESPOND_TO_DM="${RESPOND_TO_DM:="false"}"
 
+export CUSTOM_HOLIDAYS="${CUSTOM_HOLIDAYS:=""}"
+
+export HOLIDAYS_CRONTAB_WEEK_BEFORE="${HOLIDAYS_CRONTAB_WEEK_BEFORE:="0 0 7 * * *"}"
+
+export HOLIDAYS_CRONTAB_DAY_BEFORE="${HOLIDAYS_CRONTAB_DAY_BEFORE:="0 0 18 * * *"}"
+
 set +x
 
 ln -snf /usr/share/zoneinfo/"${TIME_ZONE}" /etc/localtime
