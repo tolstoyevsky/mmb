@@ -39,26 +39,4 @@ services:
     - MYSQL_PASSWORD=
     volumes:
     - ./_db:/var/lib/mysql
-  mw_qserve:
-    image: cusdeb/mwlib:0.16.2
-    network_mode: "host"
-    environment:
-    - MW_QSERVE_PORT=${MW_QSERVE_PORT}
-    - TYPE=mw-qserve
-  postman:
-    image: cusdeb/mwlib:0.16.2
-    network_mode: "host"
-    environment:
-    - TYPE=postman
-  nserve:
-    image: cusdeb/mwlib:0.16.2
-    network_mode: "host"
-    environment:
-    - RENDER_SERVER_PORT=${RENDER_SERVER_PORT}
-    - TYPE=nserve
-  nslave:
-    image: cusdeb/mwlib:0.16.2
-    network_mode: "host"
-    environment:
-    - TYPE=nslave
 
