@@ -21,13 +21,13 @@ services:
     # Render server
     - CREDENTIALS=${CREDENTIALS}
     - RENDER_SERVER_HOST=${RENDER_SERVER_HOST}
-    network_mode: "host"
     volumes:
     - ./_deleted:/var/www/w/deleted
     - ./_images:/var/www/w/images
-  mariadb:
+    ports:
+    - "8004:8004"
+  db:
     image: cusdeb/mariadb:10.5-amd64
-    network_mode: "host"
     environment:
     - MYSQL_ROOT_PASSWORD=cusdeb
     volumes:

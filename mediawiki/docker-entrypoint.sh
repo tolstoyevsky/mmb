@@ -45,7 +45,7 @@ export PHP_INI_upload_max_filesize="${PHP_INI_upload_max_filesize:=25M}"
 # Static parameters
 #
 
-WG_DB_SERVER=127.0.0.1:3306
+WG_DB_SERVER=db:3306
 
 WG_DB_USER=root
 
