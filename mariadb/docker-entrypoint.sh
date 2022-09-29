@@ -5,16 +5,6 @@ export MYSQLD_port="${MYSQLD_port:=3306}"
 # Configure MariaDB only using /etc/my.cnf
 rm /etc/my.cnf.d/mariadb-server.cnf
 
-# execute any pre-init scripts
-for i in /scripts/pre-init.d/*sh
-do
-    if [[ -e "${i}" ]]; then
-        >&2 echo "[i] pre-init.d - processing $i"
-	# shellcheck source=/dev/null
-        . "${i}"
-    fi
-done
-
 if [[ -d /run/mysqld ]]; then
     >&2 echo "[i] mysqld already present, skipping creation"
     chown -R mysql:mysql /run/mysqld
@@ -69,16 +59,6 @@ EOF
     /usr/bin/mysqld --user=mysql --bootstrap --verbose=0 < "${tfile}"
     rm -f "${tfile}"
 fi
-
-# execute any pre-exec scripts
-for i in /scripts/pre-exec.d/*sh
-do
-    if [[ -e "${i}" ]]; then
-        >&2 echo "[i] pre-exec.d - processing $i"
-	# shellcheck source=/dev/null
-        . ${i}
-    fi
-done
 
 # Modify /etc/my.cnf
 for key_val in $(env); do
