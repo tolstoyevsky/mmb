@@ -43,11 +43,11 @@ else
     MYSQL_PASSWORD=${MYSQL_PASSWORD:-""}
 
     tfile=`mktemp`
-    if [[ ! -f "$tfile" ]]; then
+    if [[ ! -f "${tfile}" ]]; then
         return 1
     fi
 
-    cat << EOF > $tfile
+    cat << EOF > "${tfile}"
 USE mysql;
 FLUSH PRIVILEGES;
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION;
@@ -57,16 +57,16 @@ EOF
 
     if [[ "$MYSQL_DATABASE" != "" ]]; then
         >&2 echo "[i] Creating database: $MYSQL_DATABASE"
-        echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET utf8 COLLATE utf8_general_ci;" >> ${tfile}
+        echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET utf8 COLLATE utf8_general_ci;" >> "${tfile}"
 
         if [[ "$MYSQL_USER" != "" ]]; then
         >&2 echo "[i] Creating user: $MYSQL_USER with password $MYSQL_PASSWORD"
-        echo "GRANT ALL ON \`$MYSQL_DATABASE\`.* to '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" >> ${tfile}
+        echo "GRANT ALL ON \`$MYSQL_DATABASE\`.* to '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" >> "${tfile}"
         fi
     fi
 
-    /usr/bin/mysqld --user=mysql --bootstrap --verbose=0 < $tfile
-    rm -f $tfile
+    /usr/bin/mysqld --user=mysql --bootstrap --verbose=0 < "${tfile}"
+    rm -f "${tfile}"
 fi
 
 # execute any pre-exec scripts
@@ -81,7 +81,7 @@ done
 # Modify /etc/my.cnf
 for key_val in $(env); do
     if [[ "${key_val}" = MYSQLD_* ]]; then
-        var=$(echo ${key_val} | cut -d"=" -f1)
+        var=$(echo "${key_val}" | cut -d"=" -f1)
 	val=${!var}
 	config_option=${var#MYSQLD_}
 	>&2 echo "Changing '${config_option}' to '${val}'"
