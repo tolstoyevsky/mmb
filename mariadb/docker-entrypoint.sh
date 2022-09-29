@@ -8,13 +8,13 @@ rm /etc/my.cnf.d/mariadb-server.cnf
 # execute any pre-init scripts
 for i in /scripts/pre-init.d/*sh
 do
-    if [ -e "${i}" ]; then
+    if [[ -e "${i}" ]]; then
         >&2 echo "[i] pre-init.d - processing $i"
         . "${i}"
     fi
 done
 
-if [ -d "/run/mysqld" ]; then
+if [[ -d /run/mysqld ]]; then
     >&2 echo "[i] mysqld already present, skipping creation"
     chown -R mysql:mysql /run/mysqld
 else
@@ -23,7 +23,7 @@ else
     chown -R mysql:mysql /run/mysqld
 fi
 
-if [ -d /var/lib/mysql/mysql ]; then
+if [[ -d /var/lib/mysql/mysql ]]; then
     >&2 echo "[i] MySQL directory already present, skipping creation"
     chown -R mysql:mysql /var/lib/mysql
 else
@@ -33,7 +33,7 @@ else
 
     mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
-    if [ "$MYSQL_ROOT_PASSWORD" = "" ]; then
+    if [[ "$MYSQL_ROOT_PASSWORD" = "" ]]; then
         MYSQL_ROOT_PASSWORD=`pwgen 16 1`
         >&2 echo "[i] MySQL root Password: $MYSQL_ROOT_PASSWORD"
     fi
@@ -43,7 +43,7 @@ else
     MYSQL_PASSWORD=${MYSQL_PASSWORD:-""}
 
     tfile=`mktemp`
-    if [ ! -f "$tfile" ]; then
+    if [[ ! -f "$tfile" ]]; then
         return 1
     fi
 
@@ -55,11 +55,11 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' identified by '$MYSQL_ROOT_PAS
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${MYSQL_ROOT_PASSWORD}');
 EOF
 
-    if [ "$MYSQL_DATABASE" != "" ]; then
+    if [[ "$MYSQL_DATABASE" != "" ]]; then
         >&2 echo "[i] Creating database: $MYSQL_DATABASE"
         echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET utf8 COLLATE utf8_general_ci;" >> ${tfile}
 
-        if [ "$MYSQL_USER" != "" ]; then
+        if [[ "$MYSQL_USER" != "" ]]; then
         >&2 echo "[i] Creating user: $MYSQL_USER with password $MYSQL_PASSWORD"
         echo "GRANT ALL ON \`$MYSQL_DATABASE\`.* to '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" >> ${tfile}
         fi
@@ -72,7 +72,7 @@ fi
 # execute any pre-exec scripts
 for i in /scripts/pre-exec.d/*sh
 do
-    if [ -e "${i}" ]; then
+    if [[ -e "${i}" ]]; then
         >&2 echo "[i] pre-exec.d - processing $i"
         . ${i}
     fi
