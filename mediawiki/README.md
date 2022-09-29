@@ -104,3 +104,8 @@ In order to modify a [php.ini](https://php.net/manual/en/configuration.file.php)
 ## How to change logo
 
 Provide a square logo named `kblogo.png` which is 135x135px or 150x150px.
+
+## How to upgrade from MariaDB 10.5 to MariaDB 10.6
+
+1. Run `docker exec` on a running MariaDB container.
+2. Run `mariadb-upgrade -uroot -p`.
