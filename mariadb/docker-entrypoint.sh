@@ -19,7 +19,7 @@ if [[ -d /run/mysqld ]]; then
     >&2 echo "[i] mysqld already present, skipping creation"
     chown -R mysql:mysql /run/mysqld
 else
-    >&2 echo "[i] mysqld not found, creating...."
+    >&2 echo "[i] mysqld not found, creating..."
     mkdir -p /run/mysqld
     chown -R mysql:mysql /run/mysqld
 fi
@@ -36,7 +36,7 @@ else
 
     if [[ "$MYSQL_ROOT_PASSWORD" = "" ]]; then
         MYSQL_ROOT_PASSWORD=$(pwgen 16 1)
-        >&2 echo "[i] MySQL root Password: $MYSQL_ROOT_PASSWORD"
+        >&2 echo "[i] MySQL root password: ${MYSQL_ROOT_PASSWORD}"
     fi
 
     MYSQL_DATABASE=${MYSQL_DATABASE:-""}
@@ -51,18 +51,18 @@ else
     cat << EOF > "${tfile}"
 USE mysql;
 FLUSH PRIVILEGES;
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION;
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' identified by '${MYSQL_ROOT_PASSWORD}' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' identified by '${MYSQL_ROOT_PASSWORD}' WITH GRANT OPTION;
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${MYSQL_ROOT_PASSWORD}');
 EOF
 
-    if [[ "$MYSQL_DATABASE" != "" ]]; then
-        >&2 echo "[i] Creating database: $MYSQL_DATABASE"
-        echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET utf8 COLLATE utf8_general_ci;" >> "${tfile}"
+    if [[ "${MYSQL_DATABASE}" != "" ]]; then
+        >&2 echo "[i] Creating database: ${MYSQL_DATABASE}"
+        echo "CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\` CHARACTER SET utf8 COLLATE utf8_general_ci;" >> "${tfile}"
 
         if [[ "$MYSQL_USER" != "" ]]; then
-        >&2 echo "[i] Creating user: $MYSQL_USER with password $MYSQL_PASSWORD"
-        echo "GRANT ALL ON \`$MYSQL_DATABASE\`.* to '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" >> "${tfile}"
+            >&2 echo "[i] Creating user: ${MYSQL_USER} with password ${MYSQL_PASSWORD}"
+            echo "GRANT ALL ON \`${MYSQL_DATABASE}\`.* to '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';" >> "${tfile}"
         fi
     fi
 
