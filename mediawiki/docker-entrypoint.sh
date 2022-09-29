@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#
+# Configurable parameters
+#
+
 PORT=${PORT:=8004}
 
 # shellcheck disable=SC2034
@@ -17,13 +21,7 @@ WG_EMERGENCY_CONTACT=${WG_EMERGENCY_CONTACT:=username@domain.com}
 
 WG_PASSWORD_SENDER=${WG_PASSWORD_SENDER:=username@domain.com}
 
-WG_DB_SERVER=${WG_DB_SERVER:=127.0.0.1:33061}
-
 WG_DB_NAME=${WG_DB_NAME:=knowledge_base}
-
-WG_DB_USER=${WG_DB_USER:=root}
-
-WG_DB_PASSWORD=${WG_DB_PASSWORD:=cusdeb}
 
 ALLOW_ACCOUNT_CREATION=${ALLOW_ACCOUNT_CREATION:=true}
 
@@ -42,6 +40,16 @@ RENDER_SERVER=${RENDER_SERVER:=http://127.0.0.1:8007}
 export PHP_INI_post_max_size="${PHP_INI_post_max_size:=25M}"
 
 export PHP_INI_upload_max_filesize="${PHP_INI_upload_max_filesize:=25M}"
+
+#
+# Static parameters
+#
+
+WG_DB_SERVER=127.0.0.1:3306
+
+WG_DB_USER=root
+
+WG_DB_PASSWORD=cusdeb
 
 # Does variable substitution for LocalSettings.php.
 # Globals:

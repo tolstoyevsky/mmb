@@ -12,10 +12,7 @@ services:
     - WG_SERVER=${WG_SERVER}
     - WG_EMERGENCY_CONTACT=${WG_EMERGENCY_CONTACT}
     - WG_PASSWORD_SENDER=${WG_PASSWORD_SENDER}
-    - WG_DB_SERVER=${WG_DB_SERVER}
     - WG_DB_NAME=${WG_DB_NAME}
-    - WG_DB_USER=${WG_DB_USER}
-    - WG_DB_PASSWORD=${WG_DB_PASSWORD}
     - ALLOW_ACCOUNT_CREATION=${ALLOW_ACCOUNT_CREATION}
     - ALLOW_ACCOUNT_EDITING=${ALLOW_ACCOUNT_EDITING}
     - ALLOW_ANONYMOUS_READING=${ALLOW_ANONYMOUS_READING}
@@ -32,11 +29,7 @@ services:
     image: cusdeb/mariadb:10.5-amd64
     network_mode: "host"
     environment:
-    - MYSQLD_port=33061
     - MYSQL_ROOT_PASSWORD=cusdeb
-    - MYSQL_DATABASE=
-    - MYSQL_USER=
-    - MYSQL_PASSWORD=
     volumes:
     - ./_db:/var/lib/mysql
 
