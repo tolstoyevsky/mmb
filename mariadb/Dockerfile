@@ -6,6 +6,7 @@ RUN apk --update add \
     curl \
     mariadb \
     mariadb-client \
+    mariadb-server-utils \
     pwgen \
     python3 \
  && cd /usr/bin \
