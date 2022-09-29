@@ -9,5 +9,3 @@ services:
     - MYSQL_DATABASE=
     - MYSQL_USER=
     - MYSQL_PASSWORD=
-    volumes:
-    - /srv/mysql:/var/lib/mysql

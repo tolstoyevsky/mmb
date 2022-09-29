@@ -23,10 +23,6 @@ MariaDB is a community-developed fork of MySQL that is dedicated to FOSS (free a
     <td>3306</td>
   </tr> 
   <tr>
-    <td>Data volume</td>
-    <td>/srv/mysql</td>
-  </tr> 
-  <tr>
     <td valign="top">Base image</td>
     <td><a href="https://hub.docker.com/_/alpine">Official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.16.0-released.html">Alpine 3.16</a></td>
   </tr>
