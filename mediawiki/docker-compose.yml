@@ -26,7 +26,7 @@ services:
     ports:
     - "8004:8004"
   db:
-    image: cusdeb/mariadb:10.5-amd64
+    image: cusdeb/mariadb:10.6-amd64
     environment:
     - MYSQL_ROOT_PASSWORD=cusdeb
     volumes:
