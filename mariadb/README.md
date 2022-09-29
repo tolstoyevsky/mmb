@@ -12,11 +12,11 @@ MariaDB is a community-developed fork of MySQL that is dedicated to FOSS (free a
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://mariadb.com/kb/en/mariadb-1050-release-notes/">10.5</a></td>
+    <td><a href="https://mariadb.com/kb/en/mariadb-1060-release-notes/">10.6</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>03 Dec 2019</td>
+    <td>26 Apr 2021</td>
   </tr>
   <tr>
     <td>Port</td>
@@ -28,7 +28,7 @@ MariaDB is a community-developed fork of MySQL that is dedicated to FOSS (free a
   </tr> 
   <tr>
     <td valign="top">Base image</td>
-    <td><a href="https://hub.docker.com/_/alpine">Official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.13.0-released.html">Alpine 3.13</a></td>
+    <td><a href="https://hub.docker.com/_/alpine">Official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.16.0-released.html">Alpine 3.16</a></td>
   </tr>
 </table>
 
