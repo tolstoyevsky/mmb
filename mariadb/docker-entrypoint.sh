@@ -10,6 +10,7 @@ for i in /scripts/pre-init.d/*sh
 do
     if [[ -e "${i}" ]]; then
         >&2 echo "[i] pre-init.d - processing $i"
+	# shellcheck source=/dev/null
         . "${i}"
     fi
 done
@@ -74,6 +75,7 @@ for i in /scripts/pre-exec.d/*sh
 do
     if [[ -e "${i}" ]]; then
         >&2 echo "[i] pre-exec.d - processing $i"
+	# shellcheck source=/dev/null
         . ${i}
     fi
 done
