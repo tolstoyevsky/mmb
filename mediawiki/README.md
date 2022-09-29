@@ -23,10 +23,10 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
     <td>8004</td>
   </tr>
   <tr>
-    <td>Data volume</td>
+    <td>Data volumes</td>
     <td>
-        <code>/srv/mediawiki/deleted:/var/www/w/deleted</code><br>
-        <code>/srv/mediawiki/images:/var/www/w/images</code>
+        <code>./_deleted:/var/www/w/deleted</code><br>
+        <code>./_images:/var/www/w/images</code>
     </td>
   </tr>
   <tr>
