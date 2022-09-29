@@ -6,6 +6,6 @@ services:
     environment:
     - MYSQLD_port=${MYSQLD_port}
     - MYSQL_ROOT_PASSWORD=cusdeb
-    - MYSQL_DATABASE=
-    - MYSQL_USER=
-    - MYSQL_PASSWORD=
+    - MYSQL_DATABASE=${MYSQL_DATABASE}
+    - MYSQL_USER=${MYSQL_USER}
+    - MYSQL_PASSWORD=${MYSQL_PASSWORD}
