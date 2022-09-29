@@ -35,7 +35,7 @@ else
     mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
     if [[ "$MYSQL_ROOT_PASSWORD" = "" ]]; then
-        MYSQL_ROOT_PASSWORD=`pwgen 16 1`
+        MYSQL_ROOT_PASSWORD=$(pwgen 16 1)
         >&2 echo "[i] MySQL root Password: $MYSQL_ROOT_PASSWORD"
     fi
 
@@ -43,7 +43,7 @@ else
     MYSQL_USER=${MYSQL_USER:-""}
     MYSQL_PASSWORD=${MYSQL_PASSWORD:-""}
 
-    tfile=`mktemp`
+    tfile=$(mktemp)
     if [[ ! -f "${tfile}" ]]; then
         return 1
     fi
