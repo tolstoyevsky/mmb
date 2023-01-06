@@ -29,7 +29,7 @@ services:
           mongo mongo/rocketchat --eval \"
             rs.initiate({
               _id: 'rs0',
-              members: [ { _id: 0, host: 'localhost:27017' } ]})\" &&
+              members: [ { _id: 0, host: 'mongo:27017' } ]})\" &&
           s=$$? && break || s=$$?;
           echo \"Tried $$i times. Waiting 5 secs...\";
           sleep 5;

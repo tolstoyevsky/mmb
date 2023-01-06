@@ -56,6 +56,17 @@ rs0:PRIMARY> use rocketchat
 rs0:PRIMARY> db.migrations.update({_id: 'control'}, {$set: {locked: false}})
 ```
 
+### Connection to Mongo refused after upgrading Rocket.Chat to 5.x
+
+To solve the problem, stick to the following instructions (inspired by [Rocket.Chat#26519](https://github.com/RocketChat/Rocket.Chat/issues/26519)):
+
+```
+$ docker exec -it rocketchat_mongo_1 mongo
+config = rs.config()
+config.members[0].host = 'mongo:27017'
+rs.reconfig(config)
+```
+
 ## Configuration
 
 `docker-compose.yml` supports the following parameters.
