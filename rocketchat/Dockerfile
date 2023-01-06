@@ -1,4 +1,4 @@
-FROM node:12-bullseye
+FROM node:14-bullseye
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV BUNDLE_DIR /home/rocketchat/bundle
