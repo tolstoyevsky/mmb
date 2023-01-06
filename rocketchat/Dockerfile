@@ -6,7 +6,7 @@ ENV BUNDLE_DIR /home/rocketchat/bundle
 # Rocket.Chat Buildmaster <buildmaster@rocket.chat>
 ENV PUBLIC_KEY 0E163286C20D07B9787EBE9FD7F9D0414FD08104
 
-ENV RC_VERSION 4.3.0
+ENV RC_VERSION 5.4.1
 
 COPY patches /home/rocketchat/patches
 
