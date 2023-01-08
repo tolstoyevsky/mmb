@@ -24,13 +24,13 @@ Nextcloud is a self-hosted collaboration platform which can act as an alternativ
   </tr>
   <tr>
     <td valign="top">Base image</td>
-    <td><a href="https://hub.docker.com/_/alpine">The official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.14.0-released.html">Alpine 3.14</a></td>
+    <td><a href="https://hub.docker.com/_/alpine">The official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.17.0-released.html">Alpine 3.17</a></td>
   </tr>
 </table>
 
 ## Features
 
-* Nginx [1.20.1](https://nginx.org/en/CHANGES-1.20) and PHP [7.4.23](https://php.net/ChangeLog-7.php#PHP_7_4).
+* Nginx [1.22.1](https://nginx.org/en/CHANGES-1.22) and PHP [8.1.14](https://php.net/ChangeLog-8.php#PHP_8_1).
 * The [Bookmarks](https://github.com/nextcloud/bookmarks) application allows users to collect and organize bookmarks.
 * The [Calendar](https://github.com/nextcloud/calendar) and [Contacts](https://github.com/nextcloud/contacts) applications allow users to synchronize calendars and contacts with the server respectively.
 * The [Circles](https://github.com/nextcloud/circles) allows users to create their own groups of users/colleagues/friends. Those groups of users (or circles) can then be used by any other app (for example, [Collectives](https://gitlab.com/collectivecloud/collectives)) for sharing purpose through the Circles API.
