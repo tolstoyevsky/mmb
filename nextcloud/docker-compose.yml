@@ -31,7 +31,7 @@ services:
     volumes:
     - ./_config:/config
   mariadb:
-    image: cusdeb/mariadb:10.5-amd64
+    image: cusdeb/mariadb:10.6-amd64
     environment:
     - MYSQLD_bind_address=mariadb
     - MYSQLD_innodb_file_per_table=1
