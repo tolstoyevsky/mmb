@@ -15,25 +15,25 @@ PM_MAX_SPARE_SERVERS=${PM_MAX_SPARE_SERVERS:=3}
 TYPE="${TYPE:=backend}"
 
 change_ini_params() {
-    change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "user" "nginx"
+    change_ini_param.py --config-file /etc/php81/php-fpm.d/www.conf --section www "user" "nginx"
 
-    change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "group" "nginx"
+    change_ini_param.py --config-file /etc/php81/php-fpm.d/www.conf --section www "group" "nginx"
 
-    change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "listen" "backend:9000"
+    change_ini_param.py --config-file /etc/php81/php-fpm.d/www.conf --section www "listen" "backend:9000"
 
-    change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "clear_env" "no"
+    change_ini_param.py --config-file /etc/php81/php-fpm.d/www.conf --section www "clear_env" "no"
 
-    change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "pm.max_children" "${PM_MAX_CHILDREN}"
+    change_ini_param.py --config-file /etc/php81/php-fpm.d/www.conf --section www "pm.max_children" "${PM_MAX_CHILDREN}"
 
-    change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "pm.start_servers" "${PM_START_SERVERS}"
+    change_ini_param.py --config-file /etc/php81/php-fpm.d/www.conf --section www "pm.start_servers" "${PM_START_SERVERS}"
 
-    change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "pm.min_spare_servers" "${PM_MIN_SPARE_SERVERS}"
+    change_ini_param.py --config-file /etc/php81/php-fpm.d/www.conf --section www "pm.min_spare_servers" "${PM_MIN_SPARE_SERVERS}"
 
-    change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "pm.max_spare_servers" "${PM_MAX_SPARE_SERVERS}"
+    change_ini_param.py --config-file /etc/php81/php-fpm.d/www.conf --section www "pm.max_spare_servers" "${PM_MAX_SPARE_SERVERS}"
 
-    change_ini_param.py --config-file /etc/php7/php.ini --section PHP "memory_limit" "512M"
+    change_ini_param.py --config-file /etc/php81/php.ini --section PHP "memory_limit" "512M"
 
-    change_ini_param.py --config-file /etc/php7/php.ini --section PHP "apc.enable_cli" "1"
+    change_ini_param.py --config-file /etc/php81/php.ini --section PHP "apc.enable_cli" "1"
 }
 
 case "${TYPE}" in
@@ -52,7 +52,7 @@ backend)
         chown nginx:nginx -R /var/www/nc/data
     fi
 
-    /usr/sbin/php-fpm7 --nodaemonize
+    /usr/sbin/php-fpm81 --nodaemonize
 
     ;;
 news_updater)

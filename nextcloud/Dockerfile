@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM alpine:3.17
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV BOOKMARKS_VER v10.0.3
@@ -40,7 +40,7 @@ ENV NODE_OPTIONS "--max-old-space-size=6144"
 
 COPY ./patches /patches
 
-RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.14/community >> /etc/apk/repositories \
+RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.17/community >> /etc/apk/repositories \
  && apk --update add \
     bash \
     composer \
@@ -51,38 +51,38 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.14/community >> /etc/apk/repo
     nginx \
     npm \
     patch \
-    php7 \
+    php81 \
  # required modules
-    php7-ctype \
-    php7-curl \
-    php7-dom \
-    php7-fpm \
-    php7-gd \
-    php7-iconv \
-    php7-json \
-    php7-mbstring \
-    php7-openssl \
+    php81-ctype \
+    php81-curl \
+    php81-dom \
+    php81-fpm \
+    php81-gd \
+    php81-iconv \
+    php81-json \
+    php81-mbstring \
+    php81-openssl \
     # for nextcloud-news-updater
-    php7-pcntl \
-    php7-pdo \
-    php7-pdo_mysql \
-    php7-posix \
-    php7-session \
-    php7-simplexml \
-    php7-tokenizer \
-    php7-xml \
-    php7-xmlreader \
-    php7-xmlwriter \
-    php7-zip \
+    php81-pcntl \
+    php81-pdo \
+    php81-pdo_mysql \
+    php81-posix \
+    php81-session \
+    php81-simplexml \
+    php81-tokenizer \
+    php81-xml \
+    php81-xmlreader \
+    php81-xmlwriter \
+    php81-zip \
  # recommended modules
-    php7-bcmath \
-    php7-fileinfo \
-    php7-gmp \
-    php7-intl \
-    php7-opcache \
-    php7-pecl-apcu \
-    php7-pecl-imagick \
-    php7-pecl-redis \
+    php81-bcmath \
+    php81-fileinfo \
+    php81-gmp \
+    php81-intl \
+    php81-opcache \
+    php81-pecl-apcu \
+    php81-pecl-imagick \
+    php81-pecl-redis \
     \
     python3 \
     py3-pip \
