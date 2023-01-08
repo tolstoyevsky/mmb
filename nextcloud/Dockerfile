@@ -1,4 +1,4 @@
-FROM alpine:3.17
+FROM node:16-alpine3.17
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV BOOKMARKS_VER v10.0.3
@@ -49,7 +49,6 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.17/community >> /etc/apk/repo
     git \
     make \
     nginx \
-    npm \
     patch \
     php81 \
  # required modules
