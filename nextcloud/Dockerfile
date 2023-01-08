@@ -17,7 +17,7 @@ ENV NEWS_VER 17.0.1
 
 ENV NEWS_UPDATER_VER 11.0.0
 
-ENV NEXTCLOUD_VER v23.0.0
+ENV NEXTCLOUD_VER v25.0.2
 
 ENV NOTES_VER v4.2.0
 
@@ -136,11 +136,6 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.17/community >> /etc/apk/repo
  #
  && >&2 echo "----- Entering to /var/www/nc" \
  && cd /var/www/nc \
- # Remove /var/www/nc/core/js/dist to rebuild it to reflect the changes in
- # hide-unnecessary-blocks-on-installation-page.patch
- && rm -r core/js/dist \
- # Remove package-lock.json because of 'Error: Integrity checksum failed when using sha512'
- && rm package-lock.json \
  && npm i --save-dev \
  && npm run build \
  && rm -r node_modules \
