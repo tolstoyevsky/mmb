@@ -31,7 +31,7 @@ ENV SPREED_VER v15.0.2
 
 ENV TASKS_VER v0.14.5
 
-ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/news /var/www/nc/apps2/text"
+ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/mail /var/www/nc/apps2/news /var/www/nc/apps2/text"
 
 ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/collectives /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/mail /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
 
@@ -91,9 +91,6 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.17/community >> /etc/apk/repo
  && cd /usr/bin \
  && curl -O https://raw.githubusercontent.com/tolstoyevsky/mmb/master/utils/change_ini_param.py \
  && chmod +x /usr/bin/change_ini_param.py \
- # Use Composer 1.x for the Mail app. See https://github.com/nextcloud/mail/issues/5136
- && curl -O https://getcomposer.org/download/1.10.23/composer.phar \
- && chmod +x /usr/bin/composer.phar \
  # Install Nextcloud
  && cd /var/www \
  && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/server.git nc \
@@ -124,10 +121,6 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.17/community >> /etc/apk/repo
  && git clone -b "${TASKS_VER}"               --depth 1 https://github.com/nextcloud/tasks.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/text.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/viewer.git \
- \
- && >&2 echo "----- Entering to /var/www/nc/apps2/mail" \
- && cd /var/www/nc/apps2/mail \
- && composer.phar install --no-dev \
  \
  && for dir in ${INSTALL_DEPS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; composer install --no-dev; done \
  \
