@@ -1,8 +1,21 @@
+diff --git a/core/Controller/SetupController.php b/core/Controller/SetupController.php
+index ab8b197..e878cb6 100644
+--- a/core/Controller/SetupController.php
++++ b/core/Controller/SetupController.php
+@@ -113,7 +113,7 @@ class SetupController {
+ 			}
+ 		}
+ 
+-		header('Location: ' . \OC::$server->getURLGenerator()->getAbsoluteURL('index.php/core/apps/recommended'));
++		header('Location: ' . \OC::$server->getURLGenerator()->getAbsoluteURL('index.php/core/apps/defaultPageUrl'));
+ 		exit();
+ 	}
+ 
 diff --git a/core/src/jquery/showpassword.js b/core/src/jquery/showpassword.js
-index 3423ea5..06493c6 100644
+index a00a57c..5b29532 100644
 --- a/core/src/jquery/showpassword.js
 +++ b/core/src/jquery/showpassword.js
-@@ -98,6 +98,7 @@ $.fn.extend({
+@@ -97,6 +97,7 @@ $.fn.extend({
  
  			// Create clone
  			const $clone = cloneElement($input)
@@ -11,10 +24,10 @@ index 3423ea5..06493c6 100644
  
  			// Set callback arguments
 diff --git a/core/templates/installation.php b/core/templates/installation.php
-index 5bdf8b0..4a57ab9 100644
+index 2affefe..66d1ef9 100644
 --- a/core/templates/installation.php
 +++ b/core/templates/installation.php
-@@ -59,7 +59,7 @@ script('core', 'dist/install');
+@@ -58,7 +58,7 @@ script('core', 'install');
  	<?php endif; ?>
  
  	<?php if (!$_['directoryIsSet'] or count($_['errors']) > 0): ?>
@@ -23,7 +36,7 @@ index 5bdf8b0..4a57ab9 100644
  		<div id="datadirContent">
  			<label for="directory"><?php p($l->t('Data folder')); ?></label>
  			<input type="text" name="directory" id="directory"
-@@ -71,7 +71,7 @@ script('core', 'dist/install');
+@@ -70,7 +70,7 @@ script('core', 'install');
  	<?php endif; ?>
  
  	<?php if (!$_['dbIsSet'] or count($_['errors']) > 0): ?>
@@ -32,7 +45,7 @@ index 5bdf8b0..4a57ab9 100644
  		<?php if ($_['hasMySQL'] or $_['hasPostgreSQL'] or $_['hasOracle']) {
  			$hasOtherDB = true;
  		} else {
-@@ -98,19 +98,19 @@ script('core', 'dist/install');
+@@ -97,18 +97,18 @@ script('core', 'install');
  	</fieldset>
  
  		<?php if ($hasOtherDB): ?>
@@ -40,95 +53,35 @@ index 5bdf8b0..4a57ab9 100644
 +		<fieldset id='databaseField' style="display: none">
  		<div id="use_other_db">
  			<p class="grouptop">
- 				<label for="dbuser" class="infield"><?php p($l->t('Database user')); ?></label>
+ 				<label for="dbuser"><?php p($l->t('Database user')); ?></label>
  				<input type="text" name="dbuser" id="dbuser"
- 					placeholder="<?php p($l->t('Database user')); ?>"
 -					value="<?php p($_['dbuser']); ?>"
 +					value="root"
  					autocomplete="off" autocapitalize="none" autocorrect="off">
  			</p>
  			<p class="groupmiddle">
- 				<input type="password" name="dbpass" id="dbpass" data-typetoggle="#dbpassword-toggle"
- 					placeholder="<?php p($l->t('Database password')); ?>"
+ 				<label for="dbpass"><?php p($l->t('Database password')); ?></label>
+ 				<input type="password" name="dbpass" id="dbpass"
 -					value="<?php p($_['dbpass']); ?>"
 +					value="secret"
  					autocomplete="off" autocapitalize="none" autocorrect="off">
- 				<label for="dbpass" class="infield"><?php p($l->t('Database password')); ?></label>
- 				<input type="checkbox" id="dbpassword-toggle" class="hidden-visually" name="dbpassword-toggle" aria-label="<?php p($l->t('Show password')); ?>">
-@@ -120,7 +120,7 @@ script('core', 'dist/install');
- 				<label for="dbname" class="infield"><?php p($l->t('Database name')); ?></label>
+ 				<button id="show" class="toggle-password" aria-label="<?php p($l->t('Show password')); ?>">
+ 					<img src="<?php print_unescaped(image_path('', 'actions/toggle.svg')); ?>" alt="<?php p($l->t('Toggle password visibility')); ?>">
+@@ -117,7 +117,7 @@ script('core', 'install');
+ 			<p class="groupmiddle">
+ 				<label for="dbname"><?php p($l->t('Database name')); ?></label>
  				<input type="text" name="dbname" id="dbname"
- 					placeholder="<?php p($l->t('Database name')); ?>"
 -					value="<?php p($_['dbname']); ?>"
 +					value="nc"
  					autocomplete="off" autocapitalize="none" autocorrect="off"
  					pattern="[0-9a-zA-Z$_-]+">
  			</p>
-@@ -139,7 +139,7 @@ script('core', 'dist/install');
- 				<label for="dbhost" class="infield"><?php p($l->t('Database host')); ?></label>
+@@ -134,7 +134,7 @@ script('core', 'install');
+ 			<p class="groupbottom">
+ 				<label for="dbhost"><?php p($l->t('Database host')); ?></label>
  				<input type="text" name="dbhost" id="dbhost"
- 					placeholder="<?php p($l->t('Database host')); ?>"
 -					value="<?php p($_['dbhost']); ?>"
 +					value="mariadb:3306"
  					autocomplete="off" autocapitalize="none" autocorrect="off">
  			</p>
  			<p class="info">
-@@ -159,9 +159,9 @@ script('core', 'dist/install');
- 		</fieldset>
- 	<?php endif ?>
- 
--	<fieldset>
-+	<fieldset style="display: none">
- 		<p class="info">
--			<input type="checkbox" id="install-recommended-apps" name="install-recommended-apps" class="checkbox checkbox--white" checked>
-+			<input type="checkbox" id="install-recommended-apps" name="install-recommended-apps" class="checkbox checkbox--white">
- 			<label for="install-recommended-apps">
- 				<?php p($l->t('Install recommended apps')); ?>
- 				<span><?php p($l->t('Calendar, Contacts, Talk, Mail & Collaborative editing')); ?></span>
-diff --git a/webpack.common.js b/webpack.common.js
-index 97ece51..c9dff94 100644
---- a/webpack.common.js
-+++ b/webpack.common.js
-@@ -6,42 +6,10 @@ const path = require('path')
- const BabelLoaderExcludeNodeModulesExcept = require('babel-loader-exclude-node-modules-except')
- const ESLintPlugin = require('eslint-webpack-plugin')
- 
--const accessibility = require('./apps/accessibility/webpack')
--const comments = require('./apps/comments/webpack')
- const core = require('./core/webpack')
--const dashboard = require('./apps/dashboard/webpack')
--const dav = require('./apps/dav/webpack')
--const files = require('./apps/files/webpack')
--const files_sharing = require('./apps/files_sharing/webpack')
--const files_trashbin = require('./apps/files_trashbin/webpack')
--const files_versions = require('./apps/files_versions/webpack')
--const oauth2 = require('./apps/oauth2/webpack')
--const settings = require('./apps/settings/webpack')
--const systemtags = require('./apps/systemtags/webpack')
--const user_status = require('./apps/user_status/webpack')
--const weather_status = require('./apps/weather_status/webpack')
--const twofactor_backupscodes = require('./apps/twofactor_backupcodes/webpack')
--const updatenotification = require('./apps/updatenotification/webpack')
--const workflowengine = require('./apps/workflowengine/webpack')
- 
- const modules = {
--	accessibility,
--	comments,
- 	core,
--	dashboard,
--	dav,
--	files,
--	files_sharing,
--	files_trashbin,
--	files_versions,
--	oauth2,
--	settings,
--	systemtags,
--	user_status,
--	weather_status,
--	twofactor_backupscodes,
--	updatenotification,
--	workflowengine,
- }
- 
- const modulesToBuild = () => {
