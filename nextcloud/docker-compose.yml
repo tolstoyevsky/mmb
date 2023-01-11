@@ -25,7 +25,7 @@ services:
     - ./_config:/var/www/nc/config
     - ./_nc/data:/var/www/nc/data
   notify_push:
-    image: cusdeb/notify_push:0.3.0-amd64
+    image: cusdeb/notify_push:0.5.0-amd64
     environment:
     - NEXTCLOUD_URL=http://frontend:8001
     volumes:
