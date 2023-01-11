@@ -1,9 +1,9 @@
-FROM alpine:3.14
+FROM alpine:3.17
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV NOTIFY_PUSH_VER v0.3.0
 
-RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.14/community >> /etc/apk/repositories \
+RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.17/community >> /etc/apk/repositories \
  && apk --update add \
     cargo \
     git \
