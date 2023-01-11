@@ -11,4 +11,9 @@ if [[ -z "${NEXTCLOUD_URL}" ]]; then
     exit 1
 fi
 
-notify_push /config/config.php
+while true; do
+    if ! $(notify_push /config/config.php); then
+        >&2 echo "Failed to run. Retrying in 30 secs";
+        sleep 30
+    fi
+done
