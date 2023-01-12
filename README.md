@@ -4,7 +4,7 @@
     <img src="/logo/382x400.png" alt="MMB">
 </p>
 
-MMB is the set of Dockerfiles and assets for building Docker images with different services (such as [Nextcloud](https://nextcloud.com), [Transmission](https://transmissionbt.com), etc.).
+MMB is the set of Dockerfiles and assets for building Docker images with different services (such as [MediaWiki](https://mediawiki.org), [Nextcloud](https://nextcloud.com), etc.).
 
 MMB stands for "Mr. Meeseeks Box". The project name was inspired by the episode ["Meeseeks and Destroy"](https://en.wikipedia.org/wiki/Meeseeks_and_Destroy) of an animated sitcom [Rick and Morty](https://en.wikipedia.org/wiki/Rick_and_Morty).
 

@@ -29,8 +29,6 @@ jobs:
           shellcheck nextcloud/docker-entrypoint.sh
           shellcheck redis/docker-entrypoint.sh
           shellcheck rocketchat/docker-entrypoint.sh
-          shellcheck transmission-web/docker-entrypoint.sh
-          shellcheck vsftpd/docker-entrypoint.sh
 
       - name: Install pylint
         run: pip install pylint
