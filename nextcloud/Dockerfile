@@ -1,6 +1,8 @@
 FROM node:16-alpine3.17
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
+ENV ARIA2_VER 1.36.0
+
 ENV BOOKMARKS_VER v12.0.0
 
 ENV CALENDAR_VER v4.2.1
@@ -12,6 +14,8 @@ ENV CONTACTS_VER v5.0.2
 ENV DECK_VER v1.8.3
 
 ENV MAIL_VER v2.2.2
+
+ENV NCDOWNLOADER_VER v1.0.2
 
 ENV NEWS_VER 20.0.0
 
@@ -31,9 +35,11 @@ ENV SPREED_VER v15.0.2
 
 ENV TASKS_VER v0.14.5
 
-ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/mail /var/www/nc/apps2/news /var/www/nc/apps2/text"
+ENV YT_DLP_VER 2023.01.06
 
-ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/collectives /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/mail /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
+ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news /var/www/nc/apps2/text"
+
+ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/collectives /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
 
 # For building the Spreed app
 ENV NODE_OPTIONS "--max-old-space-size=6144"
@@ -87,6 +93,18 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.17/community >> /etc/apk/repo
     py3-pip \
     # For nextcloud-news-updater to run it as nginx user
     sudo \
+    # for aria2
+    autoconf \
+    automake \
+    c-ares-dev \
+    ca-certificates \
+    expat-dev \
+    ffmpeg \
+    gettext-dev \
+    gnutls-dev \
+    libtool \
+    musl-dev \
+    sqlite-dev \
  && mkdir -p /run/nginx \
  && cd /usr/bin \
  && curl -O https://raw.githubusercontent.com/tolstoyevsky/mmb/master/utils/change_ini_param.py \
@@ -111,6 +129,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.17/community >> /etc/apk/repo
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/files_pdfviewer.git \
  && git clone -b "${PHOTO_SPHERE_VIEWER_VER}" --depth 1 https://github.com/nextcloud/files_photospheres.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/files_rightclick.git \
+ && git clone -b "${NCDOWNLOADER_VER}"        --depth 1 https://github.com/shiningw/ncdownloader \
  && git clone -b "${NEWS_VER}"                --depth 1 https://github.com/nextcloud/news.git \
  && git clone -b "${NOTES_VER}"               --depth 1 https://github.com/nextcloud/notes.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/notifications.git \
@@ -132,7 +151,33 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.17/community >> /etc/apk/repo
  && npm i --save-dev \
  && npm run build \
  && rm -r node_modules \
- \
+ #
+ # Install the mandatory NCDownloader requirement.
+ #
+ && npm install @nextcloud/browserslist-config --save-dev \
+ #
+ # Install the optional NCDownloader requirement.
+ #
+ && cd /var/www/nc/apps2/ncdownloader \
+ && mkdir bin && cd bin \
+ && curl -OL https://github.com/yt-dlp/yt-dlp/releases/download/"${YT_DLP_VER}"/yt-dlp \
+ && chmod a+rx yt-dlp \
+ #
+ # Build one more optional NCDownloader requirement.
+ #
+ && cd && git clone -b release-"${ARIA2_VER}" --depth=1 https://github.com/aria2/aria2.git \
+ && cd aria2 \
+ && autoreconf -i \
+ && ./configure \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --mandir=/usr/share/man \
+        --infodir=/usr/share/info \
+        --localstatedir=/var \
+        --disable-nls \
+        --with-ca-bundle=/etc/ssl/certs/ca-certificates.crt \
+ && make && make install \
+ && cd .. && rm -r aria2 \
  #
  # Build Nextcloud apps.
  # It requires NPM 7.
@@ -145,11 +190,17 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.17/community >> /etc/apk/repo
  # Cleanup
  && npm r -g npm \
  && apk del \
+    autoconf \
+    automake \
+    composer \
     curl \
-    git \
     g++ \
+    gcc \
+    git \
+    libtool \
     make \
     npm \
+    musl-dev \
     py3-pip \
  && rm -r /root/.npm \
  && rm -r /var/cache/apk/*
