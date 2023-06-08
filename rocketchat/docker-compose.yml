@@ -1,7 +1,7 @@
 version: "2"
 services:
   rocketchat:
-    image: cusdeb/rocketchat:5.4-amd64
+    image: cusdeb/rocketchat:6.2-amd64
     networks:
     - rocketchat-network
     environment:
