@@ -1,7 +1,66 @@
-FROM node:16-alpine3.17
-MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
+ARG ALPINE_VER=3.17
+ARG ARIA2_DEPS="c-ares-dev ca-certificates expat-dev ffmpeg gettext-dev gnutls-dev sqlite-dev"
+ARG ARIA2_PREFIX="/root/aria2"
+ARG NEXTCLOUD_VER=v25.0.2
+ARG YT_DLP_TARGET_PATH=/var/www/nc/apps2/ncdownloader/bin/
 
+
+FROM alpine:"${ALPINE_VER}" AS build_aria2
+ARG ALPINE_VER
+ARG ARIA2_DEPS
+ARG ARIA2_PREFIX
 ENV ARIA2_VER 1.36.0
+
+RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /etc/apk/repositories \
+ && apk --update add \
+    autoconf \
+    automake \
+    g++ \
+    git \
+    libtool \
+    make \
+    musl-dev \
+    ${ARIA2_DEPS} \
+ && cd && mkdir aria2 \
+ && git clone -b release-"${ARIA2_VER}" --depth=1 https://github.com/aria2/aria2.git aria2-src \
+ && cd aria2-src \
+ && autoreconf -i \
+ && ./configure \
+        --prefix="${ARIA2_PREFIX}" \
+        --sysconfdir="${ARIA2_PREFIX}"/etc \
+        --mandir="${ARIA2_PREFIX}"/share/man \
+        --infodir="${ARIA2_PREFIX}"/share/info \
+        --localstatedir="${ARIA2_PREFIX}"/var \
+        --disable-nls \
+        --with-ca-bundle=/etc/ssl/certs/ca-certificates.crt \
+ # Build an optional NCDownloader requirement.
+ && make && make install
+
+
+FROM alpine:"${ALPINE_VER}" AS download_change_ini_param_py
+
+RUN apk --update add curl \
+ && cd \
+ && curl -O https://raw.githubusercontent.com/tolstoyevsky/mmb/master/utils/change_ini_param.py \
+ && chmod +x change_ini_param.py
+
+
+FROM alpine:"${ALPINE_VER}" AS download_yt_dlp
+ENV YT_DLP_VER 2023.01.06
+
+RUN apk --update add curl \
+ && cd \
+ # Download an optional NCDownloader requirement.
+ && curl -OL https://github.com/yt-dlp/yt-dlp/releases/download/"${YT_DLP_VER}"/yt-dlp \
+ && chmod a+rx yt-dlp
+
+
+FROM node:16-alpine"${ALPINE_VER}"
+ARG ALPINE_VER
+ARG ARIA2_DEPS
+ARG ARIA2_PREFIX
+ARG NEXTCLOUD_VER
+ARG YT_DLP_TARGET_PATH
 
 ENV BOOKMARKS_VER v12.0.0
 
@@ -21,8 +80,6 @@ ENV NEWS_VER 20.0.0
 
 ENV NEWS_UPDATER_VER 11.0.0
 
-ENV NEXTCLOUD_VER v25.0.2
-
 ENV NOTES_VER v4.6.0
 
 ENV NOTIFY_PUSH_VER v0.5.0
@@ -35,8 +92,6 @@ ENV SPREED_VER v15.0.2
 
 ENV TASKS_VER v0.14.5
 
-ENV YT_DLP_VER 2023.01.06
-
 ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news /var/www/nc/apps2/text"
 
 ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/collectives /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
@@ -46,11 +101,10 @@ ENV NODE_OPTIONS "--max-old-space-size=6144"
 
 COPY ./patches /patches
 
-RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.17/community >> /etc/apk/repositories \
+RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /etc/apk/repositories \
  && apk --update add \
     bash \
     composer \
-    curl \
     g++ \
     git \
     make \
@@ -93,22 +147,9 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.17/community >> /etc/apk/repo
     py3-pip \
     # For nextcloud-news-updater to run it as nginx user
     sudo \
-    # for aria2
-    autoconf \
-    automake \
-    c-ares-dev \
-    ca-certificates \
-    expat-dev \
-    ffmpeg \
-    gettext-dev \
-    gnutls-dev \
-    libtool \
-    musl-dev \
-    sqlite-dev \
+    ${ARIA2_DEPS} \
  && mkdir -p /run/nginx \
  && cd /usr/bin \
- && curl -O https://raw.githubusercontent.com/tolstoyevsky/mmb/master/utils/change_ini_param.py \
- && chmod +x /usr/bin/change_ini_param.py \
  # Install Nextcloud
  && cd /var/www \
  && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/server.git nc \
@@ -152,32 +193,11 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.17/community >> /etc/apk/repo
  && npm run build \
  && rm -r node_modules \
  #
+ # Create the directory for yt-dlp.
  # Install the mandatory NCDownloader requirement.
  #
+ && mkdir ${YT_DLP_TARGET_PATH} \
  && npm install @nextcloud/browserslist-config --save-dev \
- #
- # Install the optional NCDownloader requirement.
- #
- && cd /var/www/nc/apps2/ncdownloader \
- && mkdir bin && cd bin \
- && curl -OL https://github.com/yt-dlp/yt-dlp/releases/download/"${YT_DLP_VER}"/yt-dlp \
- && chmod a+rx yt-dlp \
- #
- # Build one more optional NCDownloader requirement.
- #
- && cd && git clone -b release-"${ARIA2_VER}" --depth=1 https://github.com/aria2/aria2.git \
- && cd aria2 \
- && autoreconf -i \
- && ./configure \
-        --prefix=/usr \
-        --sysconfdir=/etc \
-        --mandir=/usr/share/man \
-        --infodir=/usr/share/info \
-        --localstatedir=/var \
-        --disable-nls \
-        --with-ca-bundle=/etc/ssl/certs/ca-certificates.crt \
- && make && make install \
- && cd .. && rm -r aria2 \
  #
  # Build Nextcloud apps.
  # It requires NPM 7.
@@ -190,20 +210,19 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.17/community >> /etc/apk/repo
  # Cleanup
  && npm r -g npm \
  && apk del \
-    autoconf \
-    automake \
     composer \
-    curl \
-    g++ \
-    gcc \
     git \
-    libtool \
     make \
     npm \
-    musl-dev \
     py3-pip \
  && rm -r /root/.npm \
  && rm -r /var/cache/apk/*
+
+COPY --from=build_aria2 "${ARIA2_PREFIX}" /usr/
+
+COPY --from=download_change_ini_param_py /root/change_ini_param.py /usr/bin/
+
+COPY --from=download_yt_dlp /root/yt-dlp ${YT_DLP_TARGET_PATH}
 
 COPY ./config/avoid-security-or-privacy-risks.conf /etc/nginx/avoid-security-or-privacy-risks.conf
 
