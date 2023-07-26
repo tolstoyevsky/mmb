@@ -55,48 +55,10 @@ RUN apk --update add curl \
  && chmod a+rx yt-dlp
 
 
-FROM node:16-alpine"${ALPINE_VER}"
+FROM node:16-alpine"${ALPINE_VER}" AS main
 ARG ALPINE_VER
 ARG ARIA2_DEPS
-ARG ARIA2_PREFIX
 ARG NEXTCLOUD_VER
-ARG YT_DLP_TARGET_PATH
-
-ENV BOOKMARKS_VER v12.1.0
-
-ENV CALENDAR_VER v4.2.1
-
-ENV COLLECTIVES_VER v2.1.1
-
-ENV CONTACTS_VER v5.0.2
-
-ENV DECK_VER v1.8.5
-
-ENV MAIL_VER v2.2.2
-
-ENV NCDOWNLOADER_VER v1.0.2
-
-ENV NEWS_VER 20.0.0
-
-ENV NEWS_UPDATER_VER 11.0.0
-
-ENV NOTES_VER v4.6.0
-
-ENV NOTIFY_PUSH_VER v0.5.0
-
-ENV PASSMAN_VER 2.4.2
-
-ENV PHOTO_SPHERE_VIEWER_VER v1.25.2
-
-ENV SPREED_VER v15.0.2
-
-ENV TASKS_VER v0.14.5
-
-ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news /var/www/nc/apps2/text"
-
-ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/collectives /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
-
-# For building the Spreed app
 ENV NODE_OPTIONS "--max-old-space-size=6144"
 
 COPY ./patches /patches
@@ -156,11 +118,68 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  && cd /var/www \
  && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/server.git nc \
  && cd /var/www/nc \
+ && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/3rdparty.git \
  # Patch Nextcloud
  && mv /patches /var/www/nc/patches \
  && for patch in $(cat patches/series); do patch -p1 < patches/"${patch}"; done \
- # Install apps
- && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/3rdparty.git \
+ # Build patched Nextcloud
+ && >&2 echo "----- Entering to /var/www/nc" \
+ && cd /var/www/nc \
+ && npm i --save-dev \
+ && npm run build \
+ && rm -r node_modules
+
+COPY ./config/avoid-security-or-privacy-risks.conf /etc/nginx/avoid-security-or-privacy-risks.conf
+COPY ./config/add-misc-headers.conf /etc/nginx/add-misc-headers.conf
+COPY ./config/default /etc/nginx/http.d/default.conf
+COPY ./docker-entrypoint.sh /entrypoint.sh
+
+WORKDIR /var/www/nc
+
+
+FROM main
+ARG ARIA2_PREFIX
+ARG NEXTCLOUD_VER
+ARG YT_DLP_TARGET_PATH
+
+ENV BOOKMARKS_VER v12.1.0
+
+ENV CALENDAR_VER v4.2.1
+
+ENV COLLECTIVES_VER v2.1.1
+
+ENV CONTACTS_VER v5.0.2
+
+ENV DECK_VER v1.8.5
+
+ENV MAIL_VER v2.2.2
+
+ENV NCDOWNLOADER_VER v1.0.2
+
+ENV NEWS_VER 20.0.0
+
+ENV NEWS_UPDATER_VER 11.0.0
+
+ENV NOTES_VER v4.6.0
+
+ENV NOTIFY_PUSH_VER v0.5.0
+
+ENV PASSMAN_VER 2.4.2
+
+ENV PHOTO_SPHERE_VIEWER_VER v1.25.2
+
+ENV SPREED_VER v15.0.2
+
+ENV TASKS_VER v0.14.5
+
+ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news /var/www/nc/apps2/text"
+
+ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/collectives /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
+
+# For building the Spreed app
+ENV NODE_OPTIONS "--max-old-space-size=6144"
+
+RUN cd /var/www/nc \
  && mkdir apps2 && cd apps2 \
  && git clone -b "${BOOKMARKS_VER}"           --depth 1 https://github.com/nextcloud/bookmarks.git \
  && git clone -b "${CALENDAR_VER}"            --depth 1 https://github.com/nextcloud/calendar.git \
@@ -186,14 +205,6 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  \
  && for dir in ${INSTALL_DEPS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; composer install --no-dev; done \
  \
- #
- # Build patched Nextcloud.
- #
- && >&2 echo "----- Entering to /var/www/nc" \
- && cd /var/www/nc \
- && npm i --save-dev \
- && npm run build \
- && rm -r node_modules \
  #
  # Create the directory for yt-dlp.
  # Install the mandatory NCDownloader requirement.
@@ -225,16 +236,6 @@ COPY --from=build_aria2 "${ARIA2_PREFIX}" /usr/
 COPY --from=download_change_ini_param_py /root/change_ini_param.py /usr/bin/
 
 COPY --from=download_yt_dlp /root/yt-dlp ${YT_DLP_TARGET_PATH}
-
-COPY ./config/avoid-security-or-privacy-risks.conf /etc/nginx/avoid-security-or-privacy-risks.conf
-
-COPY ./config/add-misc-headers.conf /etc/nginx/add-misc-headers.conf
-
-COPY ./config/default /etc/nginx/http.d/default.conf
-
-COPY ./docker-entrypoint.sh /entrypoint.sh
-
-WORKDIR /var/www/nc
 
 CMD ["/entrypoint.sh"]
 
