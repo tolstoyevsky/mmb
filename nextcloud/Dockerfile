@@ -213,7 +213,6 @@ RUN cd /var/www/nc \
  && npm install @nextcloud/browserslist-config --save-dev \
  #
  # Build Nextcloud apps.
- # It requires NPM 7.
  #
  && for dir in ${BUILD_JS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; npm i; npm run svg_sprite 2> /dev/null || true; npm run build; rm -rf node_modules; done \
  \
