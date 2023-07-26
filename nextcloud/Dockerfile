@@ -125,9 +125,11 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
     php81-pcntl \
     php81-pdo \
     php81-pdo_mysql \
+    php81-pdo_sqlite \
     php81-posix \
     php81-session \
     php81-simplexml \
+    php81-sqlite3 \
     php81-tokenizer \
     php81-xml \
     php81-xmlreader \
