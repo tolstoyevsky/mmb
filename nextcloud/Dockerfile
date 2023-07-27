@@ -10,7 +10,6 @@ ARG ALPINE_VER
 ARG ARIA2_DEPS
 ARG ARIA2_PREFIX
 ENV ARIA2_VER 1.36.0
-
 RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /etc/apk/repositories \
  && apk --update add \
     autoconf \
@@ -38,7 +37,6 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
 
 
 FROM alpine:"${ALPINE_VER}" AS download_change_ini_param_py
-
 RUN apk --update add curl \
  && cd \
  && curl -O https://raw.githubusercontent.com/tolstoyevsky/mmb/master/utils/change_ini_param.py \
@@ -47,7 +45,6 @@ RUN apk --update add curl \
 
 FROM alpine:"${ALPINE_VER}" AS download_yt_dlp
 ENV YT_DLP_VER 2023.07.06
-
 RUN apk --update add curl \
  && cd \
  # Download an optional NCDownloader requirement.
