@@ -224,7 +224,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  #
  # Build Nextcloud apps.
  #
- && for dir in ${BUILD_JS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; npm i; npm run svg_sprite 2> /dev/null || true; npm run build; rm -rf node_modules; done \
+ && for dir in ${BUILD_JS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; npm i; npm run svg_sprite 2> /dev/null || true; npm run build; done \
  \
  && chown -R nginx:nginx /var/www \
  \
@@ -236,6 +236,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
     make \
     py3-pip \
  && find /var/www/nc -name .git | xargs rm -r \
+ && find /var/www/nc -name node_modules | xargs rm -rf \
  && rm -r /root/.cache \
  && rm -r /root/.composer \
  && rm -r /root/.npm \
