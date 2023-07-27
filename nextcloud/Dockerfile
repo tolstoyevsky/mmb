@@ -46,7 +46,7 @@ RUN apk --update add curl \
 
 
 FROM alpine:"${ALPINE_VER}" AS download_yt_dlp
-ENV YT_DLP_VER 2023.01.06
+ENV YT_DLP_VER 2023.07.06
 
 RUN apk --update add curl \
  && cd \
