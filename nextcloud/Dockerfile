@@ -86,6 +86,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
     composer \
     git \
     patch \
+ && find /var/www/nc -name .git | xargs rm -r \
  && rm -r node_modules \
  && rm -r /root/.npm \
  && rm -r /var/cache/apk/*
@@ -234,6 +235,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
     git \
     make \
     py3-pip \
+ && find /var/www/nc -name .git | xargs rm -r \
  && rm -r /root/.cache \
  && rm -r /root/.composer \
  && rm -r /root/.npm \
