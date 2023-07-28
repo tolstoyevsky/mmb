@@ -62,53 +62,10 @@ COPY ./patches /patches
 
 RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /etc/apk/repositories \
  && apk --update add \
-    bash \
     composer \
-    g++ \
     git \
-    make \
     nginx \
     patch \
-    php81 \
- # required modules
-    php81-ctype \
-    php81-curl \
-    php81-dom \
-    php81-fpm \
-    php81-gd \
-    php81-iconv \
-    php81-json \
-    php81-mbstring \
-    php81-openssl \
-    # for nextcloud-news-updater
-    php81-pcntl \
-    php81-pdo \
-    php81-pdo_mysql \
-    php81-pdo_sqlite \
-    php81-posix \
-    php81-session \
-    php81-simplexml \
-    php81-sqlite3 \
-    php81-tokenizer \
-    php81-xml \
-    php81-xmlreader \
-    php81-xmlwriter \
-    php81-zip \
- # recommended modules
-    php81-bcmath \
-    php81-fileinfo \
-    php81-gmp \
-    php81-intl \
-    php81-opcache \
-    php81-pecl-apcu \
-    php81-pecl-imagick \
-    php81-pecl-redis \
-    \
-    python3 \
-    py3-pip \
-    # For nextcloud-news-updater to run it as nginx user
-    sudo \
-    ${ARIA2_DEPS} \
  && mkdir -p /run/nginx \
  && cd /usr/bin \
  # Install Nextcloud
@@ -124,7 +81,15 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  && cd /var/www/nc \
  && npm i --save-dev \
  && npm run build \
- && rm -r node_modules
+ # Cleaning up
+ && apk del \
+    composer \
+    git \
+    patch \
+ && find /var/www/nc -name .git | xargs rm -r \
+ && rm -r node_modules \
+ && rm -r /root/.npm \
+ && rm -r /var/cache/apk/*
 
 COPY ./config/avoid-security-or-privacy-risks.conf /etc/nginx/avoid-security-or-privacy-risks.conf
 COPY ./config/add-misc-headers.conf /etc/nginx/add-misc-headers.conf
@@ -135,6 +100,7 @@ WORKDIR /var/www/nc
 
 
 FROM main
+ARG ALPINE_VER
 ARG ARIA2_PREFIX
 ARG NEXTCLOUD_VER
 ARG YT_DLP_TARGET_PATH
@@ -176,7 +142,54 @@ ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/ww
 # For building the Spreed app
 ENV NODE_OPTIONS "--max-old-space-size=6144"
 
-RUN cd /var/www/nc \
+RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /etc/apk/repositories \
+ && apk --update add \
+    bash \
+    composer \
+    g++ \
+    git \
+    make \
+    php81 \
+ # required modules
+    php81-ctype \
+    php81-curl \
+    php81-dom \
+    php81-fpm \
+    php81-gd \
+    php81-iconv \
+    php81-json \
+    php81-mbstring \
+    php81-openssl \
+    # for nextcloud-news-updater
+    php81-pcntl \
+    php81-pdo \
+    php81-pdo_mysql \
+    php81-pdo_sqlite \
+    php81-posix \
+    php81-session \
+    php81-simplexml \
+    php81-sqlite3 \
+    php81-tokenizer \
+    php81-xml \
+    php81-xmlreader \
+    php81-xmlwriter \
+    php81-zip \
+ # recommended modules
+    php81-bcmath \
+    php81-fileinfo \
+    php81-gmp \
+    php81-intl \
+    php81-opcache \
+    php81-pecl-apcu \
+    php81-pecl-imagick \
+    php81-pecl-redis \
+    \
+    python3 \
+    py3-pip \
+    # For nextcloud-news-updater to run it as nginx user
+    sudo \
+    ${ARIA2_DEPS} \
+ && cd /var/www/nc \
  && mkdir apps2 && cd apps2 \
  && git clone -b "${BOOKMARKS_VER}"           --depth 1 https://github.com/nextcloud/bookmarks.git \
  && git clone -b "${CALENDAR_VER}"            --depth 1 https://github.com/nextcloud/calendar.git \
@@ -211,19 +224,21 @@ RUN cd /var/www/nc \
  #
  # Build Nextcloud apps.
  #
- && for dir in ${BUILD_JS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; npm i; npm run svg_sprite 2> /dev/null || true; npm run build; rm -rf node_modules; done \
+ && for dir in ${BUILD_JS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; npm i; npm run svg_sprite 2> /dev/null || true; npm run build; done \
  \
  && chown -R nginx:nginx /var/www \
  \
  && pip3 install nextcloud-news-updater=="${NEWS_UPDATER_VER}" \
  # Cleanup
- && npm r -g npm \
  && apk del \
     composer \
     git \
     make \
-    npm \
     py3-pip \
+ && find /var/www/nc -name .git | xargs rm -r \
+ && find /var/www/nc -name node_modules | xargs rm -rf \
+ && rm -r /root/.cache \
+ && rm -r /root/.composer \
  && rm -r /root/.npm \
  && rm -r /var/cache/apk/*
 
