@@ -1,6 +1,0 @@
-watchtower:
-  image: cusdeb/watchtower:0.3.0-amd64
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-  command: --cleanup --interval 300
-
