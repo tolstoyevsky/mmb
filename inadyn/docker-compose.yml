@@ -1,7 +1,0 @@
-version: "2"
-services:
-  inadyn:
-    image: cusdeb/inadyn:2.1-amd64
-    network_mode: "host"
-    volumes:
-    - ./inadyn.conf:/etc/inadyn.conf
