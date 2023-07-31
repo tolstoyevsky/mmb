@@ -54,7 +54,6 @@ RUN apk --update add curl \
 
 FROM node:16-alpine"${ALPINE_VER}" AS main
 ARG ALPINE_VER
-ARG ARIA2_DEPS
 ARG NEXTCLOUD_VER
 ENV NODE_OPTIONS "--max-old-space-size=6144"
 
