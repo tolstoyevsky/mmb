@@ -2,6 +2,7 @@ version: "2"
 services:
   rocketchat:
     image: cusdeb/rocketchat:6.2-amd64
+    restart: always
     networks:
     - rocketchat-network
     environment:
@@ -14,6 +15,7 @@ services:
     - "8006:8006"
   mongo:
     image: mongo:4.4
+    restart: always
     networks:
     - rocketchat-network
     volumes:
