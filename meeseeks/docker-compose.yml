@@ -1,5 +1,6 @@
 db:
   image: postgres:13
+  restart: always
   environment:
     - POSTGRES_USER=${PG_USER}
     - POSTGRES_DB=${PG_NAME}
@@ -12,6 +13,7 @@ db:
 
 meeseeks:
   image: meeseeks:${TAG}
+  restart: always
   net: host
   environment:
     # ----- Meeseeks
