@@ -4,19 +4,13 @@ set -x
 
 export ALIAS="${ALIAS:=""}"
 
-export COMPANY_NAME="${COMPANY_NAME:=""}"
-
 export CONNECT_ATTEMPTS="${CONNECT_ATTEMPTS:="5"}"
-
-export HELLO_RESPONSE="${HELLO_RESPONSE:="Hello my friend"}"
 
 export ROCKET_CHAT_API="${ROCKET_CHAT_API}"
 
 export PASSWORD="${PASSWORD}"
 
 export USER_NAME="${USER_NAME}"
-
-export TIME_ZONE="${TIME_ZONE:="Europe/Moscow"}"
 
 export PG_HOST="${PG_HOST:="127.0.0.1"}"
 
@@ -36,24 +30,9 @@ export CHECK_USERS_AVATARS="${CHECK_USERS_AVATARS:=""}"
 
 export CREATE_BIRTHDAY_CHANNELS="${CREATE_BIRTHDAY_CHANNELS:=""}"
 
-export COMPANY_NAME="${COMPANY_NAME:="CusDeb Solutions"}"
-
-export GREETINGS_RESPONSE="${GREETINGS_RESPONSE:="Welcome to ${COMPANY_NAME}!"}"
-
 export HB_CRONTAB="${HB_CRONTAB:="0 0 7 * * *"}"
 
-export NOTIFY_SET_AVATAR="${NOTIFY_SET_AVATAR:="Oh, I see you didn't set avatar!
-Please, do it as soon as possible. :grin:"}"
-
-export NOTIFY_SET_BIRTH_DATE="${NOTIFY_SET_BIRTH_DATE:="Hmm…\nIt looks like you forgot to set the date of birth.\nPlease enter it (DD.MM.YYYY)."}"
-
 export NUMBER_OF_DAYS_IN_ADVANCE="${NUMBER_OF_DAYS_IN_ADVANCE:="7"}"
-
-export PERSONS_WITHOUT_BIRTHDAY_RESPONSE="${PERSONS_WITHOUT_BIRTHDAY_RESPONSE:="These persons did not provide date of birth."}"
-
-export SET_BIRTHDAY_RESPONSE="${SET_BIRTHDAY_RESPONSE:="I memorized you birthday, well done! :wink:"}"
-
-export CONGRATULATION_PHRASES="${CONGRATULATION_PHRASES:=""}"
 
 export TENOR_API_KEY="${TENOR_API_KEY}"
 
@@ -72,6 +51,8 @@ export CUSTOM_HOLIDAYS="${CUSTOM_HOLIDAYS:=""}"
 export HOLIDAYS_CRONTAB_WEEK_BEFORE="${HOLIDAYS_CRONTAB_WEEK_BEFORE:="0 0 7 * * *"}"
 
 export HOLIDAYS_CRONTAB_DAY_BEFORE="${HOLIDAYS_CRONTAB_DAY_BEFORE:="0 0 18 * * *"}"
+
+export XML_CALENDAR_HOST="${XML_CALENDAR_HOST:="http://xmlcalendar.ru"}"
 
 set +x
 
