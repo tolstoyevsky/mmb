@@ -73,6 +73,8 @@ export HOLIDAYS_CRONTAB_WEEK_BEFORE="${HOLIDAYS_CRONTAB_WEEK_BEFORE:="0 0 7 * * 
 
 export HOLIDAYS_CRONTAB_DAY_BEFORE="${HOLIDAYS_CRONTAB_DAY_BEFORE:="0 0 18 * * *"}"
 
+export REMINDERS_LIST="${REMINDERS_LIST:="[]"}"
+
 set +x
 
 ln -snf /usr/share/zoneinfo/"${TIME_ZONE}" /etc/localtime
