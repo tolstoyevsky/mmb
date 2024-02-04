@@ -23,10 +23,10 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
     <td>8004</td>
   </tr>
   <tr>
-    <td>Data volume</td>
+    <td>Data volumes</td>
     <td>
-        <code>/srv/mediawiki/deleted:/var/www/w/deleted</code><br>
-        <code>/srv/mediawiki/images:/var/www/w/images</code>
+        <code>./_deleted:/var/www/w/deleted</code><br>
+        <code>./_images:/var/www/w/images</code>
     </td>
   </tr>
   <tr>
@@ -67,10 +67,7 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
 | WG_SERVER               | [Domain or IP](https://mediawiki.org/wiki/Manual:$wgServer) of the wiki host | 127.0.0.1:8004 |
 | WG_EMERGENCY_CONTACT    | Wiki [admin email address](https://mediawiki.org/wiki/Manual:$wgEmergencyContact) | username@domain.com |
 | WG_PASSWORD_SENDER      | [Password reminder email address](https://mediawiki.org/wiki/Manual:$wgPasswordSender) | username@domain.com |
-| WG_DB_SERVER            | [Database server host](https://mediawiki.org/wiki/Manual:$wgDBserver) | 127.0.0.1:33061 |
 | WG_DB_NAME              | [Database name](https://mediawiki.org/wiki/Manual:$wgDBname) | knowledge_base |
-| WG_DB_USER              | [Database user](https://mediawiki.org/wiki/Manual:$wgDBuser) | root |
-| WG_DB_PASSWORD          | [Database password](https://mediawiki.org/wiki/Manual:$wgDBpassword) | cusdeb |
 | ALLOW_ACCOUNT_CREATION  | Allows users to create accounts (`true` and `false`) | `true` |
 | ALLOW_ACCOUNT_EDITING   | Allows users to edit their accounts (`true` and `false`) | `true` |
 | ALLOW_ANONYMOUS_READING | Allows users to read wiki anonymously (`true` and `false`). If the parameter is `false`, wiki is **private** | `false` |
@@ -107,3 +104,8 @@ In order to modify a [php.ini](https://php.net/manual/en/configuration.file.php)
 ## How to change logo
 
 Provide a square logo named `kblogo.png` which is 135x135px or 150x150px.
+
+## How to upgrade from MariaDB 10.5 to MariaDB 10.6
+
+1. Run `docker exec` on a running MariaDB container.
+2. Run `mariadb-upgrade -uroot -p`.

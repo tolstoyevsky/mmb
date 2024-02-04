@@ -25,7 +25,6 @@ jobs:
           shellcheck cleanup/*.sh
           shellcheck mariadb/docker-entrypoint.sh
           shellcheck mediawiki/*.sh
-          shellcheck mwlib/docker-entrypoint.sh
           shellcheck nextcloud/docker-entrypoint.sh
           shellcheck redis/docker-entrypoint.sh
           shellcheck rocketchat/docker-entrypoint.sh
