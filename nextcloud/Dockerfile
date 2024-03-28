@@ -128,13 +128,15 @@ ENV NOTIFY_PUSH_VER v0.5.0
 
 ENV PASSMAN_VER 2.4.2
 
+ENV PASSWORDS_VER 2023.12.2
+
 ENV PHOTO_SPHERE_VIEWER_VER v1.25.2
 
 ENV SPREED_VER v15.0.2
 
 ENV TASKS_VER v0.14.5
 
-ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news /var/www/nc/apps2/text"
+ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news /var/www/nc/apps2/passwords /var/www/nc/apps2/text"
 
 ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/collectives /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
 
@@ -206,6 +208,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/notifications.git \
  && git clone -b "${NOTIFY_PUSH_VER}"         --depth 1 https://github.com/nextcloud/notify_push.git \
  && git clone -b "${PASSMAN_VER}"             --depth 1 https://github.com/nextcloud/passman.git \
+ && git clone -b "${PASSWORDS_VER}"           --depth 1 https://git.mdns.eu/nextcloud/passwords.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/photos.git \
  && git clone -b "${SPREED_VER}"              --depth 1 https://github.com/nextcloud/spreed.git \
  && git clone -b "${TASKS_VER}"               --depth 1 https://github.com/nextcloud/tasks.git \
