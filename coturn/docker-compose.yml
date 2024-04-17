@@ -1,8 +1,8 @@
 coturn:
-  image: cusdeb/coturn:4.5.0.7-amd64
-  command: /usr/bin/run.sh
-  environment:
-  - PORT=3478
-  - TLS_PORT=5349
-  - AUTH_SECRET=secret
-  net: "host"
+  image: cusdeb/coturn:4.6.2
+  ports:
+    - "3478:3478"
+    - "3478:3478/udp"
+    - "5349:5349"
+    - "5349:5349/udp"
+    - "49160-49200:49160-49200/udp"
