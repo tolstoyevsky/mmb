@@ -8,11 +8,11 @@ coturn is a free open source implementation of TURN and STUN Server.
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://github.com/coturn/coturn/wiki/Downloads">4.5.0.7</a></td>
+    <td><a href="https://github.com/coturn/coturn/releases/tag/4.6.2">4.6.2</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>11 Dec 2017</td>
+    <td>12 Apr 2023</td>
   </tr>
   <tr>
     <td>Port</td>
@@ -24,7 +24,7 @@ coturn is a free open source implementation of TURN and STUN Server.
   </tr> 
   <tr>
     <td valign="top">Base image</td>
-    <td>cusdeb/alpine3.7:amd64</td>
+    <td>alpine3.19</td>
   </tr>
 </table>
 

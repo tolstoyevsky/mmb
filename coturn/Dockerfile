@@ -1,29 +1,29 @@
-FROM cusdeb/alpine3.7:amd64
+FROM alpine:3.19
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
-ENV COTURN_VERSION 4.5.0.7
-
-COPY ./rollout_fixes.sh /root/rollout_fixes.sh
+ENV COTURN_VERSION 4.6.2
 
 RUN apk --update add \
     build-base \
     git \
     libevent-dev \
+    linux-headers \
+    openssl \
     openssl-dev \
     sqlite-dev \
+    sudo \
  && cd \
- && ./rollout_fixes.sh \
- && git clone -b $COTURN_VERSION https://github.com/coturn/coturn.git \
+ && git clone -b "${COTURN_VERSION}" --depth 1 https://github.com/coturn/coturn.git \
  && cd coturn \
  && ./configure --prefix=/usr \
  && make && make install \
  && cd && rm -r coturn \
- && cp /usr/share/examples/turnserver/etc/turn_server_cert.pem /etc/turn_server_cert.pem \
- && cp /usr/share/examples/turnserver/etc/turn_server_pkey.pem /etc/turn_server_pkey.pem \
  && apk del \
     build-base \
     git \
+    linux-headers \
  && rm -rf /var/cache/apk/*
 
-COPY ./run.sh /usr/bin/run.sh
+COPY ./docker-entrypoint.sh /entrypoint.sh
 
+CMD ["/entrypoint.sh"]
