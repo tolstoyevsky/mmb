@@ -51,4 +51,11 @@ services:
     - REDIS_CONF_appendonly=no
     # Disable RDB
     - REDIS_CONF_save=
-
+  coturn:
+    image: cusdeb/coturn:4.6.2
+    ports:
+      - "3478:3478"
+      - "3478:3478/udp"
+      - "5349:5349"
+      - "5349:5349/udp"
+      - "49160-49200:49160-49200/udp"
