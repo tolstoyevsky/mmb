@@ -248,4 +248,3 @@ COPY --from=download_change_ini_param_py /root/change_ini_param.py /usr/bin/
 COPY --from=download_yt_dlp /root/yt-dlp ${YT_DLP_TARGET_PATH}
 
 CMD ["/entrypoint.sh"]
-

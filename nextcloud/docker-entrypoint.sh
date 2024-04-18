@@ -66,4 +66,3 @@ news_updater)
     exit 1
     ;;
 esac
-
