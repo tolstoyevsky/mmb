@@ -1,13 +1,13 @@
 version: "3.7"
 services:
   frontend:
-    image: cusdeb/nextcloud:25-amd64
+    image: cusdeb/nextcloud:26t-amd64
     environment:
     - TYPE=frontend
     ports:
     - 8001:8001
   backend:
-    image: cusdeb/nextcloud:25-amd64
+    image: cusdeb/nextcloud:26t-amd64
     environment:
     - TYPE=backend
     - PM_MAX_CHILDREN=${PM_MAX_CHILDREN}
@@ -18,7 +18,7 @@ services:
     - ./_config:/var/www/nc/config
     - ./_nc/data:/var/www/nc/data
   news_updater:
-    image: cusdeb/nextcloud:25-amd64
+    image: cusdeb/nextcloud:26t-amd64
     environment:
     - TYPE=news_updater
     volumes:
@@ -51,4 +51,11 @@ services:
     - REDIS_CONF_appendonly=no
     # Disable RDB
     - REDIS_CONF_save=
-
+  coturn:
+    image: cusdeb/coturn:4.6.2
+    ports:
+      - "3478:3478"
+      - "3478:3478/udp"
+      - "5349:5349"
+      - "5349:5349/udp"
+      - "49160-49200:49160-49200/udp"

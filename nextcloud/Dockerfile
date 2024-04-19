@@ -1,7 +1,7 @@
 ARG ALPINE_VER=3.17
 ARG ARIA2_DEPS="c-ares-dev ca-certificates expat-dev ffmpeg gettext-dev gnutls-dev sqlite-dev"
 ARG ARIA2_PREFIX="/root/aria2"
-ARG NEXTCLOUD_VER=v25.0.2
+ARG NEXTCLOUD_VER=v26.0.13
 ARG YT_DLP_TARGET_PATH=/var/www/nc/apps2/ncdownloader/bin/
 
 
@@ -104,37 +104,37 @@ ARG ARIA2_PREFIX
 ARG NEXTCLOUD_VER
 ARG YT_DLP_TARGET_PATH
 
-ENV BOOKMARKS_VER v12.1.0
+ENV BOOKMARKS_VER v13.1.3
 
-ENV CALENDAR_VER v4.2.1
+ENV CALENDAR_VER v4.6.7
 
 ENV COLLECTIVES_VER v2.1.1
 
-ENV CONTACTS_VER v5.0.2
+ENV CONTACTS_VER v5.5.3
 
-ENV DECK_VER v1.8.5
+ENV DECK_VER v1.9.7
 
-ENV MAIL_VER v2.2.2
+ENV MAIL_VER v3.5.8
 
 ENV NCDOWNLOADER_VER v1.0.2
 
-ENV NEWS_VER 20.0.0
+ENV NEWS_VER 24.0.0
 
 ENV NEWS_UPDATER_VER 11.0.0
 
-ENV NOTES_VER v4.6.0
+ENV NOTES_VER v4.9.4
 
-ENV NOTIFY_PUSH_VER v0.5.0
+ENV NOTIFY_PUSH_VER v0.6.10
 
-ENV PASSMAN_VER 2.4.2
+ENV PASSMAN_VER 2.4.8
 
-ENV PHOTO_SPHERE_VIEWER_VER v1.25.2
+ENV PHOTO_SPHERE_VIEWER_VER v1.26.4
 
-ENV SPREED_VER v15.0.2
+ENV SPREED_VER v16.0.11
 
-ENV TASKS_VER v0.14.5
+ENV TASKS_VER v0.15.0
 
-ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news /var/www/nc/apps2/text"
+ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/photos /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news /var/www/nc/apps2/text"
 
 ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/collectives /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
 
@@ -248,4 +248,3 @@ COPY --from=download_change_ini_param_py /root/change_ini_param.py /usr/bin/
 COPY --from=download_yt_dlp /root/yt-dlp ${YT_DLP_TARGET_PATH}
 
 CMD ["/entrypoint.sh"]
-
