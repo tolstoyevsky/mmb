@@ -3,8 +3,6 @@ services:
   rocketchat:
     image: cusdeb/rocketchat:6.9-amd64
     restart: always
-    networks:
-    - rocketchat-network
     environment:
     - PORT=8006
     - MONGO_DATABASE=rocketchat
@@ -16,15 +14,11 @@ services:
   mongo:
     image: mongo:4.4
     restart: always
-    networks:
-    - rocketchat-network
     volumes:
     - ./_db:/data/db
     command: mongod --oplogSize 128 --replSet rs0
   mongo-init-replica:
     image: mongo:4.4
-    networks:
-    - rocketchat-network
     command: >
       bash -c
         "for i in $$(seq 1 30); do
@@ -38,6 +32,3 @@ services:
         done; (exit $$s)"
     depends_on:
       - mongo
-networks:
-  rocketchat-network:
-    driver: bridge
