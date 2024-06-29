@@ -1,7 +1,7 @@
 version: "2"
 services:
   rocketchat:
-    image: cusdeb/rocketchat:6.5-amd64
+    image: cusdeb/rocketchat:6.9-amd64
     restart: always
     networks:
     - rocketchat-network
