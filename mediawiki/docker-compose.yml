@@ -24,7 +24,7 @@ services:
     - ./_deleted:/var/www/w/deleted
     - ./_images:/var/www/w/images
     ports:
-    - "8004:8004"
+    - "127.0.0.1:8004:8004"
   db:
     image: cusdeb/mariadb:10.6-amd64
     environment:
