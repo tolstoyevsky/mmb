@@ -68,15 +68,15 @@ if [[ -f /var/www/w/namespaces.php ]]; then
     cat /var/www/w/namespaces.php >> /var/www/w/LocalSettings.php
 fi
 
-change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "listen" "/var/run/php/php7.0-fpm.sock"
+change_ini_param.py --config-file /etc/php83/php-fpm.d/www.conf --section www "listen" "/var/run/php/php8.3-fpm.sock"
 
-change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "listen.owner" "nginx"
+change_ini_param.py --config-file /etc/php83/php-fpm.d/www.conf --section www "listen.owner" "nginx"
 
-change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "listen.group" "nginx"
+change_ini_param.py --config-file /etc/php83/php-fpm.d/www.conf --section www "listen.group" "nginx"
 
-change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "user" "nginx"
+change_ini_param.py --config-file /etc/php83/php-fpm.d/www.conf --section www "user" "nginx"
 
-change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "group" "nginx"
+change_ini_param.py --config-file /etc/php83/php-fpm.d/www.conf --section www "group" "nginx"
 
 >&2 echo "Preparing LocalSettings.php"
 
@@ -120,9 +120,9 @@ fi
 
 >&2 echo "Executing maintenance/update.php"
 cd /var/www/w || exit 1
-php7 maintenance/update.php
+php maintenance/update.php
 
-sed -i -e "s/PORT/${PORT}/" /etc/nginx/conf.d/default.conf
+sed -i -e "s/PORT/${PORT}/" /etc/nginx/http.d/default.conf
 
 >&2 echo "Fixing ownership"
 chown -R nginx:nginx /var/www/w/deleted
@@ -141,7 +141,7 @@ for key_val in $(env); do
         val=${!var}
         config_option=${var#PHP_INI_}
         >&2 echo "Changing '${config_option}' to '${val}'"
-        change_ini_param.py --config-file /etc/php7/php.ini --section PHP "${config_option}" "${val}"
+        change_ini_param.py --config-file /etc/php83/php.ini --section PHP "${config_option}" "${val}"
     fi
 done
 

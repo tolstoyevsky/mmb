@@ -1,6 +1,6 @@
 services:
   mediawiki:
-    image: cusdeb/mediawiki:1.35-amd64
+    image: cusdeb/mediawiki:1.42-amd64
     environment:
     - PORT=${PORT}
     - PHP_INI_post_max_size=${PHP_INI_post_max_size}

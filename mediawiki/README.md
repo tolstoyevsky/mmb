@@ -12,11 +12,11 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://mediawiki.org/wiki/MediaWiki_1.35">1.35</a></td>
+    <td><a href="https://www.mediawiki.org/wiki/MediaWiki_1.42">1.42</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>20 Sep 2020</td>
+    <td>27 Jun 2024</td>
   </tr>
   <tr>
     <td>Port</td>
@@ -31,7 +31,7 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
   </tr>
   <tr>
     <td valign="top">Base image</td>
-    <td><a href="https://hub.docker.com/_/alpine">Official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.13.0-released.html">Alpine 3.13</a></td>
+    <td><a href="https://hub.docker.com/_/alpine">Official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.20.0-released.html">Alpine 3.20</a></td>
   </tr>
 </table>
 
@@ -46,7 +46,7 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
 
 ## Features
 
-* Nginx [1.18.0](http://nginx.org/en/CHANGES-1.18) and PHP [7.4.15](http://php.net/ChangeLog-7.php#7.4.15).
+* Nginx [1.26.1](http://nginx.org/en/CHANGES-1.26) and PHP [8.3.9](http://php.net/ChangeLog-8.php#8.3.9).
 * The [Cite](https://www.mediawiki.org/wiki/Extension:Cite) extension which allows creating references as footnotes on a page, using `<ref>` and `<references />` tags.
 * The [MobileFrontend](https://www.mediawiki.org/wiki/Extension:MobileFrontend) extension which provides a mobile view.
 * The [SyntaxHighlight](https://mediawiki.org/wiki/Extension:SyntaxHighlight) extension which provides rich formatting of source code using the `<syntaxhighlight>` tag.
@@ -78,7 +78,7 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
 Administrators are wiki users who are members of the "sysop" user group (see details [here](https://mediawiki.org/wiki/Manual:Administrators)). An administrator can be created, using the [createAndPromote.php](https://mediawiki.org/wiki/Manual:CreateAndPromote.php) script:
 
 1. Run `docker exec` on a running MediaWiki container.
-2. Run `php7 maintenance/createAndPromote.php --sysop <username> <password>` inside the container.
+2. Run `php maintenance/createAndPromote.php --sysop <username> <password>` inside the container.
 
 ## How to register custom namespaces
 

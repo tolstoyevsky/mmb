@@ -156,9 +156,6 @@ $wgVirtualRestConfig['modules']['parsoid']['forwardCookies'] = true;
 
 $wgMFDefaultSkinClass = 'SkinVector';
 
-// Cannot use wfLoadExtension here since extension.json does not exist.
-require "$IP/extensions/Collection/Collection.php";
-
 $wgCollectionFormats = array(
    'rl' => 'PDF',
 );
@@ -175,6 +172,7 @@ function wfMetricCounter() {
 }
 
 wfLoadExtension('Cite');
+wfLoadExtension('Collection');
 wfLoadExtension('MobileFrontend');
 wfLoadExtension('Parsoid', 'vendor/wikimedia/parsoid/extension.json');
 wfLoadExtension('SyntaxHighlight_GeSHi');

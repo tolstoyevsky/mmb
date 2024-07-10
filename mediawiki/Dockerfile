@@ -1,31 +1,31 @@
-FROM alpine:3.13
+FROM alpine:3.20
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
-ENV MEDIAWIKI_VERSION REL1_35
+ENV MEDIAWIKI_VERSION REL1_42
 
-RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repositories \
+RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.20/community >> /etc/apk/repositories \
  && apk --update add \
     bash \
     curl \
     git \
     mysql-client \
     nginx \
-    php7 \
-    php7-ctype \
-    php7-curl \
-    php7-dom \
-    php7-fileinfo \
-    php7-fpm \
-    php7-gd \
-    php7-iconv \
-    php7-intl \
-    php7-json \
-    php7-mbstring \
-    php7-mysqli \
-    php7-pecl-apcu \
-    php7-session \
-    php7-xml \
-    php7-xmlreader \
+    php83 \
+    php83-ctype \
+    php83-curl \
+    php83-dom \
+    php83-fileinfo \
+    php83-fpm \
+    php83-gd \
+    php83-iconv \
+    php83-intl \
+    php83-json \
+    php83-mbstring \
+    php83-mysqli \
+    php83-pecl-apcu \
+    php83-session \
+    php83-xml \
+    php83-xmlreader \
     python3 \
     supervisor \
  && cd /usr/bin \
@@ -67,7 +67,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.13/community >> /etc/apk/repo
 
 COPY ./config/LocalSettings.php ./config/namespaces.ph[p] /var/www/w/
 
-COPY ./config/default /etc/nginx/conf.d/default.conf
+COPY ./config/default /etc/nginx/http.d/default.conf
 
 COPY ./config/supervisord.conf /etc/supervisor/supervisord.conf
 
