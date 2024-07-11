@@ -1,25 +1,7 @@
 services:
   mediawiki:
     image: cusdeb/mediawiki:1.42-amd64
-    environment:
-    - PORT=${PORT}
-    - PHP_INI_post_max_size=${PHP_INI_post_max_size}
-    - PHP_INI_upload_max_filesize=${PHP_INI_upload_max_filesize}
-    - WG_SITENAME=${WG_SITENAME}
-    - WG_META_NAMESPACE=${WG_META_NAMESPACE}
-    - WG_PROTOCOL=${WG_PROTOCOL}
-    - WG_SERVER=${WG_SERVER}
-    - WG_EMERGENCY_CONTACT=${WG_EMERGENCY_CONTACT}
-    - WG_PASSWORD_SENDER=${WG_PASSWORD_SENDER}
-    - WG_DB_NAME=${WG_DB_NAME}
-    - ALLOW_ACCOUNT_CREATION=${ALLOW_ACCOUNT_CREATION}
-    - ALLOW_ACCOUNT_EDITING=${ALLOW_ACCOUNT_EDITING}
-    - ALLOW_ANONYMOUS_READING=${ALLOW_ANONYMOUS_READING}
-    - ALLOW_ANONYMOUS_EDITING=${ALLOW_ANONYMOUS_EDITING}
-    - METRIC_COUNTER=${METRIC_COUNTER}
-    # Render server
-    - CREDENTIALS=${CREDENTIALS}
-    - RENDER_SERVER_HOST=${RENDER_SERVER_HOST}
+    env_file: .env
     volumes:
     - ./_deleted:/var/www/w/deleted
     - ./_images:/var/www/w/images
@@ -29,6 +11,7 @@ services:
     image: cusdeb/mariadb:10.6-amd64
     environment:
     - MYSQL_ROOT_PASSWORD=cusdeb
+    env_file: .env
     volumes:
     - ./_db:/var/lib/mysql
 
