@@ -2,6 +2,7 @@ services:
   mediawiki:
     image: cusdeb/mediawiki:1.42-amd64
     env_file: .env
+    restart: always
     volumes:
     - ./_deleted:/var/www/w/deleted
     - ./_images:/var/www/w/images
@@ -12,6 +13,7 @@ services:
     environment:
     - MYSQL_ROOT_PASSWORD=cusdeb
     env_file: .env
+    restart: always
     volumes:
     - ./_db:/var/lib/mysql
 
