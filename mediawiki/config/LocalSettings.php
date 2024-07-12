@@ -154,6 +154,8 @@ $wgSessionsInObjectCache = true;
 // that $wgVirtualRestConfig['modules']['parsoid']['url'] be pointed to localhost if this setting is enabled.
 $wgVirtualRestConfig['modules']['parsoid']['forwardCookies'] = true;
 
+$wgMFCollapseSectionsByDefault = COLLAPSE_SECTIONS_BY_DEFAULT;
+
 $wgMFDefaultSkinClass = 'SkinVector';
 
 $wgCollectionFormats = array(

@@ -130,6 +130,14 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
         <td>Allows users to edit wiki anonymously (<code>true</code> and <code>false</code>)</td>
         <td><code>true</code></td>
     </tr>
+    <tr>
+        <th colspan="3">MobileFrontend</th>
+    </tr>
+    <tr>
+        <td>COLLAPSE_SECTIONS_BY_DEFAULT</td>
+        <td>Controls whether to collapse sections by default (<code>true</code> and <code>false</code>)</td>
+        <td><code>false</code></td>
+    </tr>
 </table>
 
 ## How to create an administrator
