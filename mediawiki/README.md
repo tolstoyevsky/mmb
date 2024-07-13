@@ -58,20 +58,79 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
 
 `docker-compose.yml` supports the following parameters.
 
-| Parameter | Description | Default |
-| --- | --- | --- |
-| PORT                    | Port wiki is available on | 8004 |
-| WG_SITENAME             | Wiki name | My KB |
-| WG_META_NAMESPACE       | [Name](https://mediawiki.org/wiki/Manual:$wgMetaNamespace) used for the project namespace | My_KB |
-| WG_PROTOCOL             | Protocol which is used for accessing wiki (`http` and `https`) | `http` |
-| WG_SERVER               | [Domain or IP](https://mediawiki.org/wiki/Manual:$wgServer) of the wiki host | 127.0.0.1:8004 |
-| WG_EMERGENCY_CONTACT    | Wiki [admin email address](https://mediawiki.org/wiki/Manual:$wgEmergencyContact) | username@domain.com |
-| WG_PASSWORD_SENDER      | [Password reminder email address](https://mediawiki.org/wiki/Manual:$wgPasswordSender) | username@domain.com |
-| WG_DB_NAME              | [Database name](https://mediawiki.org/wiki/Manual:$wgDBname) | knowledge_base |
-| ALLOW_ACCOUNT_CREATION  | Allows users to create accounts (`true` and `false`) | `true` |
-| ALLOW_ACCOUNT_EDITING   | Allows users to edit their accounts (`true` and `false`) | `true` |
-| ALLOW_ANONYMOUS_READING | Allows users to read wiki anonymously (`true` and `false`). If the parameter is `false`, wiki is **private** | `false` |
-| ALLOW_ANONYMOUS_EDITING | Allows users to edit wiki anonymously (`true` and `false`) | `true` |
+<table>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+        <th>Default</th>
+    </tr>
+    <tr>
+        <th colspan="3">Basic</th>
+    </tr>
+    <tr>
+        <td>PORT</td>
+        <td>Port wiki is available on</td>
+        <td>8004</td>
+    </tr>
+    <tr>
+        <td>WG_SITENAME</td>
+        <td>Wiki name</td>
+        <td>My KB</td>
+    </tr>
+    <tr>
+        <td>WG_META_NAMESPACE</td>
+        <td><a href="https://mediawiki.org/wiki/Manual:$wgMetaNamespace">Name</a> used for the project namespace</td>
+        <td>My_KB</td>
+    </tr>
+    <tr>
+        <td>WG_PROTOCOL</td>
+        <td>Protocol which is used for accessing wiki (<code>http</code> and <code>https</code>)</td>
+        <td><code>http</code></td>
+    </tr>
+    <tr>
+        <td>WG_SERVER</td>
+        <td><a href="https://mediawiki.org/wiki/Manual:$wgServer">Domain or IP</a> of the wiki host</td>
+        <td>127.0.0.1:8004</td>
+    </tr>
+    <tr>
+        <td>WG_EMERGENCY_CONTACT</td>
+        <td>Wiki <a href="https://mediawiki.org/wiki/Manual:$wgEmergencyContact">admin email address</a></td>
+        <td>username@domain.com</td>
+    </tr>
+    <tr>
+        <td>WG_PASSWORD_SENDER</td>
+        <td><a href="https://mediawiki.org/wiki/Manual:$wgPasswordSender">Password reminder email address</a></td>
+        <td>username@domain.com</td>
+    </tr>
+    <tr>
+        <td>WG_DB_NAME</td>
+        <td><a href="https://mediawiki.org/wiki/Manual:$wgDBname">Database name</a></td>
+        <td>knowledge_base</td>
+    </tr>
+    <tr>
+        <th colspan="3">Permissions</th>
+    </tr>
+    <tr>
+        <td>ALLOW_ACCOUNT_CREATION</td>
+        <td>Allows users to create accounts (<code>true</code> and <code>false</code>)</td>
+        <td><code>true</code></td>
+    </tr>
+    <tr>
+        <td>ALLOW_ACCOUNT_EDITING</td>
+        <td>Allows users to edit their accounts (<code>true</code> and <code>false</code>)</td>
+        <td><code>true</code></td>
+    </tr>
+    <tr>
+        <td>ALLOW_ANONYMOUS_READING</td>
+        <td>Allows users to read wiki anonymously (<code>true</code> and <code>false</code>). If the parameter is <code>false</code>, wiki is <strong>private</strong></td>
+        <td><code>false</code></td>
+    </tr>
+    <tr>
+        <td>ALLOW_ANONYMOUS_EDITING</td>
+        <td>Allows users to edit wiki anonymously (<code>true</code> and <code>false</code>)</td>
+        <td><code>true</code></td>
+    </tr>
+</table>
 
 ## How to create an administrator
 
