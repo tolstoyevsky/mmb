@@ -168,9 +168,22 @@ Then, rebuild the Docker image and re-run the container. After this you will get
 
 In order to modify a [php.ini](https://php.net/manual/en/configuration.file.php) parameter, use the environment variable the name of which consists of `PHP_INI_` and the name of the parameter. For example, to change the [post_max_size](https://php.net/manual/en/ini.core.php#ini.post-max-size) parameter, pass the `PHP_INI_post_max_size` environment variable to the container.
 
-## How to change logo
+## How to change logos
 
-Provide a square logo named `kblogo.png` which is 135x135px or 150x150px.
+Place all the logos in the `logos` directory, they can be accessed using the path `$wgResourceBasePath/resources/assets`. For example, you have placed `cusdeb.svg` and `cusdeb-wordmark.svg` in this directory. Next, create a file `config/logos.php` with the following content:
+
+```php
+$wgLogos = [
+    'icon' => "$wgResourceBasePath/resources/assets/cusdeb.svg",
+    'tagline' => [
+        'src' => "$wgResourceBasePath/resources/assets/cusdeb-wordmark.svg",
+        'width' => 135,
+        'height' => 15,
+    ],
+];
+```
+
+and rebuild the image. See [$wgLogos](https://mediawiki.org/wiki/Manual:$wgLogos) for details.
 
 ## How to upgrade from MariaDB 10.5 to MariaDB 10.6
 

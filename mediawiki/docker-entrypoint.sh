@@ -66,6 +66,10 @@ substitute() {
     sed -i -e "s#${var_name}#${!var_name}#" /var/www/w/LocalSettings.php
 }
 
+if [[ -f /var/www/w/logos.php ]]; then
+    cat /var/www/w/logos.php >> /var/www/w/LocalSettings.php
+fi
+
 if [[ -f /var/www/w/namespaces.php ]]; then
     cat /var/www/w/namespaces.php >> /var/www/w/LocalSettings.php
 fi

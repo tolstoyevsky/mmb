@@ -65,7 +65,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.20/community >> /etc/apk/repo
     git \
  && rm -rf /var/cache/apk/*
 
-COPY ./config/LocalSettings.php ./config/namespaces.ph[p] /var/www/w/
+COPY ./config/LocalSettings.php ./config/logos.ph[p] ./config/namespaces.ph[p] /var/www/w/
 
 COPY ./config/default /etc/nginx/http.d/default.conf
 
@@ -75,7 +75,7 @@ COPY ./rollout_fixes.sh /usr/bin/rollout_fixes.sh
 
 COPY ./docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
 
-COPY ./logo.svg ./kblogo.pn[g] /var/www/w/resources/assets/
+COPY ./logos/ /var/www/w/resources/assets/
 
 RUN /usr/bin/rollout_fixes.sh
 
