@@ -1,64 +1,19 @@
-version: "2"
 services:
   mediawiki:
-    image: cusdeb/mediawiki:1.35-amd64
-    environment:
-    - PORT=${PORT}
-    - PHP_INI_post_max_size=${PHP_INI_post_max_size}
-    - PHP_INI_upload_max_filesize=${PHP_INI_upload_max_filesize}
-    - WG_SITENAME=${WG_SITENAME}
-    - WG_META_NAMESPACE=${WG_META_NAMESPACE}
-    - WG_PROTOCOL=${WG_PROTOCOL}
-    - WG_SERVER=${WG_SERVER}
-    - WG_EMERGENCY_CONTACT=${WG_EMERGENCY_CONTACT}
-    - WG_PASSWORD_SENDER=${WG_PASSWORD_SENDER}
-    - WG_DB_SERVER=${WG_DB_SERVER}
-    - WG_DB_NAME=${WG_DB_NAME}
-    - WG_DB_USER=${WG_DB_USER}
-    - WG_DB_PASSWORD=${WG_DB_PASSWORD}
-    - ALLOW_ACCOUNT_CREATION=${ALLOW_ACCOUNT_CREATION}
-    - ALLOW_ACCOUNT_EDITING=${ALLOW_ACCOUNT_EDITING}
-    - ALLOW_ANONYMOUS_READING=${ALLOW_ANONYMOUS_READING}
-    - ALLOW_ANONYMOUS_EDITING=${ALLOW_ANONYMOUS_EDITING}
-    - METRIC_COUNTER=${METRIC_COUNTER}
-    # Render server
-    - CREDENTIALS=${CREDENTIALS}
-    - RENDER_SERVER_HOST=${RENDER_SERVER_HOST}
-    network_mode: "host"
+    image: cusdeb/mediawiki:1.42-amd64
+    env_file: .env
+    restart: always
     volumes:
     - ./_deleted:/var/www/w/deleted
     - ./_images:/var/www/w/images
-  mariadb:
-    image: cusdeb/mariadb:10.5-amd64
-    network_mode: "host"
+    ports:
+    - "127.0.0.1:8004:8004"
+  db:
+    image: cusdeb/mariadb:10.6-amd64
     environment:
-    - MYSQLD_port=33061
     - MYSQL_ROOT_PASSWORD=cusdeb
-    - MYSQL_DATABASE=
-    - MYSQL_USER=
-    - MYSQL_PASSWORD=
+    env_file: .env
+    restart: always
     volumes:
     - ./_db:/var/lib/mysql
-  mw_qserve:
-    image: cusdeb/mwlib:0.16.2
-    network_mode: "host"
-    environment:
-    - MW_QSERVE_PORT=${MW_QSERVE_PORT}
-    - TYPE=mw-qserve
-  postman:
-    image: cusdeb/mwlib:0.16.2
-    network_mode: "host"
-    environment:
-    - TYPE=postman
-  nserve:
-    image: cusdeb/mwlib:0.16.2
-    network_mode: "host"
-    environment:
-    - RENDER_SERVER_PORT=${RENDER_SERVER_PORT}
-    - TYPE=nserve
-  nslave:
-    image: cusdeb/mwlib:0.16.2
-    network_mode: "host"
-    environment:
-    - TYPE=nslave
 

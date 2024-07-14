@@ -1,11 +1,15 @@
 #!/bin/bash
 
+#
+# Configurable parameters
+#
+
 PORT=${PORT:=8004}
 
 # shellcheck disable=SC2034
 SECRET_KEY="$(python3 -c "import secrets, string; print(''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(64)))")"
 
-WG_SITENAME=${WG_SITENAME:="My KB"}
+WG_SITENAME=${WG_SITENAME:=""}
 
 WG_META_NAMESPACE=${WG_META_NAMESPACE:=My_KB}
 
@@ -17,13 +21,7 @@ WG_EMERGENCY_CONTACT=${WG_EMERGENCY_CONTACT:=username@domain.com}
 
 WG_PASSWORD_SENDER=${WG_PASSWORD_SENDER:=username@domain.com}
 
-WG_DB_SERVER=${WG_DB_SERVER:=127.0.0.1:33061}
-
 WG_DB_NAME=${WG_DB_NAME:=knowledge_base}
-
-WG_DB_USER=${WG_DB_USER:=root}
-
-WG_DB_PASSWORD=${WG_DB_PASSWORD:=cusdeb}
 
 ALLOW_ACCOUNT_CREATION=${ALLOW_ACCOUNT_CREATION:=true}
 
@@ -32,6 +30,8 @@ ALLOW_ACCOUNT_EDITING=${ALLOW_ACCOUNT_EDITING:=true}
 ALLOW_ANONYMOUS_READING=${ALLOW_ANONYMOUS_READING:=false}
 
 ALLOW_ANONYMOUS_EDITING=${ALLOW_ANONYMOUS_EDITING:=true}
+
+COLLAPSE_SECTIONS_BY_DEFAULT=${COLLAPSE_SECTIONS_BY_DEFAULT:=false}
 
 METRIC_COUNTER=${METRIC_COUNTER:=""}
 
@@ -42,6 +42,16 @@ RENDER_SERVER=${RENDER_SERVER:=http://127.0.0.1:8007}
 export PHP_INI_post_max_size="${PHP_INI_post_max_size:=25M}"
 
 export PHP_INI_upload_max_filesize="${PHP_INI_upload_max_filesize:=25M}"
+
+#
+# Static parameters
+#
+
+WG_DB_SERVER=db:3306
+
+WG_DB_USER=root
+
+WG_DB_PASSWORD=cusdeb
 
 # Does variable substitution for LocalSettings.php.
 # Globals:
@@ -56,19 +66,23 @@ substitute() {
     sed -i -e "s#${var_name}#${!var_name}#" /var/www/w/LocalSettings.php
 }
 
+if [[ -f /var/www/w/logos.php ]]; then
+    cat /var/www/w/logos.php >> /var/www/w/LocalSettings.php
+fi
+
 if [[ -f /var/www/w/namespaces.php ]]; then
     cat /var/www/w/namespaces.php >> /var/www/w/LocalSettings.php
 fi
 
-change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "listen" "/var/run/php/php7.0-fpm.sock"
+change_ini_param.py --config-file /etc/php83/php-fpm.d/www.conf --section www "listen" "/var/run/php/php8.3-fpm.sock"
 
-change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "listen.owner" "nginx"
+change_ini_param.py --config-file /etc/php83/php-fpm.d/www.conf --section www "listen.owner" "nginx"
 
-change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "listen.group" "nginx"
+change_ini_param.py --config-file /etc/php83/php-fpm.d/www.conf --section www "listen.group" "nginx"
 
-change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "user" "nginx"
+change_ini_param.py --config-file /etc/php83/php-fpm.d/www.conf --section www "user" "nginx"
 
-change_ini_param.py --config-file /etc/php7/php-fpm.d/www.conf --section www "group" "nginx"
+change_ini_param.py --config-file /etc/php83/php-fpm.d/www.conf --section www "group" "nginx"
 
 >&2 echo "Preparing LocalSettings.php"
 
@@ -87,6 +101,7 @@ substitute ALLOW_ACCOUNT_CREATION
 substitute ALLOW_ACCOUNT_EDITING
 substitute ALLOW_ANONYMOUS_READING
 substitute ALLOW_ANONYMOUS_EDITING
+substitute COLLAPSE_SECTIONS_BY_DEFAULT
 substitute RENDER_SERVER
 substitute CREDENTIALS
 substitute METRIC_COUNTER
@@ -112,9 +127,9 @@ fi
 
 >&2 echo "Executing maintenance/update.php"
 cd /var/www/w || exit 1
-php7 maintenance/update.php
+php maintenance/update.php
 
-sed -i -e "s/PORT/${PORT}/" /etc/nginx/conf.d/default.conf
+sed -i -e "s/PORT/${PORT}/" /etc/nginx/http.d/default.conf
 
 >&2 echo "Fixing ownership"
 chown -R nginx:nginx /var/www/w/deleted
@@ -133,7 +148,7 @@ for key_val in $(env); do
         val=${!var}
         config_option=${var#PHP_INI_}
         >&2 echo "Changing '${config_option}' to '${val}'"
-        change_ini_param.py --config-file /etc/php7/php.ini --section PHP "${config_option}" "${val}"
+        change_ini_param.py --config-file /etc/php83/php.ini --section PHP "${config_option}" "${val}"
     fi
 done
 

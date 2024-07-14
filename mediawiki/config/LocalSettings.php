@@ -36,10 +36,6 @@ $wgServer = "WG_PROTOCOL://WG_SERVER";
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
 
-## The URL path to the logo.  Make sure you change this from the default,
-## or else you'll overwrite your logo when you upgrade!
-$wgLogo = "$wgResourceBasePath/resources/assets/wiki.png";
-
 ## UPO means: this is also a user preference option
 
 $wgEnableEmail = false;
@@ -135,7 +131,7 @@ $wgGroupPermissions['sysop']['pagelang'] = true;
 
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'vector', 'monobook':
-$wgDefaultSkin = "vector";
+$wgDefaultSkin = "vector-2022";
 wfLoadSkin( 'vector' );
 
 # End of automatically generated settings.
@@ -154,10 +150,9 @@ $wgSessionsInObjectCache = true;
 // that $wgVirtualRestConfig['modules']['parsoid']['url'] be pointed to localhost if this setting is enabled.
 $wgVirtualRestConfig['modules']['parsoid']['forwardCookies'] = true;
 
-$wgMFDefaultSkinClass = 'SkinVector';
+$wgMFCollapseSectionsByDefault = COLLAPSE_SECTIONS_BY_DEFAULT;
 
-// Cannot use wfLoadExtension here since extension.json does not exist.
-require "$IP/extensions/Collection/Collection.php";
+$wgMFDefaultSkinClass = 'SkinVector';
 
 $wgCollectionFormats = array(
    'rl' => 'PDF',
@@ -175,6 +170,7 @@ function wfMetricCounter() {
 }
 
 wfLoadExtension('Cite');
+wfLoadExtension('Collection');
 wfLoadExtension('MobileFrontend');
 wfLoadExtension('Parsoid', 'vendor/wikimedia/parsoid/extension.json');
 wfLoadExtension('SyntaxHighlight_GeSHi');
