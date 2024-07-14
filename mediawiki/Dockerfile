@@ -1,5 +1,6 @@
 FROM alpine:3.20
-MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
+
+LABEL maintainer="Evgeny Golyshev <eugulixes@gmail.com>"
 
 ENV MEDIAWIKI_VERSION REL1_42
 
