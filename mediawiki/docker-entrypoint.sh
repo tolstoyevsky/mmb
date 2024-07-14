@@ -9,7 +9,7 @@ PORT=${PORT:=8004}
 # shellcheck disable=SC2034
 SECRET_KEY="$(python3 -c "import secrets, string; print(''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(64)))")"
 
-WG_SITENAME=${WG_SITENAME:="My KB"}
+WG_SITENAME=${WG_SITENAME:=""}
 
 WG_META_NAMESPACE=${WG_META_NAMESPACE:=My_KB}
 
