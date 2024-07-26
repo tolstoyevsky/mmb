@@ -192,6 +192,8 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
     ${ARIA2_DEPS} \
  && cd /var/www/nc \
  && mkdir apps2 && cd apps2 \
+ && wget https://git.mdns.eu/api/v4/projects/45/packages/generic/passwords/2023.12.2/passwords.tar.gz \
+ && tar -xf passwords.tar.gz \
  && git clone -b "${BOOKMARKS_VER}"           --depth 1 https://github.com/nextcloud/bookmarks.git \
  && git clone -b "${CALENDAR_VER}"            --depth 1 https://github.com/nextcloud/calendar.git \
  && git clone -b "${MAIL_VER}"                --depth 1 https://github.com/nextcloud/mail.git \
@@ -208,7 +210,6 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/notifications.git \
  && git clone -b "${NOTIFY_PUSH_VER}"         --depth 1 https://github.com/nextcloud/notify_push.git \
  && git clone -b "${PASSMAN_VER}"             --depth 1 https://github.com/nextcloud/passman.git \
- && git clone -b "${PASSWORDS_VER}"           --depth 1 https://git.mdns.eu/nextcloud/passwords.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/photos.git \
  && git clone -b "${SPREED_VER}"              --depth 1 https://github.com/nextcloud/spreed.git \
  && git clone -b "${TASKS_VER}"               --depth 1 https://github.com/nextcloud/tasks.git \
