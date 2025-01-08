@@ -1,4 +1,4 @@
-FROM node:14-bullseye
+FROM node:20-bullseye
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV BUNDLE_DIR /home/rocketchat/bundle
@@ -6,7 +6,7 @@ ENV BUNDLE_DIR /home/rocketchat/bundle
 # Rocket.Chat Buildmaster <buildmaster@rocket.chat>
 ENV PUBLIC_KEY 0E163286C20D07B9787EBE9FD7F9D0414FD08104
 
-ENV RC_VERSION 6.9.3
+ENV RC_VERSION 7.0.4
 
 COPY patches /home/rocketchat/patches
 
