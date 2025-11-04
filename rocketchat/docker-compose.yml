@@ -1,7 +1,7 @@
 version: "2"
 services:
   rocketchat:
-    image: cusdeb/rocketchat:6.9-amd64
+    image: cusdeb/rocketchat:7.12-amd64
     restart: always
     environment:
     - PORT=8006
@@ -12,7 +12,7 @@ services:
     ports:
     - "8006:8006"
   mongo:
-    image: mongo:4.4
+    image: mongo:7.0
     restart: always
     volumes:
     - ./_db:/data/db
