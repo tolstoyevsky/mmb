@@ -128,6 +128,8 @@ ENV NOTIFY_PUSH_VER v0.7.0
 
 ENV PASSMAN_VER 2.5.1
 
+ENV PASSWORDS_VER 2023.12.2
+
 ENV PHOTO_SPHERE_VIEWER_VER v1.26.4
 
 ENV SPREED_VER v16.0.11
@@ -211,6 +213,12 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  && git clone -b "${TASKS_VER}"               --depth 1 https://github.com/nextcloud/tasks.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/text.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/viewer.git \
+ \
+ # The Passwords app is distributed only as a prebuilt release tarball (not a Git repo);
+ # download and unpack it into apps2. It is already built, so it needs no composer/npm step.
+ && wget -q "https://git.mdns.eu/api/v4/projects/45/packages/generic/passwords/${PASSWORDS_VER}/passwords.tar.gz" \
+ && tar xzf passwords.tar.gz \
+ && rm passwords.tar.gz \
  \
  # Bookmarks ships no composer.lock and pins nextcloud/ocp to dev-master, which now
  # requires PHP >= 8.3; pin it to the NC 26 branch so it resolves under PHP 8.1.
