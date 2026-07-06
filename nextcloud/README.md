@@ -33,8 +33,8 @@ Nextcloud is a self-hosted collaboration platform which can act as an alternativ
 * Nginx [1.22.1](https://nginx.org/en/CHANGES-1.22) and PHP [8.1.14](https://php.net/ChangeLog-8.php#PHP_8_1).
 * The [Bookmarks](https://github.com/nextcloud/bookmarks) application allows users to collect and organize bookmarks.
 * The [Calendar](https://github.com/nextcloud/calendar) and [Contacts](https://github.com/nextcloud/contacts) applications allow users to synchronize calendars and contacts with the server respectively.
-* The [Circles](https://github.com/nextcloud/circles) allows users to create their own groups of users/colleagues/friends. Those groups of users (or circles) can then be used by any other app (for example, [Collectives](https://gitlab.com/collectivecloud/collectives)) for sharing purpose through the Circles API.
-* The [Collectives](https://gitlab.com/collectivecloud/collectives) allows users to to build shared knowledge.
+* The [Circles](https://github.com/nextcloud/circles) allows users to create their own groups of users/colleagues/friends. Those groups of users (or circles) can then be used by any other app (for example, [Collectives](https://github.com/nextcloud/collectives)) for sharing purpose through the Circles API.
+* The [Collectives](https://github.com/nextcloud/collectives) allows users to to build shared knowledge.
 * The [Deck](https://github.com/nextcloud/deck) application allows users to organize their work using [Kanban](https://en.wikipedia.org/wiki/Kanban_(development)) style dashboard.
 * The [Files viewer](https://github.com/nextcloud/viewer) application allows users to view their photos and videos.
 * The [Mail](https://github.com/nextcloud/mail) application allows users to use their IMAP email accounts using a web interface within Nextcloud.
