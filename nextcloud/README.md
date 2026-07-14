@@ -12,11 +12,11 @@ Nextcloud is a self-hosted collaboration platform which can act as an alternativ
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://github.com/nextcloud/server/releases/tag/v26.0.13">26.0.13</a></td>
+    <td><a href="https://github.com/nextcloud/server/releases/tag/v27.1.11">27.1.11</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>29 Mar 2024</td>
+    <td>25 Jun 2024</td>
   </tr>
   <tr>
     <td>Port</td>
