@@ -114,6 +114,8 @@ ENV CONTACTS_VER v5.5.4
 
 ENV DECK_VER v1.11.7
 
+ENV FILES_RIGHTCLICK_VER v27.1.9
+
 ENV MAIL_VER v3.7.25
 
 ENV NCDOWNLOADER_VER v1.0.24
@@ -201,7 +203,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  && git clone -b "${DECK_VER}"                --depth 1 https://github.com/nextcloud/deck.git \
  && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/files_pdfviewer.git \
  && git clone -b "${PHOTO_SPHERE_VIEWER_VER}" --depth 1 https://github.com/nextcloud/files_photospheres.git \
- && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/files_rightclick.git \
+ && git clone -b "${FILES_RIGHTCLICK_VER}"    --depth 1 https://github.com/nextcloud/files_rightclick.git \
  && git clone -b "${NCDOWNLOADER_VER}"        --depth 1 https://github.com/shiningw/ncdownloader \
  && git clone -b "${NEWS_VER}"                --depth 1 https://github.com/nextcloud/news.git \
  && git clone -b "${NOTES_VER}"               --depth 1 https://github.com/nextcloud/notes.git \
