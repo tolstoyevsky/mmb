@@ -223,8 +223,8 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  && rm passwords.tar.gz \
  \
  # Bookmarks ships no composer.lock and pins nextcloud/ocp to dev-master, which now
- # requires PHP >= 8.3; pin it to the NC 26 branch so it resolves under PHP 8.1.
- && sed -i 's#"nextcloud/ocp": "dev-master"#"nextcloud/ocp": "dev-stable26"#' /var/www/nc/apps2/bookmarks/composer.json \
+ # requires PHP >= 8.3; pin it to the NC 27 branch so it resolves under PHP 8.1.
+ && sed -i 's#"nextcloud/ocp": "dev-master"#"nextcloud/ocp": "dev-stable27"#' /var/www/nc/apps2/bookmarks/composer.json \
  \
  && for dir in ${INSTALL_DEPS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; composer install --no-dev; done \
  \
