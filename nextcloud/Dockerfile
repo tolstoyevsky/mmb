@@ -1,7 +1,7 @@
 ARG ALPINE_VER=3.17
 ARG ARIA2_DEPS="c-ares-dev ca-certificates expat-dev ffmpeg gettext-dev gnutls-dev sqlite-dev"
 ARG ARIA2_PREFIX="/root/aria2"
-ARG NEXTCLOUD_VER=v27.1.11
+ARG NEXTCLOUD_VER=v28.0.14
 ARG YT_DLP_TARGET_PATH=/var/www/nc/apps2/ncdownloader/bin/
 
 
