@@ -1,4 +1,4 @@
-ARG ALPINE_VER=3.17
+ARG ALPINE_VER=3.21
 ARG ARIA2_DEPS="c-ares-dev ca-certificates expat-dev ffmpeg gettext-dev gnutls-dev sqlite-dev"
 ARG ARIA2_PREFIX="/root/aria2"
 ARG NEXTCLOUD_VER=v28.0.14
@@ -52,7 +52,7 @@ RUN apk --update add curl \
  && chmod a+rx yt-dlp
 
 
-FROM node:16-alpine"${ALPINE_VER}" AS main
+FROM node:20-alpine"${ALPINE_VER}" AS main
 ARG ALPINE_VER
 ARG NEXTCLOUD_VER
 ENV NODE_OPTIONS "--max-old-space-size=6144"
@@ -128,7 +128,7 @@ ENV NOTIFY_PUSH_VER v1.2.2
 
 ENV PASSMAN_VER 2.5.1
 
-ENV PASSWORDS_VER 2023.12.2
+ENV PASSWORDS_VER 2024.12.1
 
 ENV PHOTO_SPHERE_VIEWER_VER v1.28.3
 
@@ -150,40 +150,40 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
     g++ \
     git \
     make \
-    php81 \
+    php83 \
  # required modules
-    php81-ctype \
-    php81-curl \
-    php81-dom \
-    php81-fpm \
-    php81-gd \
-    php81-iconv \
-    php81-json \
-    php81-mbstring \
-    php81-openssl \
+    php83-ctype \
+    php83-curl \
+    php83-dom \
+    php83-fpm \
+    php83-gd \
+    php83-iconv \
+    php83-json \
+    php83-mbstring \
+    php83-openssl \
     # for nextcloud-news-updater
-    php81-pcntl \
-    php81-pdo \
-    php81-pdo_mysql \
-    php81-pdo_sqlite \
-    php81-posix \
-    php81-session \
-    php81-simplexml \
-    php81-sqlite3 \
-    php81-tokenizer \
-    php81-xml \
-    php81-xmlreader \
-    php81-xmlwriter \
-    php81-zip \
+    php83-pcntl \
+    php83-pdo \
+    php83-pdo_mysql \
+    php83-pdo_sqlite \
+    php83-posix \
+    php83-session \
+    php83-simplexml \
+    php83-sqlite3 \
+    php83-tokenizer \
+    php83-xml \
+    php83-xmlreader \
+    php83-xmlwriter \
+    php83-zip \
  # recommended modules
-    php81-bcmath \
-    php81-fileinfo \
-    php81-gmp \
-    php81-intl \
-    php81-opcache \
-    php81-pecl-apcu \
-    php81-pecl-imagick \
-    php81-pecl-redis \
+    php83-bcmath \
+    php83-fileinfo \
+    php83-gmp \
+    php83-intl \
+    php83-opcache \
+    php83-pecl-apcu \
+    php83-pecl-imagick \
+    php83-pecl-redis \
     \
     python3 \
     py3-pip \
@@ -219,10 +219,6 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  && tar xzf passwords.tar.gz \
  && rm passwords.tar.gz \
  \
- # Bookmarks ships no composer.lock and pins nextcloud/ocp to dev-master, which now
- # requires PHP >= 8.3; pin it to the NC 27 branch so it resolves under PHP 8.1.
- && sed -i 's#"nextcloud/ocp": "dev-master"#"nextcloud/ocp": "dev-stable27"#' /var/www/nc/apps2/bookmarks/composer.json \
- \
  && for dir in ${INSTALL_DEPS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; composer install --no-dev; done \
  \
  #
@@ -238,7 +234,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  \
  && chown -R nginx:nginx /var/www \
  \
- && pip3 install nextcloud-news-updater=="${NEWS_UPDATER_VER}" \
+ && pip3 install --break-system-packages nextcloud-news-updater=="${NEWS_UPDATER_VER}" \
  # Cleanup
  && apk del \
     composer \
