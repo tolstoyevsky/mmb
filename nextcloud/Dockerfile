@@ -120,7 +120,7 @@ ENV MAIL_VER v3.7.25
 
 ENV NCDOWNLOADER_VER v1.0.24
 
-ENV NEWS_VER 24.0.0
+ENV NEWS_VER 25.0.0-alpha9
 
 ENV NEWS_UPDATER_VER 11.0.0
 
@@ -140,7 +140,7 @@ ENV TASKS_VER v0.16.1
 
 ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/contacts /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/photos /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/mail /var/www/nc/apps2/spreed /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news /var/www/nc/apps2/text /var/www/nc/apps2/viewer"
 
-ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/collectives /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news/js /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
+ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/collectives /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
 
 # For building the Spreed app
 ENV NODE_OPTIONS "--max-old-space-size=6144"
