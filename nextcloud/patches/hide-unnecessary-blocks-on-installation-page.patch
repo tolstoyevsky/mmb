@@ -1,9 +1,9 @@
 diff --git a/core/Controller/SetupController.php b/core/Controller/SetupController.php
-index ab8b197..e878cb6 100644
+index 0f1fa1c..1dc289b 100644
 --- a/core/Controller/SetupController.php
 +++ b/core/Controller/SetupController.php
-@@ -113,7 +113,7 @@ class SetupController {
- 			}
+@@ -117,7 +117,7 @@ class SetupController {
+ 			\OC_Template::printGuestPage('', 'installation_incomplete');
  		}
  
 -		header('Location: ' . \OC::$server->getURLGenerator()->getAbsoluteURL('index.php/core/apps/recommended'));
@@ -24,7 +24,7 @@ index a00a57c..5b29532 100644
  
  			// Set callback arguments
 diff --git a/core/templates/installation.php b/core/templates/installation.php
-index 2affefe..66d1ef9 100644
+index b5487d7..0de0d10 100644
 --- a/core/templates/installation.php
 +++ b/core/templates/installation.php
 @@ -58,7 +58,7 @@ script('core', 'install');
@@ -57,14 +57,14 @@ index 2affefe..66d1ef9 100644
  				<input type="text" name="dbuser" id="dbuser"
 -					value="<?php p($_['dbuser']); ?>"
 +					value="root"
- 					autocomplete="off" autocapitalize="none" autocorrect="off">
+ 					autocomplete="off" autocapitalize="none" spellcheck="false">
  			</p>
  			<p class="groupmiddle">
  				<label for="dbpass"><?php p($l->t('Database password')); ?></label>
  				<input type="password" name="dbpass" id="dbpass"
 -					value="<?php p($_['dbpass']); ?>"
 +					value="secret"
- 					autocomplete="off" autocapitalize="none" autocorrect="off">
+ 					autocomplete="off" autocapitalize="none" spellcheck="false">
  				<button id="show" class="toggle-password" aria-label="<?php p($l->t('Show password')); ?>">
  					<img src="<?php print_unescaped(image_path('', 'actions/toggle.svg')); ?>" alt="<?php p($l->t('Toggle password visibility')); ?>">
 @@ -117,7 +117,7 @@ script('core', 'install');
@@ -73,7 +73,7 @@ index 2affefe..66d1ef9 100644
  				<input type="text" name="dbname" id="dbname"
 -					value="<?php p($_['dbname']); ?>"
 +					value="nc"
- 					autocomplete="off" autocapitalize="none" autocorrect="off"
+ 					autocomplete="off" autocapitalize="none" spellcheck="false"
  					pattern="[0-9a-zA-Z$_-]+">
  			</p>
 @@ -134,7 +134,7 @@ script('core', 'install');
@@ -82,6 +82,6 @@ index 2affefe..66d1ef9 100644
  				<input type="text" name="dbhost" id="dbhost"
 -					value="<?php p($_['dbhost']); ?>"
 +					value="mariadb:3306"
- 					autocomplete="off" autocapitalize="none" autocorrect="off">
+ 					autocomplete="off" autocapitalize="none" spellcheck="false">
  			</p>
  			<p class="info">
