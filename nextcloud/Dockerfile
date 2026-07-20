@@ -104,7 +104,7 @@ ARG ARIA2_PREFIX
 ARG NEXTCLOUD_VER
 ARG YT_DLP_TARGET_PATH
 
-ENV BOOKMARKS_VER v13.1.3
+ENV BOOKMARKS_VER v14.2.7
 
 ENV CALENDAR_VER v4.7.20
 
@@ -112,7 +112,7 @@ ENV COLLECTIVES_VER v2.16.3
 
 ENV CONTACTS_VER v5.5.4
 
-ENV DECK_VER v1.11.7
+ENV DECK_VER v1.12.7
 
 ENV FILES_RIGHTCLICK_VER v27.1.9
 
@@ -124,7 +124,7 @@ ENV NEWS_VER 24.0.0
 
 ENV NEWS_UPDATER_VER 11.0.0
 
-ENV NOTES_VER v4.10.1
+ENV NOTES_VER v4.13.1
 
 ENV NOTIFY_PUSH_VER v1.2.2
 
@@ -132,11 +132,11 @@ ENV PASSMAN_VER 2.5.1
 
 ENV PASSWORDS_VER 2023.12.2
 
-ENV PHOTO_SPHERE_VIEWER_VER v1.27.0
+ENV PHOTO_SPHERE_VIEWER_VER v1.28.3
 
-ENV SPREED_VER v17.1.10
+ENV SPREED_VER v18.0.15
 
-ENV TASKS_VER v0.15.0
+ENV TASKS_VER v0.16.1
 
 ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/contacts /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/photos /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/mail /var/www/nc/apps2/spreed /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news /var/www/nc/apps2/text /var/www/nc/apps2/viewer"
 
