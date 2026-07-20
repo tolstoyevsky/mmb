@@ -69,6 +69,17 @@ server {
         fastcgi_read_timeout 300;
     }
 
+    # Nextcloud ships some assets as ES modules (.mjs). nginx's mime.types has
+    # no mapping for that extension, so it would be served as
+    # application/octet-stream and the browser refuses to execute it under
+    # X-Content-Type-Options: nosniff. Serve it explicitly as JavaScript.
+    location ~ \.mjs$ {
+        default_type text/javascript;
+        try_files $uri /index.php$request_uri;
+        expires 6M;
+        access_log off;
+    }
+
     location ~ \.(?:css|js|svg|gif)$ {
         try_files $uri /index.php$request_uri;
         expires 6M;
