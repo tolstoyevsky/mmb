@@ -47,7 +47,6 @@ Nextcloud is a self-hosted collaboration platform which can act as an alternativ
 * The [PDF viewer](https://github.com/nextcloud/files_pdfviewer) application allows users to view PDF files. It uses the [PDF.js](https://mozilla.github.io/pdf.js/) library under the hood.
 * The [Photos](https://github.com/nextcloud/photos) application allows users to create albums from their contents, favorite and tag their photos, show slideshows and share their photos or albums with other users.
 * The [Photo Sphere Viewer](https://github.com/nextcloud/files_photospheres) application allows users to view Google PhotoSphere 360° images.
-* The [Right click](https://github.com/nextcloud/files_rightclick) application allows users to have a right click menu.
 * The [Talk](https://github.com/nextcloud/spreed) application allows users to have private, group, public and password protected calls. It uses the [simpleWebRTC](https://simplewebrtc.com) library under the hood.
 * The [Text](https://github.com/nextcloud/text) allows users to collaborate on documents using [Markdown](https://en.wikipedia.org/wiki/Markdown).
 
