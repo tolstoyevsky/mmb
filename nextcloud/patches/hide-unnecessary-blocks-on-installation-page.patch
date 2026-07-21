@@ -24,7 +24,7 @@ index a00a57c..5b29532 100644
  
  			// Set callback arguments
 diff --git a/core/templates/installation.php b/core/templates/installation.php
-index b5487d7..0de0d10 100644
+index 232c96f..a2c7753 100644
 --- a/core/templates/installation.php
 +++ b/core/templates/installation.php
 @@ -58,7 +58,7 @@ script('core', 'install');
@@ -53,7 +53,7 @@ index b5487d7..0de0d10 100644
 +		<fieldset id='databaseField' style="display: none">
  		<div id="use_other_db">
  			<p class="grouptop">
- 				<label for="dbuser"><?php p($l->t('Database user')); ?></label>
+ 				<label for="dbuser"><?php p($l->t('Database account')); ?></label>
  				<input type="text" name="dbuser" id="dbuser"
 -					value="<?php p($_['dbuser']); ?>"
 +					value="root"
