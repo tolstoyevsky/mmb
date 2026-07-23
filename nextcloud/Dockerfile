@@ -227,6 +227,15 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  \
  && for dir in ${INSTALL_DEPS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; composer install --no-dev; done \
  \
+ # NCDownloader bundles psr/log 1.x (pulled in transitively via symfony/http-client),
+ # whose AbstractLogger has untyped method signatures. Nextcloud 31 core ships
+ # psr/log 3.x (Stringable|string typed), and NCDownloader's app autoloader shadows
+ # the core one, so loading Psr\Log\AbstractLogger fatals with an "incompatible
+ # declaration" error that takes down unrelated pages (e.g. the Photos app).
+ # Drop the bundled copy so the autoloader falls through to core's psr/log 3.x
+ # (symfony/http-client is compatible with it).
+ && rm -rf /var/www/nc/apps2/ncdownloader/vendor/psr/log \
+ \
  #
  # Create the directory for yt-dlp.
  # Install the mandatory NCDownloader requirement.
