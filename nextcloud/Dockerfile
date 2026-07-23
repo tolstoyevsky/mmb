@@ -219,6 +219,12 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  && tar xzf passwords.tar.gz \
  && rm passwords.tar.gz \
  \
+ # Bookmarks ships no composer.lock and caps composer at PHP 8.1 via config.platform,
+ # but its nextcloud/ocp dev-master dependency requires PHP >= 8.3 — the two conflict,
+ # composer install fails and the link-preview dependency ends up missing (app 500s).
+ # Raise the platform cap to the PHP version this image actually runs so ocp resolves.
+ && sed -i 's#"php": "8.1.31"#"php": "8.3.19"#' /var/www/nc/apps2/bookmarks/composer.json \
+ \
  && for dir in ${INSTALL_DEPS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; composer install --no-dev; done \
  \
  #
