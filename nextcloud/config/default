@@ -50,6 +50,9 @@ server {
     }
 
     location ~ \.php(?:$|/) {
+        # Legacy .php entry points (e.g. Files' multi-file zip download) must route via index.php, else they 500.
+        # Ref (Nextcloud nginx docs): https://docs.nextcloud.com/server/latest/admin_manual/installation/nginx.html
+        rewrite ^/(?!index|remote|public|cron|core/ajax/update|status|ocs/v[12]|updater/.+|ocs-provider/.+) /index.php$request_uri;
         fastcgi_split_path_info ^(.+?\.php)(/.*)$;
         set $path_info $fastcgi_path_info;
 
