@@ -12,26 +12,26 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
   </tr>
   <tr>
     <td>Version</td>
-    <td><a href="https://mediawiki.org/wiki/MediaWiki_1.35">1.35</a></td>
+    <td><a href="https://www.mediawiki.org/wiki/MediaWiki_1.42">1.42</a></td>
   </tr>
   <tr>
     <td>Release date</td>
-    <td>20 Sep 2020</td>
+    <td>27 Jun 2024</td>
   </tr>
   <tr>
     <td>Port</td>
     <td>8004</td>
   </tr>
   <tr>
-    <td>Data volume</td>
+    <td>Data volumes</td>
     <td>
-        <code>/srv/mediawiki/deleted:/var/www/w/deleted</code><br>
-        <code>/srv/mediawiki/images:/var/www/w/images</code>
+        <code>./_deleted:/var/www/w/deleted</code><br>
+        <code>./_images:/var/www/w/images</code>
     </td>
   </tr>
   <tr>
     <td valign="top">Base image</td>
-    <td><a href="https://hub.docker.com/_/alpine">Official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.13.0-released.html">Alpine 3.13</a></td>
+    <td><a href="https://hub.docker.com/_/alpine">Official Docker image</a> based on <a href="https://alpinelinux.org/posts/Alpine-3.20.0-released.html">Alpine 3.20</a></td>
   </tr>
 </table>
 
@@ -46,7 +46,7 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
 
 ## Features
 
-* Nginx [1.18.0](http://nginx.org/en/CHANGES-1.18) and PHP [7.4.15](http://php.net/ChangeLog-7.php#7.4.15).
+* Nginx [1.26.1](http://nginx.org/en/CHANGES-1.26) and PHP [8.3.9](http://php.net/ChangeLog-8.php#8.3.9).
 * The [Cite](https://www.mediawiki.org/wiki/Extension:Cite) extension which allows creating references as footnotes on a page, using `<ref>` and `<references />` tags.
 * The [MobileFrontend](https://www.mediawiki.org/wiki/Extension:MobileFrontend) extension which provides a mobile view.
 * The [SyntaxHighlight](https://mediawiki.org/wiki/Extension:SyntaxHighlight) extension which provides rich formatting of source code using the `<syntaxhighlight>` tag.
@@ -58,30 +58,94 @@ MediaWiki is one of the most famous wiki engines. It's best known for being used
 
 `docker-compose.yml` supports the following parameters.
 
-| Parameter | Description | Default |
-| --- | --- | --- |
-| PORT                    | Port wiki is available on | 8004 |
-| WG_SITENAME             | Wiki name | My KB |
-| WG_META_NAMESPACE       | [Name](https://mediawiki.org/wiki/Manual:$wgMetaNamespace) used for the project namespace | My_KB |
-| WG_PROTOCOL             | Protocol which is used for accessing wiki (`http` and `https`) | `http` |
-| WG_SERVER               | [Domain or IP](https://mediawiki.org/wiki/Manual:$wgServer) of the wiki host | 127.0.0.1:8004 |
-| WG_EMERGENCY_CONTACT    | Wiki [admin email address](https://mediawiki.org/wiki/Manual:$wgEmergencyContact) | username@domain.com |
-| WG_PASSWORD_SENDER      | [Password reminder email address](https://mediawiki.org/wiki/Manual:$wgPasswordSender) | username@domain.com |
-| WG_DB_SERVER            | [Database server host](https://mediawiki.org/wiki/Manual:$wgDBserver) | 127.0.0.1:33061 |
-| WG_DB_NAME              | [Database name](https://mediawiki.org/wiki/Manual:$wgDBname) | knowledge_base |
-| WG_DB_USER              | [Database user](https://mediawiki.org/wiki/Manual:$wgDBuser) | root |
-| WG_DB_PASSWORD          | [Database password](https://mediawiki.org/wiki/Manual:$wgDBpassword) | cusdeb |
-| ALLOW_ACCOUNT_CREATION  | Allows users to create accounts (`true` and `false`) | `true` |
-| ALLOW_ACCOUNT_EDITING   | Allows users to edit their accounts (`true` and `false`) | `true` |
-| ALLOW_ANONYMOUS_READING | Allows users to read wiki anonymously (`true` and `false`). If the parameter is `false`, wiki is **private** | `false` |
-| ALLOW_ANONYMOUS_EDITING | Allows users to edit wiki anonymously (`true` and `false`) | `true` |
+<table>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+        <th>Default</th>
+    </tr>
+    <tr>
+        <th colspan="3">Basic</th>
+    </tr>
+    <tr>
+        <td>PORT</td>
+        <td>Port wiki is available on</td>
+        <td>8004</td>
+    </tr>
+    <tr>
+        <td>WG_SITENAME</td>
+        <td>Wiki name</td>
+        <td>My KB</td>
+    </tr>
+    <tr>
+        <td>WG_META_NAMESPACE</td>
+        <td><a href="https://mediawiki.org/wiki/Manual:$wgMetaNamespace">Name</a> used for the project namespace</td>
+        <td>My_KB</td>
+    </tr>
+    <tr>
+        <td>WG_PROTOCOL</td>
+        <td>Protocol which is used for accessing wiki (<code>http</code> and <code>https</code>)</td>
+        <td><code>http</code></td>
+    </tr>
+    <tr>
+        <td>WG_SERVER</td>
+        <td><a href="https://mediawiki.org/wiki/Manual:$wgServer">Domain or IP</a> of the wiki host</td>
+        <td>127.0.0.1:8004</td>
+    </tr>
+    <tr>
+        <td>WG_EMERGENCY_CONTACT</td>
+        <td>Wiki <a href="https://mediawiki.org/wiki/Manual:$wgEmergencyContact">admin email address</a></td>
+        <td>username@domain.com</td>
+    </tr>
+    <tr>
+        <td>WG_PASSWORD_SENDER</td>
+        <td><a href="https://mediawiki.org/wiki/Manual:$wgPasswordSender">Password reminder email address</a></td>
+        <td>username@domain.com</td>
+    </tr>
+    <tr>
+        <td>WG_DB_NAME</td>
+        <td><a href="https://mediawiki.org/wiki/Manual:$wgDBname">Database name</a></td>
+        <td>knowledge_base</td>
+    </tr>
+    <tr>
+        <th colspan="3">Permissions</th>
+    </tr>
+    <tr>
+        <td>ALLOW_ACCOUNT_CREATION</td>
+        <td>Allows users to create accounts (<code>true</code> and <code>false</code>)</td>
+        <td><code>true</code></td>
+    </tr>
+    <tr>
+        <td>ALLOW_ACCOUNT_EDITING</td>
+        <td>Allows users to edit their accounts (<code>true</code> and <code>false</code>)</td>
+        <td><code>true</code></td>
+    </tr>
+    <tr>
+        <td>ALLOW_ANONYMOUS_READING</td>
+        <td>Allows users to read wiki anonymously (<code>true</code> and <code>false</code>). If the parameter is <code>false</code>, wiki is <strong>private</strong></td>
+        <td><code>false</code></td>
+    </tr>
+    <tr>
+        <td>ALLOW_ANONYMOUS_EDITING</td>
+        <td>Allows users to edit wiki anonymously (<code>true</code> and <code>false</code>)</td>
+        <td><code>true</code></td>
+    </tr>
+    <tr>
+        <th colspan="3">MobileFrontend</th>
+    </tr>
+    <tr>
+        <td>COLLAPSE_SECTIONS_BY_DEFAULT</td>
+        <td>Controls whether to collapse sections by default (<code>true</code> and <code>false</code>)</td>
+        <td><code>false</code></td>
+    </tr>
+</table>
 
 ## How to create an administrator
 
 Administrators are wiki users who are members of the "sysop" user group (see details [here](https://mediawiki.org/wiki/Manual:Administrators)). An administrator can be created, using the [createAndPromote.php](https://mediawiki.org/wiki/Manual:CreateAndPromote.php) script:
 
 1. Run `docker exec` on a running MediaWiki container.
-2. Run `php7 maintenance/createAndPromote.php --sysop <username> <password>` inside the container.
+2. Run `php maintenance/createAndPromote.php --sysop <username> <password>` inside the container.
 
 ## How to register custom namespaces
 
@@ -104,6 +168,24 @@ Then, rebuild the Docker image and re-run the container. After this you will get
 
 In order to modify a [php.ini](https://php.net/manual/en/configuration.file.php) parameter, use the environment variable the name of which consists of `PHP_INI_` and the name of the parameter. For example, to change the [post_max_size](https://php.net/manual/en/ini.core.php#ini.post-max-size) parameter, pass the `PHP_INI_post_max_size` environment variable to the container.
 
-## How to change logo
+## How to change logos
 
-Provide a square logo named `kblogo.png` which is 135x135px or 150x150px.
+Place all the logos in the `logos` directory, they can be accessed using the path `$wgResourceBasePath/resources/assets`. For example, you have placed `cusdeb.svg` and `cusdeb-wordmark.svg` in this directory. Next, create a file `config/logos.php` with the following content:
+
+```php
+$wgLogos = [
+    'icon' => "$wgResourceBasePath/resources/assets/cusdeb.svg",
+    'tagline' => [
+        'src' => "$wgResourceBasePath/resources/assets/cusdeb-wordmark.svg",
+        'width' => 135,
+        'height' => 15,
+    ],
+];
+```
+
+and rebuild the image. See [$wgLogos](https://mediawiki.org/wiki/Manual:$wgLogos) for details.
+
+## How to upgrade from MariaDB 10.5 to MariaDB 10.6
+
+1. Run `docker exec` on a running MariaDB container.
+2. Run `mariadb-upgrade -uroot -p`.

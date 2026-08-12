@@ -15,7 +15,7 @@ server {
     location ~ ^/w/(index|load|api|thumb|opensearch_desc|rest|img_auth)\.php$ {
         include /etc/nginx/fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+        fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
     }
 
     location /w/images {
