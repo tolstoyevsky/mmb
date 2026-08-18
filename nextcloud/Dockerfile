@@ -1,4 +1,4 @@
-ARG ALPINE_VER=3.21
+ARG ALPINE_VER=3.24
 ARG ARIA2_DEPS="c-ares-dev ca-certificates expat-dev ffmpeg gettext-dev gnutls-dev sqlite-dev"
 ARG ARIA2_PREFIX="/root/aria2"
 ARG NEXTCLOUD_VER=v31.0.14
@@ -52,7 +52,7 @@ RUN apk --update add curl \
  && chmod a+rx yt-dlp
 
 
-FROM node:20-alpine"${ALPINE_VER}" AS main
+FROM node:22-alpine"${ALPINE_VER}" AS main
 ARG ALPINE_VER
 ARG NEXTCLOUD_VER
 ENV NODE_OPTIONS "--max-old-space-size=6144"
@@ -161,6 +161,8 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
     php83-json \
     php83-mbstring \
     php83-openssl \
+    # phar so Composer runs under php83 (Alpine 3.24 ships Composer against php85, which lacks our modules)
+    php83-phar \
     # for nextcloud-news-updater
     php83-pcntl \
     php83-pdo \
@@ -225,7 +227,10 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  # Raise the platform cap to the PHP version this image actually runs so ocp resolves.
  && sed -i 's#"php": "8.1.31"#"php": "8.3.19"#' /var/www/nc/apps2/bookmarks/composer.json \
  \
- && for dir in ${INSTALL_DEPS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; composer install --no-dev; done \
+ # Composer 2.10 (Alpine 3.24) blocks installs on security advisories; the pinned upstream
+ # apps carry such deps (e.g. bookmarks -> symfony/dom-crawler 3.x) and won't resolve otherwise.
+ && php83 /usr/bin/composer.phar config --global policy.advisories.block false \
+ && for dir in ${INSTALL_DEPS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; php83 /usr/bin/composer.phar install --no-dev; done \
  \
  # NCDownloader bundles psr/log 1.x (pulled in transitively via symfony/http-client),
  # whose AbstractLogger has untyped method signatures. Nextcloud 31 core ships
@@ -260,6 +265,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  && find /var/www/nc -name node_modules | xargs rm -rf \
  && rm -r /root/.cache \
  && rm -r /root/.composer \
+ && rm -rf /root/.config/composer \
  && rm -r /root/.npm \
  && rm -r /var/cache/apk/*
 
