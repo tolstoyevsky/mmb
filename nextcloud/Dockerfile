@@ -136,20 +136,10 @@ ENV SPREED_VER v21.1.11
 
 ENV TASKS_VER v0.18.1
 
-ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/circles /var/www/nc/apps2/photos /var/www/nc/apps2/text /var/www/nc/apps2/viewer"
-
-ENV BUILD_JS_FOR "/var/www/nc/apps2/notifications /var/www/nc/apps2/photos"
-
-# For building the Spreed app
-ENV NODE_OPTIONS "--max-old-space-size=6144"
-
 RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /etc/apk/repositories \
  && apk --update add \
     bash \
-    composer \
-    g++ \
     git \
-    make \
     php83 \
  # required modules
     php83-ctype \
@@ -161,8 +151,6 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
     php83-json \
     php83-mbstring \
     php83-openssl \
-    # phar so Composer runs under php83 (Alpine 3.24 ships Composer against php85, which lacks our modules)
-    php83-phar \
     # for nextcloud-news-updater
     php83-pcntl \
     php83-pdo \
@@ -194,15 +182,8 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
     ${ARIA2_DEPS} \
  && cd /var/www/nc \
  && mkdir apps2 && cd apps2 \
- # Apps bundled with the server release but absent from the server Git tree — clone
- # at the server version. These still get a composer/npm build step below.
- && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/circles.git \
- && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/files_pdfviewer.git \
- && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/notifications.git \
- && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/photos.git \
- && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/text.git \
- && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/viewer.git \
- && git clone -b "${PASSMAN_VER}"   --depth 1 https://github.com/nextcloud/passman.git \
+ # Passman has no prebuilt release tarball (App Store only), so clone it from Git.
+ && git clone -b "${PASSMAN_VER}" --depth 1 https://github.com/nextcloud/passman.git \
  \
  # App Store apps: fetch the PREBUILT release tarball — built JS and vendor/ are
  # already inside, so no composer/npm is needed for these. The release org
@@ -228,36 +209,26 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
       done \
  && for t in *.tar.gz; do tar xzf "$t" && rm "$t"; done \
  \
- # Install PHP deps for the still-from-source (server-bundled) apps. Composer runs
- # under php83 (Alpine 3.24 ships Composer against php85, which lacks our modules).
- && for dir in ${INSTALL_DEPS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; php83 /usr/bin/composer.phar install --no-dev; done \
+ # Server-bundled apps (circles, files_pdfviewer, notifications, photos, text, viewer)
+ # ship built inside the server release tarball but are absent from the server Git
+ # tree — take them from the release tarball instead of building them from source.
+ && n=0; until wget -q "https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VER#v}.tar.bz2"; do n=$((n+1)); [ "$n" -ge 5 ] && echo "server tarball download failed" && exit 1; echo "retry $n"; sleep 5; done \
+ && tar xjf "nextcloud-${NEXTCLOUD_VER#v}.tar.bz2" nextcloud/apps/circles nextcloud/apps/files_pdfviewer nextcloud/apps/notifications nextcloud/apps/photos nextcloud/apps/text nextcloud/apps/viewer \
+ && mv nextcloud/apps/circles nextcloud/apps/files_pdfviewer nextcloud/apps/notifications nextcloud/apps/photos nextcloud/apps/text nextcloud/apps/viewer . \
+ && rm -rf nextcloud "nextcloud-${NEXTCLOUD_VER#v}.tar.bz2" \
  \
- #
- # Create the directory for yt-dlp.
- # Install the mandatory NCDownloader requirement.
- #
+ # Create the directory for yt-dlp (an optional NCDownloader requirement).
  && mkdir -p ${YT_DLP_TARGET_PATH} \
- && npm install @nextcloud/browserslist-config --save-dev \
- #
- # Build Nextcloud apps.
- #
- && for dir in ${BUILD_JS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; npm i; npm run svg_sprite 2> /dev/null || true; npm run build; done \
  \
  && chown -R nginx:nginx /var/www \
  \
  && pip3 install --break-system-packages nextcloud-news-updater=="${NEWS_UPDATER_VER}" \
  # Cleanup
  && apk del \
-    composer \
     git \
-    make \
     py3-pip \
  && find /var/www/nc -name .git | xargs rm -r \
- && find /var/www/nc -name node_modules | xargs rm -rf \
- && rm -r /root/.cache \
- && rm -r /root/.composer \
- && rm -rf /root/.config/composer \
- && rm -r /root/.npm \
+ && rm -rf /root/.cache \
  && rm -r /var/cache/apk/*
 
 COPY --from=build_aria2 "${ARIA2_PREFIX}" /usr/
