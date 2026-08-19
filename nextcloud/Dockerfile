@@ -136,9 +136,9 @@ ENV SPREED_VER v21.1.11
 
 ENV TASKS_VER v0.18.1
 
-ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/contacts /var/www/nc/apps2/circles /var/www/nc/apps2/collectives /var/www/nc/apps2/photos /var/www/nc/apps2/deck /var/www/nc/apps2/files_photospheres /var/www/nc/apps2/mail /var/www/nc/apps2/spreed /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news /var/www/nc/apps2/text /var/www/nc/apps2/viewer"
+ENV INSTALL_DEPS_FOR "/var/www/nc/apps2/circles /var/www/nc/apps2/photos /var/www/nc/apps2/text /var/www/nc/apps2/viewer"
 
-ENV BUILD_JS_FOR "/var/www/nc/apps2/bookmarks /var/www/nc/apps2/calendar /var/www/nc/apps2/collectives /var/www/nc/apps2/contacts /var/www/nc/apps2/deck /var/www/nc/apps2/mail /var/www/nc/apps2/ncdownloader /var/www/nc/apps2/news /var/www/nc/apps2/notes /var/www/nc/apps2/notifications /var/www/nc/apps2/photos /var/www/nc/apps2/spreed /var/www/nc/apps2/tasks"
+ENV BUILD_JS_FOR "/var/www/nc/apps2/notifications /var/www/nc/apps2/photos"
 
 # For building the Spreed app
 ENV NODE_OPTIONS "--max-old-space-size=6144"
@@ -194,58 +194,49 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
     ${ARIA2_DEPS} \
  && cd /var/www/nc \
  && mkdir apps2 && cd apps2 \
- && git clone -b "${BOOKMARKS_VER}"           --depth 1 https://github.com/nextcloud/bookmarks.git \
- && git clone -b "${CALENDAR_VER}"            --depth 1 https://github.com/nextcloud/calendar.git \
- && git clone -b "${MAIL_VER}"                --depth 1 https://github.com/nextcloud/mail.git \
- && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/circles.git \
- && git clone -b "${COLLECTIVES_VER}"         --depth 1 https://github.com/nextcloud/collectives.git \
- && git clone -b "${CONTACTS_VER}"            --depth 1 https://github.com/nextcloud/contacts.git \
- && git clone -b "${DECK_VER}"                --depth 1 https://github.com/nextcloud/deck.git \
- && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/files_pdfviewer.git \
- && git clone -b "${PHOTO_SPHERE_VIEWER_VER}" --depth 1 https://github.com/nextcloud/files_photospheres.git \
- && git clone -b "${NCDOWNLOADER_VER}"        --depth 1 https://github.com/shiningw/ncdownloader \
- && git clone -b "${NEWS_VER}"                --depth 1 https://github.com/nextcloud/news.git \
- && git clone -b "${NOTES_VER}"               --depth 1 https://github.com/nextcloud/notes.git \
- && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/notifications.git \
- && git clone -b "${NOTIFY_PUSH_VER}"         --depth 1 https://github.com/nextcloud/notify_push.git \
- && git clone -b "${PASSMAN_VER}"             --depth 1 https://github.com/nextcloud/passman.git \
- && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/photos.git \
- && git clone -b "${SPREED_VER}"              --depth 1 https://github.com/nextcloud/spreed.git \
- && git clone -b "${TASKS_VER}"               --depth 1 https://github.com/nextcloud/tasks.git \
- && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/text.git \
- && git clone -b "${NEXTCLOUD_VER}"           --depth 1 https://github.com/nextcloud/viewer.git \
+ # Apps bundled with the server release but absent from the server Git tree — clone
+ # at the server version. These still get a composer/npm build step below.
+ && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/circles.git \
+ && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/files_pdfviewer.git \
+ && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/notifications.git \
+ && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/photos.git \
+ && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/text.git \
+ && git clone -b "${NEXTCLOUD_VER}" --depth 1 https://github.com/nextcloud/viewer.git \
+ && git clone -b "${PASSMAN_VER}"   --depth 1 https://github.com/nextcloud/passman.git \
  \
- # The Passwords app is distributed only as a prebuilt release tarball (not a Git repo);
- # download and unpack it into apps2. It is already built, so it needs no composer/npm step.
- && wget -q "https://git.mdns.eu/api/v4/projects/45/packages/generic/passwords/${PASSWORDS_VER}/passwords.tar.gz" \
- && tar xzf passwords.tar.gz \
- && rm passwords.tar.gz \
+ # App Store apps: fetch the PREBUILT release tarball — built JS and vendor/ are
+ # already inside, so no composer/npm is needed for these. The release org
+ # (nextcloud-releases vs the app's own repo) and the asset filename differ per
+ # app, so each URL is spelled out. Every tarball unpacks to its own app dir.
+ # wget is wrapped in a retry loop (transient GitHub/CDN timeouts are common).
+ && for url in \
+      "https://github.com/nextcloud-releases/calendar/releases/download/${CALENDAR_VER}/calendar-${CALENDAR_VER}.tar.gz" \
+      "https://github.com/nextcloud-releases/contacts/releases/download/${CONTACTS_VER}/contacts-${CONTACTS_VER}.tar.gz" \
+      "https://github.com/nextcloud-releases/deck/releases/download/${DECK_VER}/deck-${DECK_VER}.tar.gz" \
+      "https://github.com/nextcloud-releases/mail/releases/download/${MAIL_VER}/mail-${MAIL_VER}.tar.gz" \
+      "https://github.com/nextcloud-releases/notes/releases/download/${NOTES_VER}/notes-${NOTES_VER}.tar.gz" \
+      "https://github.com/nextcloud-releases/spreed/releases/download/${SPREED_VER}/spreed-${SPREED_VER}.tar.gz" \
+      "https://github.com/nextcloud-releases/notify_push/releases/download/${NOTIFY_PUSH_VER}/notify_push-${NOTIFY_PUSH_VER}.tar.gz" \
+      "https://github.com/nextcloud/bookmarks/releases/download/${BOOKMARKS_VER}/bookmarks-${BOOKMARKS_VER#v}.tar.gz" \
+      "https://github.com/nextcloud/collectives/releases/download/${COLLECTIVES_VER}/collectives-${COLLECTIVES_VER#v}.tar.gz" \
+      "https://github.com/nextcloud/news/releases/download/${NEWS_VER}/news.tar.gz" \
+      "https://github.com/nextcloud/tasks/releases/download/${TASKS_VER}/tasks.tar.gz" \
+      "https://github.com/nextcloud/files_photospheres/releases/download/${PHOTO_SPHERE_VIEWER_VER}/files_photospheres.tar.gz" \
+      "https://github.com/shiningw/ncdownloader/releases/download/${NCDOWNLOADER_VER}/ncdownloader-release.tar.gz" \
+      "https://git.mdns.eu/api/v4/projects/45/packages/generic/passwords/${PASSWORDS_VER}/passwords.tar.gz" ; do \
+        n=0; until wget -q "${url}"; do n=$((n+1)); [ "$n" -ge 5 ] && echo "download failed: ${url}" && exit 1; echo "retry $n: ${url}"; sleep 5; done; \
+      done \
+ && for t in *.tar.gz; do tar xzf "$t" && rm "$t"; done \
  \
- # Bookmarks ships no composer.lock and caps composer at PHP 8.1 via config.platform,
- # but its nextcloud/ocp dev-master dependency requires PHP >= 8.3 — the two conflict,
- # composer install fails and the link-preview dependency ends up missing (app 500s).
- # Raise the platform cap to the PHP version this image actually runs so ocp resolves.
- && sed -i 's#"php": "8.1.31"#"php": "8.3.19"#' /var/www/nc/apps2/bookmarks/composer.json \
- \
- # Composer 2.10 (Alpine 3.24) blocks installs on security advisories; the pinned upstream
- # apps carry such deps (e.g. bookmarks -> symfony/dom-crawler 3.x) and won't resolve otherwise.
- && php83 /usr/bin/composer.phar config --global policy.advisories.block false \
+ # Install PHP deps for the still-from-source (server-bundled) apps. Composer runs
+ # under php83 (Alpine 3.24 ships Composer against php85, which lacks our modules).
  && for dir in ${INSTALL_DEPS_FOR}; do >&2 echo "----- Entering to ${dir}"; cd "${dir}"; php83 /usr/bin/composer.phar install --no-dev; done \
- \
- # NCDownloader bundles psr/log 1.x (pulled in transitively via symfony/http-client),
- # whose AbstractLogger has untyped method signatures. Nextcloud 31 core ships
- # psr/log 3.x (Stringable|string typed), and NCDownloader's app autoloader shadows
- # the core one, so loading Psr\Log\AbstractLogger fatals with an "incompatible
- # declaration" error that takes down unrelated pages (e.g. the Photos app).
- # Drop the bundled copy so the autoloader falls through to core's psr/log 3.x
- # (symfony/http-client is compatible with it).
- && rm -rf /var/www/nc/apps2/ncdownloader/vendor/psr/log \
  \
  #
  # Create the directory for yt-dlp.
  # Install the mandatory NCDownloader requirement.
  #
- && mkdir ${YT_DLP_TARGET_PATH} \
+ && mkdir -p ${YT_DLP_TARGET_PATH} \
  && npm install @nextcloud/browserslist-config --save-dev \
  #
  # Build Nextcloud apps.
