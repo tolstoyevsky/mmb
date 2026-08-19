@@ -1,3 +1,7 @@
+# Trim the install page for our fixed stack: hide the data-dir and DB-backend choices,
+# pre-fill the MariaDB connection, skip the recommended-apps step, and keep the
+# show-password toggle from clearing the field.
+
 diff --git a/core/Controller/SetupController.php b/core/Controller/SetupController.php
 index 0f1fa1c..1dc289b 100644
 --- a/core/Controller/SetupController.php

@@ -1,3 +1,6 @@
+# Pre-seed config defaults into Config.php so a fresh instance works out of the box:
+# registers the /apps2 app dir, disables the App Store, sets APCu+Redis cache and RU region.
+
 diff --git a/lib/private/Config.php b/lib/private/Config.php
 index 2a83d23..a2897a7 100644
 --- a/lib/private/Config.php
