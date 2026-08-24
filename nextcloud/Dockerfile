@@ -150,6 +150,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
     g++ \
     git \
     make \
+    patch \
     php83 \
  # required modules
     php83-ctype \
@@ -221,6 +222,10 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  && tar xzf passwords.tar.gz \
  && rm passwords.tar.gz \
  \
+ # A failing breach check (default HIBP) must not abort password create/share sync,
+ # otherwise a shared password hangs forever on "updatePending". Make the check non-fatal.
+ && patch -p1 -d /var/www/nc/apps2/passwords < /var/www/nc/patches/passwords-breach-check-nonfatal.patch \
+ \
  # Bookmarks ships no composer.lock and caps composer at PHP 8.1 via config.platform,
  # but its nextcloud/ocp dev-master dependency requires PHP >= 8.3 — the two conflict,
  # composer install fails and the link-preview dependency ends up missing (app 500s).
@@ -260,6 +265,7 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
     composer \
     git \
     make \
+    patch \
     py3-pip \
  && find /var/www/nc -name .git | xargs rm -r \
  && find /var/www/nc -name node_modules | xargs rm -rf \
