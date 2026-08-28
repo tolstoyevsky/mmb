@@ -1,0 +1,25 @@
+# Name a multi-file download archive after its folder, not "download.zip".
+# NC31 hardcodes "download" for any selection; NC32 fixed it. Backport of the
+# NC32 core fix; drop after bumping to NC32. Written against NC 31.0.14.
+--- a/apps/dav/lib/Connector/Sabre/ZipFolderPlugin.php
++++ b/apps/dav/lib/Connector/Sabre/ZipFolderPlugin.php
+@@ -157,13 +157,16 @@
+ 			$content[] = $child->getNode();
+ 		}
+
+-		$archiveName = 'download';
++		$archiveName = $folder->getName();
++		if (count(explode('/', trim($folder->getPath(), '/'), 3)) === 2) {
++			// this is a download of the root folder
++			$archiveName = 'download';
++		}
++
+ 		$rootPath = $folder->getPath();
+ 		if (empty($files)) {
+ 			// We download the full folder so keep it in the tree
+ 			$rootPath = dirname($folder->getPath());
+-			// Full folder is loaded to rename the archive to the folder name
+-			$archiveName = $folder->getName();
+ 		}
+ 		$streamer = new Streamer($tarRequest, -1, count($content), $this->timezoneFactory);
+ 		$streamer->sendHeaders($archiveName);
