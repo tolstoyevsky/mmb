@@ -1,2 +1,3 @@
 hide-unnecessary-blocks-on-installation-page.patch
 pre-configure-instance.patch
+files-name-multidownload-archive-after-folder.patch
