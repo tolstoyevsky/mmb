@@ -1,4 +1,4 @@
-FROM alpine:3.19
+FROM alpine:3.24
 MAINTAINER Evgeny Golyshev <eugulixes@gmail.com>
 
 ENV COTURN_VERSION 4.6.2

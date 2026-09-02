@@ -1,5 +1,9 @@
 ARG ALPINE_VER=3.24
 ARG NEXTCLOUD_VER=v31.0.14
+# Talk High Performance Backend: external signaling server + NATS message bus.
+ARG SIGNALING_VER=v2.1.1
+ARG NATS_VER=v2.14.6
+ARG NATS_SHA256=61c3d55f69f61ec616b75782250936445f2819e9e5f2ae6159b10a31abd2200c
 
 
 FROM alpine:"${ALPINE_VER}" AS download_change_ini_param_py
@@ -7,6 +11,34 @@ RUN apk --update add curl \
  && cd \
  && curl -O https://raw.githubusercontent.com/tolstoyevsky/mmb/master/utils/change_ini_param.py \
  && chmod +x change_ini_param.py
+
+
+# Build the Talk High Performance Backend signaling server from source
+# (no prebuilt binary is published). `make server` needs only go/bash/git/make.
+# Built on Alpine (go from the distro) rather than the golang image so the build
+# depends only on the same base image and mirror the rest of the image uses.
+FROM alpine:"${ALPINE_VER}" AS build_signaling
+ARG ALPINE_VER
+ARG SIGNALING_VER
+RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /etc/apk/repositories \
+ && apk --update add bash git go make \
+ && git clone -b "${SIGNALING_VER}" --depth 1 https://github.com/strukturag/nextcloud-spreed-signaling.git /src \
+ && cd /src \
+ && make server \
+ && cp bin/signaling /nextcloud-spreed-signaling
+
+
+# Fetch the NATS message bus used by the signaling server (prebuilt release).
+FROM alpine:"${ALPINE_VER}" AS download_nats
+ARG NATS_VER
+ARG NATS_SHA256
+RUN apk --update add curl \
+ && cd \
+ && curl -fsSL "https://github.com/nats-io/nats-server/releases/download/${NATS_VER}/nats-server-${NATS_VER}-linux-amd64.tar.gz" -o nats.tar.gz \
+ && echo "${NATS_SHA256}  nats.tar.gz" | sha256sum -c \
+ && tar xzf nats.tar.gz \
+ && cp "nats-server-${NATS_VER}-linux-amd64/nats-server" /nats-server \
+ && chmod +x /nats-server
 
 
 FROM node:22-alpine"${ALPINE_VER}" AS main
@@ -210,6 +242,10 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  && rm -r /var/cache/apk/*
 
 COPY --from=download_change_ini_param_py /root/change_ini_param.py /usr/bin/
+
+# Talk High Performance Backend binaries (run as TYPE=signaling / TYPE=nats).
+COPY --from=build_signaling /nextcloud-spreed-signaling /usr/bin/nextcloud-spreed-signaling
+COPY --from=download_nats /nats-server /usr/bin/nats-server
 
 CMD ["/entrypoint.sh"]
 
