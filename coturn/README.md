@@ -24,7 +24,7 @@ coturn is a free open source implementation of TURN and STUN Server.
   </tr> 
   <tr>
     <td valign="top">Base image</td>
-    <td>alpine3.19</td>
+    <td>alpine3.24</td>
   </tr>
 </table>
 
