@@ -31,6 +31,45 @@ services:
     volumes:
     - ./_config:/config
     - ./_nc/data:/var/www/nc/data
+  signaling:
+    image: cusdeb/nextcloud:31-amd64
+    environment:
+    - TYPE=signaling
+    - NATS_URL=nats://nats:4222
+    - SIGNALING_SECRET=${SIGNALING_SECRET}
+    # Set to true only if Nextcloud is served with a certificate this server
+    # does not trust (e.g. self-signed). Keep unset/false in production.
+    - SIGNALING_SKIP_VERIFY=${SIGNALING_SKIP_VERIFY}
+  nats:
+    image: cusdeb/nextcloud:31-amd64
+    environment:
+    - TYPE=nats
+  coturn:
+    image: cusdeb/coturn:4.6.2
+    environment:
+    - AUTH_SECRET=${TURN_SECRET}
+    - REALM=nextcloud
+    ports:
+    - 3478:3478
+    - 3478:3478/udp
+    - 5349:5349
+    - 5349:5349/udp
+    - 49160-49200:49160-49200/udp
+  talk_provision:
+    image: cusdeb/nextcloud:31-amd64
+    environment:
+    - TYPE=talk_provision
+    # The .../standalone-signaling/ URL, reachable from both browsers and the stack.
+    - SIGNALING_URL=${SIGNALING_URL}
+    - SIGNALING_SECRET=${SIGNALING_SECRET}
+    - SIGNALING_VERIFY=${SIGNALING_VERIFY}
+    - TURN_SERVER=${TURN_SERVER}
+    - TURN_SECRET=${TURN_SECRET}
+    - STUN_SERVER=${STUN_SERVER}
+    restart: "no"
+    volumes:
+    - ./_config:/var/www/nc/config
+    - ./_nc/data:/var/www/nc/data
   mariadb:
     image: cusdeb/mariadb:10.6-amd64
     environment:

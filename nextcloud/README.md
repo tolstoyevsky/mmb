@@ -46,7 +46,7 @@ Nextcloud is a self-hosted collaboration platform which can act as an alternativ
 * The [PDF viewer](https://github.com/nextcloud/files_pdfviewer) application allows users to view PDF files. It uses the [PDF.js](https://mozilla.github.io/pdf.js/) library under the hood.
 * The [Photos](https://github.com/nextcloud/photos) application allows users to create albums from their contents, favorite and tag their photos, show slideshows and share their photos or albums with other users.
 * The [Photo Sphere Viewer](https://github.com/nextcloud/files_photospheres) application allows users to view Google PhotoSphere 360° images.
-* The [Talk](https://github.com/nextcloud/spreed) application allows users to have private, group, public and password protected calls. It uses the [simpleWebRTC](https://simplewebrtc.com) library under the hood.
+* The [Talk](https://github.com/nextcloud/spreed) application allows users to have private, group, public and password protected calls. It uses the [simpleWebRTC](https://simplewebrtc.com) library under the hood. Calls are served by a bundled [High Performance Backend](#talk-high-performance-backend) (external signaling server + NATS message bus + TURN) so group calls stay reliable and work behind NAT.
 * The [Text](https://github.com/nextcloud/text) allows users to collaborate on documents using [Markdown](https://en.wikipedia.org/wiki/Markdown).
 
 ## Installation
@@ -64,5 +64,32 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
 | PM_START_SERVERS     | [pm.start_servers](https://php.net/manual/en/install.fpm.configuration.php#pm.start-servers)         | 2    |
 | PM_MIN_SPARE_SERVERS | [pm.min_spare_servers](https://php.net/manual/en/install.fpm.configuration.php#pm.min-spare-servers) | 1    |
 | PM_MAX_SPARE_SERVERS | [pm.max_spare_servers](https://php.net/manual/en/install.fpm.configuration.php#pm.max-spare-servers) | 3    |
+| SIGNALING_URL        | Public `.../standalone-signaling/` URL Talk hands to clients (must be reachable from the browsers and from the stack). Empty = signaling not registered. | *(empty)* |
+| SIGNALING_SECRET     | Shared secret between Nextcloud and the signaling server                                             | secret |
+| SIGNALING_HASHKEY    | Key signing signaling session tokens (32 or 64 bytes). Required to be equal across multiple signaling instances | *(random per start)* |
+| SIGNALING_BLOCKKEY   | Key encrypting signaling session tokens (16, 24 or 32 bytes). Same multi-instance rule as SIGNALING_HASHKEY | *(random per start)* |
+| SIGNALING_VERIFY     | Set to any value to pass `--verify` when registering the signaling server (valid TLS)                | *(empty)* |
+| SIGNALING_SKIP_VERIFY| `true` lets the signaling server talk to a Nextcloud with an untrusted (e.g. self-signed) certificate | *(empty)* |
+| TURN_SERVER          | Public `host:port` of the TURN server (coturn). Empty = TURN not registered                          | *(empty)* |
+| TURN_SECRET          | Shared secret for TURN REST credentials (must match coturn `AUTH_SECRET`)                            | secret |
+| STUN_SERVER          | Public `host:port` of the STUN server. Empty = STUN not registered                                   | *(empty)* |
 
 In order to calculate the values of `PM_MAX_CHILDREN`, `PM_START_SERVERS`, `PM_MIN_SPARE_SERVERS` and `PM_MAX_SPARE_SERVERS` that fit your needs, use [PHP-FPM Process Calculator](https://spot13.com/pmcalculator/).
+
+## Talk High Performance Backend
+
+Talk ships with its High Performance Backend (HPB) so that group calls scale and
+traverse NAT. It is delivered by four extra services in `docker-compose.yml`:
+`coturn` runs from its own image, while `signaling`, `nats` and `talk_provision`
+are the shared Nextcloud image started with different `TYPE` values:
+
+* `signaling` (`TYPE=signaling`): the [nextcloud-spreed-signaling](https://github.com/strukturag/nextcloud-spreed-signaling) server, reverse-proxied by the frontend at `/standalone-signaling/`.
+* `nats` (`TYPE=nats`): the [NATS](https://nats.io/) message bus the signaling server uses to exchange events asynchronously.
+* `coturn`: the TURN/STUN server, authenticating clients with time-limited REST credentials derived from a shared secret.
+* `talk_provision` (`TYPE=talk_provision`): a one-shot service that waits until Nextcloud is installed and then idempotently enables Talk and registers the signaling/TURN/STUN servers from the variables above. It is safe to leave in place; it re-runs on every `up` and only adds what is missing.
+
+After the first `docker-compose up`, install Nextcloud through the web installer
+as usual; `talk_provision` finishes the Talk wiring on its own once the instance
+is up. Set `SIGNALING_URL`, `TURN_SERVER` and `STUN_SERVER` to hosts that are
+reachable both from users' browsers and from within the stack, and change
+`SIGNALING_SECRET`/`TURN_SECRET` from their defaults before going to production.
