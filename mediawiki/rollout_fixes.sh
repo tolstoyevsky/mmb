@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# The directories are necessary for nginx and php-fpm, but they do not exist in the container.
-mkdir /run/nginx
+# The directory is necessary for php-fpm, but it does not exist in the container.
 mkdir /run/php
 
