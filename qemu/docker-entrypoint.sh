@@ -106,7 +106,15 @@ MACHINE_TYPE=${MACHINE_TYPE:=""}
 
 MEMORY=${MEMORY:=""}
 
+MONITOR_PORT="${MONITOR_PORT:=55555}"
+
 SD=${SD=""}
+
+SERIAL_PORT=${SERIAL_PORT:=4321}
+
+VNC_DISPLAY=${VNC_DISPLAY:=0}
+
+ENABLE_VNC_PASSWORD=${ENABLE_VNC_PASSWORD:=false}
 
 set +x
 
@@ -140,11 +148,19 @@ reset=$(tput sgr0)
 
 curl -L -f -o "/tmp/${IMAGE}" "${IMAGE_URL}"
 
+if gunzip -t "/tmp/${IMAGE}"; then
+    mv "/tmp/${IMAGE}" "/tmp/${IMAGE}.gz"
+
+    gunzip "/tmp/${IMAGE}.gz"
+fi
+
 if [ ! -z ${IMAGE} ]; then
     info "trying to emulate Raspberry Pi 3 since IMAGE was specified."
 
     info "the ARCH value was changed to aarch64."
     ARCH="aarch64"
+
+    DEVICE="usb-kbd"
 
     info "the MACHINE_TYPE value was changed to raspi3."
     MACHINE_TYPE="raspi3"
@@ -152,12 +168,22 @@ if [ ! -z ${IMAGE} ]; then
     info "the MEMORY value was changed to 1G."
     MEMORY="1G"
 
+    MONITOR="tcp:127.0.0.1:${MONITOR_PORT},server,nowait"
+
     info "the SD value was changed to ${IMAGE}."
     SD="${IMAGE}"
 
     image_size=$(wc -c < "/tmp/${IMAGE}")
     IMAGE_RESIZE_VALUE=$(( "${image_size}" / 1024 ** 3 + 1 ))
     IMAGE_RESIZE_VALUE="${IMAGE_RESIZE_VALUE}G"
+
+    SERIAL="tcp:localhost:${SERIAL_PORT},server,nowait"
+
+    VNC=":${VNC_DISPLAY}"
+
+    if ${ENABLE_VNC_PASSWORD}; then
+        VNC="${VNC},password=on"
+    fi
 
     info "using the following command line \"${default_cmdline}\"."
     cmdline="${default_cmdline}"
@@ -270,11 +296,15 @@ alpha|cris|lm32|m68k|microblaze|microblazeel|moxie|s390x|sh4|sh4eb|tricore|unico
 esac
 
 params=(
+    "DEVICE -device"
     "DTB -dtb"
     "KERNEL -kernel"
     "MACHINE_TYPE -M"
     "MEMORY -m"
+    "MONITOR -monitor"
     "SD -sd"
+    "SERIAL -serial"
+    "VNC -vnc"
 )
 
 for i in "${params[@]}"; do
@@ -288,8 +318,6 @@ done
 if [ ! -z "${cmdline}" ]; then
     qemu_args+=( -append "\"${cmdline}\"" )
 fi
-
-qemu_args+=( -serial stdio )
 
 info "passing \"${qemu_args[@]}\" to ${qemu_bin}"
 
