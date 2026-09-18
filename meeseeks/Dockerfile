@@ -4,17 +4,15 @@ ARG BRANCH
 
 ENV HOME /root
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
 RUN echo https://mirror.yandex.ru/mirrors/alpine/v3.15/main/       > /etc/apk/repositories \
  && echo https://mirror.yandex.ru/mirrors/alpine/v3.15/community/ >> /etc/apk/repositories \
  && apk --update add \
     bash \
     curl \
-    gcc \
     git \
-    linux-headers \
-    musl-dev \
     openssh \
-    postgresql-dev \
  && mkdir /var/www \
  && cd /var/www \
  \
@@ -22,10 +20,10 @@ RUN echo https://mirror.yandex.ru/mirrors/alpine/v3.15/main/       > /etc/apk/re
  && chmod +x wait-for-it.sh \
  \
  && git clone -b $BRANCH --depth 1 https://github.com/tolstoyevsky/meeseeks.git \
- && pip3 install -r meeseeks/requirements.txt \
+ && cd meeseeks \
+ && uv sync \
  \
  && apk del \
-   gcc \
    git \
    openssh \
  && rm -rf /var/cache/apk/*
