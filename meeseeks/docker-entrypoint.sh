@@ -89,10 +89,10 @@ ln -snf /usr/share/zoneinfo/"${TIME_ZONE}" /etc/localtime
 
 cd apps/happy_birthder
 
-env PYTHONPATH=$(pwd)/../.. python3 ini_config.py
+env PYTHONPATH=$(pwd)/../.. uv run python ini_config.py
 
-env PYTHONPATH=$(pwd)/../.. alembic upgrade head
+env PYTHONPATH=$(pwd)/../.. uv run alembic upgrade head
 
 cd ../..
 
-env PYTHONPATH=$(pwd) python3 manage.py
+env PYTHONPATH=$(pwd) uv run python manage.py
