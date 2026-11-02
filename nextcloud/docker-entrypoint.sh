@@ -34,6 +34,8 @@ change_ini_params() {
     change_ini_param.py --config-file /etc/php83/php.ini --section PHP "memory_limit" "512M"
 
     change_ini_param.py --config-file /etc/php83/php.ini --section PHP "apc.enable_cli" "1"
+
+    change_ini_param.py --config-file /etc/php83/php.ini --section opcache "opcache.interned_strings_buffer" "16"
 }
 
 case "${TYPE}" in
