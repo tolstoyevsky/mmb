@@ -85,6 +85,11 @@ If you set up a system cron job for `cron.php` before, remove it.
 News feeds are fetched by the `news_updater` service, so the built-in News cron
 updater is disabled by default.
 
+Heavy daily jobs run during the maintenance window, 01:00-05:59 UTC by default.
+To change it, set `maintenance_window_start` to another hour in UTC (`100`
+disables the window), e.g.
+`occ config:system:set maintenance_window_start --type=integer --value=22`.
+
 ## Talk High Performance Backend
 
 Talk ships with its High Performance Backend (HPB) so that group calls scale and

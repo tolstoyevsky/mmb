@@ -2,7 +2,7 @@ diff --git a/lib/private/Config.php b/lib/private/Config.php
 index 2a83d23..a2897a7 100644
 --- a/lib/private/Config.php
 +++ b/lib/private/Config.php
-@@ -48,7 +48,29 @@ class Config {
+@@ -17,7 +17,30 @@ class Config {
  	public const ENV_PREFIX = 'NC_';
  
  	/** @var array Associative array ($key => $value) */
@@ -22,6 +22,7 @@ index 2a83d23..a2897a7 100644
 +		],
 +		'appstoreenabled' => false,
 +		'default_phone_region' => 'RU',
++		'maintenance_window_start' => 1,
 +		'memcache.local' => '\OC\Memcache\APCu',
 +		'memcache.distributed' => '\OC\Memcache\Redis',
 +		'memcache.locking' => '\OC\Memcache\Redis',
