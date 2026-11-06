@@ -63,6 +63,23 @@ news_updater)
     sudo -u nginx nextcloud-news-updater /var/www/nc
 
     ;;
+cron)
+    change_ini_params
+
+    # Exit immediately on docker stop
+    trap 'exit 0' TERM INT
+
+    # Run the background jobs every 5 minutes once Nextcloud is installed
+    while true; do
+        if grep -qs "'installed' => true" /var/www/nc/config/config.php; then
+            sudo -u nginx php83 -f /var/www/nc/cron.php || >&2 echo "cron: cron.php exited with an error"
+        fi
+
+        sleep 300 &
+        wait $!
+    done
+
+    ;;
 signaling)
     # Talk High Performance Backend signaling server.
     SIGNALING_SECRET="${SIGNALING_SECRET:=secret}"

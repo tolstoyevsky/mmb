@@ -206,6 +206,9 @@ RUN echo http://mirror.yandex.ru/mirrors/alpine/v"${ALPINE_VER}"/community >> /e
  # otherwise a shared password hangs forever on "updatePending". Make the check non-fatal.
  && patch -p1 -d /var/www/nc/apps2/passwords < /var/www/nc/patches/passwords-breach-check-nonfatal.patch \
  \
+ # The feeds are fetched by news_updater, so disable the News cron updater.
+ && patch -p1 -d /var/www/nc/apps2/news < /var/www/nc/patches/news-disable-cron-updates.patch \
+ \
  # Bookmarks ships no composer.lock and caps composer at PHP 8.1 via config.platform,
  # but its nextcloud/ocp dev-master dependency requires PHP >= 8.3 — the two conflict,
  # composer install fails and the link-preview dependency ends up missing (app 500s).

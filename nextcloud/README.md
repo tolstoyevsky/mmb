@@ -76,6 +76,15 @@ Read the [Getting Started](https://github.com/tolstoyevsky/mmb#getting-started) 
 
 In order to calculate the values of `PM_MAX_CHILDREN`, `PM_START_SERVERS`, `PM_MIN_SPARE_SERVERS` and `PM_MAX_SPARE_SERVERS` that fit your needs, use [PHP-FPM Process Calculator](https://spot13.com/pmcalculator/).
 
+## Background jobs
+
+The `cron` service runs `cron.php` every 5 minutes, so Nextcloud uses the Cron
+mode for background jobs. The mode is switched automatically on the first run.
+If you set up a system cron job for `cron.php` before, remove it.
+
+News feeds are fetched by the `news_updater` service, so the built-in News cron
+updater is disabled by default.
+
 ## Talk High Performance Backend
 
 Talk ships with its High Performance Backend (HPB) so that group calls scale and
