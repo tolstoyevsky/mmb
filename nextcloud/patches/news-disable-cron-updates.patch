@@ -1,0 +1,13 @@
+# News: disable the built-in cron updater by default. The feeds are fetched
+# by the news_updater service, otherwise they would be fetched twice.
+--- a/lib/AppInfo/Application.php
++++ b/lib/AppInfo/Application.php
+@@ -63,7 +63,7 @@
+         'purgeUnread'              => false,
+         'maxRedirects'             => 10,
+         'feedFetcherTimeout'       => 60,
+-        'useCronUpdates'           => true,
++        'useCronUpdates'           => false,
+         'exploreUrl'               => '',
+         'updateInterval'           => 3600,
+         'useNextUpdateTime'        => false,

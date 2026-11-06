@@ -24,6 +24,13 @@ services:
     volumes:
     - ./_config:/var/www/nc/config
     - ./_nc/data:/var/www/nc/data
+  cron:
+    image: cusdeb/nextcloud:31-amd64
+    environment:
+    - TYPE=cron
+    volumes:
+    - ./_config:/var/www/nc/config
+    - ./_nc/data:/var/www/nc/data
   notify_push:
     image: cusdeb/notify_push:1.2.2-amd64
     environment:
